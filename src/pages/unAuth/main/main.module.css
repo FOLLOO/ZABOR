@@ -1,0 +1,121 @@
+
+.video{
+    width: 100%;
+}
+
+.title{
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 2.5vw;
+    text-align: center;
+    width: 80%;
+    margin : 10vh auto;
+}
+
+.title p{
+    color: #868686;
+}
+.back{
+    background-image: url("../../../asserts/background/bckg_main.png");
+}
+.grid{
+    padding: 0 120px;
+    /*grid-template-columns: repeat(3, 1fr );*/
+    grid-template-columns: 1fr 16.66666666vw 1fr;
+    /*gap: 100px;*/
+    /*row-gap: 50px;*/
+    column-gap: 100px;
+    height: 600px;
+    margin: 10vh 0;
+}
+.row{
+    margin: 0 0 50px 0;
+    height: 100%;
+    /*height: fit-content;*/
+}
+
+.row ul{
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.05556vw;
+
+
+    /*width: 50%;*/
+    margin: auto;
+    /*justify-content: center;*/
+    /*align-self: center;*/
+}
+.row ul li{
+    margin: 10px 0;
+    display: flex;
+    gap: 10px
+}
+
+.row ul li img{
+    width: 20px;
+    height: 20px;
+}
+
+
+.row2{
+    grid-row: 2;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+.center_col{
+    width: 16.66666666vw ;
+    /*grid-row: span 2;*/
+}
+.logo{
+    text-align: center;
+    height: 100%;
+}
+.logo h2{
+    height: fit-content;
+    font-size: 1.875vw;
+}
+
+.howITwork{
+    padding: 0 120px;
+}
+.howITworkFlex{
+    gap: 55px
+}
+.lastDescription{
+    margin: 3vh 0;
+    height: 450px;
+}
+.i_glassBox{
+    gap:35px;
+    padding: 30px 35px;
+    text-align: center;
+    height: 578px;
+}
+
+.glassBox{
+    gap:35px;
+    padding: 30px 35px;
+    text-align: center;
+}
+.descriptionLast{
+    width: 50%;
+}
+
+.description{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.registration{
+    padding: 0 120px;
+    margin-top: 10vh;
+    padding-bottom: 30vh;
+}
+.register{
+    gap: 10px;
+    cursor: pointer;
+}

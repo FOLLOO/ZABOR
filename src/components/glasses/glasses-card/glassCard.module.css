@@ -1,0 +1,10 @@
+.glass{
+    width: auto;
+    height: 100%;
+    box-sizing: content-box;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #D5D4D4;
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    padding: 10px;
+}

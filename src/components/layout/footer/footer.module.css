@@ -1,0 +1,41 @@
+.footer{
+    background-image: url("/src/asserts/background/FOOTER.png");
+    height: 800px;
+}
+.filter {
+    padding: 50px 380px;
+    height: 100%;
+    backdrop-filter: blur(30px);
+    gap: 50px;
+}
+.title{
+    text-align: center;
+}
+
+.grid{
+    height: 200px;
+}
+
+.content{
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+}
+.content h6{
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+}
+.content ul{
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+}
+.content ul li{
+    height: 25px;
+}
+
+.row{
+    text-align: center;
+    margin: 15px 0;
+}

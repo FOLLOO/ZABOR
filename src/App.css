@@ -1,38 +1,160 @@
-.App {
-  text-align: center;
+
+/* Inter Font */
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
-.App-link {
-  color: #61dafb;
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter/Inter-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+/* Inter Font */
+/* Open Sans Font */
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans/OpenSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans/OpenSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./fonts/OpenSans/OpenSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+/* Open Sans Font */
+
+
+/*h1{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: 200;*/
+/*  font-size: 64px;*/
+/*}*/
+
+/*h2{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: bold;*/
+/*  font-size: 48px;*/
+/*}*/
+
+/*h3{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: bold;*/
+/*  font-size: 32px;*/
+/*}*/
+
+/*h4{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: bold;*/
+/*  font-size: 24px;*/
+/*}*/
+
+
+
+h1{
+  font-family: 'Inter', sans-serif;
+  font-weight: 200;
+  font-size: 3.33333vw;
+}
+
+h2{
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 2.5vw;
+}
+
+h3{
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 1.70833vw;
+}
+
+h4{
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 1.33333vw;
+}
+
