@@ -8,7 +8,7 @@ function Footer (props) {
       <div className={`${styles.filter} ${global.flex} ${global.f_dir_column}`}>
 
       <div className={styles.title}>
-        <h2>LOGO</h2>
+        <h2>Z A B O R</h2>
       </div>
 
       <div className={`${global.flex} ${styles.grid} ${global.f_ji_center}`}>

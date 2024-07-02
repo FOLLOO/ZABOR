@@ -1,0 +1,84 @@
+.select {
+    position: relative;
+    min-width: 200px;
+}
+
+.select svg {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 3px);
+    width: 10px;
+    height: 6px;
+    stroke-width: 2px;
+    stroke: #9098A9;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.select select{
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 13px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 5px;
+
+    -webkit-appearance: none;
+    /*padding: 7px 40px 7px 12px;*/
+    /*width: 100%;*/
+    /*border: 1px solid #E8EAED;*/
+    /*border-radius: 5px;*/
+    /*background: white;*/
+    /*box-shadow: 0 1px 3px -2px #9098A9;*/
+    /*cursor: pointer;*/
+    /*font-family: inherit;*/
+    /*font-size: 16px;*/
+    transition: all 150ms ease;
+}
+
+
+
+.select select:required:invalid {
+    color: #000;
+}
+
+.select select option {
+    color: #000;
+    padding: 13px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+}
+
+
+
+.select select option[value=""][disabled] {
+    display: none;
+}
+
+.select select:focus {
+    outline: none;
+    border-color: #076553;
+    /*box-shadow: 0 0 0 2px rgba(49, 49, 49, 0.2);*/
+}
+
+.select select:hover + svg {
+    stroke: #000;
+}
+
+.sprites {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+}

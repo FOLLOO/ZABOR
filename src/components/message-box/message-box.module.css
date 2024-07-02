@@ -1,0 +1,16 @@
+.main{
+    margin: auto;
+    background: black;
+    color: white;
+    width: fit-content;
+    max-width: 475px;
+    padding:  30px 40px 40px 40px ;
+    border-radius: 5px;
+    gap: 25px
+}
+
+.main h4{
+    /*margin: 25px 0;*/
+    font-size: 1.25vw;
+    color: #828282;
+}

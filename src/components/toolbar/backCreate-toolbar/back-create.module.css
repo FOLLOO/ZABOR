@@ -1,0 +1,13 @@
+.main{
+    width: 100%;
+}
+
+.create{
+    width: 560px;
+    gap: 25px
+}
+
+.desc{
+    width: 100%;
+    text-align: right;
+}

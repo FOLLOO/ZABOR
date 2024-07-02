@@ -1,0 +1,13 @@
+.main{
+    gap: 30px;
+    max-width: 300px;
+}
+
+.post{
+    cursor: pointer;
+    gap: 10px;
+}
+
+.post:hover{
+    color: rgba(7, 101, 83, 0.87);
+}

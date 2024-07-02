@@ -1,0 +1,16 @@
+.mainDrop{
+    padding-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 20px;
+
+    filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.25));
+
+    background: #FFFFFF;
+    border-radius: 5px;
+
+}
+

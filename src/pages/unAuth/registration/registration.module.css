@@ -1,0 +1,32 @@
+
+.back{
+    padding-top: 20px;
+    background-image: url("../../../asserts/background/FOOTER.png");
+    background-repeat: no-repeat;
+}
+.state{
+    padding: 90px 150px;
+}
+.title{
+    text-align: center;
+}
+.flex{
+    padding: 100px 30px;
+}
+.com{
+    gap:20px
+}
+.logo{
+    width: 100%;
+}
+
+.form{
+    padding: 0 70px;
+    width: 100%;
+    gap: 42px;
+}
+
+.signIn > div {
+    margin: 15px 0;
+}
+

@@ -190,6 +190,18 @@
 }
 /*HEIGHT*/
 
+.shadowBliz{
+    box-shadow: rgba(0, 0 , 0 , 0.24) 0 3px 8px 0;
+}
+.blur{
+    filter: blur(20px);
+}
+
+
 .pad{
     padding: 0 120px;
+}
+
+.padRight{
+    padding-right: 120px;
 }

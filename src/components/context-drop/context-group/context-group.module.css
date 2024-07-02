@@ -1,0 +1,12 @@
+.group{
+    width: 100%;
+    gap: 5px;
+
+    /*padding: 0 30px;*/
+}
+
+.group::after{
+    content: '';
+    display: block;
+    border-bottom: 1px solid #D6D6D6;
+}

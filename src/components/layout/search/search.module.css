@@ -1,0 +1,27 @@
+.main{
+    width: 100%;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+
+
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #838383;
+    border-radius: 30px;
+    padding: 5px 15px;
+}
+
+.input::placeholder{
+    color: #838383;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.search{
+    width: 100%;
+
+    gap: 10px;
+}

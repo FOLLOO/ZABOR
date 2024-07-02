@@ -1,0 +1,38 @@
+.grid{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: 70px 1fr auto;
+    grid-template-areas:
+    "menu header"
+    "menu content"
+    "footer footer";
+}
+
+.leftHand{
+    position: sticky;
+    top: 0;
+    align-self: start;
+    grid-row: span 2;
+}
+.header{
+    position: sticky;
+    top: 0;
+    align-self: start;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 4;
+}
+.footer{
+    grid-column: span 2;
+}
+
+
+.grid2{
+    display: grid;
+    grid-template-columns: 85px 1fr;
+    grid-template-rows: 70px 1fr auto;
+    grid-template-areas:
+    "menu header"
+    "menu content"
+    "footer footer";
+}

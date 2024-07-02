@@ -1,3 +1,18 @@
 .nav{
     height: 70px;
 }
+
+.trap{
+    width: 46%;
+    gap: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.search{
+    width: 100%;
+}
+
+.logo{
+    width: 30%;
+}

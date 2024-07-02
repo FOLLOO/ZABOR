@@ -1,0 +1,25 @@
+.button{
+    /* Green Button */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    /* Auto layout */
+    padding: 10px 0;
+    width: 100%;
+    height: fit-content;
+    background: #076553;
+    border-radius: 5px;
+    color: white;
+}
+
+.button:hover{
+    /*background: lightgray;*/
+    box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 5px;
+    background: #076553;
+    /*transform: scaleX(1.0111);*/
+}
+

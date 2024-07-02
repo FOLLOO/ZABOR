@@ -1,0 +1,10 @@
+.main{
+    overflow: hidden;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.img{
+    object-fit: cover;
+    overflow: hidden;
+}

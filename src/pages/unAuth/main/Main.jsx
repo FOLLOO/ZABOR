@@ -16,10 +16,14 @@ import course from '../../../asserts/icons/Курсы.svg'
 import text from '../../../asserts/icons/Текст.svg'
 import link from '../../../asserts/icons/Link.svg'
 import GlassBox from '../../../components/glasses/glasses-box/GlassBox'
+import { useNavigate } from 'react-router-dom'
 
 
 
 function Main (props) {
+
+  const navigate = useNavigate()
+
   return (
     <>
       <video className={styles.video} loop autoPlay muted>
@@ -77,10 +81,7 @@ function Main (props) {
                 <div
                   className={`${global.flex} ${global.f_ji_center} ${global.f_center} ${global.f_a_center} ${global.h100}`}>
                   <h2>
-                    {/*naZAБORe*/}
-                    ZAБOR <br/>
-                    O &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br/>
-                    V &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    ZABOR
                   </h2>
                 </div>
               </div>
@@ -192,7 +193,7 @@ function Main (props) {
       </div>
 
 
-      <div className={styles.registration}>
+      <div className={styles.registration} onClick={() => navigate('/registration')}>
         <GlassCard>
           <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} style={{padding: "60px"}}>
             <h2>Пройти регистрацию</h2>
@@ -201,7 +202,7 @@ function Main (props) {
         </GlassCard>
       </div>
 
-    <div className={styles.registration}>
+    <div className={styles.registration} onClick={() => navigate('/login')}>
       <GlassCard>
         <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} style={{padding: "60px"}}>
           <h2>Посмотреть посты пользователей</h2>
