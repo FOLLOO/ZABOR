@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './message-box.module.css'
 import global from '../../global.module.css'
 
@@ -9,12 +9,18 @@ import InputText from '../ui/input/input-text/InputText'
 import GreenButton from '../ui/buttons/green-button/GreenButton'
 import WhiteButton from '../ui/buttons/white-button/WhiteButton'
 import TransprantButton from '../ui/buttons/transprant-button/TransprantButton'
+import { OverlayContext } from '../../context/OverlayContext'
 function MessageBox ({
   visability = false,
   message,
   type
 }) {
 
+  const { overlay, setOverlay } = useContext(OverlayContext);
+
+  const toggleOverlay = () => {
+    setOverlay(!overlay);
+  };
 
   const Help = () => {
     return (
@@ -23,7 +29,10 @@ function MessageBox ({
           <h3>О чем хотите сообщить?</h3>
           <TransprantButton
             img={close}
-            stylee={{maxWidth: "50px"}}/>
+            nonePad
+            stylee={{maxWidth: "50px"}}
+            click={() => toggleOverlay()}
+          />
         </div>
         <h4>
           Мы обязательно рассмотрим ваше обращение
@@ -45,6 +54,8 @@ function MessageBox ({
           <h3>Добавлено в корзину!</h3>
           <TransprantButton
             img={close}
+            nonePad
+            click={() => toggleOverlay()}
             stylee={{maxWidth: "50px"}}/>
         </div>
         <h4>
@@ -67,7 +78,10 @@ function MessageBox ({
           <h3>Вы уверены что хотите {message ? message : '...'}?</h3>
           <TransprantButton
             img={close}
-            stylee={{maxWidth: "50px"}}/>
+            nonePad
+            click={() => toggleOverlay()}
+            stylee={{maxWidth: "50px"}}
+          />
         </div>
         <h4>
           Что то написано
@@ -98,7 +112,8 @@ function MessageBox ({
 
   return (
 
-    <div className={`${styles.main} ${global.flex} ${global.f_dir_column}`} style={visability ? {display: 'flex'} : {display: 'none'}}>
+    <div className={`${styles.main} ${global.flex} ${global.f_dir_column}`}
+         style={visability ? {display: 'flex'} : {display: 'none'}}>
       {renderSwitch(type)}
     </div>
 

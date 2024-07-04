@@ -29,7 +29,6 @@ function CardLittle ({
           </div>
 
           <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>
-
             {blur ?
               <img src={lock} alt={'lock'}/>
               :

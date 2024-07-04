@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import global from '../../../../global.module.css'
 import styles from './create-post.module.css'
@@ -13,9 +13,23 @@ import GlassBox from '../../../../components/glasses/glasses-box/GlassBox'
 import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
 import TempEditor from '../../../temp/TempEditor'
 import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
+import { OverlayContext } from '../../../../context/OverlayContext'
+import MessageBox from '../../../../components/message-box/MessageBox'
 function CreatePost (props) {
+
+
+  const { overlay, setOverlay } = useContext(OverlayContext);
+
+  const toggleOverlay = () => {
+    setOverlay(!overlay);
+  };
+
   return (
     <div className={global.pad}>
+      {overlay ?
+        <MessageBox type={'help'} visability={true}/>
+        : null
+      }
       <div className={styles.grid}>
         <div className={styles.main}>
 
@@ -56,7 +70,7 @@ function CreatePost (props) {
             <div className={global.d3}>
               Добавить блок
             </div>
-            <GreenButton text={'Addd'}/>
+            <GreenButton text={'Addd'} click={() => toggleOverlay()}/>
           </div>
 
         </div>
@@ -74,6 +88,7 @@ function CreatePost (props) {
           <CardLittle/>
         </div>
       </div>
+
     </div>
   )
 }

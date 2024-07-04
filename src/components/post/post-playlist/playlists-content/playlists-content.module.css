@@ -1,0 +1,29 @@
+.main{
+    gap: 30px
+}
+
+.about{
+    max-width: 500px;
+    text-align: center;
+    gap: 20px
+}
+
+.glassContetn{
+    padding: 10px;
+    gap: 20px;
+}
+
+.input{
+    width: 400px;
+    max-width: 400px;
+}
+.settings{
+    max-width: 40px;
+}
+
+.actions{
+    margin-bottom: 3%;
+}
+.videoOl{
+    gap: 20px
+}

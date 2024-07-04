@@ -1,0 +1,33 @@
+.text{
+    gap: 20px;
+    padding: 20px;
+}
+
+.main{
+    max-width: 320px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.7s;
+    cursor: pointer;
+}
+.main:hover{
+    box-shadow: 0 10px 36px 0 rgba(0, 0, 0, 0.16);
+}
+
+.image{
+    height: 240px;
+}
+
+.img{
+    height: 240px;
+    object-fit: cover;
+}
+
+.description{
+    display: -webkit-box;       /* Используется для создания блочного контейнера с вебкит-специфичными свойствами */
+    -webkit-box-orient: vertical; /* Определяет ориентацию блочного контейнера */
+    -webkit-line-clamp: 3;      /* Количество строк, после которых обрезается текст */
+    overflow: hidden;           /* Скрывает текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis;
+    /*text-align: justify;*/
+}

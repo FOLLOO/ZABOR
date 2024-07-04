@@ -11,6 +11,7 @@ import TempEditor from './pages/temp/TempEditor'
 import Layout from './components/layouts/Layout'
 import TempPAge from './pages/temp/TempPAge'
 import CreatePost from './pages/auth/froms/post-create/CreatePost'
+import Profile from './pages/auth/profile/Profile'
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
 
         <Route path="/" element={<Layout type={'auth'}/>}>
           <Route path='/auth' element={<>auth</>}/>
+          <Route path='/profile/:id' element={<Profile/>}/>
         </Route>
 
         <Route path="/" element={<Layout type={'form'}/> }>

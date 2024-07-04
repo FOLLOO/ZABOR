@@ -41,12 +41,12 @@ function Header (props) {
           <TransprantButton
             click={() => navigate('/registration')}
             text={'Регистрация'}
-            stylee={{fontWeight: 300, fontSize: 24, fontFamily: 'Inter'}}
+
             />
           <TransprantButton
             click={() => navigate('/login')}
             text={'Войти'}
-            stylee={{fontWeight: 600, fontSize: 24, fontFamily: 'Inter'}}
+
             />
         </div>
           : null }

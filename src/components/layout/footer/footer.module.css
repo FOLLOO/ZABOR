@@ -1,41 +1,128 @@
 .footer{
-    background-image: url("/src/asserts/background/FOOTER.png");
-    height: 800px;
-}
-.filter {
-    padding: 50px 380px;
-    height: 100%;
-    backdrop-filter: blur(30px);
-    gap: 50px;
-}
-.title{
-    text-align: center;
+    background: #0C0C0C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 10% 0;
+    flex-direction: column;
+    /*height: 100%;*/
 }
 
-.grid{
-    height: 200px;
+.footer h2{
+    transition: 1s;
 }
 
+.footer h2:hover{
+    text-shadow: 0 0 5px rgb(255, 255, 255),
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 25px rgb(255,255,255, 0.6),
+    0 0 50px rgb(255,255,255, 0.2);
+}
 .content{
-    box-sizing: border-box;
-    width: 100%;
+    max-width: 1080px;
+    width: 1080px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     text-align: center;
+    gap: 46px;
 }
-.content h6{
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 12px;
+.description{
+    max-width: 796px;
 }
-.content ul{
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 12px;
+.coopiryte{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
-.content ul li{
-    height: 25px;
+.c_text{
+    justify-self: center;
+    height: 100%;
+    line-height: 100%;
+    vertical-align: middle;
+}
+.block{
+
+    width: 100%;
+}
+.buttons{
+    display: flex;
+    gap: 10px;
 }
 
-.row{
-    text-align: center;
-    margin: 15px 0;
+.whiteButton{
+    background: white;
+    color: black;
+    border-radius: 20px;
+    padding: 6px 20px;
+
+    transition: 0.5s;
 }
+.b_content{
+    align-items: center;
+    display: flex;
+    gap: 7px;
+}
+.whiteButton:hover{
+    box-shadow: 0 0 5px rgb(255, 255, 255),
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 25px rgb(255,255,255, 0.6),
+    0 0 50px rgb(255,255,255, 0.2);
+}
+
+.hr{
+    width: 100%;
+    border-bottom:1px solid #2B2A2A;
+}
+.logo{
+    transition: 0.6s;
+}
+.logo:hover{
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(255, 255, 255, 0.7));
+    filter: drop-shadow( 3px 3px 2px rgba(255, 255, 255, 0.7));
+}
+/*.footer{*/
+/*    background-image: url("/src/asserts/background/FOOTER.png");*/
+/*    height: 800px;*/
+/*}*/
+/*.filter {*/
+/*    padding: 50px 380px;*/
+/*    height: 100%;*/
+/*    backdrop-filter: blur(30px);*/
+/*    gap: 50px;*/
+/*}*/
+/*.title{*/
+/*    text-align: center;*/
+/*}*/
+
+/*.grid{*/
+/*    height: 200px;*/
+/*}*/
+
+/*.content{*/
+/*    box-sizing: border-box;*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*}*/
+/*.content h6{*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: 800;*/
+/*    font-size: 12px;*/
+/*}*/
+/*.content ul{*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: 300;*/
+/*    font-size: 12px;*/
+/*}*/
+/*.content ul li{*/
+/*    height: 25px;*/
+/*}*/
+
+/*.row{*/
+/*    text-align: center;*/
+/*    margin: 15px 0;*/
+/*}*/
+
+

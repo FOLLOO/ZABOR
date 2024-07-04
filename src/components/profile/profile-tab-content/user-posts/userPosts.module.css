@@ -1,0 +1,16 @@
+/*margin потому что там ток один атрибут*/
+
+.margin{
+    margin-top: 5%;
+}
+
+.main{
+    text-align: center;
+    gap: 30px;
+    padding: 30px;
+}
+
+.addButton{
+    width: 300px;
+}
+

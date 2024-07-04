@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../layout/header/Header'
 import Footer from '../layout/footer/Footer'
 import { Outlet } from 'react-router-dom'
@@ -6,12 +6,14 @@ import { Outlet } from 'react-router-dom'
 import global from '../../global.module.css'
 import styles from './layouts.module.css'
 import TransprantButton from '../ui/buttons/transprant-button/TransprantButton'
+import { OverlayContext, OverlayContextProvider } from '../../context/OverlayContext'
 const Layout = ({type,
   // login = false,
   // isAuth = false
 }) => {
 
   const [open, setOpen] = useState(false)
+  const { overlay } = useContext(OverlayContext)
   const Login = () => {
     return (
       <>
@@ -92,7 +94,6 @@ const Layout = ({type,
       </div>
     )
   }
-
   const Form = () => {
     return (
       <>
@@ -101,7 +102,6 @@ const Layout = ({type,
       </>
     )
   }
-
   const renderSwitch = (param) => {
     switch (param){
       case 'settings' :
@@ -120,9 +120,22 @@ const Layout = ({type,
   }
 
   return (
-    <div>
-      {renderSwitch(type)}
-    </div>
+    <>
+      { overlay ?
+        <>
+        <div className={styles.overlay}>
+        </div>
+        <div className={styles.overlayActive}>
+          {renderSwitch(type)}
+        </div>
+        </>
+      :
+        <>
+          {renderSwitch(type)}
+        </>
+      }
+
+    </>
   )
 }
 

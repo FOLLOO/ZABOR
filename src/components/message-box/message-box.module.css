@@ -1,4 +1,8 @@
 .main{
+    position: absolute;
+    top: 25%;
+    left: 35%;
+
     margin: auto;
     background: black;
     color: white;
@@ -6,7 +10,10 @@
     max-width: 475px;
     padding:  30px 40px 40px 40px ;
     border-radius: 5px;
-    gap: 25px
+    gap: 25px;
+
+
+    z-index: 110;
 }
 
 .main h4{

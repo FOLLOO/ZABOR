@@ -1,10 +1,28 @@
 .glass{
-    width: auto;
-    height: 100%;
+    /*Хз почему на auto поставил*/
+    /*width: auto; */
+    /*width: 100%;*/
     box-sizing: content-box;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid #D5D4D4;
     backdrop-filter: blur(15px);
     border-radius: 30px;
     padding: 10px;
+}
+
+.fit{
+    width: fit-content;
+}
+
+.w100{
+    width: 100%;
+}
+
+.fitH{
+    height: fit-content;
+}
+
+.h100{
+    height: 100%;
+
 }

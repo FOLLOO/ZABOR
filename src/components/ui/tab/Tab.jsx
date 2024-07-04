@@ -10,7 +10,7 @@ const TabContent = (props) => (
 
 function Tab ({items = []}) {
 
-  const [ active, setActive ] = React.useState(null);
+  const [ active, setActive ] = React.useState(0);
   const openTab = e => setActive(+e.target.dataset.index);
 
   return (
