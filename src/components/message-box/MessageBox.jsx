@@ -10,8 +10,18 @@ import GreenButton from '../ui/buttons/green-button/GreenButton'
 import WhiteButton from '../ui/buttons/white-button/WhiteButton'
 import TransprantButton from '../ui/buttons/transprant-button/TransprantButton'
 import { OverlayContext } from '../../context/OverlayContext'
+
+/** Сообщения по типу:
+ * вы уверены что хотите удалить это и т.д
+ * Принимает 3 параметра : visability , message , type
+ *  type принимает входыне данные
+ * 'help' - Жалоба какая то
+ * 'buy' - Вы добавли пост в корзину
+ * 'sure' - Вы уверены что хотите ... {message} ...
+ * */
+
 function MessageBox ({
-  visability = false,
+  visability = true,
   message,
   type
 }) {
@@ -111,13 +121,10 @@ function MessageBox ({
 
 
   return (
-
     <div className={`${styles.main} ${global.flex} ${global.f_dir_column}`}
          style={visability ? {display: 'flex'} : {display: 'none'}}>
       {renderSwitch(type)}
     </div>
-
-
   )
 }
 

@@ -12,6 +12,7 @@ function Playlists ({ data = 'slfdo' }) {
 
   const [open, setOpen] = useState(false)
 
+  /** ничего нет*/
   const NothingYeat = () => {
     return (
       <GlassCard>
@@ -31,32 +32,16 @@ function Playlists ({ data = 'slfdo' }) {
       </GlassCard>
     )
   }
+  /** Отобржаение плейлистов */
   const AllPlaylists = () => {
     return (
       <>
-        <div className={styles.title}>
+        <div className={`${styles.title}`}>
           <h2>Плейлисты</h2>
         </div>
         <div className={styles.margin}>
           <div className={styles.grid} onClick={() => setOpen(!open)}>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
+            <Playlist add/>
             <Playlist/>
             <Playlist/>
           </div>
@@ -64,7 +49,7 @@ function Playlists ({ data = 'slfdo' }) {
       </>
     )
   }
-
+  /** Отобржаение контента внутри плелиста */
   const PlaylistContetn = () => {
     return (
       <PlaylistsContent/>

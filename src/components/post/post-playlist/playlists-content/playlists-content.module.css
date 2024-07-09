@@ -4,8 +4,12 @@
 
 .about{
     max-width: 500px;
+    max-height: 500px;
     text-align: center;
-    gap: 20px
+    gap: 20px;
+
+    position: sticky;
+    top: 60px;
 }
 
 .glassContetn{
@@ -27,3 +31,4 @@
 .videoOl{
     gap: 20px
 }
+

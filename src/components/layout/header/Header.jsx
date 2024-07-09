@@ -15,7 +15,7 @@ function Header (props) {
   const navigate = useNavigate()
 
   return (
-    <header className={props.pad ? global.pad : null}>
+    <header className={props.pad ? global.pad : props.settings ? styles.settings : null}>
       <nav className={`${styles.nav} ${global.flex} ${global.f_s_between} ${global.f_ji_center} ${global.f_a_center} ${props.loginn ? global.pad : global.padRight}`}>
         <div className={styles.trap}>
 

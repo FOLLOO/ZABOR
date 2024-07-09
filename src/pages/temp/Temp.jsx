@@ -13,20 +13,26 @@ import WhiteButton from '../../components/ui/buttons/white-button/WhiteButton'
 
 
 import tempIcon from '../../asserts/icons/Файл.svg'
+import temp from '../../asserts/temp/temp.jpg'
+
+
 import ProfileNickname from '../../components/profile/profile-nickname/ProfileNickname'
 import Search from '../../components/layout/search/Search'
 import Tab from '../../components/ui/tab/Tab'
 import CardLittle from '../../components/post/post-cards/card-little/CardLittle'
 import { OverlayContext } from '../../context/OverlayContext'
+import RenderType from '../../components/notifications/renderType/RenderType'
+import Notification from '../../components/notifications/Notification'
 
 function Temp (props) {
 
   const [some, setSome] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const items = [
-    { title: 'London', content: <MessageBox visability={true} type={'sure'}/> },
-    { title: 'Paris', content: <MessageBox visability={true} type={'help'}/> },
-    { title: 'Tokyo', content: <MessageBox visability={true} type={'buy'}/> },
+    { title: 'London', content: <MessageBox  type={'sure'}/> },
+    { title: 'Paris', content: <MessageBox  type={'help'}/> },
+    { title: 'Tokyo', content: <MessageBox  type={'buy'}/> },
   ];
 
 
@@ -90,6 +96,51 @@ function Temp (props) {
         </div>
         <div style={{margin: "60px"}}/>
 
+
+        <div style={{margin: 'auto', width: "70%"}}>
+          <RenderType postImage={temp} avatar={temp} text={'что то '} views={1000} date={'2 часа назад'}/>
+        </div>
+        <div style={{margin: 'auto', width: "70%"}}>
+        <div style={{margin: "60px"}}/>
+          <GreenButton text={'Добавить'} unique={true} click={() => setOpen(!open)}/>
+        <div style={{margin: "60px"}}/>
+        { open ?
+          <div style={{maxWidth: 'fit-content'}}>
+          <ContextDrop title={'Уведомления'}>
+            <ContextGroup><Notification type={'com'}
+                            postName={'Какое то название поста Какое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название поста'}
+                            nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'new-post'}
+                                        postName={'Какое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'liked-post'}
+                                        postName={'Какое то название поста Какое то название постаКакое то название постаКакое то название постаКакое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'deleted-post'}
+                                        postName={'Какое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'buy-post'}
+                                        postName={'Какое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'com-post'}
+                                        postName={'Какое то название поста Какое то название постаКакое то название постаКакое то название постаКакое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'liked-com'}
+                                        postName={'Какое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'answer-com'}
+                                        postName={'Какое то название поста Какое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название постаКакое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+            <ContextGroup><Notification type={'subscribed'}
+                                        postName={'Какое то название поста'}
+                                        nickname={'Антон'}/> </ContextGroup>
+
+          </ContextDrop>
+          </div>
+
+        : null}
+        <div style={{margin: "60px"}}/>
+        </div>
       </>
   );
 }

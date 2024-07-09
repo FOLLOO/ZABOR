@@ -12,6 +12,7 @@ import Layout from './components/layouts/Layout'
 import TempPAge from './pages/temp/TempPAge'
 import CreatePost from './pages/auth/froms/post-create/CreatePost'
 import Profile from './pages/auth/profile/Profile'
+import MyProfileSettings from './pages/auth/settings/my-profile-settings/MyProfileSettings'
 
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
         </Route>
 
         <Route path="/" element={<Layout type={'settings'}/>}>
-          <Route path='/settings' element={<TempPAge/>}/>
+          <Route path='settings/temp' element={<TempPAge/>}/>
+          <Route path='settings/myprofile' element={<MyProfileSettings/>}/>
         </Route>
 
         <Route path="/" element={<Layout type={'auth'}/>}>

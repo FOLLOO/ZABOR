@@ -1,4 +1,9 @@
 .footer{
+    position: sticky;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 100;
+
     background: #0C0C0C;
     display: flex;
     align-items: center;
@@ -7,6 +12,19 @@
     padding: 10% 0;
     flex-direction: column;
     /*height: 100%;*/
+}
+
+.frodo{
+    overflow: hidden;
+    z-index: 100;
+
+    background: #0C0C0C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 10% 0;
+    flex-direction: column;
 }
 
 .footer h2{

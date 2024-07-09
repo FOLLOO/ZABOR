@@ -14,26 +14,33 @@ import Playlists from '../../../components/profile/profile-tab-content/playlists
 import UserPosts from '../../../components/profile/profile-tab-content/user-posts/UserPosts'
 
 
-function Profile (props) {
-
+function Profile ({prewie, nickname}) {
+  /** Контент для Tab */
   const tabContent = [
     { title: 'Публикации', content: <UserPosts/> },
     { title: 'Плейлисты', content: <Playlists/> },
     { title: 'Об авторе', content: <AboutMe/> },
   ];
-
-
+  /** Компонент для страницыы профиля главный контент отоправляется в Tab через items*/
   return (
     <div className={styles.main}>
         <div className={styles.prewieImage}>
+          {prewie ?
           <img src={temp} alt={'some'}/>
+          :
+            <div className={global.skeleton}></div>
+          }
         </div>
         <div className={styles.content}>
           <div className={styles.profile}>
             <div className={styles.nickname}>
               <ProfileCircle size={200}/>
               <div className={styles.subes}>
-              <h2>Porfile NICKNAME</h2>
+                {nickname ?
+                <h2>Porfile NICKNAME</h2>
+                :
+                  <h2 className={global.skeleton}>NICKNAME</h2>
+                }
               <div className={global.d2}>
                 Пока нет подписчиков
               </div>

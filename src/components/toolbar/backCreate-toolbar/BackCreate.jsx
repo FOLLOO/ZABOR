@@ -7,7 +7,7 @@ import arrowBack from '../../../asserts/icons/Arrow back.svg'
 
 import TransprantButton from '../../ui/buttons/transprant-button/TransprantButton'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
-function BackCreate (props) {
+function BackCreate ({description, greenText, button}) {
   //todo: лучше опрделять или props-ами прописывать?
   return (
     <div className={styles.main}>
@@ -15,13 +15,14 @@ function BackCreate (props) {
         <div className={styles.back}>
           <TransprantButton text={'Назад'} img={arrowBack} noPad/>
         </div>
-
+        {button ?
           <div className={`${styles.create} ${global.flex} ${global.f_a_center}`}>
             <div className={`${styles.desc} ${global.d3} `}>
-              {props.description}
+              {description}
             </div>
-            <GreenButton text={props.greenText} unique/>
+            <GreenButton text={greenText} unique/>
           </div>
+          : null }
       </div>
     </div>
   )

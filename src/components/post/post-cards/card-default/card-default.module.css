@@ -1,6 +1,6 @@
 .main{
-    width: 350px;
-    height: 250px;
+    width: 490px;
+    height: 426px;
     overflow: hidden;
 
     border-radius: 15px;
@@ -24,12 +24,14 @@
 }
 
 .actions{
-    padding: 10px;
-    gap: 12px;
+    /*height: 280px;*/
+    padding: 25px;
+    gap: 20px;
 
 }
 .button{
-    width: 55px;
+    height: 35px;
+    width: 62px;
     padding: 5px;
     background: white;
     border-radius: 15px;
@@ -49,10 +51,11 @@
 }
 
 .cardImage{
+    height: 350px;
     background: linear-gradient(0deg, rgba(16, 17, 18, 0.92) 25.68%, rgba(27, 28, 32, 0) 72.2%);
     /*background: -moz-linear-gradient();*/
     position: relative;
-    top: -100%;
+    top: -110%;
     z-index: -1;
     object-fit: cover;
     /*filter: blur(20);*/
@@ -76,12 +79,12 @@
 .content{
     /*position: relative;*/
     /*top: -60px;*/
-    height: 81px;
+    height: 160px;
     width: 100%;
 
     border-radius: 10px;
     background: white;
-    gap: 10px;
+    gap: 15px;
     padding: 15px 20px;
 }
 

@@ -13,6 +13,7 @@ import WhiteButton from '../../../ui/buttons/white-button/WhiteButton'
 import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
 import whiteButton from '../../../ui/buttons/white-button/WhiteButton'
 function CardLittle ({
+  image = false,
   title,
   views,
   price,
@@ -21,7 +22,7 @@ function CardLittle ({
 }) {
   return (
     <div className={`${styles.main} ${global.shadowBliz}`}>
-      <div className={styles.temp}>
+      <div className={image ? styles.temp : null}>
 
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
@@ -53,27 +54,46 @@ function CardLittle ({
         <div className={`${styles.epigraph} ${global.flex}`}>
           <div className={`${global.t5} ${styles.title}`}>
             {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
-            Пришла и оторвало голову нам сумасшедшая весна
+            {/*Пришла и оторвало голову нам сумасшедшая весна*/}
+            {title ? title :
+              <div className={global.skeleton}>
+                Пришла и оторвало голову нам сумасшедшая весна
+              </div>
+            }
           </div>
           <div className={global.t5}>
-            {price ? price + '₽' : '15₽'}
+            {price ? price + '₽' :
+              <div className={global.skeleton}>
+              015₽
+              </div>
+
+            }
           </div>
         </div>
         <div className={`${styles.analytych} ${global.flex} ${global.f_s_between}`}>
           <div className={`${global.d3} ${styles.views}`}>
-            {views ? views + ' просмотров' : 1000 + ' просмотров'}
+            {views ? views + ' просмотров' :
+              <div className={global.skeleton}>
+              1000 просмотров
+              </div>
+              }
           </div>
           <div className={global.d3}>
-            {time ? time : '2 часа назад'}
+            {time ? time :
+              <div className={global.skeleton}>
+              '2 часа назад'
+              </div>
+            }
           </div>
         </div>
       </div>
       </div>
+      {image ?
+        <img className={`${styles.cardImage}  ${blur ? global.blur : null}`} src={temp} alt={'temp'}/>
+      :
+        <div className={`${global.skeleton} ${styles.noImage}`}>
 
-      {blur ?
-        <img className={`${styles.cardImage} ${global.blur}`} src={temp} alt={'temp'}/>
-        :
-        <img className={styles.cardImage} src={temp} alt={'temp'}/>
+        </div>
       }
     </div>
   )

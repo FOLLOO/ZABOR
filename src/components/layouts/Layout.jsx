@@ -30,7 +30,7 @@ const Layout = ({type,
         </div>
 
         <Outlet/>
-        <Footer/>
+        <Footer noStick/>
       </>
     )
   }
@@ -82,7 +82,7 @@ const Layout = ({type,
           </div>
         </div>
         <div className={styles.header}>
-        <Header auth/>
+        <Header auth settings/>
         </div>
         <div className={styles.content}>
         <Outlet/>

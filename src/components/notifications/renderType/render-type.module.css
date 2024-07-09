@@ -1,0 +1,24 @@
+.main{
+    max-width: 500px;
+    width: 500px;
+    gap: 10px;
+    background: white;
+    padding: 7px;
+}
+
+.postImage{
+    max-width: 117px;
+}
+
+.content{
+    width: 100%;
+    gap: 5px;
+}
+
+.title {
+    display: -webkit-box;       /* Используется для создания блочного контейнера с вебкит-специфичными свойствами */
+    -webkit-box-orient: vertical; /* Определяет ориентацию блочного контейнера */
+    -webkit-line-clamp: 2;      /* Количество строк, после которых обрезается текст */
+    overflow: hidden;           /* Скрывает текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis;
+}

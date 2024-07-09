@@ -16,7 +16,55 @@
     color: #868686;
 }
 .back{
-    background-image: url("../../../asserts/background/bckg_main.png");
+/*Пальмы*/
+    /*background-image: url("../../../asserts/background/bckg_main.png");*/
+
+/*!*Точки*! источник https://uiverse.io/patterns?page=0 */
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0);
+    background-size: 100px 100px;
+    background-position: -5px -5px
+
+
+
+    /*--color: #E1E1E1;*/
+    /*background-color: #F3F3F3;*/
+    /*background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),*/
+    /*linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);*/
+    /*background-size: 55px 55px;*/
+
+
+/*КЕКИЧ*/
+    /*--s: 105px; !* control the size *!*/
+    /*--c1: #b9b9b9;*/
+    /*--c2: #dcdcdc;*/
+    /*--c3: #fafafa;*/
+
+    /*background: conic-gradient(*/
+    /*        from 75deg,*/
+    /*        var(--c1) 15deg,*/
+    /*        var(--c2) 0 30deg,*/
+    /*        #0000 0 180deg,*/
+    /*        var(--c2) 0 195deg,*/
+    /*        var(--c1) 0 210deg,*/
+    /*        #0000 0*/
+    /*)*/
+    /*calc(0.5 * var(--s)) calc(0.5 * var(--s) / 0.577),*/
+    /*conic-gradient(*/
+    /*        var(--c1) 30deg,*/
+    /*        var(--c3) 0 75deg,*/
+    /*        var(--c1) 0 90deg,*/
+    /*        var(--c2) 0 105deg,*/
+    /*        var(--c3) 0 150deg,*/
+    /*        var(--c2) 0 180deg,*/
+    /*        var(--c3) 0 210deg,*/
+    /*        var(--c1) 0 256deg,*/
+    /*        var(--c2) 0 270deg,*/
+    /*        var(--c1) 0 286deg,*/
+    /*        var(--c2) 0 331deg,*/
+    /*        var(--c3) 0*/
+    /*);*/
+    /*background-size: var(--s) calc(var(--s) / 0.577);*/
 }
 .grid{
     padding: 0 120px;

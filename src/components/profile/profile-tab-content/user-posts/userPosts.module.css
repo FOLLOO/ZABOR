@@ -1,7 +1,7 @@
 /*margin потому что там ток один атрибут*/
 
 .margin{
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .main{
@@ -14,3 +14,17 @@
     width: 300px;
 }
 
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px
+}
+
+.title{
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    top: 70px;
+    position: sticky;
+    z-index: 99;
+}

@@ -14,5 +14,10 @@
 }
 
 .logo{
+    min-width: fit-content;
     width: 30%;
+}
+
+.settings{
+    padding: 0 120px 0 35px;
 }
