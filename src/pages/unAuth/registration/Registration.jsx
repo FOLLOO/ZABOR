@@ -33,10 +33,11 @@ function Registration (props) {
                 </h1>
               </div>
               <form className={styles.signIn}>
-                <InputText place={'Введите Email'} type={'text'}/>
-                <InputDporDown/>
-                <InputText place={'Введите Пароль'} type={'password'}/>
-                <InputText place={'Повторите Пароль'} type={'password'}/>
+                <InputText place={'Введите Email'} type={'text'} height={"50px"}/>
+                <InputDporDown />
+                <InputText place={'Введите Пароль'} type={'date'} height={"50px"}/>
+                <InputText place={'Введите Пароль'} type={'password'} height={"50px"}/>
+                <InputText place={'Повторите Пароль'} type={'password'} height={"50px"}/>
                 <div className={`${global.flex} ${global.f_end} ${global.f_a_center}`}>
 
                   <div className={global.d2}>

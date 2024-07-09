@@ -13,6 +13,9 @@ import TempPAge from './pages/temp/TempPAge'
 import CreatePost from './pages/auth/froms/post-create/CreatePost'
 import Profile from './pages/auth/profile/Profile'
 import MyProfileSettings from './pages/auth/settings/my-profile-settings/MyProfileSettings'
+import MySubscribeSettings from './pages/auth/settings/my-subscribe-settings/MySubscribeSettings'
+import PlaylistCreate from './pages/auth/froms/playlist-create/PlaylistCreate'
+import SelectGroupTagsPage from './pages/auth/froms/select-group-tags/SelectGroupTagsPage'
 
 
 function App() {
@@ -33,9 +36,13 @@ function App() {
           <Route path='/login' element={<Authorization/>}/>
         </Route>
 
-        <Route path="/" element={<Layout type={'settings'}/>}>
+        <Route path='/' element={<Layout type={'settings'}/>}>
           <Route path='settings/temp' element={<TempPAge/>}/>
           <Route path='settings/myprofile' element={<MyProfileSettings/>}/>
+          <Route path='settings/mysubs' element={<MySubscribeSettings/>}/>
+
+          <Route path={'create/playlist'} element={<PlaylistCreate/>}/>
+
         </Route>
 
         <Route path="/" element={<Layout type={'auth'}/>}>
@@ -44,7 +51,8 @@ function App() {
         </Route>
 
         <Route path="/" element={<Layout type={'form'}/> }>
-          <Route path={'create'} element={<CreatePost/>}/>
+          <Route path={'/create/post'} element={<CreatePost/>}/>
+          <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
         </Route>
 
       </Routes>

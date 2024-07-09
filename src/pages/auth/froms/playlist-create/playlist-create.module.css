@@ -1,0 +1,38 @@
+.main{
+    padding: 0 35px;
+}
+
+.profileInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+}
+
+.social{
+    width: 100%;
+    gap: 70px
+}
+
+.profileInputs input, select{
+    max-width: 500px;
+}
+
+.profileInputs button{
+    max-width: 300px;
+}
+
+.settings{
+    margin-bottom: 5%;
+}
+
+.toggle{
+    gap: 20px
+}
+
+.search{
+    margin-bottom: 20px;
+}
+
+.posts{
+    gap: 20px;
+}

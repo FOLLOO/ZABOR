@@ -1,0 +1,65 @@
+.main{
+    max-width: 300px;
+    max-height: 460px;
+    overflow: hidden;
+
+    background: white;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding: 10px 0;
+
+    cursor: pointer;
+
+    transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.main:hover{
+    transform: scale(1.01);
+}
+
+.userDescription{
+    min-height: 100px;
+
+    display: -webkit-box;       /* Используется для создания блочного контейнера с вебкит-специфичными свойствами */
+    -webkit-box-orient: vertical; /* Определяет ориентацию блочного контейнера */
+    -webkit-line-clamp: 5;      /* Количество строк, после которых обрезается текст */
+    overflow: hidden;           /* Скрывает текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis;
+}
+.title{
+    padding: 0 10px;
+}
+
+.userPreview{
+    height: 144px;
+    overflow: hidden;
+}
+
+.userPreview img{
+    height: 144px;
+    width: 100%;
+    /*overflow: hidden;*/
+    object-fit: cover;
+    object-position: center;
+}
+
+.content{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.buttons{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+

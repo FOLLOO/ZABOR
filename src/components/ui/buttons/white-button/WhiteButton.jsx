@@ -16,7 +16,7 @@ function WhiteButton ({click, img,
           : null
         }
         {text ?
-          <div className={unique ? global.t1 : null}>
+          <div className={unique ? global.t5 : null}>
             {text}
           </div>
           : null

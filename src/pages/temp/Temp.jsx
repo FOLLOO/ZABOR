@@ -23,6 +23,7 @@ import CardLittle from '../../components/post/post-cards/card-little/CardLittle'
 import { OverlayContext } from '../../context/OverlayContext'
 import RenderType from '../../components/notifications/renderType/RenderType'
 import Notification from '../../components/notifications/Notification'
+import TagCheckBox from '../../components/ui/input/tag-checkbox/TagCheckBox'
 
 function Temp (props) {
 
@@ -139,7 +140,12 @@ function Temp (props) {
           </div>
 
         : null}
+
+
         <div style={{margin: "60px"}}/>
+
+          <TagCheckBox/>
+          <div style={{margin: "60px"}}/>
         </div>
       </>
   );

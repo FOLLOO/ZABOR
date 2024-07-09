@@ -9,15 +9,17 @@ import InputText from '../../../../components/ui/input/input-text/InputText'
 import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
 import InputDporDown from '../../../../components/ui/input/input-dropdown/InputDporDown'
+import ProfileCard from '../../../../components/profile/profile-card/ProfileCard'
 
 //img
-
 import vk from '../../../../asserts/icons/VK.svg'
 import twich from '../../../../asserts/icons/twich.svg'
 import mail from '../../../../asserts/icons/mail.svg'
 import telegram from '../../../../asserts/icons/Telegram.svg'
 import tikTok from '../../../../asserts/icons/tikTok.svg'
 import a_link from '../../../../asserts/icons/Another Link (Link).svg'
+
+import temp from '../../../../asserts/temp/full-shot-people-training-together.jpg'
 
 function MyProfileSettings ({}) {
   return (
@@ -109,6 +111,15 @@ function MyProfileSettings ({}) {
             <GreenButton text={'Сохранить изменения'} unique />
           </div>
         </SettingsBlock>
+
+
+        <ProfileCard nickname={'Егор Антонов'}
+                     image={temp}
+                     description={'Я целеустремленный и креативный специалист, ' +
+                       'который постоянно находится в поиске новых возможностей для самореализации.' +
+                       'С радостью делюсь своими идеями и знаниями со всеми, кто меня окружает.' +
+                       ' Стремлюсь к постоянному саморазвитию и совершенствованию своих навыков'}/>
+        <ProfileCard />
       </div>
     </div>
   )

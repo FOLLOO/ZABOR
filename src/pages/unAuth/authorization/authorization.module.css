@@ -25,7 +25,9 @@
     width: 100%;
     gap: 42px;
 }
-
+.signIn {
+    max-height: 545px;
+}
 .signIn > div {
     margin: 15px 0;
 }

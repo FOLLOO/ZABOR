@@ -32,8 +32,8 @@ function Authorization (props) {
                   </h1>
                 </div>
               <form className={styles.signIn}>
-                <InputText place={'Введите Email'} type={'text'}/>
-                <InputText place={'Введите Пароль'} type={'password'}/>
+                <InputText place={'Введите Email'} type={'text'} height={'50px'}/>
+                <InputText place={'Введите Пароль'} type={'password'} height={'50px'}/>
                 <div className={`${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
                   <div className={`${global.flex} ${global.f_a_center} ${styles.com}`}>
                   <InputCheckbox/>

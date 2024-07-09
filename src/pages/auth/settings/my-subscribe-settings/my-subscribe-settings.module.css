@@ -1,0 +1,37 @@
+.main{
+    padding: 0 35px;
+}
+
+.profileInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+}
+
+.social{
+    width: 100%;
+    gap: 70px
+}
+
+.profileInputs input, select{
+    max-width: 500px;
+}
+
+.profileInputs button{
+    max-width: 300px;
+}
+
+.settings{
+    margin-bottom: 5%;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px
+}
+
+.search{
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
