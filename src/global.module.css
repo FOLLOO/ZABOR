@@ -223,6 +223,10 @@
     padding: 0 120px;
 }
 
+.padLeft{
+    padding: 0 120px 0 35px ;
+}
+
 .padRight{
     padding-right: 120px;
 }

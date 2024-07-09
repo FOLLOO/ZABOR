@@ -16,6 +16,9 @@ import MyProfileSettings from './pages/auth/settings/my-profile-settings/MyProfi
 import MySubscribeSettings from './pages/auth/settings/my-subscribe-settings/MySubscribeSettings'
 import PlaylistCreate from './pages/auth/froms/playlist-create/PlaylistCreate'
 import SelectGroupTagsPage from './pages/auth/froms/select-group-tags/SelectGroupTagsPage'
+import SelectTagsPage from './pages/auth/froms/select-tags/SelectTagsPage'
+import MyGroupTags from './pages/auth/settings/my-tags/group/MyGroupTags'
+import MyTags from './pages/auth/settings/my-tags/tags/MyTags'
 
 
 function App() {
@@ -43,6 +46,9 @@ function App() {
 
           <Route path={'create/playlist'} element={<PlaylistCreate/>}/>
 
+          <Route path={'my/group'} element={<MyGroupTags/>}/>
+          <Route path={'my/tags'} element={<MyTags/>}/>
+
         </Route>
 
         <Route path="/" element={<Layout type={'auth'}/>}>
@@ -53,6 +59,7 @@ function App() {
         <Route path="/" element={<Layout type={'form'}/> }>
           <Route path={'/create/post'} element={<CreatePost/>}/>
           <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
+          <Route path={'/tags'} element={<SelectTagsPage/>}/>
         </Route>
 
       </Routes>

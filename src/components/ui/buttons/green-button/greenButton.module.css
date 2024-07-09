@@ -8,7 +8,7 @@
     padding: 10px 0;
     width: 100%;
     height: fit-content;
-    background: #076553;
+    background: #5B11B9;
     border-radius: 5px;
     color: white;
 }
@@ -19,7 +19,7 @@
     backdrop-filter: blur(15px);
     /* Note: backdrop-filter has minimal browser support */
     border-radius: 5px;
-    background: #076553;
+    background: #5B11B9;
     /*transform: scaleX(1.0111);*/
 }
 

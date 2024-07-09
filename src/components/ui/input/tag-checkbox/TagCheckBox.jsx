@@ -9,8 +9,8 @@ function TagCheckBox ({image, text}) {
 
   return (
     <div className={styles.checkbox_container} onClick={() => setChecked(!checked)}>
-      <input type="checkbox" id={styles.checkbox} className={styles.checkbox} checked={checked}/>
-      <label htmlFor="checkbox" className={styles.checkbox_label}>
+      <input type="checkbox" className={styles.checkbox} checked={checked}/>
+      <label  className={styles.checkbox_label}>
         <img src={temp} alt="Description" className={styles.checkbox_image}/>
         <span className={styles.checkbox_text}>Your Text Here</span>
       </label>
