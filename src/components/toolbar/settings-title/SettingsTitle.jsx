@@ -8,7 +8,7 @@ function SettingsTitle ({bigTitle, title, description}) {
     <div className={styles.main}>
         <h2 className={styles.h}>{bigTitle}</h2>
         <h3>{title}</h3>
-      <div className={`${global.d2} ${styles.desc}`}>
+      <div className={`${global.d3} ${styles.desc}`}>
         {description}
       </div>
     </div>

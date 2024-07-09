@@ -1,8 +1,18 @@
 .main{
     margin-top: 45px;
+    gap: 40px
 }
 
 
 .title{
     gap: 10px
+}
+
+.content{
+    width: 100%;
+
+}
+
+.red{
+    color: #FF6060 !important;
 }

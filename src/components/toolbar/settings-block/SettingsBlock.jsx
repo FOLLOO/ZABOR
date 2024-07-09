@@ -10,7 +10,7 @@ function SettingsBlock ({ children, title, descripton, red , mainWidth, titleWid
         <div className={global.t5}>
           {title ? title : null}
         </div>
-        <div className={red ? `${global.d3} ${styles.red}` : global.d3}>
+        <div className={red ? `${global.d2} ${styles.red}` : global.d2}>
           {descripton ? descripton : null}
         </div>
       </div>

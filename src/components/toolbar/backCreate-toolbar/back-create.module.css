@@ -11,3 +11,10 @@
     width: 100%;
     text-align: right;
 }
+
+.sticky{
+    position: sticky;
+    top: 70px;
+
+    background: white;
+}

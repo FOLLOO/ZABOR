@@ -7,22 +7,107 @@ import SettingsTitle from '../../../../components/toolbar/settings-title/Setting
 import SettingsBlock from '../../../../components/toolbar/settings-block/SettingsBlock'
 import InputText from '../../../../components/ui/input/input-text/InputText'
 import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
+import Textarea from '../../../../components/ui/input/textarea/Textarea'
+import InputDporDown from '../../../../components/ui/input/input-dropdown/InputDporDown'
 
-function MyProfileSettings (props) {
+//img
+
+import vk from '../../../../asserts/icons/VK.svg'
+import twich from '../../../../asserts/icons/twich.svg'
+import mail from '../../../../asserts/icons/mail.svg'
+import telegram from '../../../../asserts/icons/Telegram.svg'
+import tikTok from '../../../../asserts/icons/tikTok.svg'
+import a_link from '../../../../asserts/icons/Another Link (Link).svg'
+
+function MyProfileSettings ({}) {
   return (
     <div className={styles.main}>
-      <BackCreate />
+      <BackCreate sticky/>
       <SettingsTitle bigTitle={'Мой профиль'} description={'Эти данные отображаются на вашей странице в профиле'}/>
 
 
       <div className={styles.settings}>
-        <SettingsBlock title={'Публичная информация'} descripton={'Эта информация отображается всем. \n' +
+        <SettingsBlock
+          mainWidth={1400}
+          title={'Публичная информация'} descripton={'Эта информация отображается всем. \n' +
           'На вашей странице профиля'} >
-          <>
-            <InputText place={'nickname'}/>
-            <InputText place={'Информация о себе'}/>
-            <GreenButton text={'Сохранитть изменения'}/>
-          </>
+          <div className={styles.profileInputs}>
+            <InputText place={'Nickname (псевдоним)'}/>
+            {/*<InputText place={'Информация о себе'}/>*/}
+            <Textarea place={'Информация о себе'} rows={15}/>
+            <GreenButton text={'Сохранить изменения'} unique/>
+          </div>
+        </SettingsBlock>
+
+        <SettingsBlock
+          mainWidth={1400}
+          title={'Личная информация'} descripton={'Необходимо для рекомендаций. Не отображается на странице профиля'} >
+          <div className={styles.profileInputs}>
+            <InputDporDown />
+            <InputText place={'Дата рождения'} type={'date'}/>
+            {/*<InputText place={'Информация о себе'}/>*/}
+            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
+            <GreenButton text={'Сохранить изменения'} unique/>
+          </div>
+        </SettingsBlock>
+
+
+        <SettingsBlock
+          mainWidth={1400}
+          title={'Параметры входа'} descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
+          ' \n' +
+          'и одну цифру'} red>
+          <div className={styles.profileInputs}>
+            <InputText place={'Введите старый пароль'} type={'text'}/>
+            <InputText place={'Введите новый пароль'} type={'password'}/>
+            <InputText place={'Повторите новый пароль'} type={'password'}/>
+            {/*<InputText place={'Информация о себе'}/>*/}
+            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
+            <GreenButton text={'Сохранить изменения'} unique />
+          </div>
+        </SettingsBlock>
+
+
+        <SettingsBlock
+          mainWidth={1400}
+          title={'Социальные сети'} >
+          <div className={styles.profileInputs}>
+            <div className={`${global.flex} ${styles.social}`}>
+            <InputText place={'Телеграм'} width={"50%"}/>
+              <img src={telegram} alt={'social'}/>
+            </div>
+
+            <div className={`${global.flex} ${styles.social}`}>
+              <InputText place={'ВКонтакте'} width={"50%"} />
+              <img src={vk} alt={'social'}/>
+            </div>
+
+            <div className={`${global.flex} ${styles.social}`}>
+              <InputText place={'Email'} width={"50%"}/>
+              <img src={mail} alt={'social'}/>
+            </div>
+
+            <div className={`${global.flex} ${styles.social}`}>
+              <InputText place={'Twich'} width={"50%"}/>
+              <img src={twich} alt={'social'}/>
+            </div>
+
+            <div className={`${global.flex} ${styles.social}`}>
+              <InputText place={'TikTok'} width={"50%"}/>
+              <img src={tikTok} alt={'social'}/>
+            </div>
+
+            <div className={`${global.flex} ${styles.social}`}>
+              <InputText place={'Другое'} width={"50%"}/>
+              <img src={a_link} alt={'social'}/>
+            </div>
+
+
+
+            {/*<InputText place={'Информация о себе'}/>*/}
+            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
+            <GreenButton text={'Сохранить изменения'} unique />
+          </div>
         </SettingsBlock>
       </div>
     </div>

@@ -1,8 +1,8 @@
 .input{
-
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
     font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+
 
     vertical-align: top;
     width: 100%;
@@ -13,14 +13,9 @@
     backdrop-filter: blur(15px);
     /* Note: backdrop-filter has minimal browser support */
     border-radius: 5px;
-
-
 }
 
 .input::placeholder{
-    color: #BEBEBE;
-}
 
-.main{
-    height: 100%;
+    color: #BEBEBE;
 }
