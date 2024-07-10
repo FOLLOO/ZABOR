@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './card-default.module.css'
 import global from '../../../../global.module.css'
@@ -7,9 +7,12 @@ import lock from '../../../../asserts/icons/Lock.svg'
 import basket from '../../../../asserts/icons/basket.svg'
 import plus from '../../../../asserts/icons/plus.svg'
 import temp from '../../../../asserts/temp/temp2.jpg'
+import axios from 'axios'
 
 function CardDefault ({
   image = false,
+  img,
+  avatar_img,
   title,
   views,
   price,
@@ -17,12 +20,13 @@ function CardDefault ({
   description,
   blur = false
 }) {
+
   return (
     <div className={`${styles.main} ${global.shadowBliz}`}>
-      <div className={image ? styles.temp : null}>
+      <div className={img ? styles.temp : null}>
         <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
-            <ProfileCircle size={40}/>
+            <ProfileCircle img={avatar_img} size={40}/>
           </div>
 
           <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>
@@ -62,7 +66,7 @@ function CardDefault ({
                 </div>
               }
             </div>
-            <div className={global.h4}>
+            <div className={`${global.h4} ${styles.price}`}>
               {price ? price + ' ₽' :
                 <div className={global.skeleton}>
                   015₽
@@ -105,8 +109,8 @@ function CardDefault ({
           </div>
         </div>
       </div>
-      {image ?
-        <img className={`${styles.cardImage}  ${blur ? global.blur : null}`} src={temp} alt={'temp'}/>
+      {img ?
+        <img className={`${styles.cardImage}  ${blur ? global.blur : null}`} src={img} alt={'temp'}/>
         :
         <div className={`${global.skeleton} ${styles.noImage}`}>
 

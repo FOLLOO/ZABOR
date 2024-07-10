@@ -4,10 +4,11 @@ import React from 'react'
 import global from '../../../../global.module.css'
 import styles from './greenButton.module.css'
 
-function GreenButton ({text, stylee, img, unique, click}) {
+function GreenButton ({text, stylee, img, unique, click, type}) {
   return (
     <button
       className={styles.button}
+      type={type ? type : null }
       onClick={click ? click : null}>
       <div className={styles.content} style={stylee? stylee : null}>
         { img ?

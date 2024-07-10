@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-
-import './App.css';
+import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+
 import Main from './pages/unAuth/main/Main'
 import Authorization from './pages/unAuth/authorization/Authorization'
 import Registration from './pages/unAuth/registration/Registration'
@@ -20,56 +21,80 @@ import SelectTagsPage from './pages/auth/froms/select-tags/SelectTagsPage'
 import MyGroupTags from './pages/auth/settings/my-tags/group/MyGroupTags'
 import MyTags from './pages/auth/settings/my-tags/tags/MyTags'
 
+import { Provider } from 'react-redux'
+import axios from 'axios'
+import store from './redux/store'
 
-function App() {
+// axios.defaults.baseURL = 'https://192.168.1.121:5000'
+// axios.defaults.withCredentials = true
+
+function App () {
+
+  const SettingsPage = () => {
+    return (
+      <Routes >
+        <Route path="/temp" element={<TempPAge/>}/>
+        <Route path="/myprofile" element={<MyProfileSettings/>}/>
+        <Route path="/mysubs" element={<MySubscribeSettings/>}/>
+      </Routes>
+    )
+  }
+
   return (
     <div className="App">
-      <BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/settings" element={<Layout type={'settings'} />}>
+              <Route index element={<SettingsPage />} />
+              <Route path="/settings/temp" element={<TempPAge />} />
+              <Route path="/settings/myprofile" element={<MyProfileSettings />} />
+              <Route path="/settings/mysubs" element={<MySubscribeSettings />} />
+            </Route>
 
-      <Routes >
-        <Route path="/temp" element={<Temp/>}/>
-        <Route path="/temp2" element={<TempEditor/>}/>
 
-        <Route path="/" element={<Layout type={'notAuth'}/>}>
-          <Route path="/" element={<Main/>}/>
-        </Route>
+            <Route path="/temp" element={<Temp/>}/>
+            <Route path="/temp2" element={<TempEditor/>}/>
 
-        <Route path="/" element={<Layout type={'login'}/>}>
-          <Route path='/registration' element={<Registration/>}/>
-          <Route path='/login' element={<Authorization/>}/>
-        </Route>
+            <Route path="/" element={<Layout type={'notAuth'}/>}>
+              <Route path="/" element={<Main/>}/>
+            </Route>
 
-        <Route path='/' element={<Layout type={'settings'}/>}>
-          <Route path='settings/temp' element={<TempPAge/>}/>
-          <Route path='settings/myprofile' element={<MyProfileSettings/>}/>
-          <Route path='settings/mysubs' element={<MySubscribeSettings/>}/>
+            <Route path="/" element={<Layout type={'login'}/>}>
+              <Route path="/registration" element={<Registration/>}/>
+              <Route path="/login" element={<Authorization/>}/>
+            </Route>
 
-          <Route path={'create/playlist'} element={<PlaylistCreate/>}/>
+            <Route path="/" element={<Layout type={'settings'}/>}>
+              <Route path={'create/playlist'} element={<PlaylistCreate/>}/>
 
-          <Route path={'my/group'} element={<MyGroupTags/>}/>
-          <Route path={'my/tags'} element={<MyTags/>}/>
+              <Route path={'my/group'} element={<MyGroupTags/>}/>
+              <Route path={'my/tags'} element={<MyTags/>}/>
 
-        </Route>
+            </Route>
 
-        <Route path="/" element={<Layout type={'auth'}/>}>
-          <Route path='/auth' element={<>auth</>}/>
-          <Route path='/profile/:id' element={<Profile/>}/>
-        </Route>
+            {/*<Route path={'/settings'} element={<Layout type={'settings'}/>}>*/}
+            {/*  <Route path="/temp" element={<TempPAge/>}/>*/}
+            {/*  <Route path="/myprofile" element={<MyProfileSettings/>}/>*/}
+            {/*  <Route path="/mysubs" element={<MySubscribeSettings/>}/>*/}
+            {/*</Route>*/}
 
-        <Route path="/" element={<Layout type={'form'}/> }>
-          <Route path={'/create/post'} element={<CreatePost/>}/>
-          <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
-          <Route path={'/tags'} element={<SelectTagsPage/>}/>
-        </Route>
+            <Route path="/" element={<Layout type={'auth'}/>}>
+              <Route path="/auth" element={<>auth</>}/>
+              <Route path="/profile/:id" element={<Profile/>}/>
+            </Route>
 
-      </Routes>
-      </BrowserRouter>
-      {/*<Header/>*/}
-      {/*<Main/>*/}
-      {/*<Authorization/>*/}
-      {/*<Footer/>*/}
+            <Route path="/" element={<Layout type={'form'}/>}>
+              <Route path={'/create/post'} element={<CreatePost/>}/>
+              <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
+              <Route path={'/tags'} element={<SelectTagsPage/>}/>
+            </Route>
+
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

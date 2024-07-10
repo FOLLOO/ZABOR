@@ -4,6 +4,7 @@ import React from 'react'
 import styles from './transprantButton.module.css'
 import global from '../../../../global.module.css'
 function TransprantButton ({text, stylee, img, unique, click, nonePad,
+  red = false,
   left= false,
   noPad = false
 }) {
@@ -25,7 +26,7 @@ function TransprantButton ({text, stylee, img, unique, click, nonePad,
           : null
         }
         {text ?
-          <div className={unique ? global.t1 : `${global.text} ` }>
+          <div className={unique ? global.t1 : `${global.text} `} style={red ? {color: '#AD0000'} : null}>
             {text}
           </div>
           : null

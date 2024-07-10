@@ -8,7 +8,7 @@ import GreenButton from '../../../ui/buttons/green-button/GreenButton'
 import Playlist from '../../../post/post-playlist/Playlist'
 import PlaylistsContent from '../../../post/post-playlist/playlists-content/PlaylistsContent'
 
-function Playlists ({ data = 'slfdo' }) {
+function Playlists ({ data = [] }) {
 
   const [open, setOpen] = useState(false)
 
@@ -42,8 +42,15 @@ function Playlists ({ data = 'slfdo' }) {
         <div className={styles.margin}>
           <div className={styles.grid} onClick={() => setOpen(!open)}>
             <Playlist add/>
-            <Playlist/>
-            <Playlist/>
+            {data.length > 0 ? data.map((item =>
+                <Playlist title={item} image={item} description={item}/>
+            ))
+              :
+              <>
+              <Playlist add/>
+              </>
+            }
+
           </div>
         </div>
       </>

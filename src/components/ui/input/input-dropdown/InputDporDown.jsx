@@ -1,19 +1,18 @@
 import React from 'react'
 import './input-dropdown.css'
 
-function InputDporDown (props) {
+
+
+function InputDporDown ({data = [], required}) {
   return (
     <div>
       <label className="select" htmlFor="slct">
-        <select id="slct" required>
-          <option value="" disabled="" selected="">Select option</option>
-          <option className="custom-option" value="#">One</option>
-          <option className="custom-option" value="#">Two</option>
-          <option className="custom-option" value="#">Three</option>
-          <option className="custom-option" value="#">Four</option>
-          <option value="#">Five</option>
-          <option value="#">Six</option>
-          <option value="#">Seven</option>
+        <select id="slct" required={required}>
+          {/*<option value="" disabled="" selected="" className="pol">Ваш пол</option>*/}
+          <option value="" hidden>Ваш пол</option>
+          {data.length > 0 ?  data.map((item =>
+            <option value={item.title} key={item.id}>{item.title}</option>
+          )) : null }
         </select>
         <svg>
           <use xlinkHref="#select-arrow-down"></use>

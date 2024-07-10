@@ -13,7 +13,7 @@ import temp
 /** Посты пользователя */
 
 
-function UserPosts ({ data = 'asdfasd' }) {
+function UserPosts ({ data = [] }) {
 
   /** Нет постов*/
   const NothingYeat = () => {
@@ -37,16 +37,34 @@ function UserPosts ({ data = 'asdfasd' }) {
   const UserPosts = () => {
     return (
       <>
+
+
         <div className={styles.title}>
           <h2>Публикации</h2>
         </div>
         <div className={styles.margin}>
-
           <div className={styles.grid}>
-            <CardDefault/>
-            <CardDefault/>
-            <CardDefault/>
-            <CardDefault/>
+            {data.length > 0 ?
+              data.map((message =>
+                  <CardDefault
+                    avatar_img={message}
+                    img={message}
+                    // blur
+                    views={1000}
+                    time={new Date().toLocaleDateString('ru-RU')}
+                    title={message}
+                    description={message}
+                    price={14}
+                    image/>
+              ))
+              :
+              <>
+                <CardDefault/>
+                <CardDefault/>
+                <CardDefault/>
+                <CardDefault/>
+              </>
+            }
           </div>
         </div>
       </>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // css
 import styles from './header.module.css'
@@ -9,10 +9,38 @@ import { Link, useNavigate } from 'react-router-dom'
 import Search from '../search/Search'
 import ProfileNickname from '../../profile/profile-nickname/ProfileNickname'
 
+import bascket from '../../../asserts/icons/basket.svg'
+import arrowMenu from '../../../asserts/icons/arowMenu.svg'
+import bell from '../../../asserts/icons/Bell.svg'
+import ContextGroup from '../../context-drop/context-group/ContextGroup'
+import ContextDrop from '../../context-drop/ContextDrop'
+
+
+import tempIcon from '../../../asserts/icons/Файл.svg'
+import settings from '../../../asserts/icons/Settings.svg'
+import logout from '../../../asserts/icons/LogOut.svg'
+import hole from '../../../asserts/icons/Творческая студия.svg'
+import Notification from '../../notifications/Notification'
 
 function Header (props) {
 
   const navigate = useNavigate()
+  const [menu , setMenu] = useState(false)
+  const [notifications , setNotifications] = useState(false)
+
+  const ref = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target))
+      setMenu(false)
+    setNotifications(false)
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
 
   return (
     <header className={props.pad ? global.pad : props.settings ? styles.settings : null}>
@@ -32,7 +60,56 @@ function Header (props) {
         </div>
         <div className={styles.trap2}>
           {props.auth ?
-          <ProfileNickname type={'default'} nickname={'Нафис'}/>
+            <>
+              <TransprantButton img={bascket} click={() => navigate('/settings/notifications')}/>
+              <TransprantButton img={bell} click={() => setNotifications(!notifications)}/>
+              {
+                notifications ?
+                  <div className={styles.notifications}  ref={ref}>
+                    <ContextDrop>
+                     <ContextGroup>
+                      <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                     </ContextGroup>
+                      <ContextGroup>
+                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                      </ContextGroup>
+                      <ContextGroup>
+                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                      </ContextGroup>
+                      <ContextGroup>
+                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                      </ContextGroup>
+                      <ContextGroup>
+                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                      </ContextGroup>
+
+                    </ContextDrop>
+                  </div>
+                  : null
+              }
+              <ProfileNickname type={'default'} nickname={'Нафис'}/>
+              <TransprantButton img={arrowMenu} click={() => setMenu(!menu)}/>
+
+              {
+                menu ?
+                    <div className={styles.contextMenu} ref={ref}>
+                      <ContextDrop>
+                        <ContextGroup>
+                          <ProfileNickname nickname={'home'} type={'default'} desc/>
+                        </ContextGroup>
+                        <ContextGroup>
+                          <TransprantButton img={hole} text={'Творческая студия'} left />
+                        </ContextGroup>
+                        <ContextGroup noafter>
+                          <TransprantButton img={settings} text={'Настройки'} left click={() => navigate('/settings/myprofile')}/>
+                          <TransprantButton img={logout} text={'Выйти'} red left click={() => navigate('/')}/>
+                        </ContextGroup>
+                      </ContextDrop>
+                    </div>
+                : null
+              }
+
+            </>
           : null }
         </div>
 

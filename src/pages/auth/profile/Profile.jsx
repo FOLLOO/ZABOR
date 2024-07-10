@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './profile.module.css'
 import global from '../../../global.module.css'
@@ -12,14 +12,46 @@ import WhiteButton from '../../../components/ui/buttons/white-button/WhiteButton
 import AboutMe from '../../../components/profile/profile-tab-content/aboutMe/AboutMe'
 import Playlists from '../../../components/profile/profile-tab-content/playlists/Playlists'
 import UserPosts from '../../../components/profile/profile-tab-content/user-posts/UserPosts'
-
+// import axios from '../../../r-axios/axios'
+import axios from 'axios'
 
 function Profile ({prewie, nickname}) {
+
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+  // const getData = async () => {
+  //   try {
+  //     const response = await axios.get('/random_joke');
+  //       setData(response);
+  //   } catch (err) {
+  //     console.error(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const getData = async () => {
+    try{
+      const response = await axios.get('https://dog.ceo/api/breed/hound/images/random/1000')
+      setData(response.data.message)
+      setLoading(false)
+    }
+    catch (err){
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+      getData();
+      // console.log(data)
+  },[loading])
+
+
   /** Контент для Tab */
   const tabContent = [
-    { title: 'Публикации', content: <UserPosts/> },
-    { title: 'Плейлисты', content: <Playlists/> },
-    { title: 'Об авторе', content: <AboutMe/> },
+    { title: 'Публикации', content: <UserPosts data={data}/> },
+    { title: 'Плейлисты', content: <Playlists data={data}/> },
+    { title: 'Об авторе', content: <AboutMe /> },
   ];
   /** Компонент для страницыы профиля главный контент отоправляется в Tab через items*/
   return (

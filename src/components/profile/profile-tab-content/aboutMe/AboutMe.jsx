@@ -4,8 +4,12 @@ import styles from './aboutMe.module.css'
 import global from '../../../../global.module.css'
 import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
+import { useNavigate } from 'react-router-dom'
 
 function AboutMe ({text}) {
+
+  const navigate = useNavigate()
+
   return (
     // margin потому что там ток один атрибут
     <div className={styles.margin}>
@@ -18,7 +22,7 @@ function AboutMe ({text}) {
           </div>
           {text ? null :
             <div className={styles.addButton}>
-            <GreenButton text={'Добавить'} unique/>
+            <GreenButton text={'Добавить'} unique click={() => navigate('/settings/myprofile')}/>
             </div>
           }
         </div>

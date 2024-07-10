@@ -7,6 +7,22 @@ import global from '../../global.module.css'
 import styles from './layouts.module.css'
 import TransprantButton from '../ui/buttons/transprant-button/TransprantButton'
 import { OverlayContext, OverlayContextProvider } from '../../context/OverlayContext'
+
+
+import  analytychs from '../../asserts/icons/settingsMenu/Analytics.svg'
+import  bar from '../../asserts/icons/settingsMenu/BarMenu.svg'
+import  outlet_bell from '../../asserts/icons/settingsMenu/outlet-bell.svg'
+import  profile from '../../asserts/icons/settingsMenu/Profile.svg'
+import  subes from '../../asserts/icons/settingsMenu/Subes.svg'
+import  tag from '../../asserts/icons/settingsMenu/tags1.svg'
+
+import  main from '../../asserts/icons/mainMenu/Главная.svg'
+import  buyed from '../../asserts/icons/mainMenu/Кулпенное.svg'
+import  comments from '../../asserts/icons/mainMenu/Обсуждаемое.svg'
+import  liked from '../../asserts/icons/mainMenu/Понравилось.svg'
+import  popular from '../../asserts/icons/mainMenu/Популярное.svg'
+
+
 const Layout = ({type,
   // login = false,
   // isAuth = false
@@ -40,15 +56,13 @@ const Layout = ({type,
         <div className={open ? styles.grid : styles.grid2}>
           <div className={styles.leftHand}>
             <div className={`${global.flex} ${global.f_dir_column}`}>
-              <TransprantButton text={'Some'} click={() => setOpen(!open)}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
-              <TransprantButton text={'Some'}/>
+              <TransprantButton img={bar}  click={() => setOpen(!open)}/>
+              <TransprantButton img={main} text={open ? 'Главная' : null}/>
+              <TransprantButton img={subes} text={open ?'Подписки' : null}/>
+              <TransprantButton img={liked} text={open ?'Понравилось' : null}/>
+              <TransprantButton img={popular} text={open ?'Популярное': null}/>
+              <TransprantButton img={comments} text={open ?'Обсуждаемое': null}/>
+              <TransprantButton img={buyed} text={open ? 'Купленное': null}/>
             </div>
           </div>
           <div className={styles.header}>
@@ -70,15 +84,12 @@ const Layout = ({type,
       <div className={open ? styles.grid : styles.grid2}>
         <div className={styles.leftHand}>
           <div className={`${global.flex} ${global.f_dir_column}`}>
-            <TransprantButton text={'Some'} click={() => setOpen(!open)}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
-            <TransprantButton text={'Some'}/>
+            <TransprantButton img={bar} click={() => setOpen(!open)}/>
+            <TransprantButton img={analytychs} text={open ? 'Творческая студия' : null}/>
+            <TransprantButton img={profile} text={open ? 'Личная информация' : null}/>
+            <TransprantButton img={subes} text={open ? 'Подписки' : null}/>
+            <TransprantButton img={outlet_bell} text={open ? 'Уведомления' : null}/>
+            <TransprantButton img={tag} text={open ? 'Теги' : null}/>
           </div>
         </div>
         <div className={styles.header}>

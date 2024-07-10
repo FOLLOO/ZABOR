@@ -51,13 +51,15 @@
 }
 
 .cardImage{
-    height: 350px;
+    width: 490px;
+    /*height: 350px;*/
     background: linear-gradient(0deg, rgba(16, 17, 18, 0.92) 25.68%, rgba(27, 28, 32, 0) 72.2%);
     /*background: -moz-linear-gradient();*/
     position: relative;
     top: -110%;
     z-index: -1;
     object-fit: cover;
+    object-position: top;
     /*filter: blur(20);*/
     transition: all 150ms ease;
 }
@@ -82,7 +84,10 @@
     height: 160px;
     width: 100%;
 
-    border-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
     background: white;
     gap: 15px;
     padding: 15px 20px;
@@ -93,6 +98,10 @@
 }
 .epigraph:hover{
     color: #076553;
+}
+.price{
+    min-width: 50px;
+    text-align: center;
 }
 .title{
     overflow: hidden;

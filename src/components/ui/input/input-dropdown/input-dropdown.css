@@ -1,6 +1,7 @@
 .select {
     position: relative;
     min-width: 200px;
+
 }
 
 .select svg {
@@ -81,4 +82,8 @@
     height: 0;
     pointer-events: none;
     user-select: none;
+}
+
+.pol{
+    color: #828282;
 }

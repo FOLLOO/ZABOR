@@ -8,7 +8,7 @@ function ProfileCircle ({img, size}) {
     <div className={styles.main} style={{width: `${size}px`, height: `${size}px`}}>
       {
         img ?
-      <img className={styles.img} src={temp} alt={'profileImage'} style={{width: `${size}px`, height: `${size}px`}}/>
+      <img className={styles.img} src={img ? img : temp} alt={'profileImage'} style={{width: `${size}px`, height: `${size}px`}}/>
           :
           <div className={global.skeleton}>
           </div>

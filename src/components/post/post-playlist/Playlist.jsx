@@ -12,7 +12,7 @@ function Playlist ({title, description, image, add}) {
     <div className={`${styles.main} ${global.shadowBliz} ${global.flex} ${global.f_dir_column} `}>
       <div className={styles.image}>
         {image ?
-        <img src={temp} alt={'playlist-img'} className={styles.img}/>
+        <img src={image} alt={'playlist-img'} className={styles.img}/>
           :
           <div className={global.skeleton}>
           </div> }

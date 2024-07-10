@@ -11,3 +11,7 @@
 .post:hover{
     color: rgba(7, 101, 83, 0.87);
 }
+
+.hola{
+    gap: 10px
+}

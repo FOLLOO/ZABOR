@@ -5,6 +5,7 @@
 
 .main{
     max-width: 320px;
+    height: 400px;
     border-radius: 5px;
     overflow: hidden;
     transition: 0.7s;
@@ -15,12 +16,16 @@
 }
 
 .image{
+
     height: 240px;
 }
 
 .img{
+    width: 100%;
+    max-width: 320px;
     height: 240px;
     object-fit: cover;
+    object-position: top;
 }
 
 .description{
@@ -30,4 +35,11 @@
     overflow: hidden;           /* Скрывает текст, выходящий за пределы контейнера */
     text-overflow: ellipsis;
     /*text-align: justify;*/
+}
+
+.title h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    white-space: nowrap;
 }
