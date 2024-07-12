@@ -20,8 +20,29 @@ import tikTok from '../../../../asserts/icons/tikTok.svg'
 import a_link from '../../../../asserts/icons/Another Link (Link).svg'
 
 import temp from '../../../../asserts/temp/full-shot-people-training-together.jpg'
+import { useAuth } from '../../../../provider/AuthProvider'
 
+// console.log(user)
 function MyProfileSettings ({}) {
+
+  const { user } = useAuth()
+
+  const formattedDate = user?.date_of_birth ? new Date(user?.date_of_birth).toISOString().slice(0, 10) : '';
+
+
+  const items = [
+    {
+      id: 1,
+      title: 'Мужской',
+      value: 'м'
+    },
+    {
+      id: 2,
+      title: 'Женский',
+      value: 'ж'
+    },
+  ]
+
   return (
     <div className={styles.main}>
       <BackCreate sticky/>
@@ -34,9 +55,9 @@ function MyProfileSettings ({}) {
           title={'Публичная информация'} descripton={'Эта информация отображается всем. \n' +
           'На вашей странице профиля'} >
           <div className={styles.profileInputs}>
-            <InputText place={'Nickname (псевдоним)'}/>
+            <InputText place={'Nickname (псевдоним)'} value={user?.nickname}/>
             {/*<InputText place={'Информация о себе'}/>*/}
-            <Textarea place={'Информация о себе'} rows={15}/>
+            <Textarea place={'Информация о себе'} rows={15} value={user?.aboutMe}/>
             <GreenButton text={'Сохранить изменения'} unique/>
           </div>
         </SettingsBlock>
@@ -45,8 +66,8 @@ function MyProfileSettings ({}) {
           mainWidth={1400}
           title={'Личная информация'} descripton={'Необходимо для рекомендаций. Не отображается на странице профиля'} >
           <div className={styles.profileInputs}>
-            <InputDporDown />
-            <InputText place={'Дата рождения'} type={'date'}/>
+            <InputDporDown data={items} value={user?.sex} />
+            <InputText place={'Дата рождения'} type={'date'} value={formattedDate}/>
             {/*<InputText place={'Информация о себе'}/>*/}
             {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
             <GreenButton text={'Сохранить изменения'} unique/>

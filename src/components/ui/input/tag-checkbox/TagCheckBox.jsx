@@ -12,7 +12,7 @@ function TagCheckBox ({image, text}) {
       <input type="checkbox" className={styles.checkbox} checked={checked}/>
       <label  className={styles.checkbox_label}>
         <img src={temp} alt="Description" className={styles.checkbox_image}/>
-        <span className={styles.checkbox_text}>Your Text Here</span>
+        <span className={`${styles.checkbox_text} ${global.t1}`}>Your Text Here</span>
       </label>
     </div>
   )

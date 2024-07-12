@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import ContextMenu from '../../components/ temp/ContextMenu'
 import InputToggle from '../../components/ui/input/input-toggle/InputCheckbox'
 import InputText from '../../components/ui/input/input-text/InputText'
 import InputDporDown from '../../components/ui/input/input-dropdown/InputDporDown'
@@ -31,9 +30,9 @@ function Temp (props) {
   const [open, setOpen] = useState(false)
 
   const items = [
-    { title: 'London', content: <MessageBox  type={'sure'}/> },
-    { title: 'Paris', content: <MessageBox  type={'help'}/> },
-    { title: 'Tokyo', content: <MessageBox  type={'buy'}/> },
+    // { title: 'London', content: <MessageBox  type={'sure'}/> },
+    // { title: 'Paris', content: <MessageBox  type={'help'}/> },
+    // { title: 'Tokyo', content: <MessageBox  type={'buy'}/> },
   ];
 
 
@@ -56,10 +55,10 @@ function Temp (props) {
         <TransprantButton text={'Добавить'} />
 
         {some ?
-        <MessageBox visability={true} type={'sure'}/>
+        <MessageBox visability={false} type={'sure'}/>
         :
-          null
-        }
+        null
+      }
   <div style={{margin: 'auto', width: "300px"}}>
 
         <ContextDrop>

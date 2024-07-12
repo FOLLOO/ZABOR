@@ -92,6 +92,7 @@
     color: #076553;
 }
 .title{
+    font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

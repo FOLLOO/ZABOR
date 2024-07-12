@@ -1,0 +1,1 @@
+export const IUserLogin = (email, password) => ({email, password})

@@ -23,7 +23,7 @@ function Footer ({noStick}) {
           <button className={styles.whiteButton}>
             <div className={styles.b_content}>
               <img src={eye_emoji} width={22}/>
-              <div className={global.t4}>
+              <div className={`${global.t1} ${global.medium}`}>
                 Документы
               </div>
             </div>
@@ -31,7 +31,7 @@ function Footer ({noStick}) {
           <button className={styles.whiteButton}>
             <div className={styles.b_content}>
               <img src={hello_emoji} width={22}/>
-              <div className={global.t4}>
+              <div className={`${global.t1} ${global.medium}`}>
                 Контакты
               </div>
             </div>
@@ -45,7 +45,7 @@ function Footer ({noStick}) {
             <img className={styles.logo} src={logo} alt={'logo'}/>
           </div>
           <div className={styles.block}>
-            <div className={`${global.t3} ${styles.c_text}`}>
+            <div className={`${global.d3} ${styles.c_text}`}>
               © 2024 АЙМАНИ. Все права защищены.
             </div>
           </div>

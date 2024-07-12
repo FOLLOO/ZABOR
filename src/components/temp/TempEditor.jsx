@@ -2,6 +2,8 @@ import React from 'react'
 import { BubbleMenu, EditorProvider, FloatingMenu, useCurrentEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 
+import './TipTap.css'
+
 const extensions = [
   StarterKit,
 ]
@@ -49,50 +51,45 @@ function TempEditor (props) {
           >
             H5
           </button>
-          <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-            className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
-          >
-            H6
-          </button>
+          {/*<button*/}
+          {/*  onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}*/}
+          {/*  className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}*/}
+          {/*>*/}
+          {/*  H6*/}
+          {/*</button>*/}
 
-          <button
-            onClick={() => editor.chain().focus().undo().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .undo()
-                .run()
-            }
-          >
-            Undo
-          </button>
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .redo()
-                .run()
-            }
-          >
-            Redo
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-            className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
-          >
-            Purple
-          </button>
+          {/*<button*/}
+          {/*  onClick={() => editor.chain().focus().undo().run()}*/}
+          {/*  disabled={*/}
+          {/*    !editor.can()*/}
+          {/*      .chain()*/}
+          {/*      .focus()*/}
+          {/*      .undo()*/}
+          {/*      .run()*/}
+          {/*  }*/}
+          {/*>*/}
+          {/*  Вернуть*/}
+          {/*</button>*/}
+          {/*<button*/}
+          {/*  onClick={() => editor.chain().focus().redo().run()}*/}
+          {/*  disabled={*/}
+          {/*    !editor.can()*/}
+          {/*      .chain()*/}
+          {/*      .focus()*/}
+          {/*      .redo()*/}
+          {/*      .run()*/}
+          {/*  }*/}
+          {/*>*/}
+          {/*  Вернуть*/}
+          {/*</button>*/}
+
         </div>
       </div>
     )
   }
 
   return (
-    <div style={{width: "1000px", height: 'fit-content', minHeight: "100px"}}>
+    <div >
     <EditorProvider  extensions={extensions} >
       <BubbleMenu> <MenuBar/> </BubbleMenu>
     </EditorProvider>

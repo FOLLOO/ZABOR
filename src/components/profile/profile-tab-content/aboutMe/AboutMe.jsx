@@ -6,7 +6,7 @@ import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
 
-function AboutMe ({text}) {
+function AboutMe ({data, text}) {
 
   const navigate = useNavigate()
 
@@ -18,9 +18,9 @@ function AboutMe ({text}) {
         ${global.f_a_center} ${styles.main}`}>
           <h3>Обо мне</h3>
           <div className={global.d2}>
-            {text ? text : 'Пока что ничего нет 🤔'}
+            {data?.profile.aboutMe ? data?.profile.aboutMe : 'Пока что ничего нет 🤔'}
           </div>
-          {text ? null :
+          {data?.profile.aboutMe ? null :
             <div className={styles.addButton}>
             <GreenButton text={'Добавить'} unique click={() => navigate('/settings/myprofile')}/>
             </div>

@@ -7,7 +7,7 @@ function Search ({stylee}) {
     <div className={styles.main} style={stylee}>
       <div className={`${global.flex} ${global.f_a_center} ${styles.search}`}>
         <img src={search} alt={''}/>
-        <input className={styles.input} type={'text'} placeholder={'Найти...'} />
+        <input className={`${styles.input} ${global.text} ${global.medium}`} type={'text'} placeholder={'Найти...'} />
       </div>
     </div>
   )

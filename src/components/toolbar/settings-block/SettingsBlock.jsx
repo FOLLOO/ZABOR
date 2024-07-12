@@ -9,10 +9,10 @@ function SettingsBlock ({ children, title, descripton, red , mainWidth, titleWid
          style={{width: mainWidth ? mainWidth : 'auto'}}>
       <div className={`${styles.title} ${global.flex} ${global.f_dir_column}`}
            style={{width: titleWidth ? titleWidth : '500px'}}>
-        <div className={global.t5}>
+        <div className={`${global.t2} ${global.medium}`}>
           {title ? title : null}
         </div>
-        <div className={red ? `${global.d2} ${styles.red}` : global.d2}>
+        <div className={red ? `${global.d3} ${styles.red}` : global.d3}>
           {descripton ? descripton : null}
         </div>
       </div>

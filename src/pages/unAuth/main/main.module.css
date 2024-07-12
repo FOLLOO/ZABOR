@@ -1,25 +1,8 @@
-
-.video{
-    width: 100%;
-}
-
-.title{
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    font-size: 2.5vw;
-    text-align: center;
-    width: 80%;
-    margin : 10vh auto;
-}
-
-.title p{
-    color: #868686;
-}
 .back{
-/*Пальмы*/
+    /*Пальмы*/
     /*background-image: url("../../../asserts/background/bckg_main.png");*/
 
-/*!*Точки*! источник https://uiverse.io/patterns?page=0 */
+    /*!*Точки*! источник https://uiverse.io/patterns?page=0 */
     background-color: #ffffff;
     background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0);
     background-size: 100px 100px;
@@ -34,7 +17,7 @@
     /*background-size: 55px 55px;*/
 
 
-/*КЕКИЧ*/
+    /*КЕКИЧ*/
     /*--s: 105px; !* control the size *!*/
     /*--c1: #b9b9b9;*/
     /*--c2: #dcdcdc;*/
@@ -66,14 +49,29 @@
     /*);*/
     /*background-size: var(--s) calc(var(--s) / 0.577);*/
 }
+
+.video{
+    width: 100%;
+}
+
+.title{
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 2.5vw;
+    text-align: center;
+    width: 80%;
+    margin : 10vh auto;
+}
+
+.title p{
+    color: #868686;
+}
+
 .grid{
-    padding: 0 120px;
-    /*grid-template-columns: repeat(3, 1fr );*/
+    display: grid;
     grid-template-columns: 1fr 16.66666666vw 1fr;
-    /*gap: 100px;*/
-    /*row-gap: 50px;*/
     column-gap: 100px;
-    height: 600px;
+    height: 30vw;
     margin: 10vh 0;
 }
 .row{
@@ -85,7 +83,7 @@
 .row ul{
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    font-size: 1.05556vw;
+    /*font-size: 1.05556vw;*/
 
 
     /*width: 50%;*/
@@ -114,7 +112,7 @@
     flex-direction: column;
 }
 .center_col{
-    width: 16.66666666vw ;
+    /*width: 16.66666666vw ;*/
     /*grid-row: span 2;*/
 }
 .logo{
@@ -123,13 +121,11 @@
 }
 .logo h2{
     height: fit-content;
-    font-size: 1.875vw;
+    /*font-size: 1.875vw;*/
 }
 
-.howITwork{
-    padding: 0 120px;
-}
 .howITworkFlex{
+    display: flex;
     gap: 55px
 }
 .lastDescription{
@@ -158,12 +154,36 @@
     height: 100%;
 }
 
-.registration{
-    padding: 0 120px;
-    margin-top: 10vh;
-    padding-bottom: 30vh;
-}
 .register{
     gap: 10px;
     cursor: pointer;
+}
+
+.buttons{
+    gap: 10px;
+    margin-bottom: 5vw
+}
+
+@media (max-width: 1600px) {
+    .howITworkFlex{
+        flex-direction: column;
+    }
+
+    .grid{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(3, 1fr);
+        height: fit-content;
+        margin: 10vh 0;
+    }
+
+    .title{
+        font-family: 'Lato', sans-serif;
+        font-weight: 600;
+        font-size: 12pt;
+        text-align: center;
+        width: 100%;
+        margin : 10px auto;
+    }
+
 }

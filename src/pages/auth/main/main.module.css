@@ -1,0 +1,26 @@
+.main{
+    padding: 0 120px 0 70px;
+    min-height: 100vh;
+
+    margin-bottom: 5vw;
+}
+
+.tags{
+    margin-top: 2vw;
+
+    gap: 10px;
+    /*max-width: 1000px;*/
+    overflow-x: scroll;
+}
+
+.grid{
+    margin-top: 2vw;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px
+}
+.b_width{
+    min-width: 120px;
+    max-width: 300px;
+}

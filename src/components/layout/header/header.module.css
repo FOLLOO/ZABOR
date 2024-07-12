@@ -23,7 +23,7 @@
 }
 
 .trap2{
-    width: 30%;
+    width: 40%;
     display: flex;
     align-items: center;
 }
@@ -37,6 +37,7 @@
     position: absolute;
     top: 7.5vh;
     right: 7.5vw;
+    z-index: 99;
 }
 
 .notifications{
@@ -46,6 +47,9 @@
     position: absolute;
     top: 7.5vh;
     right: 25vw;
+
+    z-index: 99;
+
 }
 
 

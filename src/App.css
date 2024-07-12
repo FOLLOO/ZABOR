@@ -117,6 +117,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato/Lato-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
 
 @font-face {
   font-family: 'Lato';
@@ -134,8 +140,29 @@
 
 @font-face {
   font-family: 'Lato';
+  src: url('./fonts/Lato/Lato-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato/Lato-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
   src: url('./fonts/Lato/Lato-Bold.ttf') format('truetype');
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./fonts/Lato/Lato-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
   font-style: normal;
 }
 
@@ -145,6 +172,20 @@
   font-weight: 900;
   font-style: normal;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*Lato*/
 
@@ -179,7 +220,7 @@
 
 h1{
   font-family: 'Lato', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 3.33333vw; /* 64px */
 }
 

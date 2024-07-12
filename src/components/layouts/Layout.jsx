@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Header from '../layout/header/Header'
 import Footer from '../layout/footer/Footer'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import global from '../../global.module.css'
 import styles from './layouts.module.css'
@@ -12,6 +12,7 @@ import { OverlayContext, OverlayContextProvider } from '../../context/OverlayCon
 import  analytychs from '../../asserts/icons/settingsMenu/Analytics.svg'
 import  bar from '../../asserts/icons/settingsMenu/BarMenu.svg'
 import  outlet_bell from '../../asserts/icons/settingsMenu/outlet-bell.svg'
+import  outlet_bell1 from '../../asserts/icons/settingsMenu/outlet-bell2.svg'
 import  profile from '../../asserts/icons/settingsMenu/Profile.svg'
 import  subes from '../../asserts/icons/settingsMenu/Subes.svg'
 import  tag from '../../asserts/icons/settingsMenu/tags1.svg'
@@ -27,7 +28,7 @@ const Layout = ({type,
   // login = false,
   // isAuth = false
 }) => {
-
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const { overlay } = useContext(OverlayContext)
   const Login = () => {
@@ -56,13 +57,13 @@ const Layout = ({type,
         <div className={open ? styles.grid : styles.grid2}>
           <div className={styles.leftHand}>
             <div className={`${global.flex} ${global.f_dir_column}`}>
-              <TransprantButton img={bar}  click={() => setOpen(!open)}/>
-              <TransprantButton img={main} text={open ? 'Главная' : null}/>
-              <TransprantButton img={subes} text={open ?'Подписки' : null}/>
-              <TransprantButton img={liked} text={open ?'Понравилось' : null}/>
-              <TransprantButton img={popular} text={open ?'Популярное': null}/>
-              <TransprantButton img={comments} text={open ?'Обсуждаемое': null}/>
-              <TransprantButton img={buyed} text={open ? 'Купленное': null}/>
+              <TransprantButton left img={bar}  click={() => setOpen(!open)}/>
+              <TransprantButton left img={main} text={open ? 'Главная' : null}/>
+              <TransprantButton left img={popular} text={open ?'Популярное': null}/>
+              <TransprantButton left img={comments} text={open ?'Обсуждаемое': null}/>
+              <TransprantButton left img={subes} text={open ?'Подписки' : null}/>
+              <TransprantButton left img={liked} text={open ?'Понравилось' : null}/>
+              <TransprantButton left img={buyed} text={open ? 'Купленное': null}/>
             </div>
           </div>
           <div className={styles.header}>
@@ -84,12 +85,31 @@ const Layout = ({type,
       <div className={open ? styles.grid : styles.grid2}>
         <div className={styles.leftHand}>
           <div className={`${global.flex} ${global.f_dir_column}`}>
-            <TransprantButton img={bar} click={() => setOpen(!open)}/>
-            <TransprantButton img={analytychs} text={open ? 'Творческая студия' : null}/>
-            <TransprantButton img={profile} text={open ? 'Личная информация' : null}/>
-            <TransprantButton img={subes} text={open ? 'Подписки' : null}/>
-            <TransprantButton img={outlet_bell} text={open ? 'Уведомления' : null}/>
-            <TransprantButton img={tag} text={open ? 'Теги' : null}/>
+            {/*<span style={{height: '1vh'}}/>*/}
+            <TransprantButton left img={bar}
+                              text={open ? 'Меню' : null}
+                              click={() => setOpen(!open)}/>
+            <span style={{height: '1vh'}}/>
+            <TransprantButton left img={analytychs}
+                              text={open ? 'Творческая студия' : null}
+            click={() => navigate('/anal')}
+            />
+            <TransprantButton left img={profile}
+                              text={open ? 'Личная информация' : null}
+            click={() => navigate('/settings/myprofile')}
+            />
+            <TransprantButton left img={subes}
+                              text={open ? 'Подписки' : null}
+            click={() => navigate('/settings/mysubs')}
+            />
+            <TransprantButton left img={outlet_bell1}
+                              text={open ? 'Уведомления' : null}
+            click={() => navigate('/temp')}
+            />
+            <TransprantButton left img={tag}
+                              text={open ? 'Теги' : null}
+            click={() => navigate('/group')}
+            />
           </div>
         </div>
         <div className={styles.header}>

@@ -16,7 +16,7 @@ function GreenButton ({text, stylee, img, unique, click, type}) {
           : null
         }
         {text ?
-          <div className={unique ? null : global.t1}>
+          <div className={unique ? global.t1 : global.t1}>
             {text}
           </div>
           : null

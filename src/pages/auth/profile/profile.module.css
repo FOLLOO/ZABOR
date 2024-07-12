@@ -16,7 +16,9 @@
 .content{
     padding: 0 120px;
 }
-
+.contentPad{
+    padding-right: 120px;
+}
 .profile{
     position: relative;
     top: -80px;

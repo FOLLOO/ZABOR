@@ -36,7 +36,7 @@ function Main (props) {
           <br/> потенциал</p>
       </div>
 
-      <div className={`${global.grid} ${styles.grid}`}>
+      <div className={`${styles.grid} ${global.pad}`}>
         <div className={styles.column}>
           <div className={styles.row}>
             <GlassCard>
@@ -132,8 +132,8 @@ function Main (props) {
     </div>
 
 
-      <div className={styles.howITwork}>
-        <div className={`${global.flex} ${styles.howITworkFlex}`}>
+      <div className={global.pad}>
+        <div className={`${styles.howITworkFlex}`}>
           <GlassBox>
             <div className={` ${styles.i_glassBox}
             ${global.flex} ${global.f_dir_column} ${global.f_center} ${global.f_a_center}`}>
@@ -192,7 +192,7 @@ function Main (props) {
         </div>
       </div>
 
-
+    <div className={`${global.flex} ${global.f_dir_column} ${global.pad} ${styles.buttons}`}>
       <div className={styles.registration} onClick={() => navigate('/registration')}>
         <GlassCard>
           <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} style={{padding: "60px"}}>
@@ -209,6 +209,7 @@ function Main (props) {
           <img src={link} alt={'link'}/>
         </div>
       </GlassCard>
+    </div>
     </div>
 
   </div>

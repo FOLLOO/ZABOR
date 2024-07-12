@@ -20,7 +20,7 @@ function PlaylistsPost ({title, description, cost, views, image}) {
       <div className={`${styles.content} ${global.flex} ${global.f_dir_column}`}>
         <div className={`${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
           {title ?
-            <h3>{title}</h3>
+            <h4>{title}</h4>
           :
             // eslint-disable-next-line jsx-a11y/heading-has-content
             <h3 className={global.skeleton}>.</h3>
@@ -43,11 +43,11 @@ function PlaylistsPost ({title, description, cost, views, image}) {
             Опишу </h5>
         }
         {views ?
-        <div className={global.t3}>
+        <div className={global.d3}>
           {views.toLocaleString('ru-RU') + ' Просмотров'}
         </div>
           :
-          <div className={`${global.t3} ${global.skeleton}`}>
+          <div className={`${global.d3} ${global.skeleton}`}>
             1 000 Просмотров
           </div>
         }

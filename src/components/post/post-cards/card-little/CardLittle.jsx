@@ -12,12 +12,14 @@ import ProfileCircle from '../../../profile/profile-circle/ProfileCircle'
 import WhiteButton from '../../../ui/buttons/white-button/WhiteButton'
 import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
 import whiteButton from '../../../ui/buttons/white-button/WhiteButton'
+import { Link } from 'react-router-dom'
 function CardLittle ({
   image = false,
   title,
   views,
   price,
-  time,
+  user_id,
+  time ,
   blur = false
 }) {
   return (
@@ -26,7 +28,9 @@ function CardLittle ({
 
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
+            <Link to={`/user/${user_id}`}>
             <ProfileCircle size={30}/>
+            </Link>
           </div>
 
           <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>
@@ -40,7 +44,7 @@ function CardLittle ({
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
             {/*<TransprantButton text={'+'} img={basket} stylee={{background: 'white', width: '55px', padding: 0}}/>*/}
 
-            <button className={styles.button}>
+            <button className={styles.button} >
               <div  className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                   <img src={basket} alt={'button img'}/>
                   <img src={plus} alt={'button img'}/>
@@ -51,8 +55,8 @@ function CardLittle ({
 
 
       <div className={`${styles.content} ${global.flex} ${global.f_dir_column}`}>
-        <div className={`${styles.epigraph} ${global.flex}`}>
-          <div className={`${global.t5} ${styles.title}`}>
+        <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
+          <div className={`${global.t1} ${styles.title}`}>
             {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
             {/*Пришла и оторвало голову нам сумасшедшая весна*/}
             {title ? title :
@@ -61,8 +65,8 @@ function CardLittle ({
               </div>
             }
           </div>
-          <div className={global.t5}>
-            {price ? price + '₽' :
+          <div className={`${global.t1} ${styles.title}`}>
+            {price ?  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(price) :
               <div className={global.skeleton}>
               015₽
               </div>
@@ -78,8 +82,9 @@ function CardLittle ({
               </div>
               }
           </div>
+
           <div className={global.d3}>
-            {time ? time :
+            {time ? new Intl.DateTimeFormat('ru-RU').format(new Date(time)) :
               <div className={global.skeleton}>
               '2 часа назад'
               </div>

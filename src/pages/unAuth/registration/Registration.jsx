@@ -4,64 +4,67 @@ import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
 import global from '../../../global.module.css'
 import InputText from '../../../components/ui/input/input-text/InputText'
 import InputCheckbox from '../../../components/ui/input/input-toggle/InputCheckbox'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
 import axios from '../../../r-axios/axios'
+import { fetchRegistration } from '../../../redux/slices/user'
+import { useDispatch } from 'react-redux'
 
 function Registration (props) {
 
-  const [nickname, setNickname] = useState("")
-  const [email, setEmail] = useState("")
-  const [sex, setSex] = useState("")
-  const [password, setPassword] = useState("")
-  const [password1, setPassword1] = useState("")
-  const [DR, setDR] = useState("")
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const [errMes, setErrMes] = useState("")
+  const [nickname, setNickname] = useState('')
+  const [email, setEmail] = useState('')
+  const [sex, setSex] = useState('')
+  const [password, setPassword] = useState('')
+  const [password1, setPassword1] = useState('')
+  const [DR, setDR] = useState('')
 
+  const [errMes, setErrMes] = useState('')
 
   // useEffect(() => {
-  //   axios.get('/publication/getMainPublications');
+  //   axios.post('/registration');
   // })
 
   const items = [
     {
       id: 1,
-      title: 'Мужской'
+      title: 'Мужской',
+      value: 'м'
     },
     {
       id: 2,
-      title: 'Женский'
+      title: 'Женский',
+      value: 'ж'
     },
   ]
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (password !== password1){
-      return setErrMes("Пароли не совпадают")
+    if (password !== password1) {
+      return setErrMes('Пароли не совпадают')
     }
+    const data = { email,
+      password,
+      username: nickname,
+      sex,
+      date_of_birth: DR, }
 
-    try {
-      const response = await axios.post('/auth/registration',
-        { email,
-          password,
-          username : nickname,
-          sex,
-          date_of_birth : DR,
-        });
-      console.log(response)
-      if (response.status === 200) {
-        const { token } = response.data;
-        localStorage.setItem('token', token);
-        // router.push('/posts');
-      } else {
-        console.log('ошибка', response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(fetchRegistration(data))
+      .then((res) => {
+        if (res.error) {
+          setErrMes(res.error.message)
+        }
+        if (res.error === undefined) {
+          const pathname = localStorage.getItem('last_path') || '/group'
+          navigate(pathname)
+          window.location.reload()
+        }
+      })
   }
 
   return (
@@ -80,7 +83,8 @@ function Registration (props) {
                 </h2>
               </div>
             </div>
-            <div className={`${styles.form} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`} style={{width: "100%"}}>
+            <div className={`${styles.form} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`}
+                 style={{ width: '100%' }}>
               <div className={styles.title}>
                 <h1>
                   Регистрация
@@ -88,16 +92,36 @@ function Registration (props) {
               </div>
               <form className={styles.signIn} onSubmit={handleSubmit}>
                 <InputText
-                  place={'Введите Email'} type={'text'} height={"50px"}
+                  place={'Введите Email'} type={'email'} height={'50px'}
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={email ? email : null}
+                  onChange={e => setEmail(e.target.value)}
                 />
-                <InputText place={'Введите Nickname'} type={'text'} height={"50px"}/>
-                <InputDporDown data={items}/>
-                <InputText place={'Введите Пароль'} type={'date'} height={"50px"}/>
-                <InputText place={'Введите Пароль'} type={'password'} height={"50px"}/>
-                <InputText place={'Повторите Пароль'} type={'password'} height={"50px"}/>
+                <InputText place={'Введите Nickname'} type={'text'} height={'50px'}
+                           value={nickname ? nickname : null}
+                           required
+                           onChange={e => setNickname(e.target.value)}
+                />
+                <InputDporDown data={items} required
+                               value={sex ? sex : null}
+                               onChange={e => setSex(e.target.value)}
+                />
+                <InputText type={'date'} height={'50px'}
+              value={DR ? DR : null}
+                           required
+                           onChange={e => setDR(e.target.value)}
+
+                />
+                <InputText place={'Введите Пароль'} type={'password'} height={'50px'}
+                           value={password ? password : null}
+                           required
+                           onChange={e => setPassword(e.target.value)}
+                />
+                <InputText place={'Повторите Пароль'} type={'password'} height={'50px'}
+                           value={password1 ? password1 : null}
+                           required
+                           onChange={e => setPassword1(e.target.value)}
+                />
                 <div className={`${global.flex} ${global.f_end} ${global.f_a_center}`}>
 
                   <div className={global.d2}>

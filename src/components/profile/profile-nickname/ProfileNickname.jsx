@@ -10,12 +10,12 @@ function ProfileNickname ({ nickname, date, view, type, desc = false }) {
     return (
       <div>
         <Link to={'/profile/1'} className={` ${global.flex} ${global.f_dir_column}  ${styles.hola}`}>
-          <div className={`${global.t5}`}>
+          <div className={`${global.t2}`}>
             {nickname ? nickname : 'Anonymos'}
           </div>
           {desc ?
             <div className={global.d3}>
-              Посмотреть свою страницу автора
+              Моя страница автора
             </div>
             : null}
         </Link>
@@ -26,7 +26,7 @@ function ProfileNickname ({ nickname, date, view, type, desc = false }) {
   const Post = () => {
     return (
       <div className={`${global.flex} ${global.f_dir_column} ${styles.post}`}>
-        <div className={global.t5}>
+        <div className={global.t3}>
           {nickname ? nickname : 'Anonymos'}
         </div>
         <div className={global.d3}>

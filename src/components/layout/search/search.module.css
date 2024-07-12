@@ -1,8 +1,8 @@
 .main{
     width: 100%;
 
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
+    /*font-family: 'Lato', sans-serif;*/
+    /*font-size: 13pt;*/
 
 
     box-sizing: border-box;
@@ -17,13 +17,12 @@
 .input::placeholder{
     color: #838383;
     font-family: 'Lato', sans-serif;
-    font-size: 16px;
+    font-size: 13pt;
     font-weight: 300;
 }
 
 .input{
     width: 100%;
-
 }
 
 .search{

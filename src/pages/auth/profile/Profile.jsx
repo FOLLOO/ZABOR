@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import styles from './profile.module.css'
 import global from '../../../global.module.css'
@@ -14,21 +14,18 @@ import Playlists from '../../../components/profile/profile-tab-content/playlists
 import UserPosts from '../../../components/profile/profile-tab-content/user-posts/UserPosts'
 // import axios from '../../../r-axios/axios'
 import axios from 'axios'
+import { OverlayContext } from '../../../context/OverlayContext'
+import { useSelector } from 'react-redux'
+import { selectAuthData } from '../../../redux/slices/user'
 
-function Profile ({prewie, nickname}) {
+function Profile ({prewie}) {
+  const { overlay } = useContext(OverlayContext)
+
+  const authData = useSelector(selectAuthData);
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
-  // const getData = async () => {
-  //   try {
-  //     const response = await axios.get('/random_joke');
-  //       setData(response);
-  //   } catch (err) {
-  //     console.error(err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+
 
   const getData = async () => {
     try{
@@ -51,7 +48,7 @@ function Profile ({prewie, nickname}) {
   const tabContent = [
     { title: 'Публикации', content: <UserPosts data={data}/> },
     { title: 'Плейлисты', content: <Playlists data={data}/> },
-    { title: 'Об авторе', content: <AboutMe /> },
+    { title: 'Об авторе', content: <AboutMe data={authData}/> },
   ];
   /** Компонент для страницыы профиля главный контент отоправляется в Tab через items*/
   return (
@@ -68,8 +65,8 @@ function Profile ({prewie, nickname}) {
             <div className={styles.nickname}>
               <ProfileCircle size={200}/>
               <div className={styles.subes}>
-                {nickname ?
-                <h2>Porfile NICKNAME</h2>
+                {authData?.profile.nickname ?
+                <h2>{authData?.profile.nickname}</h2>
                 :
                   <h2 className={global.skeleton}>NICKNAME</h2>
                 }

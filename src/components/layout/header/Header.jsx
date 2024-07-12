@@ -9,20 +9,30 @@ import { Link, useNavigate } from 'react-router-dom'
 import Search from '../search/Search'
 import ProfileNickname from '../../profile/profile-nickname/ProfileNickname'
 
-import bascket from '../../../asserts/icons/basket.svg'
-import arrowMenu from '../../../asserts/icons/arowMenu.svg'
-import bell from '../../../asserts/icons/Bell.svg'
 import ContextGroup from '../../context-drop/context-group/ContextGroup'
 import ContextDrop from '../../context-drop/ContextDrop'
 
 
+import bascket from '../../../asserts/icons/basket.svg'
+import arrowMenu from '../../../asserts/icons/arowMenu.svg'
+import bell from '../../../asserts/icons/settingsMenu/outlet-bell2.svg'
 import tempIcon from '../../../asserts/icons/Файл.svg'
 import settings from '../../../asserts/icons/Settings.svg'
 import logout from '../../../asserts/icons/LogOut.svg'
 import hole from '../../../asserts/icons/Творческая студия.svg'
 import Notification from '../../notifications/Notification'
+import { useDispatch, useSelector } from 'react-redux'
+import UserService from '../../../services/UserService'
+import { selectAuthData } from '../../../redux/slices/user'
+import userService from '../../../services/UserService'
+import { useAuth } from '../../../provider/AuthProvider'
+
 
 function Header (props) {
+  const { isAuth, user } = useAuth()
+  // const dispatch = useDispatch()
+  const authData = useSelector(selectAuthData);
+
 
   const navigate = useNavigate()
   const [menu , setMenu] = useState(false)
@@ -36,6 +46,21 @@ function Header (props) {
     setNotifications(false)
   }
 
+  const logOut = async () => {
+    const response = await UserService.logout()
+
+    if (response.status === 200){
+      alert('вы вышли из своего аккаунта')
+      navigate('/')
+      console.log({ succses: true })
+    }
+  }
+
+  const mainLink = (param) => {
+   return param ? navigate('/main') : navigate('/')
+  }
+
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -47,8 +72,7 @@ function Header (props) {
       <nav className={`${styles.nav} ${global.flex} ${global.f_s_between} ${global.f_ji_center} ${global.f_a_center} ${props.loginn ? global.pad : global.padRight}`}>
         <div className={styles.trap}>
 
-        <button className={styles.logo} onClick={() => navigate('/')}>
-          {/*<img src={''} alt={'logo'}/>*/}
+        <button className={styles.logo} onClick={() => mainLink(isAuth)}>
           <h3>Z A B O R</h3>
         </button>
 
@@ -61,12 +85,17 @@ function Header (props) {
         <div className={styles.trap2}>
           {props.auth ?
             <>
-              <TransprantButton img={bascket} click={() => navigate('/settings/notifications')}/>
-              <TransprantButton img={bell} click={() => setNotifications(!notifications)}/>
+              <TransprantButton notification img={bascket} click={() => navigate('/market')}/>
+              <TransprantButton notification img={bell} click={() => setNotifications(!notifications)}/>
               {
                 notifications ?
-                  <div className={styles.notifications}  ref={ref}>
-                    <ContextDrop>
+                  <div className={`${styles.notifications} ${global.shadowBliz}`}  ref={ref}>
+                    <ContextDrop title={'Уведомления'}>
+                      {/*<ContextGroup noafter>*/}
+                      {/*  <div className={global.h3}>*/}
+                      {/*   <h3>Уведомления</h3>*/}
+                      {/*  </div>*/}
+                      {/*</ContextGroup>*/}
                      <ContextGroup>
                       <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
                      </ContextGroup>
@@ -87,22 +116,23 @@ function Header (props) {
                   </div>
                   : null
               }
-              <ProfileNickname type={'default'} nickname={'Нафис'}/>
+              <ProfileNickname type={'default'} nickname={user?.nickname ? user.nickname : null}/>
               <TransprantButton img={arrowMenu} click={() => setMenu(!menu)}/>
-
               {
                 menu ?
-                    <div className={styles.contextMenu} ref={ref}>
+                    <div className={`${styles.contextMenu} ${global.shadowBliz}`} ref={ref}>
                       <ContextDrop>
                         <ContextGroup>
-                          <ProfileNickname nickname={'home'} type={'default'} desc/>
+                          <Link to={`/profile/${user?.id}`}>
+                          <ProfileNickname nickname={user?.nickname ? user?.nickname : null} type={'default'} desc/>
+                          </Link>
                         </ContextGroup>
                         <ContextGroup>
                           <TransprantButton img={hole} text={'Творческая студия'} left />
                         </ContextGroup>
                         <ContextGroup noafter>
                           <TransprantButton img={settings} text={'Настройки'} left click={() => navigate('/settings/myprofile')}/>
-                          <TransprantButton img={logout} text={'Выйти'} red left click={() => navigate('/')}/>
+                          <TransprantButton img={logout} text={'Выйти'} red left click={logOut}/>
                         </ContextGroup>
                       </ContextDrop>
                     </div>
@@ -118,12 +148,10 @@ function Header (props) {
           <TransprantButton
             click={() => navigate('/registration')}
             text={'Регистрация'}
-
             />
           <TransprantButton
             click={() => navigate('/login')}
             text={'Войти'}
-
             />
         </div>
           : null }

@@ -75,7 +75,7 @@ function CardDefault ({
               }
             </div>
           </div>
-          <div className={global.d1}>
+          <div className={global.d2}>
             {description ? description :
               <div className={global.skeleton}>
                 asdfasdf
@@ -92,14 +92,14 @@ function CardDefault ({
             }
           </div>
           <div className={`${styles.analytych} ${global.flex} ${global.f_s_between}`}>
-            <div className={`${global.d2} ${styles.views}`}>
+            <div className={`${global.d3} ${styles.views}`}>
               {views ? views + ' просмотров' :
                 <div className={global.skeleton}>
                   1000 просмотров
                 </div>
               }
             </div>
-            <div className={global.d2}>
+            <div className={global.d3}>
               {time ? time :
                 <div className={global.skeleton}>
                   '2 часа назад'

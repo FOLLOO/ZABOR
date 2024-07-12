@@ -62,41 +62,78 @@
 
 
 
+/*.t1 {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: 600;*/
+/*    font-size: 0.55556vw; !* 10px / 1920px * 100 *!*/
+/*}*/
+
+/*.t2 {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: 300;*/
+/*    font-size: 0.625vw; !* 12px / 1920px * 100 *!*/
+/*}*/
+
+/*.t3 {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: 300; !*Light*!*/
+/*    font-size: 0.71429vw; !* 14px / 1920px * 100 *!*/
+/*}*/
+
+/*.t4 {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: normal; !*Light*!*/
+/*    font-size: 0.83333vw; !* 16px / 1920px * 100 *!*/
+/*}*/
+
+/*.t5 {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: 700; !*Light*!*/
+/*    font-size: 0.83333vw; !* 16px / 1920px * 100 *!*/
+/*}*/
+
+/*.text {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    font-weight: normal; !*Light*!*/
+/*    font-size: 0.8333vw; !* 20px / 1920px * 100 *!*/
+/*}*/
+
 .t1 {
     font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    font-size: 0.55556vw; /* 10px / 1920px * 100 */
+    font-weight: normal;
+    font-size: 14pt; /* 10px / 1920px * 100 */
 }
 
 .t2 {
     font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 0.625vw; /* 12px / 1920px * 100 */
+    font-weight: normal;
+    font-size: 16pt; /* 12px / 1920px * 100 */
 }
 
 .t3 {
     font-family: 'Lato', sans-serif;
-    font-weight: 300; /*Light*/
-    font-size: 0.71429vw; /* 14px / 1920px * 100 */
+    font-weight: normal; /*Light*/
+    font-size: 18pt; /* 14px / 1920px * 100 */
 }
 
 .t4 {
     font-family: 'Lato', sans-serif;
     font-weight: normal; /*Light*/
-    font-size: 0.83333vw; /* 16px / 1920px * 100 */
+    font-size: 20pt; /* 16px / 1920px * 100 */
 }
 
 .t5 {
     font-family: 'Lato', sans-serif;
-    font-weight: 700; /*Light*/
-    font-size: 0.83333vw; /* 16px / 1920px * 100 */
+    font-weight: normal; /*Light*/
+    font-size: 22pt; /* 16px / 1920px * 100 */
 }
 
 .text {
     font-family: 'Lato', sans-serif;
     font-weight: normal; /*Light*/
-    font-size: 1.05556vw; /* 20px / 1920px * 100 */
+    font-size: 13pt; /* 20px / 1920px * 100 */
 }
+
 
 /*.textPX{*/
 /*    font-family: 'Lato', sans-serif;*/
@@ -107,13 +144,17 @@
 .bold{
     font-weight: 700;
 }
+.medium{
+    font-weight: 500;
+}
+
 
 
 .d1 {
     font-family: 'Lato', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 1.05556vw;
+    font-size: 1vw;
     color: #828282;
 }
 
@@ -121,7 +162,7 @@
     font-family: 'Lato', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 0.83333vw;
+    font-size: 0.89vw;
     color: #828282;
 }
 
@@ -129,7 +170,7 @@
     font-family: 'Lato', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 0.625vw;
+    font-size: 0.78vw;
     color: #828282;
 }
 
@@ -261,40 +302,45 @@
 }
 
 @media (max-width: 1600px) {
+
+    .pad{
+        padding: 0 10px;
+    }
+
     .t1 {
         font-family: 'Lato', sans-serif;
-        font-weight: 600;
-        font-size: 10px; /* 10px / 1920px * 100 */
+        font-weight: normal;
+        font-size: 14pt; /* 10px / 1920px * 100 */
     }
 
     .t2 {
         font-family: 'Lato', sans-serif;
-        font-weight: 300;
-        font-size: 12px; /* 12px / 1920px * 100 */
+        font-weight: normal;
+        font-size: 16pt; /* 12px / 1920px * 100 */
     }
 
     .t3 {
         font-family: 'Lato', sans-serif;
-        font-weight: 300; /*Light*/
-        font-size: 14px; /* 14px / 1920px * 100 */
+        font-weight: normal; /*Light*/
+        font-size: 18pt; /* 14px / 1920px * 100 */
     }
 
     .t4 {
         font-family: 'Lato', sans-serif;
         font-weight: normal; /*Light*/
-        font-size: 16px; /* 16px / 1920px * 100 */
+        font-size: 20pt; /* 16px / 1920px * 100 */
     }
 
     .t5 {
         font-family: 'Lato', sans-serif;
-        font-weight: 700; /*Light*/
-        font-size: 16px; /* 16px / 1920px * 100 */
+        font-weight: normal; /*Light*/
+        font-size: 22pt; /* 16px / 1920px * 100 */
     }
 
     .text {
         font-family: 'Lato', sans-serif;
         font-weight: normal; /*Light*/
-        font-size: 20px; /* 20px / 1920px * 100 */
+        font-size: 18pt; /* 20px / 1920px * 100 */
     }
 
 
@@ -303,7 +349,7 @@
         font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 18px;
         color: #828282;
     }
 
@@ -319,7 +365,7 @@
         font-family: 'Lato', sans-serif;
         font-style: normal;
         font-weight: normal;
-        font-size: 12px;
+        font-size: 14px;
         color: #828282;
     }
 

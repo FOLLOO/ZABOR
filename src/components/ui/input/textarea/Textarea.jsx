@@ -3,10 +3,11 @@ import React from 'react'
 import styles from './textarea.module.css'
 import global from '../../../../global.module.css'
 
-function Textarea ({place, rows}) {
+function Textarea ({place, rows, value}) {
   return (
     <div className={styles.main}>
       <textarea
+        value={value}
         className={styles.input}
         rows={rows}
         placeholder={place ? place : null}/>

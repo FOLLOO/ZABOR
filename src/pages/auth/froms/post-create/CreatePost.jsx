@@ -11,7 +11,7 @@ import ProfileNickname from '../../../../components/profile/profile-nickname/Pro
 import WhiteButton from '../../../../components/ui/buttons/white-button/WhiteButton'
 import GlassBox from '../../../../components/glasses/glasses-box/GlassBox'
 import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
-import TempEditor from '../../../temp/TempEditor'
+import TempEditor from '../../../../components/temp/TempEditor'
 import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
 import { OverlayContext } from '../../../../context/OverlayContext'
 import MessageBox from '../../../../components/message-box/MessageBox'
