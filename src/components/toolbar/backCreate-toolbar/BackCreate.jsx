@@ -8,7 +8,7 @@ import arrowBack from '../../../asserts/icons/Arrow back.svg'
 import TransprantButton from '../../ui/buttons/transprant-button/TransprantButton'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
-function BackCreate ({description, greenText, button, sticky}) {
+function BackCreate ({description, greenText, button, sticky, click}) {
   //todo: лучше опрделять или props-ами прописывать?
 
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ function BackCreate ({description, greenText, button, sticky}) {
             <div className={`${styles.desc} ${global.d3} `}>
               {description}
             </div>
-            <GreenButton text={greenText} unique/>
+            <GreenButton text={greenText} click={click} unique/>
           </div>
           : null }
       </div>

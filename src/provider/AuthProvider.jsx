@@ -1,10 +1,13 @@
 import {useContext, createContext, useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import userService from "../services/UserService";
+import { Provider } from 'react-redux'
+import store from '../redux/store'
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+
   const [isAuth, setIsAuth] = useState(false)
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("site") || "");
@@ -46,6 +49,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+
   const logOut = async () => {
     const response = await userService.logout()
     if (response.status === 200) {
@@ -57,8 +61,10 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, isAuth, loginAction, logOut }}>
+    <AuthContext.Provider value={{ token, user, isAuth, loginAction, logOut }} >
+      {/*<Provider store={store}>*/}
       {children}
+      {/*</Provider>*/}
     </AuthContext.Provider>
   );
 

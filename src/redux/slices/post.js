@@ -17,6 +17,32 @@ export const fetchPosts = createAsyncThunk('publication/getMainPublications', as
   }
 });
 
+export const createPost = createAsyncThunk('publication/createPublication', async (data) => {
+  try {
+    const response = await axios.post('/publication/createPublication', data);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+export const getUserPost = createAsyncThunk('publication/getUserPublications', async (id) => {
+  try {
+    const response = await axios.get('/publication/getUserPublications', {
+      params:{
+        userId: id
+      }
+    });
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+
+
+// export const fetchCreate = createAsyncThunk()
+
 // export const fetchRegistration = createAsyncThunk('auth/registration', async (regData) => {
 //  const {data} = await axios.post('/auth/registration', regData)
 //    .catch(error => {

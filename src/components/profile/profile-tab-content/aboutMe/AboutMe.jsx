@@ -18,9 +18,9 @@ function AboutMe ({data, text}) {
         ${global.f_a_center} ${styles.main}`}>
           <h3>Обо мне</h3>
           <div className={global.d2}>
-            {data?.profile.aboutMe ? data?.profile.aboutMe : 'Пока что ничего нет 🤔'}
+            {data?.aboutMe ? data?.aboutMe : 'Пока что ничего нет 🤔'}
           </div>
-          {data?.profile.aboutMe ? null :
+          {data?.aboutMe ? null :
             <div className={styles.addButton}>
             <GreenButton text={'Добавить'} unique click={() => navigate('/settings/myprofile')}/>
             </div>

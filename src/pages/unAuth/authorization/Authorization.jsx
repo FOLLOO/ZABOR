@@ -34,19 +34,16 @@ function Authorization (props) {
 
     await loginAction(email, password)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.error) {
           return setErrMes(res.error.message)
         }
         const { token, email } = res
 
-        console.log(res)
-
         localStorage.setItem('token', token)
         setCookie('token', token)
         setCookie('email', email)
         navigate('/main')
-
       })
   }
 
@@ -86,12 +83,8 @@ function Authorization (props) {
 
                 <div className={`${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
                   <div className={`${global.flex} ${global.f_a_center} ${styles.com}`}>
-                    <InputCheckbox/>
-                    <div className={global.t5}>
-                      Запомнить меня
-                    </div>
-                  </div>
 
+                  </div>
                   <div className={global.d2}>
                     <Link to={'/registration'}>
                       Зарегестрироваться

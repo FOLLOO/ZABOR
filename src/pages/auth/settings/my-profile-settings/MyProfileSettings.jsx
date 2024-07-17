@@ -43,6 +43,8 @@ function MyProfileSettings ({}) {
     },
   ]
 
+
+
   return (
     <div className={styles.main}>
       <BackCreate sticky/>
@@ -124,8 +126,6 @@ function MyProfileSettings ({}) {
               <InputText place={'Другое'} width={"50%"}/>
               <img src={a_link} alt={'social'}/>
             </div>
-
-
 
             {/*<InputText place={'Информация о себе'}/>*/}
             {/*<Textarea place={'Информация о себе'} rows={15}/>*/}

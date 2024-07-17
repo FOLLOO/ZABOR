@@ -15,15 +15,23 @@ import UserPosts from '../../../components/profile/profile-tab-content/user-post
 // import axios from '../../../r-axios/axios'
 import axios from 'axios'
 import { OverlayContext } from '../../../context/OverlayContext'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthData } from '../../../redux/slices/user'
+import { useAuth } from '../../../provider/AuthProvider'
+import { useParams } from 'react-router-dom'
+import { fetchPosts, getUserPost } from '../../../redux/slices/post'
 
 function Profile ({prewie}) {
   const { overlay } = useContext(OverlayContext)
+  const { id } = useParams()
+  const { user } = useAuth()
 
-  const authData = useSelector(selectAuthData);
-
+  // const authData = useSelector(selectAuthData);
+  const [errMes, setErrMes] = useState('')
+  const dispatch = useDispatch()
   const [data, setData] = useState([])
+  const [posts, setPosts] = useState([])
+
   const [loading, setLoading] = useState(true)
 
 
@@ -38,17 +46,41 @@ function Profile ({prewie}) {
     }
   }
 
+  const getUserPosts = async () => {
+    try{
+      dispatch(getUserPost(id))
+        .then((res) => {
+          if (res.error) {
+            setErrMes(res.error.message)
+          }
+          if (res.error === undefined) {
+            // console.log(res)
+            // const pathname = localStorage.getItem('token') || '/main'
+            setPosts(res.payload)
+            setLoading(false)
+            // const {refreshToken} = res.payload.profile
+            // setCookie("refreshToken" , refreshToken)
+          }
+        })
+    }
+    catch (err){
+      console.log(err)
+    }
+  }
+
+
   useEffect(() => {
-      getData();
+      // getData();
+      getUserPosts()
       // console.log(data)
   },[loading])
-
+  // console.log(posts)
 
   /** Контент для Tab */
   const tabContent = [
-    { title: 'Публикации', content: <UserPosts data={data}/> },
+    { title: 'Публикации', content: <UserPosts data={posts}/> },
     { title: 'Плейлисты', content: <Playlists data={data}/> },
-    { title: 'Об авторе', content: <AboutMe data={authData}/> },
+    { title: 'Об авторе', content: <AboutMe data={user ? user : null}/> },
   ];
   /** Компонент для страницыы профиля главный контент отоправляется в Tab через items*/
   return (
@@ -65,8 +97,8 @@ function Profile ({prewie}) {
             <div className={styles.nickname}>
               <ProfileCircle size={200}/>
               <div className={styles.subes}>
-                {authData?.profile.nickname ?
-                <h2>{authData?.profile.nickname}</h2>
+                {user?.nickname ?
+                <h2>{user?.nickname}</h2>
                 :
                   <h2 className={global.skeleton}>NICKNAME</h2>
                 }
@@ -76,7 +108,7 @@ function Profile ({prewie}) {
               </div>
             </div>
             <div className={styles.follow}>
-            <WhiteButton text={'Подписаться'}/>
+              <WhiteButton text={'Подписаться'}/>
             </div>
           </div>
           <div className={styles.tab}>

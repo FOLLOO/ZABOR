@@ -10,6 +10,8 @@ import InputDporDown from '../../../components/ui/input/input-dropdown/InputDpor
 import axios from '../../../r-axios/axios'
 import { fetchRegistration } from '../../../redux/slices/user'
 import { useDispatch } from 'react-redux'
+import { useAuth } from '../../../provider/AuthProvider'
+import userService from '../../../services/UserService'
 
 function Registration (props) {
 
@@ -25,10 +27,6 @@ function Registration (props) {
 
   const [errMes, setErrMes] = useState('')
 
-  // useEffect(() => {
-  //   axios.post('/registration');
-  // })
-
   const items = [
     {
       id: 1,
@@ -41,30 +39,42 @@ function Registration (props) {
       value: 'ж'
     },
   ]
-
+// ZAEBALOOOO
+// ZAEBALOOOO
+// ZAEBALOOOO
+// ZAEBALOOOO
+// ZAEBALOOOO
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (password !== password1) {
       return setErrMes('Пароли не совпадают')
     }
-    const data = { email,
+    const data = {
+      email,
       password,
       username: nickname,
       sex,
-      date_of_birth: DR, }
+      date_of_birth: DR,
+    }
+    try{
+      userService().createNewUser(data)
+    }
+    catch (err){
 
-    dispatch(fetchRegistration(data))
-      .then((res) => {
-        if (res.error) {
-          setErrMes(res.error.message)
-        }
-        if (res.error === undefined) {
-          const pathname = localStorage.getItem('last_path') || '/group'
-          navigate(pathname)
-          window.location.reload()
-        }
-      })
+    }
+
+    // dispatch(fetchRegistration(data))
+    //   .then((res) => {
+    //     if (res.error) {
+    //       setErrMes(res.error.message)
+    //     }
+    //     if (res.error === undefined) {
+    //       const pathname = localStorage.getItem('last_path') || '/group'
+    //       navigate(pathname)
+    //       // window.location.reload()
+    //     }
+    //   })
   }
 
   return (
@@ -107,7 +117,7 @@ function Registration (props) {
                                onChange={e => setSex(e.target.value)}
                 />
                 <InputText type={'date'} height={'50px'}
-              value={DR ? DR : null}
+                           value={DR ? DR : null}
                            required
                            onChange={e => setDR(e.target.value)}
 

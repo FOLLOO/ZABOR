@@ -37,10 +37,61 @@
 
 .inputDescription{
     width: 100%;
-    height: 100px;
+    height: fit-content;
 }
-
+.inputDescription h4{
+    margin-bottom: 2vh;
+}
 .buttons{
     display: flex;
     flex-direction: column;
+}
+
+.text{
+    width: 65%;
+}
+
+.main{
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background: rgb(255,255,255);
+    /*background: linear-gradient(0deg, rgba(255,255,255,0) 35%, rgba(255,255,255,1) 60%);*/
+}
+
+.title {
+    width: 65%;
+    max-width: 100%;
+    /*background-color: #f5f5f5;*/
+    color: #242424;
+    padding: .15rem .5rem;
+    min-height: 40px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    line-height: 1.15;
+
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 2.5vw; /* 36/48px */
+
+    box-shadow: 0px 10px 20px -18px;
+}
+
+.title:focus {
+    border-bottom: 2px solid #5b5fc7;
+    border-radius: 4px 4px 2px 2px;
+}
+
+/*.title:hover {*/
+/*    outline: 1px solid lightgrey;*/
+/*}*/
+
+.save{
+    margin-left: auto;
+    width: 300px;
+    /*position: fixed;*/
+    /*top: 10vh;*/
+    /*left: 50vw;*/
+    /*z-index: 99*/
 }

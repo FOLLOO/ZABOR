@@ -5,9 +5,11 @@ import global from '../../../../global.module.css'
 function WhiteButton ({click, img,
   img_width,
   img_height,
+  disable,
   text, stylee, unique= false}) {
   return (
     <button
+      disabled={disable}
       className={styles.button}
       onClick={click ? click : null} >
       <div className={`${styles.content} ${global.flex} ${global.f_a_center} ${img ? '' : global.f_center }`}  style={stylee ? stylee : null}>

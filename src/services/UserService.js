@@ -17,6 +17,9 @@ class UserService {
   async createNewUser(user) {
     try {
       const {data} = await axiosClassic.post(`/auth/registration`, user)
+        .catch(error => {
+        throw error.response.data
+      })
       return data
     } catch (e) {
       throw Error(e)
@@ -37,7 +40,7 @@ class UserService {
   }
 
   async logout() {
-    const response = await axiosClassic.post('/user/logout')
+    const response = await axiosClassic.post('/auth/logout')
     if (response.data)
       removeFromStorage();
     return response;

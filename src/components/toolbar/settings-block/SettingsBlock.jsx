@@ -2,8 +2,15 @@ import React from 'react'
 
 import styles from './settings-block.module.css'
 import global from '../../../global.module.css'
+import GreenButton from '../../ui/buttons/green-button/GreenButton'
 
-function SettingsBlock ({ children, title, descripton, red , mainWidth, titleWidth, noMargin = false}) {
+function SettingsBlock ({ children,
+  title,
+  descripton,
+  red, button, b_text, b_type,
+  mainWidth,
+  titleWidth,
+  noMargin = false}) {
   return (
     <div className={noMargin ? `${styles.Nomain} ${global.flex}` : `${styles.main} ${global.flex}`}
          style={{width: mainWidth ? mainWidth : 'auto'}}>
@@ -12,6 +19,7 @@ function SettingsBlock ({ children, title, descripton, red , mainWidth, titleWid
         <div className={`${global.t2} ${global.medium}`}>
           {title ? title : null}
         </div>
+        {button ? <GreenButton text={b_text} type={b_type}  /> : null }
         <div className={red ? `${global.d3} ${styles.red}` : global.d3}>
           {descripton ? descripton : null}
         </div>

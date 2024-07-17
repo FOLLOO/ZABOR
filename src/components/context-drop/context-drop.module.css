@@ -1,6 +1,6 @@
 .mainDrop{
     /*padding-top: 20px;*/
-    padding: 20px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -8,6 +8,7 @@
     /*Убрал для уведомлений, нужно что то придумать*/
     gap: 2px;
 
+    z-index: 99;
 
     filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.25));
 

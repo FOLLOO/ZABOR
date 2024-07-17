@@ -3,13 +3,14 @@ import global from '../../../global.module.css'
 import styles from './profile-nickname.module.css'
 import ProfileCircle from '../profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../../provider/AuthProvider'
 
 function ProfileNickname ({ nickname, date, view, type, desc = false }) {
-
+  const {user} = useAuth()
   const Default = () => {
     return (
       <div>
-        <Link to={'/profile/1'} className={` ${global.flex} ${global.f_dir_column}  ${styles.hola}`}>
+        <Link to={`/profile/${user?.id}`} className={` ${global.flex} ${global.f_dir_column}  ${styles.hola}`}>
           <div className={`${global.t2}`}>
             {nickname ? nickname : 'Anonymos'}
           </div>

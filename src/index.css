@@ -33,9 +33,10 @@ a, button {
 }
 
 /* Remove list styles (bullets/numbers) */
-ol, ul, menu, summary {
-  list-style: none;
-}
+
+/*ol, ul, menu, summary {*/
+/*  list-style: none;*/
+/*}*/
 
 /* For images to not be able to exceed their container */
 img {
@@ -138,9 +139,9 @@ aside, nav, footer, header, section, main {
 
 
 
-ul, ul li {
-  list-style: none;
-}
+/*ul, ul li {*/
+/*  list-style: none;*/
+/*}*/
 
 img {
   vertical-align: top;
@@ -194,5 +195,18 @@ legend {
   display: block;
 }
 
+body{
+  font-family: 'Lato', sans-serif;
+  /*font-weight: 700;*/
+  font-size: 20px;
+}
+
+p{
+  text-indent: 1.5em;
+  line-height: 1.6;
+  font-size: 14pt;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 
 

@@ -9,13 +9,16 @@ import reportWebVitals from './reportWebVitals';
 import { OverlayContextProvider } from './context/OverlayContext'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import { TagsProvider } from './context/TagsContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <OverlayContextProvider>
       <Provider store={store}>
+        <TagsProvider>
         <App />
+        </TagsProvider>
       </Provider>
     </OverlayContextProvider>
   </React.StrictMode>

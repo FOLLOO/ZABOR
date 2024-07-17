@@ -9,11 +9,20 @@ import CardDefault from '../../../post/post-cards/card-default/CardDefault'
 
 import temp
   from '../../../../asserts/temp/smiling-handsome-young-man-city-street-taking-picture-from-vintage-camera.jpg'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useAuth } from '../../../../provider/AuthProvider'
 
 /** Посты пользователя */
 
 
 function UserPosts ({ data = [] }) {
+
+  const { user } = useAuth()
+  const { id } = useParams()
+
+  const navigate = useNavigate()
+
+  // console.log('id', id , 'userID', user?.id)
 
   /** Нет постов*/
   const NothingYeat = () => {
@@ -26,9 +35,15 @@ function UserPosts ({ data = [] }) {
             {/*Какое то говно пределать нужно*/}
             Пока что ничего нет 🤔
           </div>
+          {id === user?.id ?
           <div className={styles.addButton}>
-            <GreenButton text={'Создать публикацию'} unique/>
+            {user.roleId === 1 ?
+              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
+              :
+              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
+            }
           </div>
+            : null }
         </div>
       </GlassCard>
     )
@@ -37,24 +52,29 @@ function UserPosts ({ data = [] }) {
   const UserPosts = () => {
     return (
       <>
-
-
         <div className={styles.title}>
           <h2>Публикации</h2>
         </div>
         <div className={styles.margin}>
           <div className={styles.grid}>
+
+            {Number(id)  === user?.id ? user?.roleId === 1 ?
+              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
+              :
+              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
+            : null}
             {data.length > 0 ?
               data.map((message =>
                   <CardDefault
-                    avatar_img={message}
-                    img={message}
-                    // blur
-                    views={1000}
-                    time={new Date().toLocaleDateString('ru-RU')}
-                    title={message}
-                    description={message}
-                    price={14}
+                    avatar_img={message?.coverUrl}
+                    img={message?.coverUrl}
+                    blur={!!message?.price}
+                    views={message?.views_count + 1}
+                    time={new Date(message?.createdAt).toLocaleDateString('ru-RU', )}
+                    title={message?.title}
+                    // todo: EDITABLE
+                    description={message?.description}
+                    price={message?.price ? message?.price : 'Бесплатно'}
                     image/>
               ))
               :

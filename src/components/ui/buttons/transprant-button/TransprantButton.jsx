@@ -9,12 +9,14 @@ function TransprantButton ({
   red = false,
   left = false,
   noPad = false,
+  type,
   notification = false
 }) {
 
   return (
     <button
       className={styles.button}
+      type={type ? type : null}
       style={stylee ? stylee : null}
       onClick={click ? click : null}>
       {/*че за хуйню я тут понаписал */}

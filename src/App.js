@@ -7,7 +7,7 @@ import Main from './pages/unAuth/main/Main'
 import Authorization from './pages/unAuth/authorization/Authorization'
 import Registration from './pages/unAuth/registration/Registration'
 import Temp from './pages/temp/Temp'
-import TempEditor from './components/temp/TempEditor'
+import TipTapEditor from './components/temp/TipTapEditor'
 import Layout from './components/layouts/Layout'
 import TempPAge from './pages/temp/TempPAge'
 import CreatePost from './pages/auth/froms/post-create/CreatePost'
@@ -25,8 +25,9 @@ import axios from 'axios'
 import store from './redux/store'
 import MainAfter from './pages/auth/main/MainAfter'
 import { fetchAuth, SelectIsAuth } from './redux/slices/user'
-import AuthProvider from './provider/AuthProvider'
+import AuthProvider, { useAuth } from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
+import { TagsProvider } from './context/TagsContext'
 
 // axios.defaults.baseURL = 'https://192.168.1.121:5000'
 // axios.defaults.withCredentials = true
@@ -34,23 +35,22 @@ import Market from './pages/auth/market/Market'
 /** манал это Route перделаай плиз */
 
 function App () {
+
   return (
     <div className="App">
-        <BrowserRouter>
-      <AuthProvider>
+      <BrowserRouter>
+        <AuthProvider>
           <Routes>
             <Route path="/settings" element={<Layout type={'settings'}/>}>
               <Route path="/settings/temp" element={<TempPAge/>}/>
               <Route path="/settings/myprofile" element={<MyProfileSettings/>}/>
               <Route path="/settings/mysubs" element={<MySubscribeSettings/>}/>
             </Route>
-
             <Route path={'/main'} element={<Layout type={'auth'}/>}>
               <Route path="/main" element={<MainAfter/>}/>
             </Route>
-
             <Route path="/temp" element={<Temp/>}/>
-            <Route path="/temp2" element={<TempEditor/>}/>
+            <Route path="/temp2" element={<TipTapEditor/>}/>
 
             <Route path="/" element={<Layout type={'notAuth'}/>}>
               <Route path="/" element={<Main/>}/>
@@ -73,17 +73,15 @@ function App () {
               <Route path="/profile/:id" element={<Profile/>}/>
               <Route path={'/post/:id'} element={<PlaylistCreate/>}/>
             </Route>
-
             <Route path="/" element={<Layout type={'form'}/>}>
               <Route path={'/create/post'} element={<CreatePost/>}/>
               <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
               <Route path={'/tags'} element={<SelectTagsPage/>}/>
               <Route path={'/market'} element={<Market/>}/>
             </Route>
-
           </Routes>
-      </AuthProvider>
-        </BrowserRouter>
+        </AuthProvider>
+      </BrowserRouter>
     </div>
   )
 }

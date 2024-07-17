@@ -51,8 +51,8 @@ function Header (props) {
 
     if (response.status === 200){
       alert('вы вышли из своего аккаунта')
-      navigate('/')
-      console.log({ succses: true })
+      navigate('/login')
+      // console.log({ succses: true })
     }
   }
 
@@ -116,7 +116,9 @@ function Header (props) {
                   </div>
                   : null
               }
+              <Link to={`/profile/${user?.id}`}>
               <ProfileNickname type={'default'} nickname={user?.nickname ? user.nickname : null}/>
+              </Link>
               <TransprantButton img={arrowMenu} click={() => setMenu(!menu)}/>
               {
                 menu ?
