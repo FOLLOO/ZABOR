@@ -8,18 +8,26 @@
     padding: 10px 0;
     width: 100%;
     height: fit-content;
-    background: #5B11B9;
-    border-radius: 5px;
+    background: linear-gradient(87.1deg, #B780FF 0%, #8F38FF 100.61%);
+    border-radius: 10px;
     color: white;
+
+    background-size: 200% 200%;
+    /*background-position: 0% 0%;*/
+    /*transition: background-position 1s ease-in-out;*/
+    transition: 1s ;
 }
 
 .button:hover{
-    /*background: lightgray;*/
-    box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(15px);
-    /* Note: backdrop-filter has minimal browser support */
-    border-radius: 5px;
-    background: #5B11B9;
-    /*transform: scaleX(1.0111);*/
+    transform: scale(0.97);
+    /*transform: scale(1.03);*/
+
+    background-position: 100% 100%;
+    /*background: linear-gradient(87.1deg, #8F38FF 10%, #B780FF 90%);*/
+}
+
+.button:active{
+    background-position: 100% 100%;
+    /*background: linear-gradient(87.1deg, #8F38FF 10%, #B780FF 90%);*/
 }
 

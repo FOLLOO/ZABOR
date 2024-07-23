@@ -30,7 +30,7 @@ const Layout = ({type,
 }) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
-  const { overlay } = useContext(OverlayContext)
+  const { overlay, setOverlay } = useContext(OverlayContext)
   const Login = () => {
     return (
       <>
@@ -45,7 +45,6 @@ const Layout = ({type,
         <div className={styles.header}>
         <Header loginn/>
         </div>
-
         <Outlet/>
         <Footer noStick/>
       </>
@@ -61,7 +60,7 @@ const Layout = ({type,
               <TransprantButton left img={main} text={open ? 'Главная' : null}/>
               <TransprantButton left img={popular} text={open ?'Популярное': null}/>
               <TransprantButton left img={comments} text={open ?'Обсуждаемое': null}/>
-              <TransprantButton left img={subes} text={open ?'Подписки' : null}/>
+              <TransprantButton left img={subes} click={() => setOverlay(!overlay)} text={open ?'Подписки' : null}/>
               <TransprantButton left img={liked} text={open ?'Понравилось' : null}/>
               <TransprantButton left img={buyed} text={open ? 'Купленное': null}/>
             </div>
@@ -155,6 +154,8 @@ const Layout = ({type,
       { overlay ?
         <>
         <div className={styles.overlay}>
+          {/*FICHA*/}
+          <h5 onClick={() => setOverlay(!overlay)}> close </h5>
         </div>
         <div className={styles.overlayActive}>
           {renderSwitch(type)}

@@ -5,9 +5,13 @@ import global from '../../../global.module.css'
 
 import temp from '../../../asserts/temp/temp.jpg'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
+import { useNavigate } from 'react-router-dom'
 
 /** Карточка плейлиста используется на вкладке Плейлисты внутри профиля*/
 function Playlist ({title, description, image, add}) {
+
+  const navigate = useNavigate()
+
   return (
     <div className={`${styles.main} ${global.shadowBliz} ${global.flex} ${global.f_dir_column} `}>
       <div className={styles.image}>
@@ -20,7 +24,7 @@ function Playlist ({title, description, image, add}) {
       <div className={`${styles.text} ${global.flex} ${global.f_dir_column}`}>
         {
           add ?
-            <GreenButton text={'Создать плелист'} unique/>
+            <GreenButton text={'Создать плелист'} unique click={() => navigate('/create/playlist')}/>
             : null
         }
         <div className={styles.title}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styles from './my-profile-settings.module.css'
 import global from '../../../../global.module.css'
@@ -28,8 +28,6 @@ function MyProfileSettings ({}) {
   const { user } = useAuth()
 
   const formattedDate = user?.date_of_birth ? new Date(user?.date_of_birth).toISOString().slice(0, 10) : '';
-
-
   const items = [
     {
       id: 1,
@@ -43,13 +41,21 @@ function MyProfileSettings ({}) {
     },
   ]
 
+  const [nick, setNick] = useState('')
+  const [aboutMe, setAboutMe] = useState('')
+  const [sex, setSex] = useState('')
+  const [birthDay, setBirthDay] = useState()
+  const [links, setLinks] = useState([])
+
+  const [passwordBefore, setPasswordBefore] = useState('')
+  const [passwordAfter, setPasswordAfter] = useState('')
+  const [passwordRepeat, setPasswordRepeat] = useState('')
 
 
   return (
     <div className={styles.main}>
       <BackCreate sticky/>
       <SettingsTitle bigTitle={'Мой профиль'} description={'Эти данные отображаются на вашей странице в профиле'}/>
-
 
       <div className={styles.settings}>
         <SettingsBlock
@@ -60,7 +66,7 @@ function MyProfileSettings ({}) {
             <InputText place={'Nickname (псевдоним)'} value={user?.nickname}/>
             {/*<InputText place={'Информация о себе'}/>*/}
             <Textarea place={'Информация о себе'} rows={15} value={user?.aboutMe}/>
-            <GreenButton text={'Сохранить изменения'} unique/>
+            {/*<GreenButton text={'Сохранить изменения'} unique/>*/}
           </div>
         </SettingsBlock>
 
@@ -75,23 +81,6 @@ function MyProfileSettings ({}) {
             <GreenButton text={'Сохранить изменения'} unique/>
           </div>
         </SettingsBlock>
-
-
-        <SettingsBlock
-          mainWidth={1400}
-          title={'Параметры входа'} descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
-          ' \n' +
-          'и одну цифру'} red>
-          <div className={styles.profileInputs}>
-            <InputText place={'Введите старый пароль'} type={'text'}/>
-            <InputText place={'Введите новый пароль'} type={'password'}/>
-            <InputText place={'Повторите новый пароль'} type={'password'}/>
-            {/*<InputText place={'Информация о себе'}/>*/}
-            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
-            <GreenButton text={'Сохранить изменения'} unique />
-          </div>
-        </SettingsBlock>
-
 
         <SettingsBlock
           mainWidth={1400}
@@ -133,7 +122,20 @@ function MyProfileSettings ({}) {
           </div>
         </SettingsBlock>
 
-
+        <SettingsBlock
+          mainWidth={1400}
+          title={'Параметры входа'} descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
+          ' \n' +
+          'и одну цифру'} red>
+          <div className={styles.profileInputs}>
+            <InputText place={'Введите старый пароль'} type={'text'}/>
+            <InputText place={'Введите новый пароль'} type={'password'}/>
+            <InputText place={'Повторите новый пароль'} type={'password'}/>
+            {/*<InputText place={'Информация о себе'}/>*/}
+            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
+            <GreenButton text={'Сохранить изменения'} unique />
+          </div>
+        </SettingsBlock>
         {/*<ProfileCard nickname={'Егор Антонов'}*/}
         {/*             image={temp}*/}
         {/*             description={'Я целеустремленный и креативный специалист, ' +*/}

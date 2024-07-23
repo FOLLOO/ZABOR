@@ -23,8 +23,10 @@ import { OverlayContext } from '../../context/OverlayContext'
 import RenderType from '../../components/notifications/renderType/RenderType'
 import Notification from '../../components/notifications/Notification'
 import TagCheckBox from '../../components/ui/input/tag-checkbox/TagCheckBox'
+import SelectPost from '../../components/post/post-playlist/select-postORplaylist/SelectPost'
 
 function Temp (props) {
+  const { overlay, setOverlay } = useContext(OverlayContext)
 
   const [some, setSome] = useState(false)
   const [open, setOpen] = useState(false)
@@ -39,6 +41,7 @@ function Temp (props) {
 
   return (
       <>
+
         {/*<iframe className="caca"*/}
         {/*        src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FhrnNgeaefhJ3iezHPZjqZf%2FZABOR%3Fnode-id%3D0-1%26t%3D55SeVljzuJkIPSiw-1"*/}
         {/*        allowFullScreen></iframe>*/}
@@ -91,7 +94,7 @@ function Temp (props) {
 
         <div style={{margin: 'auto', width: "70%"}}>
 
-          <CardLittle title={'HEllo world'} price={1000} views={'1 000 000'} time={' два дня назад'} blur/>
+          <CardLittle title={'HEllo world'} price={1000} views={'1 000 000'}  blur/>
 
         </div>
         <div style={{margin: "60px"}}/>
@@ -144,6 +147,20 @@ function Temp (props) {
         <div style={{margin: "60px"}}/>
 
           <TagCheckBox/>
+          <div style={{margin: "60px"}}/>
+
+          <WhiteButton text={'HOLA'} click={() => setOverlay(!overlay)}/>
+          {overlay ?
+          <MessageBox type={'help'} visability={true}/>
+            : null }
+          <div style={{margin: "60px"}}/>
+
+          <SelectPost title={'asldkjf'} img={temp} id={1} description={'asdf'}/>
+          <SelectPost title={'asldkjf'} img={temp} id={2} description={'asdf'}/>
+          <SelectPost title={'asldkjf'} img={temp} id={3} description={'asdf'}/>
+          <SelectPost title={'asldkjf'} img={temp} id={4} description={'asdf'}/>
+          <SelectPost title={'asldkjf'} img={temp} id={5} description={'asdf'}/>
+          <SelectPost title={'asldkjf'} img={temp} id={6} description={'asdf'}/>
           <div style={{margin: "60px"}}/>
         </div>
       </>

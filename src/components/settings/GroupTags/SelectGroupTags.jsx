@@ -9,7 +9,7 @@ import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { useTags } from '../../../context/TagsContext'
 import { useNavigate } from 'react-router-dom'
 
-function SelectGroupTags ({ userChoice = false, tags = [] }) {
+function SelectGroupTags ({ userChoice = false, tags = [], first }) {
 
   const { addGroupTag } = useTags()
   const navigate = useNavigate()
@@ -31,7 +31,7 @@ function SelectGroupTags ({ userChoice = false, tags = [] }) {
   }
   const haddleSubmit = () => {
       addGroupTag(selectTag)
-    navigate('/tags')
+      navigate(first ? '/select/creative_tags' : '/tags')
   }
 
   // useEffect(() => {
@@ -41,7 +41,7 @@ function SelectGroupTags ({ userChoice = false, tags = [] }) {
   return (
     <div>
       <SettingsTitle bigTitle={userChoice ? 'Мои интересы' : 'Расскажите'}
-                     title={userChoice ? null : 'На какую тематику будт посты?'}
+                     title={userChoice ? null : 'На какую тематику будут посты?'}
                      description={userChoice ? 'Изменения сохраняются автоматически' : 'Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
 
       <form onSubmit={haddleSubmit}>

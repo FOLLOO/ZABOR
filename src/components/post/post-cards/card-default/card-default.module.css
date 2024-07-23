@@ -11,7 +11,7 @@
 
 .main:hover{
     box-shadow: 0 10px 36px 0 rgba(0, 0, 0, 0.16);
-    backdrop-filter: blur(15px);
+    /*backdrop-filter: blur(15px);*/
 }
 .temp{
     background: linear-gradient(0deg, rgba(16, 17, 18, 0.92) 25%, rgba(27, 28, 32, 0) 72%);
@@ -111,4 +111,40 @@
 
 .analytych{
     cursor: default;
+}
+
+.edit h3{
+    width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(90deg);
+}
+.edit{
+    /*height: 10px;*/
+    /*width: 5px;*/
+}
+
+.editFlex{
+    align-items: center;
+    justify-content: center;
+    gap: 50px
+}
+
+
+.editContext{
+    display: block;
+    /*top: 10%;*/
+    margin-left: 9%;
+    position: absolute;
+    z-index: 98;
+    /*margin-top: 10%;*/
+}
+
+.description{
+    /*display: -webkit-box;           !* Для использования flexbox *!*/
+    /*-webkit-box-orient: vertical;   !* Устанавливает вертикальную ориентацию *!*/
+    -webkit-line-clamp: 3;          /* Указывает количество строк */
+    overflow: hidden;               /* Скрывает переполнение */
+    text-overflow: ellipsis;
 }

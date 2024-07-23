@@ -20,6 +20,7 @@ function CardLittle ({
   price,
   user_id,
   time ,
+  editable,
   blur = false
 }) {
   return (
@@ -46,8 +47,8 @@ function CardLittle ({
 
             <button className={styles.button} >
               <div  className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
-                  <img src={basket} alt={'button img'}/>
-                  <img src={plus} alt={'button img'}/>
+                  <img src={basket} alt={'img'}/>
+                  <img src={plus} alt={'img'}/>
               </div>
             </button>
           </div>
@@ -90,6 +91,7 @@ function CardLittle ({
               </div>
             }
           </div>
+
         </div>
       </div>
       </div>

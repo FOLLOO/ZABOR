@@ -29,6 +29,14 @@
     margin-bottom: 3%;
 }
 .videoOl{
-    gap: 20px
+    gap: 20px;
+    list-style: none;
+}
+
+.li{
+    /*font-family: 'Lato', sans-serif;*/
+    /*font-size: 64px;*/
+    /*font-weight: lighter;*/
+    /*align-items: center;*/
 }
 

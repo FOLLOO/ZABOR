@@ -37,6 +37,9 @@ a, button {
 /*ol, ul, menu, summary {*/
 /*  list-style: none;*/
 /*}*/
+ol{
+  list-style-type: decimal;
+}
 
 /* For images to not be able to exceed their container */
 img {

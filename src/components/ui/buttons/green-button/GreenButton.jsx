@@ -4,9 +4,10 @@ import React from 'react'
 import global from '../../../../global.module.css'
 import styles from './greenButton.module.css'
 
-function GreenButton ({text, stylee, img, unique, click, type}) {
+function GreenButton ({text, stylee, img, unique, click, type, form}) {
   return (
     <button
+      form={form}
       className={styles.button}
       type={type ? type : null }
       onClick={click ? click : null}>

@@ -10,13 +10,15 @@ import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import InputDporDown from '../../../ui/input/input-dropdown/InputDporDown'
 import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
  /** Это контент плейлиста его описание и его видео*/
-function PlaylistsContent ({title, description, data}) {
+function PlaylistsContent ({title, description, data, folder}) {
+  console.log(folder)
+  console.log(data)
   return (
     <div className={`${styles.main} ${global.flex}`}>
       <div className={`${styles.about} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`}>
           {/*<h2>{title ? title : 'Загрузка...'}</h2>*/}
-        {title ?
-          <h2>{title}</h2>
+        {folder.title ?
+          <h2>{folder.title}</h2>
           :
           // eslint-disable-next-line jsx-a11y/heading-has-content
           <h2 className={global.skeleton} style={{maxHeight: "60px"}}>.</h2>
@@ -25,9 +27,9 @@ function PlaylistsContent ({title, description, data}) {
         <GlassCard width height>
           <div className={`${styles.glassContetn} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`}>
           <h3>Описание</h3>
-            {description ?
+            {folder.description ?
           <div className={global.d2}>
-            {description}
+            {folder.description}
           </div>
             :
               <div className={`${global.d2} ${global.skeleton}`}>
@@ -58,30 +60,21 @@ function PlaylistsContent ({title, description, data}) {
           </div>
         </div>
         <div className={`${styles.video} `}>
-          <ol className={`${global.flex} ${global.f_dir_column} ${styles.videoOl}`}>
-            <li><PlaylistsPost views={10000}/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-            <li><PlaylistsPost/></li>
-          </ol>
+          <div className={`${global.flex} ${global.f_dir_column} ${styles.videoOl}`}>
+            {data.items.length > 0 ?
+            data.items.map((item) => (
+              // <li className={styles.li}>
+                <PlaylistsPost image={item.coverUrl}
+                                 title={item.title}
+                                 description={item.description.replace(/<[^>]*>?/gm, '')}
+                                 views={item.views_count + 1 }
+                                 cost={item.price}
+              />
+              // </li>
+            )) :
+              <li><PlaylistsPost/></li>
+            }
+          </div>
         </div>
       </div>
     </div>

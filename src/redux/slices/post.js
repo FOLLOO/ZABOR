@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 // import axios from "axios";
 import { axiosClassic as axios } from '../../r-axios/axios'
 
-
 export const fetchPosts = createAsyncThunk('publication/getMainPublications', async (params) => {
   try {
     const response = await axios.get('/publication/getMainPublications', {
@@ -39,6 +38,19 @@ export const getUserPost = createAsyncThunk('publication/getUserPublications', a
   }
 });
 
+export const deltePost = createAsyncThunk('publication/deletePublication', async (id) => {
+  try {
+    const response = await axios.put('/publication/deletePublication', {
+        publicationId: id
+    },
+      { withCredentials: true }
+    );
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 
 
 // export const fetchCreate = createAsyncThunk()
@@ -58,65 +70,35 @@ export const getUserPost = createAsyncThunk('publication/getUserPublications', a
 //
 //
 //
-// const initialState = {
-//  data: null,
-//  status: 'loading',
-// }
-//
-//
-//
-// const authSlince = createSlice({
-//  name: 'auth',
-//  initialState,
-//  reducers: {
-//   logout: (state) => {
-//    state.data = null;
-//   }
-//  },
-//  extraReducers: (builder) => {
-//   builder
-//     .addCase(fetchAuth.pending, (state) => {
-//      state.status = 'loading';
-//      state.data = null
-//     })
-//     .addCase(fetchAuth.fulfilled, (state, action) => {
-//      state.status = 'loaded';
-//      state.data = action.payload;
-//     })
-//     .addCase(fetchAuth.rejected, (state) => {
-//      state.status = 'error';
-//      state.data = null
-//     })
-//     // .addCase(fetchAuthMe.pending, (state) => {
-//     //   state.status = 'loading';
-//     //   state.data = null
-//     // })
-//     // .addCase(fetchAuthMe.fulfilled, (state, action) => {
-//     //   state.status = 'loaded';
-//     //   state.data = action.payload;
-//     // })
-//     // .addCase(fetchAuthMe.rejected, (state) => {
-//     //   state.status = 'error';
-//     //   state.data = null
-//     // })
-//     .addCase(fetchRegistration.pending, (state) => {
-//      state.status = 'loading';
-//      state.data = null
-//     })
-//     .addCase(fetchRegistration.fulfilled, (state, action) => {
-//      state.status = 'loaded';
-//      state.data = action.payload;
-//     })
-//     .addCase(fetchRegistration.rejected, (state) => {
-//      state.status = 'error';
-//      state.data = null
-//     })
-//
-//  }
-// })
-//
-// export const SelectIsAuth = state => Boolean(state.auth.data);
-//
-// export const authReducer = authSlince.reducer;
-//
-// export const { logout } = authSlince.actions
+const initialState = {
+  userPosts:{
+    items: [],
+    status: 'loading',
+  }
+}
+
+const userPostsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserPost.pending, (state) => {
+        state.userPosts.items = [];
+        state.userPosts.status = 'loading';
+      })
+      .addCase(getUserPost.fulfilled, (state, action) => {
+        state.userPosts.items = action.payload;
+        state.userPosts.status = 'loaded';
+      })
+      .addCase(getUserPost.rejected, (state) => {
+        state.userPosts.items = [];
+        state.userPosts.status = 'error';
+      })
+      .addCase(deltePost.pending, (state, action) => {
+        state.userPosts.items = state.userPosts.items.filter(obj => obj.id === action.payload);
+      });
+  }
+});
+
+export const userPostsReducer = userPostsSlice.reducer;

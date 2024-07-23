@@ -16,75 +16,134 @@ import UserPosts from '../../../components/profile/profile-tab-content/user-post
 import axios from 'axios'
 import { OverlayContext } from '../../../context/OverlayContext'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAuthData } from '../../../redux/slices/user'
 import { useAuth } from '../../../provider/AuthProvider'
 import { useParams } from 'react-router-dom'
 import { fetchPosts, getUserPost } from '../../../redux/slices/post'
+import ContextDrop from '../../../components/context-drop/ContextDrop'
+import SelectPost from '../../../components/post/post-playlist/select-postORplaylist/SelectPost'
+import AfterBlock from '../../../components/after-overlay-block/AfterBlock'
+import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
+import { getUserFolder, putPostToFolder } from '../../../redux/slices/folder'
+import { useEditor } from '@tiptap/react'
+import playlists from '../../../components/profile/profile-tab-content/playlists/Playlists'
+import { string } from 'prop-types'
 
 function Profile ({prewie}) {
-  const { overlay } = useContext(OverlayContext)
+  const { overlay,setOverlay, someOpen, setSomeOpen } = useContext(OverlayContext)
   const { id } = useParams()
   const { user } = useAuth()
 
   // const authData = useSelector(selectAuthData);
-  const [errMes, setErrMes] = useState('')
   const dispatch = useDispatch()
-  const [data, setData] = useState([])
-  const [posts, setPosts] = useState([])
+  const { userPosts } = useSelector(state => state.posts)
+  const { userFolder } =  useSelector(state => state.folder)
+
+  const [playlist, setPlaylist] = useState([])
 
   const [loading, setLoading] = useState(true)
 
 
-  const getData = async () => {
-    try{
-      const response = await axios.get('https://dog.ceo/api/breed/hound/images/random/1000')
-      setData(response.data.message)
-      setLoading(false)
+
+  const closeSome = () => {
+    // getUserFolders()
+    setOverlay(!overlay)
+    setSomeOpen(!someOpen)
+    setPlaylist([])
+  }
+
+  const addPlaylist = (value, isChecked) => {
+    if (isChecked) {
+      if (!playlist.includes(value)) {
+        setPlaylist(prevPlaylist => [...prevPlaylist, value]);
+        // console.log('Added to playlist:', value);
+      }
+    } else {
+      setPlaylist(prevPlaylist => prevPlaylist.filter(item => item !== value));
     }
-    catch (err){
-      console.log(err)
+  };
+  const addToPlaylistVideo = () => {
+    if (playlist.length <= 0){
+      alert('выберете плейлист')
+      // console.log('aaa')
+    }
+    const HASH = window.location.hash.replace('#', '')
+    // console.log(HASH)
+    for(let i = 0; i < playlist.length; i++){
+      try{
+        const data = {
+          publicationId: HASH,
+          folderOfPublicationId: playlist[i]
+        }
+        dispatch(putPostToFolder(data))
+      }
+      catch (e){
+        console.log(e)
+      }
     }
   }
 
   const getUserPosts = async () => {
     try{
       dispatch(getUserPost(id))
-        .then((res) => {
-          if (res.error) {
-            setErrMes(res.error.message)
-          }
-          if (res.error === undefined) {
-            // console.log(res)
-            // const pathname = localStorage.getItem('token') || '/main'
-            setPosts(res.payload)
-            setLoading(false)
-            // const {refreshToken} = res.payload.profile
-            // setCookie("refreshToken" , refreshToken)
-          }
-        })
+      setLoading(false)
     }
     catch (err){
+      console.log(err)
+      setLoading(false)
+    }
+  }
+
+  const getUserFolders = () => {
+    try{
+      dispatch(getUserFolder(id))
+    }catch (err) {
       console.log(err)
     }
   }
 
+  useEffect(() => {
+      getUserPosts()
+    },
+    [])
 
   useEffect(() => {
-      // getData();
-      getUserPosts()
-      // console.log(data)
-  },[loading])
-  // console.log(posts)
+    getUserFolders()
+  }, [overlay])
+
+
 
   /** Контент для Tab */
+  // todo: При открытии плейлиста не отобржается Находится ли он в нем уже или нет
+
   const tabContent = [
-    { title: 'Публикации', content: <UserPosts data={posts}/> },
-    { title: 'Плейлисты', content: <Playlists data={data}/> },
+    { title: 'Публикации', content: <UserPosts data={userPosts.items}/> },
+    { title: 'Плейлисты', content: <Playlists /> },
     { title: 'Об авторе', content: <AboutMe data={user ? user : null}/> },
   ];
-  /** Компонент для страницыы профиля главный контент отоправляется в Tab через items*/
+  // console.log(user)
+  /** Компонент для страницы профиля главный контент отправляется в Tab через items*/
   return (
     <div className={styles.main}>
+      {someOpen ?
+        <div className={styles.addToPalylist}>
+          <AfterBlock>
+            <h2>Выберете плейлист</h2>
+            <div className={styles.addPostsCarda}>
+            {userFolder?.items.map((item) => (
+              <SelectPost title={item?.name}
+                          onChange={(event) => addPlaylist(item?.id, event.target.checked)}
+                          id={item?.id}
+                          img={temp}
+                          description={item?.description}/>
+            ))}
+            </div>
+            <div className={`${global.flex} ${styles.gap}`}>
+              <WhiteButton text={'Отмена'} click={() => closeSome()} />
+              <GreenButton text={'Сохранить'} click={() => addToPlaylistVideo()}/>
+            </div>
+          </AfterBlock>
+        </div>
+      : null}
         <div className={styles.prewieImage}>
           {prewie ?
           <img src={temp} alt={'some'}/>
@@ -107,9 +166,12 @@ function Profile ({prewie}) {
               </div>
               </div>
             </div>
+            {/*Тут должен быть редактор фото*/}
+            {user?.id === Number(id) ?
+              null :
             <div className={styles.follow}>
               <WhiteButton text={'Подписаться'}/>
-            </div>
+            </div> }
           </div>
           <div className={styles.tab}>
             <Tab items={tabContent}/>

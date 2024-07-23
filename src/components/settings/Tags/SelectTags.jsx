@@ -8,12 +8,15 @@ import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
 import WhiteButton from '../../ui/buttons/white-button/WhiteButton'
 import { useTags } from '../../../context/TagsContext'
 import { useNavigate } from 'react-router-dom'
+import registration from '../../../pages/unAuth/registration/Registration'
+import { useDispatch } from 'react-redux'
+import { createUserInterests } from '../../../redux/slices/tag'
 
-function SelectTags ({ userChoice = false, tags = [] }) {
+function SelectTags ({ userChoice = false, tags = [], first }) {
 
-  const { addCreativeTag } = useTags()
+  const { addCreativeTag, creativeTags  } = useTags()
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const [creativeeTags, setCreativeeTags] = useState([])
 
   const addTag = (id) => {
@@ -37,12 +40,24 @@ function SelectTags ({ userChoice = false, tags = [] }) {
     navigate('/create/post')
   }
 
+  const RegistrationInterestings = (e) => {
+    e.preventDefault()
+    // console.log(creativeeTags)
+    try{
+      const transformedData = creativeeTags.map(tag => ({ id: tag }));
+    dispatch(createUserInterests(transformedData))
+    }catch (err){
+      console.log(err)
+    }
+
+  }
+
   return (
     <div>
       <SettingsTitle bigTitle={userChoice ? 'Определите интересующие вас теги' : 'Определите теги'}
                      description={'Это необходимо для рекомендации. Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
-      <form onSubmit={haddleSubmit}>
-        <SettingsBlock title={'Творческие теги'} button b_type={'submit'} b_text={'Сохранить'}>
+      <form onSubmit={first ? RegistrationInterestings : haddleSubmit}>
+        <SettingsBlock  title={'Творческие теги'} button b_type={'submit'} b_text={'Сохранить'}>
           <div className={styles.grid}>
             {
               tags.length > 0 ? tags.map((item) => (

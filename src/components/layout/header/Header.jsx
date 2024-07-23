@@ -21,17 +21,14 @@ import settings from '../../../asserts/icons/Settings.svg'
 import logout from '../../../asserts/icons/LogOut.svg'
 import hole from '../../../asserts/icons/Творческая студия.svg'
 import Notification from '../../notifications/Notification'
-import { useDispatch, useSelector } from 'react-redux'
 import UserService from '../../../services/UserService'
-import { selectAuthData } from '../../../redux/slices/user'
-import userService from '../../../services/UserService'
 import { useAuth } from '../../../provider/AuthProvider'
 
 
 function Header (props) {
   const { isAuth, user } = useAuth()
   // const dispatch = useDispatch()
-  const authData = useSelector(selectAuthData);
+  // const authData = useSelector(selectAuthData);
 
 
   const navigate = useNavigate()

@@ -34,5 +34,16 @@
 }
 
 .posts{
+    height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
     gap: 20px;
+}
+
+.navigate{
+    position: sticky;
+    top: 7vh;
+    z-index: 1;
+    background: white;
+    padding-right: 240px;
 }

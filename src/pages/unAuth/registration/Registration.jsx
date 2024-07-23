@@ -61,20 +61,8 @@ function Registration (props) {
       userService().createNewUser(data)
     }
     catch (err){
-
+      console.log(user)
     }
-
-    // dispatch(fetchRegistration(data))
-    //   .then((res) => {
-    //     if (res.error) {
-    //       setErrMes(res.error.message)
-    //     }
-    //     if (res.error === undefined) {
-    //       const pathname = localStorage.getItem('last_path') || '/group'
-    //       navigate(pathname)
-    //       // window.location.reload()
-    //     }
-    //   })
   }
 
   return (

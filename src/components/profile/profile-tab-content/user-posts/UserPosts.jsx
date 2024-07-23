@@ -11,6 +11,9 @@ import temp
   from '../../../../asserts/temp/smiling-handsome-young-man-city-street-taking-picture-from-vintage-camera.jpg'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../../../provider/AuthProvider'
+import ContextDrop from '../../../context-drop/ContextDrop'
+import ContextGroup from '../../../context-drop/context-group/ContextGroup'
+import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
 
 /** Посты пользователя */
 
@@ -32,18 +35,18 @@ function UserPosts ({ data = [] }) {
         ${global.f_a_center} ${styles.main}`}>
           <h3>Публикации</h3>
           <div className={global.d2}>
-            {/*Какое то говно пределать нужно*/}
+            {/*Какое-то говно переделать нужно*/}
             Пока что ничего нет 🤔
           </div>
           {id === user?.id ?
-          <div className={styles.addButton}>
-            {user.roleId === 1 ?
-              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
-              :
-              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
-            }
-          </div>
-            : null }
+            <div className={styles.addButton}>
+              {user.roleId === 1 ?
+                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
+                :
+                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
+              }
+            </div>
+            : null}
         </div>
       </GlassCard>
     )
@@ -57,26 +60,28 @@ function UserPosts ({ data = [] }) {
         </div>
         <div className={styles.margin}>
           <div className={styles.grid}>
-
-            {Number(id)  === user?.id ? user?.roleId === 1 ?
-              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
-              :
-              <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
-            : null}
+            {Number(id) === user?.id ? user?.roleId === 1 ?
+                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
+                :
+                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
+              : null}
             {data.length > 0 ?
-              data.map((message =>
-                  <CardDefault
-                    avatar_img={message?.coverUrl}
-                    img={message?.coverUrl}
-                    blur={!!message?.price}
-                    views={message?.views_count + 1}
-                    time={new Date(message?.createdAt).toLocaleDateString('ru-RU', )}
-                    title={message?.title}
-                    // todo: EDITABLE
-                    description={message?.description}
-                    price={message?.price ? message?.price : 'Бесплатно'}
-                    image/>
-              ))
+                data.map((message =>
+              // <>
+                <CardDefault
+                  id={message?.id}
+                  avatar_img={message?.coverUrl}
+                  img={message?.coverUrl}
+                  blur={!!message?.price}
+                  views={message?.views_count + 1}
+                  time={new Date(message?.createdAt).toLocaleDateString('ru-RU',)}
+                  title={message?.title}
+                  // todo: EDITABLE
+                  editable={Number(id) === user?.id}
+                  description={message?.description.replace(/<[^>]*>?/gm, '')}
+                  price={message?.price ? message?.price : 'Бесплатно'}
+                  image/>
+                ))
               :
               <>
                 <CardDefault/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './palylists.module.css'
 import global from '../../../../global.module.css'
@@ -7,10 +7,47 @@ import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
 import Playlist from '../../../post/post-playlist/Playlist'
 import PlaylistsContent from '../../../post/post-playlist/playlists-content/PlaylistsContent'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPublicationsInFolder, getUserFolder } from '../../../../redux/slices/folder'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function Playlists ({ data = [] }) {
 
+  const {id} = useParams()
+  const dispatch = useDispatch();
+  const { dataInFolder } = useSelector(state => state.folder)
+
+  const navigate = useNavigate()
+
+  const { userFolder } =  useSelector(state => state.folder)
+  const [folder, setFolder] = useState({})
   const [open, setOpen] = useState(false)
+
+  const getFolders = () => {
+    try{
+      dispatch(getUserFolder(id))
+    }catch (err) {
+      console.log(err)
+    }
+  }
+  const openFolder = (value, title, description) => {
+    setOpen(!open)
+    setFolder({'title' : title, 'description': description})
+    try{
+      dispatch(getPublicationsInFolder(value))
+      // console.log('suck yes')
+    }catch (e){
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getFolders()
+  }, [userFolder.items < 0])
+
+  useEffect(() => {
+
+  },[open])
 
   /** ничего нет*/
   const NothingYeat = () => {
@@ -20,10 +57,10 @@ function Playlists ({ data = [] }) {
         ${global.f_a_center} ${styles.main}`}>
           <h3>Плейлисты</h3>
           <div className={global.d2}>
-            {/*Какое то говно пределать нужно*/}
-            {data ? data : 'Пока что ничего нет 🤔'}
+            {/*Какое то говно переделать нужно*/}
+            {userFolder?.items.length > 0 ? userFolder?.items : 'Пока что ничего нет 🤔'}
           </div>
-          {data ? null :
+          {userFolder?.items.length > 0 ? null :
             <div className={styles.addButton}>
               <GreenButton text={'Создать'} unique/>
             </div>
@@ -32,7 +69,7 @@ function Playlists ({ data = [] }) {
       </GlassCard>
     )
   }
-  /** Отобржаение плейлистов */
+  /** Отображение плейлистов */
   const AllPlaylists = () => {
     return (
       <>
@@ -40,14 +77,16 @@ function Playlists ({ data = [] }) {
           <h2>Плейлисты</h2>
         </div>
         <div className={styles.margin}>
-          <div className={styles.grid} onClick={() => setOpen(!open)}>
-            <Playlist add/>
-            {data.length > 0 ? data.map((item =>
-                <Playlist title={item} image={item} description={item}/>
+          <div className={styles.grid}>
+            <Playlist add />
+            {userFolder?.items.length > 0 ? userFolder?.items.map((item =>
+                <div onClick={() => openFolder(item?.id, item?.name, item?.description)}>
+                <Playlist title={item.name} image={null} description={item.description} />
+                </div>
             ))
               :
               <>
-              <Playlist add/>
+              {/*<Playlist add/>*/}
               </>
             }
 
@@ -56,17 +95,18 @@ function Playlists ({ data = [] }) {
       </>
     )
   }
+
   /** Отобржаение контента внутри плелиста */
   const PlaylistContetn = () => {
     return (
-      <PlaylistsContent/>
+      <PlaylistsContent data={dataInFolder} folder={folder}/>
     )
   }
 
   return (
     // margin потому что там ток один атрибут
     <div className={styles.margin}>
-      {data ?
+      {userFolder?.items.length > 0 ?
         <>
           {open ? PlaylistContetn() :
           <AllPlaylists/>

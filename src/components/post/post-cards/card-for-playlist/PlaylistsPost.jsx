@@ -6,6 +6,9 @@ import global from '../../../../global.module.css'
 import temp from '../../../../asserts/temp/people-doing-outdoor-training.jpg'
 /** Отображение карточки поста использоуется в плейлисте*/
 function PlaylistsPost ({title, description, cost, views, image}) {
+
+
+
   return (
     <div className={`${styles.main} ${global.flex}`}>
       <div className={ image ? styles.image : null}>
@@ -25,9 +28,10 @@ function PlaylistsPost ({title, description, cost, views, image}) {
             // eslint-disable-next-line jsx-a11y/heading-has-content
             <h3 className={global.skeleton}>.</h3>
           }
-            {cost ?
-              <div className={global.text}>
-                {cost}
+            {cost === 0 ? <div className={global.t2} style={{marginLeft: "10px"}}> Бесплатно</div> :
+              cost > 0 ?
+              <div className={global.t2}>
+                {new Intl.NumberFormat('ru-RU', { currency: 'RUB' }).format(cost) }
               </div>
               :
               null

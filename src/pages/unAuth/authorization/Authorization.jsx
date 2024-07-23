@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './authorization.module.css'
 import global from '../../../global.module.css'
 import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
 import InputText from '../../../components/ui/input/input-text/InputText'
-import InputCheckbox from '../../../components/ui/input/input-toggle/InputCheckbox'
+// import InputCheckbox from '../../../components/ui/input/input-toggle/InputCheckbox'
 import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { fetchLogin } from '../../../redux/slices/user'
 
 import { useCookies } from 'react-cookie'
 import { useAuth } from '../../../provider/AuthProvider'
 
-/*** headers не зодержит refreshToken -> он как бы есть, но его с axios не вытащить
+/*** headers не содержит refreshToken -> он как бы есть, но его с axios не вытащить
  * https://github.com/axios/axios/issues/295
  * Как то так
  * */
-function Authorization (props) {
+function Authorization () {
 
   const { loginAction } = useAuth()
 
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
+  // eslint-disable-next-line no-unused-vars
   const [errMes, setErrMes] = useState('')
-
+  // eslint-disable-next-line no-unused-vars
   const [cookie, setCookie] = useCookies()
 
   const navigate = useNavigate()
@@ -38,14 +37,22 @@ function Authorization (props) {
         if (res.error) {
           return setErrMes(res.error.message)
         }
-        const { token, email } = res
+        const { token, email} = res
+          // console.log(res)
+        localStorage.setItem('token', token) //Где то вроде используется
+        // console.log(token, email)
 
-        localStorage.setItem('token', token)
-        setCookie('token', token)
-        setCookie('email', email)
+        setCookie('token', token, { path: '/' })
+        setCookie('email', email, { path: '/' })
+
         navigate('/main')
       })
   }
+
+  // useEffect(() => {
+  //
+  //   console.log('Cookies after setting:', cookie);
+  // }, [cookie]);
 
   return (
     <div className={styles.back}>
@@ -87,7 +94,7 @@ function Authorization (props) {
                   </div>
                   <div className={global.d2}>
                     <Link to={'/registration'}>
-                      Зарегестрироваться
+                      Зарегистрироваться
                     </Link>
                   </div>
                 </div>

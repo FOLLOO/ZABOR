@@ -48,7 +48,7 @@ function Market (props) {
 
         </div>
 
-        <div className={`${styles.bascket} ${global.shadowBliz}`}>
+        <div className={`${styles.bascket} `}>
           {/*<div className={styles.bascket_content}>*/}
           <div className={styles.call}>
             <h4>

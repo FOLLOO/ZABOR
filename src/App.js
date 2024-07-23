@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -20,14 +20,14 @@ import SelectTagsPage from './pages/auth/froms/select-tags/SelectTagsPage'
 import MyGroupTags from './pages/auth/settings/my-tags/group/MyGroupTags'
 import MyTags from './pages/auth/settings/my-tags/tags/MyTags'
 
-import { Provider, useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import store from './redux/store'
 import MainAfter from './pages/auth/main/MainAfter'
-import { fetchAuth, SelectIsAuth } from './redux/slices/user'
 import AuthProvider, { useAuth } from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
-import { TagsProvider } from './context/TagsContext'
+import UserInterstings from './pages/unAuth/registration/userIntretings/select-group-tags/UserInterstings'
+import FinilyChoices from './pages/unAuth/registration/userIntretings/select-tags/FinilyChoices'
+import { OverlayContext } from './context/OverlayContext'
+
+
 
 // axios.defaults.baseURL = 'https://192.168.1.121:5000'
 // axios.defaults.withCredentials = true
@@ -35,9 +35,9 @@ import { TagsProvider } from './context/TagsContext'
 /** манал это Route перделаай плиз */
 
 function App () {
-
+  const { overlay } = useContext(OverlayContext) // overlay находится в layouts
   return (
-    <div className="App">
+    <div  className="App">
       <BrowserRouter>
         <AuthProvider>
           <Routes>
@@ -49,6 +49,7 @@ function App () {
             <Route path={'/main'} element={<Layout type={'auth'}/>}>
               <Route path="/main" element={<MainAfter/>}/>
             </Route>
+
             <Route path="/temp" element={<Temp/>}/>
             <Route path="/temp2" element={<TipTapEditor/>}/>
 
@@ -58,11 +59,13 @@ function App () {
 
             <Route path="/" element={<Layout type={'login'}/>}>
               <Route path="/registration" element={<Registration/>}/>
+              <Route path="/select/tags" element={<UserInterstings/>}/>
+              <Route path="/select/creative_tags" element={<FinilyChoices/>}/>
               <Route path="/login" element={<Authorization/>}/>
             </Route>
 
             <Route path="/" element={<Layout type={'settings'}/>}>
-              <Route path={'create/playlist'} element={<PlaylistCreate/>}/>
+              <Route path={'/create/playlist'} element={<PlaylistCreate/>}/>
               <Route path={'my/group'} element={<MyGroupTags/>}/>
               <Route path={'my/tags'} element={<MyTags/>}/>
 
