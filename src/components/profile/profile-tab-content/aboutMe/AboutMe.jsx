@@ -27,8 +27,6 @@ function AboutMe ({data, text, social}) {
           }
         </div>
       </GlassCard>
-
-
       <div className={`${global.flex} ${global.f_s_between} ${styles.infCards}`}>
         <GlassCard>
           <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
