@@ -24,6 +24,7 @@ import RenderType from '../../components/notifications/renderType/RenderType'
 import Notification from '../../components/notifications/Notification'
 import TagCheckBox from '../../components/ui/input/tag-checkbox/TagCheckBox'
 import SelectPost from '../../components/post/post-playlist/select-postORplaylist/SelectPost'
+import LittleTag from '../../components/ui/input/little-tag/TagCheckBox'
 
 function Temp (props) {
   const { overlay, setOverlay } = useContext(OverlayContext)
@@ -161,6 +162,8 @@ function Temp (props) {
           <SelectPost title={'asldkjf'} img={temp} id={4} description={'asdf'}/>
           <SelectPost title={'asldkjf'} img={temp} id={5} description={'asdf'}/>
           <SelectPost title={'asldkjf'} img={temp} id={6} description={'asdf'}/>
+          <div style={{margin: "60px"}}/>
+          <LittleTag text={'hola'}/>
           <div style={{margin: "60px"}}/>
         </div>
       </>

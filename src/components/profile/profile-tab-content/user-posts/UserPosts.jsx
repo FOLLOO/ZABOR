@@ -70,7 +70,7 @@ function UserPosts ({ data = [] }) {
               // <>
                 <CardDefault
                   id={message?.id}
-                  avatar_img={message?.coverUrl}
+                  avatar_img={null} //todo: Пока что ничего нет
                   img={message?.coverUrl}
                   blur={!!message?.price}
                   views={message?.views_count + 1}

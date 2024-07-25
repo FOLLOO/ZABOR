@@ -252,6 +252,12 @@
 }
 /*HEIGHT*/
 
+/*WIDTH*/
+.w100{
+    width: 100%;
+}
+/*WIDTH*/
+
 .shadowBliz{
     box-shadow: rgba(0, 0 , 0 , 0.24) 0 3px 8px 0;
 }
@@ -266,6 +272,9 @@
 
 .padLeft{
     padding: 0 120px 0 35px ;
+}
+.padRilLeft{
+    padding-left: 120px;
 }
 
 .padRight{

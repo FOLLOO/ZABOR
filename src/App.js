@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -21,7 +21,7 @@ import MyGroupTags from './pages/auth/settings/my-tags/group/MyGroupTags'
 import MyTags from './pages/auth/settings/my-tags/tags/MyTags'
 
 import MainAfter from './pages/auth/main/MainAfter'
-import AuthProvider, { useAuth } from './provider/AuthProvider'
+import AuthProvider from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
 import UserInterstings from './pages/unAuth/registration/userIntretings/select-group-tags/UserInterstings'
 import FinilyChoices from './pages/unAuth/registration/userIntretings/select-tags/FinilyChoices'
@@ -35,7 +35,7 @@ import { OverlayContext } from './context/OverlayContext'
 /** манал это Route перделаай плиз */
 
 function App () {
-  const { overlay } = useContext(OverlayContext) // overlay находится в layouts
+  // const { overlay } = useContext(OverlayContext) // overlay находится в layouts
   return (
     <div  className="App">
       <BrowserRouter>

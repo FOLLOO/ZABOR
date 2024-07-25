@@ -30,3 +30,9 @@
     z-index: 3;
 }
 
+@media (max-width: 1500px) {
+   .grid{
+       grid-template-columns: repeat(2, 1fr);
+
+   }
+}

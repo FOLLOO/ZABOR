@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import styles from './main.module.css'
 import global from '../../../global.module.css'
@@ -10,11 +10,14 @@ import { useDispatch } from 'react-redux'
 import { fetchPosts } from '../../../redux/slices/post'
 import { fetchTags } from '../../../redux/slices/tag'
 import { Link } from 'react-router-dom'
+import MessageBox from '../../../components/message-box/MessageBox'
+import { OverlayContext } from '../../../context/OverlayContext'
 
 function MainAfter (props) {
 
   const [errMes, setErrMes] = useState("")
   const [loading, setLoading] = useState(false)
+  const { overlay } = useContext(OverlayContext)
   const dispatch = useDispatch()
 
   const [data, setData] = useState([])
@@ -35,6 +38,7 @@ function MainAfter (props) {
         }
       })
   }
+  // console.log(data)
 
   const getTags = () => {
     dispatch(fetchTags())
@@ -61,6 +65,10 @@ function MainAfter (props) {
 
   return (
     <div className={`${styles.main}`}>
+      {overlay ?
+      <MessageBox type={'buy'}/>
+        : null
+      }
       <SettingsTitle bigTitle={'Публикации'}/>
       <div className={`${global.flex} ${styles.tags}`}>
         {tags.length > 0 ?
@@ -84,7 +92,10 @@ function MainAfter (props) {
         {data.length > 0 ? data.map(posts => (
           <Link to={`/post/${posts.id}`}>
             <CardLittle
+              data={posts}
+              avatar={posts.user.files[0].url}
               blur
+              img={posts.coverUrl}
               title={posts.title}
               price={posts.price}
               user_id={posts.userId}

@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './registration.module.css'
 import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
 import global from '../../../global.module.css'
 import InputText from '../../../components/ui/input/input-text/InputText'
-import InputCheckbox from '../../../components/ui/input/input-toggle/InputCheckbox'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
-import axios from '../../../r-axios/axios'
-import { fetchRegistration } from '../../../redux/slices/user'
-import { useDispatch } from 'react-redux'
-import { useAuth } from '../../../provider/AuthProvider'
+// import axios from '../../../r-axios/axios'
+// import { fetchRegistration } from '../../../redux/slices/user'
+// import { useDispatch } from 'react-redux'
+// import { useAuth } from '../../../provider/AuthProvider'
 import userService from '../../../services/UserService'
 
 function Registration (props) {
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  // const navigate = useNavigate()
+  // const dispatch = useDispatch()
 
   const [nickname, setNickname] = useState('')
   const [email, setEmail] = useState('')
@@ -61,7 +60,7 @@ function Registration (props) {
       userService().createNewUser(data)
     }
     catch (err){
-      console.log(user)
+      // console.log(user)
     }
   }
 

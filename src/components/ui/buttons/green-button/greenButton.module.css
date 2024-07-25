@@ -31,3 +31,8 @@
     /*background: linear-gradient(87.1deg, #8F38FF 10%, #B780FF 90%);*/
 }
 
+@media (max-width: 1600px) {
+    .button {
+        gap: 0px
+    }
+}

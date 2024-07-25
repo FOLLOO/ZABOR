@@ -1,15 +1,28 @@
-// import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {axiosClassic as axios} from '../../r-axios/axios'
 // // import axios from "axios";
-// import {axiosClassic as axios} from '../../r-axios/axios'
-//
-// export const fetchLogin = createAsyncThunk('auth/login', async (loginData) => {
-//   const { data } = await axios.post('/auth/login', loginData)
+
+// export const getUserData = createAsyncThunk('user/getUser', async (param) => {
+//   const response = await axios.get('/user/getUser', param)
 //     .catch(error => {
 //       throw error.response.data
 //     })
-//   return data
+//   return response
 // })
-//
+
+export const getUserData = createAsyncThunk('user/getUser', async (id) => {
+  try {
+    const response = await axios.get('/user/getUser',  {
+      params: {
+        userId: id
+      }
+    });
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 // export const fetchRegistration = createAsyncThunk('auth/registration', async (regData) => {
 //   const {data} = await axios.post('/auth/registration', regData)
 //     .catch(error => {
@@ -25,66 +38,39 @@
 //
 //
 //
-// const initialState = {
-//   data: null,
-//   status: 'loading',
-// }
-//
-//
-//
-// const authSlince = createSlice({
-//   name: 'auth',
-//   initialState,
-//   reducers: {
-//     logout: (state) => {
-//       state.data = null;
-//     }
-//   },
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchLogin.pending, (state) => {
-//         state.status = 'loading';
-//         state.data = null
-//       })
-//       .addCase(fetchLogin.fulfilled, (state, action) => {
-//         state.status = 'loaded';
-//         state.data = action.payload;
-//       })
-//       .addCase(fetchLogin.rejected, (state) => {
-//         state.status = 'error';
-//         state.data = null
-//       })
-//       .addCase(fetchAuth.pending, (state) => {
-//         state.status = 'loading';
-//         state.data = null
-//       })
-//       .addCase(fetchAuth.fulfilled, (state, action) => {
-//         state.status = 'loaded';
-//         state.data = action.payload;
-//       })
-//       .addCase(fetchAuth.rejected, (state) => {
-//         state.status = 'error';
-//         state.data = null
-//       })
-//       .addCase(fetchRegistration.pending, (state) => {
-//         state.status = 'loading';
-//         state.data = null
-//       })
-//       .addCase(fetchRegistration.fulfilled, (state, action) => {
-//         state.status = 'loaded';
-//         state.data = action.payload;
-//       })
-//       .addCase(fetchRegistration.rejected, (state) => {
-//         state.status = 'error';
-//         state.data = null
-//       })
-//
-//   }
-// })
+const initialState = {
+  userData:{
+    items: [],
+    status: 'loading',
+  }
+}
+
+
+
+const userSlice = createSlice({
+  name: 'userR',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserData.pending, (state) => {
+        state.userData.items = []
+        state.status = 'loading';
+      })
+      .addCase(getUserData.fulfilled, (state, action) => {
+        state.userData.items = action.payload;
+        state.status = 'loaded';
+      })
+      .addCase(getUserData.rejected, (state) => {
+        state.userData.items = []
+        state.status = 'error';
+      })
+  }
+})
 //
 // export const SelectIsAuth = state => Boolean(state.auth.data);
 // export const selectAuthData = state => state.auth?.data;
 //
-// export const authReducer = authSlince.reducer;
+export const userReducer = userSlice.reducer;
 //
 // export const { logout } = authSlince.actions

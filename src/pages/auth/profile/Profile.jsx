@@ -6,7 +6,6 @@ import global from '../../../global.module.css'
 import temp from '../../../asserts/temp/temp.jpg'
 
 import Tab from '../../../components/ui/tab/Tab'
-import MessageBox from '../../../components/message-box/MessageBox'
 import ProfileCircle from '../../../components/profile/profile-circle/ProfileCircle'
 import WhiteButton from '../../../components/ui/buttons/white-button/WhiteButton'
 import AboutMe from '../../../components/profile/profile-tab-content/aboutMe/AboutMe'
@@ -19,14 +18,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useAuth } from '../../../provider/AuthProvider'
 import { useParams } from 'react-router-dom'
 import { fetchPosts, getUserPost } from '../../../redux/slices/post'
-import ContextDrop from '../../../components/context-drop/ContextDrop'
 import SelectPost from '../../../components/post/post-playlist/select-postORplaylist/SelectPost'
 import AfterBlock from '../../../components/after-overlay-block/AfterBlock'
 import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import { getUserFolder, putPostToFolder } from '../../../redux/slices/folder'
-import { useEditor } from '@tiptap/react'
-import playlists from '../../../components/profile/profile-tab-content/playlists/Playlists'
-import { string } from 'prop-types'
+import { getUserData } from '../../../redux/slices/user'
 
 function Profile ({prewie}) {
   const { overlay,setOverlay, someOpen, setSomeOpen } = useContext(OverlayContext)
@@ -35,14 +31,12 @@ function Profile ({prewie}) {
 
   // const authData = useSelector(selectAuthData);
   const dispatch = useDispatch()
-  const { userPosts } = useSelector(state => state.posts)
+  const { userData } = useSelector(state => state.userR)
   const { userFolder } =  useSelector(state => state.folder)
 
   const [playlist, setPlaylist] = useState([])
 
   const [loading, setLoading] = useState(true)
-
-
 
   const closeSome = () => {
     // getUserFolders()
@@ -52,22 +46,23 @@ function Profile ({prewie}) {
   }
 
   const addPlaylist = (value, isChecked) => {
+    // console.log(value, isChecked)
     if (isChecked) {
       if (!playlist.includes(value)) {
         setPlaylist(prevPlaylist => [...prevPlaylist, value]);
-        // console.log('Added to playlist:', value);
+        console.log('Added to playlist:', value);
       }
     } else {
       setPlaylist(prevPlaylist => prevPlaylist.filter(item => item !== value));
     }
+
+    // console.log(playlist)
   };
   const addToPlaylistVideo = () => {
     if (playlist.length <= 0){
-      alert('выберете плейлист')
-      // console.log('aaa')
+      alert('Выберете плейлист')
     }
     const HASH = window.location.hash.replace('#', '')
-    // console.log(HASH)
     for(let i = 0; i < playlist.length; i++){
       try{
         const data = {
@@ -80,6 +75,7 @@ function Profile ({prewie}) {
         console.log(e)
       }
     }
+    closeSome()
   }
 
   const getUserPosts = async () => {
@@ -101,26 +97,39 @@ function Profile ({prewie}) {
     }
   }
 
+  const getUser = () => {
+    // const data = {
+    //   userId: id
+    // }
+    try{
+      dispatch(getUserData(id))
+    }
+    catch (err){
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
-      getUserPosts()
+      // getUserPosts()
+      getUser()
     },
     [])
 
   useEffect(() => {
     getUserFolders()
-  }, [overlay])
+  }, [overlay === true])
 
-
+// console.log(userR)
 
   /** Контент для Tab */
   // todo: При открытии плейлиста не отобржается Находится ли он в нем уже или нет
 
   const tabContent = [
-    { title: 'Публикации', content: <UserPosts data={userPosts.items}/> },
+    { title: 'Публикации', content: <UserPosts data={userData.items.publications}/> },
     { title: 'Плейлисты', content: <Playlists /> },
-    { title: 'Об авторе', content: <AboutMe data={user ? user : null}/> },
+    { title: 'Об авторе', content: <AboutMe data={user ? user : null} social={userData.items.socialMedia}/> },
   ];
-  // console.log(user)
+  // console.log(userData)
   /** Компонент для страницы профиля главный контент отправляется в Tab через items*/
   return (
     <div className={styles.main}>
@@ -133,7 +142,8 @@ function Profile ({prewie}) {
               <SelectPost title={item?.name}
                           onChange={(event) => addPlaylist(item?.id, event.target.checked)}
                           id={item?.id}
-                          img={temp}
+                          img={item?.coverUrl}
+                          // img={temp}
                           description={item?.description}/>
             ))}
             </div>
@@ -156,14 +166,21 @@ function Profile ({prewie}) {
             <div className={styles.nickname}>
               <ProfileCircle size={200}/>
               <div className={styles.subes}>
-                {user?.nickname ?
-                <h2>{user?.nickname}</h2>
+                {userData?.items?.user?.nickname ?
+                <h2>{userData?.items?.user?.nickname}</h2>
                 :
                   <h2 className={global.skeleton}>NICKNAME</h2>
                 }
-              <div className={global.d2}>
-                Пока нет подписчиков
-              </div>
+                {userData?.items?.user?.count_subscribers ?
+                  <div className={global.d2}>
+                    {userData?.items?.user?.count_subscribers} Подписчик
+                  </div>
+                  // <h2>{userData?.items?.user?.nickname}</h2>
+                  :
+                  <div className={global.d2}>
+                    Пока нет подписчиков
+                  </div>
+                }
               </div>
             </div>
             {/*Тут должен быть редактор фото*/}

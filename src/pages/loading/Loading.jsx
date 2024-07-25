@@ -10,6 +10,7 @@ function Loading (props) {
     <div className={styles.main}>
       <img src={loading} alt={'loading..'} className={styles.img}/>
       <div className={global.d2}> Идет загрузка. Не отключайтесь... </div>
+      <div className={global.d3}> Презагрузите страницу если ничего не происходит </div>
     </div>
   )
 }

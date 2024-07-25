@@ -81,7 +81,10 @@ function Playlists ({ data = [] }) {
             <Playlist add />
             {userFolder?.items.length > 0 ? userFolder?.items.map((item =>
                 <div onClick={() => openFolder(item?.id, item?.name, item?.description)}>
-                <Playlist title={item.name} image={null} description={item.description} />
+                <Playlist
+                  title={item.name}
+                  image={item.latest_publication?.coverUrl}
+                  description={item.description} />
                 </div>
             ))
               :

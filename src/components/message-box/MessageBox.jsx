@@ -10,6 +10,7 @@ import GreenButton from '../ui/buttons/green-button/GreenButton'
 import WhiteButton from '../ui/buttons/white-button/WhiteButton'
 import TransprantButton from '../ui/buttons/transprant-button/TransprantButton'
 import { OverlayContext } from '../../context/OverlayContext'
+import { useNavigate } from 'react-router-dom'
 
 /** Сообщения по типу:
  * вы уверены что хотите удалить это и т.д
@@ -27,10 +28,14 @@ function MessageBox ({
 }) {
 
   const { overlay, setOverlay } = useContext(OverlayContext);
-
+  const navigate = useNavigate()
   const toggleOverlay = () => {
     setOverlay(!overlay);
   };
+  const openLink = (value) => {
+    toggleOverlay()
+    navigate(value)
+  }
 
   const Help = () => {
     return (
@@ -69,13 +74,13 @@ function MessageBox ({
             stylee={{maxWidth: "50px"}}/>
         </div>
         <h4>
-          Удалить пост можно будте в Корзне
+          Удалить пост можно в корзине
         </h4>
         {/*<InputDporDown/>*/}
         {/*<InputText height={"200px"}/>*/}
         <div className={`${global.flex} ${global.f_dir_column}`}  style={{gap: "10px"}}>
-          <WhiteButton text={'Продолжить покупки'} click={() => visability = false}/>
-          <GreenButton text={'Открыть корзину'} unique/>
+          <WhiteButton text={'Продолжить покупки'} click={() => toggleOverlay()}/>
+          <GreenButton text={'Открыть корзину'} unique click={() => openLink('/market')}/>
         </div>
       </>
     )

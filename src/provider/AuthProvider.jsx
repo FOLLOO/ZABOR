@@ -1,8 +1,6 @@
 import {useContext, createContext, useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import userService from "../services/UserService";
-import { Provider } from 'react-redux'
-import store from '../redux/store'
 
 const AuthContext = createContext();
 
@@ -60,8 +58,22 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUser = async(data) => {
+    try{
+
+    const response = await userService.updateUser(data).then(res => res)
+    if (response.status === 200) {
+      setUser(response.profile);
+    }
+    throw new Error(response.message);
+    }
+    catch (e) {
+      return e;
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ token, user, isAuth, loginAction, logOut }} >
+    <AuthContext.Provider value={{ token, user, isAuth, loginAction, logOut, updateUser }} >
       {/*<Provider store={store}>*/}
       {children}
       {/*</Provider>*/}

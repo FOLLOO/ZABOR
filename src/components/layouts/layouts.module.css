@@ -54,3 +54,17 @@
     height: 100%;
     overflow: hidden;
 }
+
+
+@media (max-width: 1600px) {
+    .grid2{
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        grid-template-rows: 70px 1fr auto;
+        grid-template-areas:
+    "menu header"
+    "menu content"
+    "footer footer";
+        padding-left: 10px;
+    }
+}

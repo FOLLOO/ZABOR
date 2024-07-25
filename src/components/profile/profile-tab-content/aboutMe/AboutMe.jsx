@@ -6,7 +6,7 @@ import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
 
-function AboutMe ({data, text}) {
+function AboutMe ({data, text, social}) {
 
   const navigate = useNavigate()
 

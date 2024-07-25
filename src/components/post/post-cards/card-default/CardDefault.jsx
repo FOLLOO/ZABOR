@@ -20,6 +20,7 @@ import moveTo from '../../../../asserts/icons/folder-move.svg'
 import remover from '../../../../asserts/icons/contextMenu/trash red.svg'
 import { OverlayContext } from '../../../../context/OverlayContext'
 import { useNavigate } from 'react-router-dom'
+import { IMAGE_URL } from '../../../../utils'
 
 
 function CardDefault ({
@@ -72,6 +73,7 @@ function CardDefault ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // console.log(img)
 
   return (
     <>
@@ -184,7 +186,7 @@ function CardDefault ({
         </ContextDrop>
       </div> : null}
       {img ?
-        <img className={`${styles.cardImage}  ${blur ? global.blur : null}`} src={img} alt={'temp'}/>
+        <img className={`${styles.cardImage}  ${blur ? global.blur : null}`} src={`${IMAGE_URL}${img}`} alt={'temp'}/>
         :
         <div className={`${global.skeleton} ${styles.noImage}`}>
 

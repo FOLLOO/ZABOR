@@ -74,4 +74,11 @@
     font-size: 12px;
 }
 
+@media (max-width: 1600px) {
+    .content {
+        gap: 0;
+        padding: 5px;
+
+    }
+}
 

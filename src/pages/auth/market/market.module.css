@@ -1,11 +1,38 @@
-.bascket{
+.main{
+    height: 92vh;
+    overflow-y: hidden ;
+}
+.whiteButton{
+    margin-top: 10px;
+    background: white;
+    color: black;
+    border-radius: 20px;
+    padding: 6px 20px;
+    transition: 0.5s;
+}
+.b_content{
+    justify-content: center;
     display: flex;
-    flex-direction: column;
+    gap: 7px;
+}
+.whiteButton:hover{
+    box-shadow: 0 0 5px rgb(255, 255, 255),
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 25px rgb(255,255,255, 0.6),
+    0 0 50px rgb(255,255,255, 0.2);
+}
 
+.bascket{
+    background: #0C0C0C;
+    max-width: 800px;
+    width: 100%;
+    height: 100vmin;
+    color: white;
+    /*display: flex;*/
+    /*flex-direction: column;*/
     gap: 20px;
-
-    height: fit-content;
-    margin-left: 5%;
+    /*height: fit-content;*/
+    /*margin-left: 5%;*/
     padding: 20px 30px;
 
     overflow: hidden;
@@ -13,7 +40,7 @@
 .posts{
     display: flex;
     flex-direction: column;
-    width: 65%;
+    /*width: 65%;*/
     gap: 20px;
     height: 65vh;
     overflow-y: scroll;
@@ -43,16 +70,48 @@
 }
 
 .call{
+    /*align-items: center;*/
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;*/
+    /*gap: 100px*/
+}
+.hall{
+    height: 50px;
+    text-align: center;
     align-items: center;
     display: flex;
     justify-content: space-between;
-    gap: 100px
+}
+.call::after{
+    content: '';
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+.bascket_content{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap : 26px;
+    text-align: center;
+    width: 380px;
+    margin: 0 auto;
 }
 
-.call h4{
-    font-weight: 300;
+.basket_footer{
+    margin: 0 auto;
+    width: 380px;
+    gap: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.call h4::after{
-    content: ':';
+.c_text{
+    color: white;
 }

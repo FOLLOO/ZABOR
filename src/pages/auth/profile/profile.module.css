@@ -65,3 +65,12 @@
 .gap{
     gap: 10px;
 }
+
+@media (max-width: 1600px) {
+    .content {
+        padding: 0 10px;
+    }
+    .contentPad{
+        padding-right: 10px;
+    }
+}
