@@ -21,6 +21,7 @@ import remover from '../../../../asserts/icons/contextMenu/trash red.svg'
 import { OverlayContext } from '../../../../context/OverlayContext'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE_URL } from '../../../../utils'
+import { useAuth } from '../../../../provider/AuthProvider'
 
 
 function CardDefault ({
@@ -34,6 +35,7 @@ function CardDefault ({
   time,
   description,
   id,
+  userID,
   blur = false
 }) {
 
@@ -42,6 +44,7 @@ function CardDefault ({
   const {overlay, setOverlay,someOpen, setSomeOpen} = useContext(OverlayContext)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { user } = useAuth()
   const hndleDeletePost = (param) => {
     try{
       dispatch(deltePost(param))
@@ -61,7 +64,6 @@ function CardDefault ({
     setOverlay(!overlay)
     setSomeOpen(!someOpen)
     // hash
-
     navigate({
       hash: `#${id}`
     });
@@ -73,7 +75,7 @@ function CardDefault ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // console.log(img)
+  // console.log(user.id)
 
   return (
     <>
@@ -94,7 +96,7 @@ function CardDefault ({
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
             {/*<TransprantButton text={'+'} img={basket} stylee={{background: 'white', width: '55px', padding: 0}}/>*/}
 
-            {title ?
+            {user?.id === userID ? null : title ?
               <button className={styles.button}>
                 <div className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                   <img src={basket} alt={'button img'}/>
@@ -102,8 +104,7 @@ function CardDefault ({
                 </div>
               </button>
               :
-              <div className={global.skeleton}>\
-
+              <div className={global.skeleton}> /
               </div>}
           </div>
 

@@ -56,7 +56,9 @@ function UserPosts ({ data = [] }) {
     return (
       <>
         <div className={styles.title}>
+          <header>
           <h2>Публикации</h2>
+          </header>
         </div>
         <div className={styles.margin}>
           <div className={styles.grid}>
@@ -70,6 +72,7 @@ function UserPosts ({ data = [] }) {
               // <>
                 <CardDefault
                   id={message?.id}
+                  userID={message?.userId}
                   avatar_img={null} //todo: Пока что ничего нет
                   img={message?.coverUrl}
                   blur={!!message?.price}

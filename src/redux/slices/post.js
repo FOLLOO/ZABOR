@@ -18,7 +18,9 @@ export const fetchPosts = createAsyncThunk('publication/getMainPublications', as
 
 export const createPost = createAsyncThunk('publication/createPublication', async (data) => {
   try {
-    const response = await axios.post('/publication/createPublication', data);
+    const response = await axios.post('/publication/createPublication', data, { headers: {
+        'content-type': 'multipart/form-data',
+      }});
     return response.data; // Возвращаем данные из ответа
   } catch (error) {
     throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux

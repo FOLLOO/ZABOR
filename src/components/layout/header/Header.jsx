@@ -23,19 +23,22 @@ import hole from '../../../asserts/icons/Творческая студия.svg'
 import Notification from '../../notifications/Notification'
 import UserService from '../../../services/UserService'
 import { useAuth } from '../../../provider/AuthProvider'
+import { useSelector } from 'react-redux'
 
 
 function Header (props) {
   const { isAuth, user } = useAuth()
-  // const dispatch = useDispatch()
-  // const authData = useSelector(selectAuthData);
 
+  const cartItems = useSelector((state) => state.cart.items)
 
   const navigate = useNavigate()
   const [menu , setMenu] = useState(false)
   const [notifications , setNotifications] = useState(false)
 
   const ref = useRef(null);
+
+  // const market_count = ;
+
 
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target))
@@ -82,8 +85,8 @@ function Header (props) {
         <div className={styles.trap2}>
           {props.auth ?
             <>
-              <TransprantButton notification img={bascket} click={() => navigate('/market')}/>
-              <TransprantButton notification img={bell} click={() => setNotifications(!notifications)}/>
+              <TransprantButton notification={cartItems?.length} img={bascket} click={() => navigate('/market')}/>
+              <TransprantButton notification={cartItems?.length} img={bell} click={() => setNotifications(!notifications)}/>
               {
                 notifications ?
                   <div className={`${styles.notifications} ${global.shadowBliz}`}  ref={ref}>
@@ -123,7 +126,7 @@ function Header (props) {
                       <ContextDrop>
                         <ContextGroup>
                           <Link to={`/profile/${user?.id}`}>
-                          <ProfileNickname nickname={user?.nickname ? user?.nickname : null} type={'default'} desc/>
+                            <ProfileNickname nickname={user?.nickname ? user?.nickname : null} type={'default'} desc/>
                           </Link>
                         </ContextGroup>
                         <ContextGroup>

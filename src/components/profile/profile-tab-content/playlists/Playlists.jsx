@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getPublicationsInFolder, getUserFolder } from '../../../../redux/slices/folder'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import temp from '../../../../asserts/temp/top-view-over-chinese-hot-pot.jpg'
+
 function Playlists ({ data = [] }) {
 
   const {id} = useParams()
@@ -48,7 +50,6 @@ function Playlists ({ data = [] }) {
   useEffect(() => {
 
   },[open])
-
   /** ничего нет*/
   const NothingYeat = () => {
     return (
@@ -83,7 +84,8 @@ function Playlists ({ data = [] }) {
                 <div onClick={() => openFolder(item?.id, item?.name, item?.description)}>
                 <Playlist
                   title={item.name}
-                  image={item.latest_publication?.coverUrl}
+                  image={item.latest_publication[0]?.publication?.coverUrl}
+                  // image={temp}
                   description={item.description} />
                 </div>
             ))

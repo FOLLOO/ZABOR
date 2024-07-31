@@ -11,9 +11,9 @@ function TransprantButton ({
   noPad = false,
   form,
   type,
+  // notification_count,
   notification = false
 }) {
-
   return (
     <button
       form={form}
@@ -31,7 +31,7 @@ function TransprantButton ({
           <>
           <img src={img} alt={'button img'} className={styles.img}/>
           {notification ?
-            <div className={styles.notification_count}>12</div> : null }
+            <div className={styles.notification_count}>{notification}</div> : null }
           </>
           : null
         }

@@ -22,10 +22,8 @@ import { useAuth } from '../../../../provider/AuthProvider'
 import ContextDrop from '../../../../components/context-drop/ContextDrop'
 import ContextGroup from '../../../../components/context-drop/context-group/ContextGroup'
 import TransprantButton from '../../../../components/ui/buttons/transprant-button/TransprantButton'
-import Textarea from '../../../../components/ui/input/textarea/Textarea'
 import { useTags } from '../../../../context/TagsContext'
 import { useDispatch } from 'react-redux'
-import { fetchTags } from '../../../../redux/slices/tag'
 import { createPost } from '../../../../redux/slices/post'
 import { useNavigate } from 'react-router-dom'
 
@@ -36,6 +34,9 @@ function CreatePost (props) {
   const { user } = useAuth()
   const { overlay, setOverlay } = useContext(OverlayContext)
 
+  const [file, setFile] = useState(null)
+  const [fileURL, setFileURL] = useState(null)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [errMes, setErrMes] = useState()
@@ -43,7 +44,7 @@ function CreatePost (props) {
   const [save, setSave] = useState(false)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState('')
 
   const toggleOverlay = () => {
     setOverlay(!overlay)
@@ -55,27 +56,28 @@ function CreatePost (props) {
   // }, [description, content])
 
   // console.log('1', groupTags, '2', creativeTags)
-  function stripHtmlTags(html) {
-    return html.replace(/<[^>]*>?/gm, '');
+  function stripHtmlTags (html) {
+    return html.replace(/<[^>]*>?/gm, '')
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-      console.log(description)
+    // console.log(description)
 
-    formData.append('file', null);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('ageLimitId', 1);
-    formData.append('tags', '[4]');
-    formData.append('price', 0);
+    // formData.append('file', file)
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('ageLimitId', 1)
+    formData.append('tags', '[4]')
+    formData.append('price', 0)
     // { user.roleId === 1 ?
-    formData.append('groupTags', JSON.stringify(user.roleId === 1 ? groupTags[0] : null));
+    formData.append('groupTags', JSON.stringify(user?.roleId === 1 ? groupTags[0] : null))
     // formData.append('groupTags', groupTags[0]);
-    formData.append('creativeTags', JSON.stringify(user.roleId === 1 ? creativeTags[0] : null));
+    formData.append('creativeTags', JSON.stringify(user?.roleId === 1 ? creativeTags[0] : null))
     // formData.append('creativeTags', creativeTags[0]);
     // : null }
-    formData.append('blocks', JSON.stringify([{ type: "text", content: content  }]));
-    formData.append('cover', null);
+    formData.append('blocks', JSON.stringify([{ type: 'text', content: content }]))
+    formData.append('cover', file)
     // const data = {
     //   file: null, // todo: Допилить
     //   title: title,
@@ -88,23 +90,33 @@ function CreatePost (props) {
     //   blocks: [{ type: "text", content: content  }],
     //   cover: null,
     // }
-      try{
-        dispatch(createPost(formData))
-        navigate(`/profile/${user?.id}`)
-      }
-      catch (err){
-        console.log(err)
-      }
+    try {
+      dispatch(createPost(formData))
+      // navigate(`/profile/${user?.id}`)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  // useEffect(() => {
-  //   // alert(errMes)
-  // },[errMes])
+  const deleteFile = () =>  {
+    setFile(null)
+  }
+  const handleChange = (event) => {
+    const uploadedFile = event.target.files[0]
+    setFile(uploadedFile)
+    if (uploadedFile) {
+      const fileURL = URL.createObjectURL(uploadedFile)
+      setFileURL(fileURL)
+    }
+  }
+  useEffect(() => {
+    console.log(file)
+  },[file])
 
 // useEffect(() => {
 //   console.log('title: ',title , 'description: ', description)
 // },[title, description])
-
+//   console.log(file)
 
   return (
     <div className={global.pad}>
@@ -127,7 +139,7 @@ function CreatePost (props) {
                     Data
                   </ContextGroup>
                   <ContextGroup noafter>
-                    <TransprantButton img={save_i} text={'В черновик'}  left/>
+                    <TransprantButton img={save_i} text={'В черновик'} left/>
                     <TransprantButton img={trash} text={'Удалить'} red left/>
                   </ContextGroup>
                 </ContextDrop>
@@ -139,54 +151,82 @@ function CreatePost (props) {
         <span>
 
         </span>
-          <form onSubmit={handleSubmit} id={'save_my_post'}>
-            <div className={styles.content}>
-              <img src={temp} width={1250} height={520} alt={'temp'} style={{
-                overflow: 'hidden',
-                maxHeight: '520px',
-                maxWidth: '1250px',
-                objectFit: 'cover'
-              }}/>
-              <div className={styles.profile}>
-                <ProfileNickname type={'post'} nickname={user?.nickname}/>
-                <div className={styles.button}>
-                  <WhiteButton text={'Подписаться'} disable/>
-                </div>
-              </div>
-              <div className={styles.inputDescription}>
-                <GlassCard height>
-                  <h4>Описание</h4>
-                  <div className={global.d3}>
-                    {/*<TipTapEditor place={"Описание"} getValue={setDescription} />*/}
-                    {/*<Textarea rows={10}*/}
-                    {/*          onChange={e => setDescription(e.target.value)}*/}
-                    {/*          place={'Описание'}*/}
-                    {/*          value={description ? description : null} />*/}
-
-                    <TipTapEditor bubble place={'Напишите что нибудь'} getValue={setDescription}/>
-
+        <form onSubmit={handleSubmit} id={'save_my_post'}>
+          <div className={styles.content}>
+            <div className={styles.spanImage}>
+              {file === null || file === undefined ?
+                <div className={global.skeleton}>
+                  {/*Some*/}
+                  <div className={styles.fileUpload}>
+                    <input type={'file'} onChange={handleChange}/>
+                    {/*<TransprantButton text={'Добавить файл'} type={'file'} />*/}
                   </div>
-                  {/*{description}*/}
-                </GlassCard>
-              </div>
-
-              {/*<TipTapEditor bubble place={"Заголовок"}/>*/}
-              <input type={'text'} className={styles.title} value={title ? title : null}
-                     onChange={e => setTitle(e.target.value)}/>
-
-              <div className={styles.text}>
-                <TipTapEditor bubble place={'Напишите что нибудь'} getValue={setContent}/>
-              </div>
-
-              <div className={styles.buttons}>
-                <div className={global.d3}>
-                  Добавить блок
                 </div>
-                <GreenButton text={'+'} />
-              </div>
 
+                :
+                <div  className={styles.mainImage}>
+                  <img src={fileURL} className={styles.image} width={1250} height={520} alt={'temp'} style={{
+                    overflow: 'hidden',
+                    maxHeight: '520px',
+                    maxWidth: '1250px',
+                    objectFit: 'cover'
+                  }}/>
+
+                  {/*<div className={styles.fileUpload}>*/}
+                  {/*  /!*<TransprantButton text={'Добавить файл'} type={'file'} />*!/*/}
+                  {/*</div>*/}
+                  <div className={styles.delete}>
+                    <input type={'file'} id={'input_file'} style={{display: 'none'}} onChange={handleChange}/>
+                    <label htmlFor={'input_file'}>
+                      <span className={styles.support}>
+                          <h5>Импортировать новый файл</h5>
+                          <p className={global.d2}>Поддерживаемые форматы: .jpg .jpeg .png .mp4</p>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              }
             </div>
-          </form>
+            <div className={styles.profile}>
+              <ProfileNickname type={'post'} nickname={user?.nickname}/>
+              <div className={styles.button}>
+                <WhiteButton text={'Подписаться'} disable/>
+              </div>
+            </div>
+            <div className={styles.inputDescription}>
+              <GlassCard height>
+                <h4>Описание</h4>
+                <div className={global.d3}>
+                  {/*<TipTapEditor place={"Описание"} getValue={setDescription} />*/}
+                  {/*<Textarea rows={10}*/}
+                  {/*          onChange={e => setDescription(e.target.value)}*/}
+                  {/*          place={'Описание'}*/}
+                  {/*          value={description ? description : null} />*/}
+
+                  <TipTapEditor bubble place={'Напишите что нибудь'} getValue={setDescription}/>
+
+                </div>
+                {/*{description}*/}
+              </GlassCard>
+            </div>
+
+            {/*<TipTapEditor bubble place={"Заголовок"}/>*/}
+            <input type={'text'} className={styles.title} value={title ? title : null}
+                   onChange={e => setTitle(e.target.value)}/>
+
+            <div className={styles.text}>
+              <TipTapEditor bubble place={'Напишите что нибудь'} getValue={setContent}/>
+            </div>
+
+            <div className={styles.buttons}>
+              <div className={global.d3}>
+                Добавить блок
+              </div>
+              <GreenButton text={'+'}/>
+            </div>
+
+          </div>
+        </form>
         <div className={styles.recomends}>
           <h4>Похожее</h4>
           <CardLittle/>

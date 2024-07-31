@@ -16,6 +16,14 @@
 
 }
 
+.lock{
+    position: relative;
+    bottom: 200px;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
 .description{
     display: -webkit-box;       /* Используется для создания блочного контейнера с вебкит-специфичными свойствами */
     -webkit-box-orient: vertical; /* Определяет ориентацию блочного контейнера */
@@ -27,14 +35,16 @@
 
 .img{
     object-fit: cover;
-    min-width: 386px ;
+    min-width: 386px;
     height: 100%;
     display: block;
     width: 100%;
 }
 
 .image{
-    max-width: 386px ;
+    overflow: hidden;
+    width: 100%;
+    max-width: 386px;
     position: relative;
     display: inline-block;
 }

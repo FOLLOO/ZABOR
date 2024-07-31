@@ -23,6 +23,28 @@ export const getUserData = createAsyncThunk('user/getUser', async (id) => {
   }
 });
 
+export const postUserAvatar = createAsyncThunk('user/takeAvatar', async (data) => {
+  try {
+    const response = await axios.post('/user/takeAvatar',  data, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      }
+    });
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+export const getUserAvatar = createAsyncThunk('user/getAvatar', async () => {
+  try {
+    const response = await axios.get('/user/getAvatar');
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 // export const fetchRegistration = createAsyncThunk('auth/registration', async (regData) => {
 //   const {data} = await axios.post('/auth/registration', regData)
 //     .catch(error => {
@@ -41,6 +63,7 @@ export const getUserData = createAsyncThunk('user/getUser', async (id) => {
 const initialState = {
   userData:{
     items: [],
+    avatar: 'url',
     status: 'loading',
   }
 }
@@ -63,6 +86,18 @@ const userSlice = createSlice({
       })
       .addCase(getUserData.rejected, (state) => {
         state.userData.items = []
+        state.status = 'error';
+      })
+      .addCase(getUserAvatar.pending, (state) => {
+        state.userData.avatar = 'not'
+        state.status = 'loading';
+      })
+      .addCase(getUserAvatar.fulfilled, (state, action) => {
+        state.userData.avatar = action.payload;
+        state.status = 'loaded';
+      })
+      .addCase(getUserAvatar.rejected, (state) => {
+        state.userData.avatar = 'err'
         state.status = 'error';
       })
   }

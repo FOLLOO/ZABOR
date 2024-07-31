@@ -6,6 +6,7 @@ import global from '../../../global.module.css'
 import temp from '../../../asserts/temp/temp.jpg'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
+import { IMAGE_URL } from '../../../utils'
 
 /** Карточка плейлиста используется на вкладке Плейлисты внутри профиля*/
 function Playlist ({title, description, image, add}) {
@@ -16,7 +17,7 @@ function Playlist ({title, description, image, add}) {
     <div className={`${styles.main} ${global.shadowBliz} ${global.flex} ${global.f_dir_column} `}>
       <div className={styles.image}>
         {image ?
-        <img src={image} alt={'playlist-img'} className={styles.img}/>
+        <img src={`${IMAGE_URL}${image}`} alt={'playlist-img'} className={styles.img}/>
           :
           <div className={global.skeleton}>
           </div> }

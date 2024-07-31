@@ -1,3 +1,6 @@
+
+
+
 .grid{
     display: grid;
     grid-template-columns: auto fit-content(350px);
@@ -94,4 +97,58 @@
     /*top: 10vh;*/
     /*left: 50vw;*/
     /*z-index: 99*/
+}
+
+.spanImage{
+    /*height: 520px;*/
+    width: 100%;
+    /*max-height: 520px;*/
+    max-width: 1250px;
+}
+
+.fileUpload{
+    /*position: absolute;*/
+    /*top: 49vh;*/
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete{
+    opacity:0;
+    height: 0;
+    /*transition: height 1s ease-in-out;*/
+    transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+
+    position: relative;
+    bottom: 300px;
+    left: 330px;
+    padding: 10px;
+    width: 500px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 10px;
+    border: 1px dashed rgb(136, 136, 136);
+}
+
+.mainImage:hover .delete {
+    height: 100%;
+    opacity: 1;
+    /*transition:opacity 0.5s linear;*/
+
+    /*-moz-transition: opacity 0.5s linear;*/
+    /*-webkit-transition: opacity 0.5s linear;*/
+}
+
+.support h5{
+    text-align: center;
+}
+
+.support p{
+    text-align: center;
 }

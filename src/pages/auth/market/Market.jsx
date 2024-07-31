@@ -19,6 +19,7 @@ function Market (props) {
   const totalPrice = cartItems.reduce((acc, currentValue) => {
     return acc + currentValue.price
   }, 0)
+
   return (
     <div className={`${global.flex} ${styles.main}`}>
       <div className={`${global.padRilLeft} ${global.w100}`}>
@@ -28,7 +29,8 @@ function Market (props) {
           <div className={styles.posts}>
             {cartItems.length > 0 ?
               cartItems.map((item) => (
-                <PlaylistsPost title={item.title}
+                <PlaylistsPost blur
+                               title={item.title}
                                image={item.coverUrl}
                                cost={item.price}
                                views={item.views_count}

@@ -38,10 +38,8 @@ function Authorization () {
           return setErrMes(res.error.message)
         }
         const { token, email} = res
-          // console.log(res)
         localStorage.setItem('token', token) //Где то вроде используется
-        // console.log(token, email)
-
+        localStorage.setItem('hui', 'hui')
         setCookie('token', token, { path: '/' })
         setCookie('email', email, { path: '/' })
 
