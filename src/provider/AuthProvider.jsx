@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
     try {
       const response = await userService.getNewTokens().then(res => res.data)
       if (response) {
-        setUser(response.profile);
+        // setUser(response.profile);
         setToken(response.token);
         setIsAuth(true)
         return navigate(lastPath ? lastPath : "/");
@@ -27,7 +27,10 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    refreshAction()
+    setUser(JSON.parse(localStorage.getItem('user')))
+    setToken(localStorage.getItem('token'));
+    setIsAuth(true) //временное решение
+    // refreshAction()
     return () => refreshAction()
   }, [])
 
@@ -36,6 +39,7 @@ const AuthProvider = ({ children }) => {
       const response = await userService.login(email, password).then(res => res)
       if (response.token) {
         setUser(response.profile);
+        localStorage.setItem('user', JSON.stringify(response.profile))
         setToken(response.token);
         setIsAuth(true)
         return {path: lastPath ? lastPath : "/", token: response.token, email: response.email};

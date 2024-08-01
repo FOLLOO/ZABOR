@@ -52,7 +52,6 @@
 
 }
 
-
 .notifications::-webkit-scrollbar {
     width: 5px;
 }
@@ -69,3 +68,7 @@
     background-clip: content-box;
     background-color: rgba(196, 196, 196, 0.35);
 }
+
+/*.btn{*/
+/*    max-width: 50px;*/
+/*}*/

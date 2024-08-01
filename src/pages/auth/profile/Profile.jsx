@@ -4,6 +4,7 @@ import styles from './profile.module.css'
 import global from '../../../global.module.css'
 
 import temp from '../../../asserts/temp/temp.jpg'
+import edit from '../../../asserts/icons/edit.svg'
 
 import Tab from '../../../components/ui/tab/Tab'
 import ProfileCircle from '../../../components/profile/profile-circle/ProfileCircle'
@@ -19,10 +20,12 @@ import SelectPost from '../../../components/post/post-playlist/select-postORplay
 import AfterBlock from '../../../components/after-overlay-block/AfterBlock'
 import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import { getUserFolder, putPostToFolder } from '../../../redux/slices/folder'
-import { getUserAvatar, getUserData, postUserAvatar } from '../../../redux/slices/user'
+import { getUserAvatar, getUserData, postUserAvatar, postUserCover } from '../../../redux/slices/user'
 import { getUserPost } from '../../../redux/slices/post'
 import MessageBox from '../../../components/message-box/MessageBox'
 import { IMAGE_URL } from '../../../utils'
+import TransprantButton from '../../../components/ui/buttons/transprant-button/TransprantButton'
+import { postSubscribe } from '../../../redux/slices/sub'
 
 function Profile ({ prewie }) {
   const { overlay, setOverlay, someOpen, setSomeOpen } = useContext(OverlayContext)
@@ -35,12 +38,15 @@ function Profile ({ prewie }) {
   const { userData } = useSelector(state => state.userR)
   const { userFolder } = useSelector(state => state.folder)
 
+  const isUserDataLoading = userData.status === 'loading'
+
   const [file, setFile] = useState(null)
   const [fileURL, setFileURL] = useState(null)
+  const [sub, setSub] = useState(false)
 
   const [playlist, setPlaylist] = useState([])
 
-  const [loading, setLoading] = useState(true)
+  const [happy, setHappy] = useState(0)
 
   const closeSome = () => {
     Over()
@@ -52,23 +58,46 @@ function Profile ({ prewie }) {
     setOverlay(!overlay)
   }
 
-  async function saveImage() {
-      formData.append('avatar', file)
+  // useEffect(() => {
+  //   // if (happy) {
+  //     console.log('Current happy:', happy)
+  //   // }
+  // }, [happy])
 
-      try{
+  const saveImage = (e) => {
+    // e.preventDefault()
+    // console.log(happy)
+    let value = localStorage.getItem('type')
+    console.log(value.toString())
+    alert('value', value)
+    if (value === 'avatar') {
+      formData.append('avatar', file)
+      try {
         dispatch(postUserAvatar(formData))
         Over()
-      }
-      catch (err){
+      } catch (err) {
         console.log(err)
       }
+    }
+    if (value === 'cover') {
+      formData.append('cover', file)
+      try {
+        dispatch(postUserCover(formData))
+        Over()
+      } catch (err) {
+        console.log(err)
+      }
+    } else {
+      alert('💀 Something wrong with your params 💀')
+      localStorage.removeItem('type')
+    }
   }
   const addPlaylist = (value, isChecked) => {
     // console.log(value, isChecked)
     if (isChecked) {
       if (!playlist.includes(value)) {
         setPlaylist(prevPlaylist => [...prevPlaylist, value])
-        console.log('Added to playlist:', value)
+        // console.log('Added to playlist:', value)
       }
     } else {
       setPlaylist(prevPlaylist => prevPlaylist.filter(item => item !== value))
@@ -95,15 +124,15 @@ function Profile ({ prewie }) {
     closeSome()
   }
 
-  const getUserPosts = async () => {
-    try {
-      dispatch(getUserPost(id))
-      setLoading(false)
-    } catch (err) {
-      console.log(err)
-      setLoading(false)
-    }
-  }
+  // const getUserPosts = async () => {
+  //   try {
+  //     dispatch(getUserPost(id))
+  //     setLoading(false)
+  //   } catch (err) {
+  //     console.log(err)
+  //     setLoading(false)
+  //   }
+  // }
 
   const getUserFolders = () => {
     try {
@@ -114,9 +143,6 @@ function Profile ({ prewie }) {
   }
 
   const getUser = () => {
-    // const data = {
-    //   userId: id
-    // }
     try {
       dispatch(getUserData(id))
       dispatch(getUserAvatar())
@@ -134,25 +160,43 @@ function Profile ({ prewie }) {
     }
   }
 
-  useEffect(() => {
-      // getUserPosts()
-      getUser()
-    },
-    [])
+  function Subscribe() {
+    const data = {
+      authorId: id
+    }
+    try{
+      dispatch(postSubscribe(data));
+      setSub(!sub)
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
 
   useEffect(() => {
+    if (userData.status === 'loaded') return
+    // getUserPosts()
+    getUser()
+  }, [])
+
+  useEffect(() => {
+    if (userFolder.status === 'loaded') return
     getUserFolders()
-  }, [someOpen === true])
-console.log(userData)
+  }, [])
+
+  // useEffect(() => {
+  //   console.log(type)
+  // },[type])
+// console.log(userData)
   /** Контент для Tab */
-    // todo: При открытии плейлиста не отобржается Находится ли он в нем уже или нет
+    // todo: При открытии плейлиста не отображается Находится ли он в нем уже или нет
 
   const tabContent = [
       { title: 'Публикации', content: <UserPosts data={userData.items.publications}/> },
       { title: 'Плейлисты', content: <Playlists/> },
       { title: 'Об авторе', content: <AboutMe data={user ? user : null} social={userData.items.socialMedia}/> },
     ]
-  // console.log(userData)
+  // console.log(user)
   /** Компонент для страницы профиля главный контент отправляется в Tab через items*/
   return (
     <div className={styles.main}>
@@ -178,15 +222,16 @@ console.log(userData)
         </div>
         : null}
       <div className={styles.prewieImage}>
-        {prewie ?
-          <img src={temp} alt={'some'} title={'Превью пользователя'}/>
+        {userData?.items.coverUrl ?
+          <img src={`${IMAGE_URL}${userData?.items.coverUrl}`} alt={'some'} title={'Превью пользователя'}/>
           :
           <div className={global.skeleton} title={'Превью пользователя'}></div>
         }
       </div>
-      {overlay ?
-        <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`} title={'Форма добавления изображение для автораки'}>
-          <form className={styles.delete} id={'uploadImage'}>
+      {overlay && !someOpen ?
+        <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}
+             title={'Форма добавления изображение для ava'}>
+          <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
             <input type={'file'} id={'input_file'} style={{ display: 'none' }} onChange={fileChange}/>
             <label htmlFor={'input_file'}>
                       <span className={styles.support}>
@@ -202,7 +247,7 @@ console.log(userData)
           <div className={`${global.flex}`} style={{ gap: '10px' }}>
             <WhiteButton text={'Отмена'} click={() => Over()}/>
             <GreenButton text={'Сохранить'} type={'submit'} form={'uploadImage'}
-                         click={() => saveImage()}
+              // click={() => saveImage()}
                          unique
             />
           </div>
@@ -212,10 +257,13 @@ console.log(userData)
       <div className={styles.content}>
         <div className={styles.profile}>
           <div className={styles.nickname}>
-            <ProfileCircle img={`${IMAGE_URL}${userData?.avatar.url}`}
-                            size={200}
+            <ProfileCircle img={`${IMAGE_URL}${userData?.items.avatarUrl}`}
+                           size={200}
                            edit={user?.id === Number(id) ? true : null}
-                           click={() => Over()}/>
+                           click={() => {
+                             Over()
+                             localStorage.setItem('type', 'avatar')
+                           }}/>
             <div className={styles.subes}>
               {userData?.items?.user?.nickname ?
                 <h2 title={'Псевдоним пользователя'}>{userData?.items?.user?.nickname}</h2>
@@ -236,9 +284,17 @@ console.log(userData)
           </div>
           {/*Тут должен быть редактор фото*/}
           {user?.id === Number(id) ?
-            null :
+            <div className={styles.edit}>
+              <TransprantButton text={'Изменить обложку'} img={edit} left click={() => {
+                Over()
+                localStorage.setItem('type', 'cover')
+              }}/>
+            </div>
+            :
             <div className={styles.follow}>
-              <WhiteButton text={'Подписаться'}/>
+              {sub ?
+                <TransprantButton text={'Отписаться'} /> :
+                <WhiteButton text={'Подписаться'} click={() => Subscribe()}/> }
             </div>}
         </div>
         <div className={styles.tab}>

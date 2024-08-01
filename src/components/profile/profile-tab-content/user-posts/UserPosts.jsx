@@ -14,6 +14,8 @@ import { useAuth } from '../../../../provider/AuthProvider'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
 import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
+import { useSelector } from 'react-redux'
+import { IMAGE_URL } from '../../../../utils'
 
 /** Посты пользователя */
 
@@ -22,6 +24,8 @@ function UserPosts ({ data = [] }) {
 
   const { user } = useAuth()
   const { id } = useParams()
+
+  const { userData } = useSelector(state => state.userR)
 
   const navigate = useNavigate()
 
@@ -51,7 +55,7 @@ function UserPosts ({ data = [] }) {
       </GlassCard>
     )
   }
-
+// console.log(userData)
   const UserPosts = () => {
     return (
       <>
@@ -71,9 +75,10 @@ function UserPosts ({ data = [] }) {
                 data.map((message =>
               // <>
                 <CardDefault
+                  data={message}
                   id={message?.id}
                   userID={message?.userId}
-                  avatar_img={null} //todo: Пока что ничего нет
+                  avatar_img={`${IMAGE_URL}${userData.avatar.url}`} //todo: Пока что ничего нет
                   img={message?.coverUrl}
                   blur={!!message?.price}
                   views={message?.views_count + 1}

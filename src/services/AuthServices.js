@@ -13,6 +13,7 @@ export const saveTokenStorage = (accessToken) => {
   })
 }
 export const removeFromStorage = () => {
+  localStorage.clear()
   Cookies.remove('email')
   Cookies.remove('refreshToken')
   Cookies.remove('token')

@@ -36,6 +36,20 @@ export const postUserAvatar = createAsyncThunk('user/takeAvatar', async (data) =
   }
 });
 
+export const postUserCover = createAsyncThunk('user/takeCover', async (data) => {
+  try {
+    const response = await axios.post('/user/takeCover',  data, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      }
+    });
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+
 export const getUserAvatar = createAsyncThunk('user/getAvatar', async () => {
   try {
     const response = await axios.get('/user/getAvatar');

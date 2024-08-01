@@ -8,6 +8,18 @@
     overflow: hidden;
 }
 
+.prewieImage::after{
+    content: '';
+    display: block;
+    position: relative;
+    bottom: 100%;
+    opacity: 40%;
+    height: 100%;
+    width: 100%;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.2), #000000);
+}
+
 .prewieImage img{
     width: 100%;
     object-fit: cover;
@@ -22,7 +34,6 @@
 .profile{
     position: relative;
     top: -80px;
-
 
     display: flex;
     justify-content: space-between;
@@ -104,6 +115,12 @@
     color: white;
     border-radius: 10px;
     border: 1px dashed rgb(136, 136, 136);
+}
+
+.edit{
+    display: flex;
+    justify-content: end;
+    align-items: flex-start;
 }
 
 

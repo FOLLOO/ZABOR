@@ -23,13 +23,19 @@ import hole from '../../../asserts/icons/Творческая студия.svg'
 import Notification from '../../notifications/Notification'
 import UserService from '../../../services/UserService'
 import { useAuth } from '../../../provider/AuthProvider'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { IMAGE_URL } from '../../../utils'
+import { getNotifications } from '../../../redux/slices/notifications'
+import Loading from '../../../pages/loading/Loading'
+import Nothing from '../../../pages/nothing/Nothing'
 
 
 function Header (props) {
   const { isAuth, user } = useAuth()
+  const { notification } = useSelector(state => state.noti)
 
-  const cartItems = useSelector((state) => state.cart.items)
+  const cartItems = useSelector((state) => state?.cart.items)
+  const dispatch = useDispatch();
 
   const navigate = useNavigate()
   const [menu , setMenu] = useState(false)
@@ -38,14 +44,11 @@ function Header (props) {
   const ref = useRef(null);
 
   // const market_count = ;
-
-
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target))
       setMenu(false)
     setNotifications(false)
   }
-
   const logOut = async () => {
     const response = await UserService.logout()
 
@@ -55,10 +58,28 @@ function Header (props) {
       // console.log({ succses: true })
     }
   }
-
   const mainLink = (param) => {
    return param ? navigate('/main') : navigate('/')
   }
+
+  const getNoti = () => {
+    try{
+      dispatch(getNotifications())
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    // Устанавливаем интервал в 10 минут (600000 миллисекунд)
+    const interval = setInterval(getNoti, 600000);
+    // const interval = setInterval(getNoti, 1000);
+    // console.log(notification)
+
+    // Возвращаем функцию очистки, чтобы остановить таймер при размонтировании компонента
+    return () => clearInterval(interval);
+  }, []);
 
 
   useEffect(() => {
@@ -71,7 +92,6 @@ function Header (props) {
     <header className={props.pad ? global.pad : props.settings ? styles.settings : null}>
       <nav className={`${styles.nav} ${global.flex} ${global.f_s_between} ${global.f_ji_center} ${global.f_a_center} ${props.loginn ? global.pad : global.padRight}`}>
         <div className={styles.trap}>
-
         <button className={styles.logo} onClick={() => mainLink(isAuth)}>
           <h3>Z A B O R</h3>
         </button>
@@ -85,8 +105,13 @@ function Header (props) {
         <div className={styles.trap2}>
           {props.auth ?
             <>
+              {/*<div className={styles.btn}>*/}
               <TransprantButton notification={cartItems?.length} img={bascket} click={() => navigate('/market')}/>
-              <TransprantButton notification={cartItems?.length} img={bell} click={() => setNotifications(!notifications)}/>
+              {/*</div>*/}
+              {/*<div className={styles.btn}>*/}
+              <TransprantButton notification={notifications.length} img={bell} click={() => {setNotifications(!notifications);
+              getNoti()}}/>
+              {/*</div>*/}
               {
                 notifications ?
                   <div className={`${styles.notifications} ${global.shadowBliz}`}  ref={ref}>
@@ -96,28 +121,39 @@ function Header (props) {
                       {/*   <h3>Уведомления</h3>*/}
                       {/*  </div>*/}
                       {/*</ContextGroup>*/}
-                     <ContextGroup>
-                      <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
-                     </ContextGroup>
-                      <ContextGroup>
-                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
-                      </ContextGroup>
-                      <ContextGroup>
-                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
-                      </ContextGroup>
-                      <ContextGroup>
-                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
-                      </ContextGroup>
-                      <ContextGroup>
-                        <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
-                      </ContextGroup>
+
+                      {notifications.length > 0 ? notifications.map((item) => (
+                          <ContextGroup>
+                         <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                          </ContextGroup>
+                      )) :
+                        <ContextGroup noafter >
+                          <Nothing/>
+                        </ContextGroup>
+                      }
+
+                     {/*<ContextGroup>*/}
+                     {/* <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>*/}
+                     {/*</ContextGroup>*/}
+                     {/* <ContextGroup>*/}
+                     {/*   <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>*/}
+                     {/* </ContextGroup>*/}
+                     {/* <ContextGroup>*/}
+                     {/*   <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>*/}
+                     {/* </ContextGroup>*/}
+                     {/* <ContextGroup>*/}
+                     {/*   <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>*/}
+                     {/* </ContextGroup>*/}
+                     {/* <ContextGroup>*/}
+                     {/*   <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>*/}
+                     {/* </ContextGroup>*/}
 
                     </ContextDrop>
                   </div>
                   : null
               }
               <Link to={`/profile/${user?.id}`}>
-              <ProfileNickname type={'default'} nickname={user?.nickname ? user.nickname : null}/>
+                <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`}  type={'default'} nickname={user?.nickname ? user.nickname : null}/>
               </Link>
               <TransprantButton img={arrowMenu} click={() => setMenu(!menu)}/>
               {
@@ -126,7 +162,7 @@ function Header (props) {
                       <ContextDrop>
                         <ContextGroup>
                           <Link to={`/profile/${user?.id}`}>
-                            <ProfileNickname nickname={user?.nickname ? user?.nickname : null} type={'default'} desc/>
+                            <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`} nickname={user?.nickname ? user?.nickname : null} type={'default'} desc/>
                           </Link>
                         </ContextGroup>
                         <ContextGroup>

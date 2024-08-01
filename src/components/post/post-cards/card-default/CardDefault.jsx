@@ -11,7 +11,7 @@ import axios from 'axios'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
 import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { deltePost } from '../../../../redux/slices/post'
 
 
@@ -22,6 +22,7 @@ import { OverlayContext } from '../../../../context/OverlayContext'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE_URL } from '../../../../utils'
 import { useAuth } from '../../../../provider/AuthProvider'
+import { addItemToCart } from '../../../../redux/slices/bascet'
 
 
 function CardDefault ({
@@ -31,6 +32,7 @@ function CardDefault ({
   title,
   views,
   price,
+  data,
   editable,
   time,
   description,
@@ -42,9 +44,15 @@ function CardDefault ({
   const [open, setOpen] = useState(false)
   const ref = useRef(null);
   const {overlay, setOverlay,someOpen, setSomeOpen} = useContext(OverlayContext)
+  const cartItems = useSelector((state) => state.cart.items);
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const [disable, setDisable] = useState(false)
+
   const { user } = useAuth()
+
+
   const hndleDeletePost = (param) => {
     try{
       dispatch(deltePost(param))
@@ -68,6 +76,17 @@ function CardDefault ({
       hash: `#${id}`
     });
   }
+
+  const handleAddToCart = (e) => {
+    // e.preventDefault()
+    // setOverlay(!overlay);
+    // Добавляем товар в корзину
+
+    if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){ //решение проблемы: по id задать свойство кнопке disabled
+      dispatch(addItemToCart(data));
+      setDisable(true)
+    }
+  };
 
 
   useEffect(() => {
@@ -96,16 +115,16 @@ function CardDefault ({
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
             {/*<TransprantButton text={'+'} img={basket} stylee={{background: 'white', width: '55px', padding: 0}}/>*/}
 
-            {user?.id === userID ? null : title ?
-              <button className={styles.button}>
+            {user?.id === userID ? null : price !== 'Бесплатно' ?
+              <button className={styles.button} disabled={disable} onClick={(e) => handleAddToCart()}>
                 <div className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                   <img src={basket} alt={'button img'}/>
                   <img src={plus} alt={'button img'}/>
                 </div>
               </button>
-              :
-              <div className={global.skeleton}> /
-              </div>}
+              : null }
+               {/*<div className={global.skeleton}> /*/}
+               {/*</div>}*/}
           </div>
 
         </div>

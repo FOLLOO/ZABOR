@@ -12,6 +12,7 @@ import { fetchTags } from '../../../redux/slices/tag'
 import { Link } from 'react-router-dom'
 import MessageBox from '../../../components/message-box/MessageBox'
 import { OverlayContext } from '../../../context/OverlayContext'
+import LittleTag from '../../../components/ui/input/little-tag/TagCheckBox'
 
 function MainAfter (props) {
 
@@ -19,6 +20,7 @@ function MainAfter (props) {
   const [loading, setLoading] = useState(false)
   const { overlay } = useContext(OverlayContext)
   const dispatch = useDispatch()
+  const [open, setOpen]= useState()
 
   const [data, setData] = useState([])
   const [tags, setTags] = useState([])
@@ -70,13 +72,13 @@ function MainAfter (props) {
         : null
       }
       <SettingsTitle bigTitle={'Публикации'}/>
-      <div className={`${global.flex} ${styles.tags}`}>
+      <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
+        <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
         {tags.length > 0 ?
           tags.map(item => (
             <div className={styles.b_width}>
-              <WhiteButton text={item.name}/>
+              <LittleTag text={item.name}/>
             </div>
-
           ))
         :
           <>

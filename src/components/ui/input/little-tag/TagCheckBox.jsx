@@ -12,7 +12,7 @@ function LittleTag ({text, click, onChange}) {
   };
 // Почему-то не работи
   return (
-    <div className={checkedd ? styles.checkbox_checked : styles.checkbox_container}>
+    <div className={checkedd ? styles.checkbox_checked : styles.checkbox_container} onClick={click}>
       <input type="checkbox" id={'some'} className={styles.checkbox}
             // checked={() => checked}
               checked={checkedd}

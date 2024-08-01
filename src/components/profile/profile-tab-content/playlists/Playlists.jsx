@@ -45,11 +45,13 @@ function Playlists ({ data = [] }) {
 
   useEffect(() => {
     getFolders()
-  }, [userFolder.items < 0])
+  }, [userFolder?.items < 0])
 
   useEffect(() => {
 
   },[open])
+
+  console.log(userFolder?.items)
   /** ничего нет*/
   const NothingYeat = () => {
     return (
@@ -111,7 +113,7 @@ function Playlists ({ data = [] }) {
   return (
     // margin потому что там ток один атрибут
     <div className={styles.margin}>
-      {userFolder?.items.length > 0 ?
+      {userFolder?.items !== 'У пользователя нет плейлистов' && userFolder?.items.length > 0 ?
         <>
           {open ? PlaylistContetn() :
           <AllPlaylists/>

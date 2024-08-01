@@ -4,8 +4,12 @@ import styles from './profile-card.module.css'
 import global from '../../../global.module.css'
 import SubscribeButton from '../../ui/buttons/subscribe-button/SubscribeButton'
 import WhiteButton from '../../ui/buttons/white-button/WhiteButton'
+import GreenButton from '../../ui/buttons/green-button/GreenButton'
+import { IMAGE_URL } from '../../../utils'
+import { useNavigate } from 'react-router-dom'
 
-function ProfileCard ({ image, nickname, description }) {
+function ProfileCard ({ image, nickname, description, id }) {
+  const navigate = useNavigate()
   return (
     <div className={`${styles.main} ${global.shadowBliz}`}>
       <div className={styles.title}>
@@ -15,7 +19,7 @@ function ProfileCard ({ image, nickname, description }) {
       </div>
       <div className={styles.userPreview}>
         {image ?
-          <img src={image} alt={'userPreview'}/>
+          <img src={`${IMAGE_URL}${image}`} alt={'userPreview'}/>
           :
           <div className={global.skeleton}>
             Какая то не нужная информация для того чтобы скелетон работал, а скелеты любят бегать прыгать и танцевать.
@@ -47,8 +51,8 @@ function ProfileCard ({ image, nickname, description }) {
         <div className={styles.buttons}>
           {nickname ?
             <>
-            <SubscribeButton text={'Подписаться'} />
-            <WhiteButton text={'К автору'} unique/>
+            <GreenButton text={'Вы подписаны'} />
+            <WhiteButton text={'К автору'} click={() => navigate(`/profile/${id}`)} />
             </>
             :
             <>

@@ -51,7 +51,7 @@ function AboutMe ({data, text, social}) {
             </div>
             {text ? null :
               <div className={styles.addButton}>
-                <GreenButton text={'Добавить соц. сеть'} unique/>
+                <GreenButton text={'Добавить соц.сеть'} click={() => navigate('/settings/myprofile')} unique/>
               </div>
             }
           </div>

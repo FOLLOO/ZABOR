@@ -5,13 +5,40 @@
     margin-bottom: 5vw;
 }
 
-.tags{
-    margin-top: 2vw;
+/*.tags{*/
+/*    margin-top: 2vw;*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(9, auto);*/
+/*    grid-template-rows: auto;*/
+/*    gap: 10px;*/
+/*    overflow-x: hidden;*/
+/*}*/
+/*.tags_hidden{*/
+/*    margin-top: 2vw;*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(9, auto);*/
+/*    grid-template-rows: repeat(1, 1fr);*/
+/*    gap: 10px;*/
+/*    overflow: hidden;*/
+/*}*/
 
+.tags, .tags_hidden {
+    margin-top: 2vw;
+    display: grid;
+    grid-template-columns: repeat(9, auto);
     gap: 10px;
-    /*max-width: 1000px;*/
-    overflow-x: scroll;
+    overflow: hidden;
+    transition: all 1s ease-out;
 }
+
+.tags {
+    height: auto; /* конечное состояние */
+}
+
+.tags_hidden {
+    height: 40px; /* начальная высота для одной строки */
+}
+
 
 .grid{
     margin-top: 2vw;

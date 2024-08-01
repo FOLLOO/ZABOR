@@ -20,7 +20,8 @@
 import axios from "axios" ;
 import {getAccessToken, removeFromStorage} from "../services/AuthServices";
 import userService from "../services/UserService";
-const token = window.localStorage.getItem("token");
+const token = localStorage.getItem("token");
+
 const options = {
   baseURL: 'http://192.168.1.121:5000/api',
   headers: {

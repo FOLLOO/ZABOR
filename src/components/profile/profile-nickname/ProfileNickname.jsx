@@ -5,7 +5,7 @@ import ProfileCircle from '../profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../../provider/AuthProvider'
 
-function ProfileNickname ({ nickname, date, view, type, desc = false }) {
+function ProfileNickname ({ nickname, date, view, type, desc = false, img }) {
   const {user} = useAuth()
   const Default = () => {
     return (
@@ -51,7 +51,7 @@ function ProfileNickname ({ nickname, date, view, type, desc = false }) {
   return (
     <>
       <div className={`${global.flex} ${global.f_a_center} ${styles.main}`}>
-        <ProfileCircle size={50}/>
+        <ProfileCircle size={50} img={img}/>
         {renderSwitch(type)}
       </div>
     </>
