@@ -9,6 +9,7 @@
     /*box-shadow: 0 10px 36px 0 rgba(0 ,0 , 0, 0.16);*/
     border: 1px solid rgba(91, 17, 185, 0.08);
     cursor: pointer;
+    z-index: 2;
 }
 
 .main:hover{

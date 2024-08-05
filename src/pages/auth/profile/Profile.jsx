@@ -26,6 +26,7 @@ import MessageBox from '../../../components/message-box/MessageBox'
 import { IMAGE_URL } from '../../../utils'
 import TransprantButton from '../../../components/ui/buttons/transprant-button/TransprantButton'
 import { postSubscribe } from '../../../redux/slices/sub'
+import loading from '../../loading/Loading'
 
 function Profile ({ prewie }) {
   const { overlay, setOverlay, someOpen, setSomeOpen } = useContext(OverlayContext)
@@ -124,16 +125,6 @@ function Profile ({ prewie }) {
     closeSome()
   }
 
-  // const getUserPosts = async () => {
-  //   try {
-  //     dispatch(getUserPost(id))
-  //     setLoading(false)
-  //   } catch (err) {
-  //     console.log(err)
-  //     setLoading(false)
-  //   }
-  // }
-
   const getUserFolders = () => {
     try {
       dispatch(getUserFolder(id))
@@ -184,10 +175,6 @@ function Profile ({ prewie }) {
     getUserFolders()
   }, [])
 
-  // useEffect(() => {
-  //   console.log(type)
-  // },[type])
-// console.log(userData)
   /** Контент для Tab */
     // todo: При открытии плейлиста не отображается Находится ли он в нем уже или нет
 
@@ -196,7 +183,6 @@ function Profile ({ prewie }) {
       { title: 'Плейлисты', content: <Playlists/> },
       { title: 'Об авторе', content: <AboutMe data={user ? user : null} social={userData.items.socialMedia}/> },
     ]
-  // console.log(user)
   /** Компонент для страницы профиля главный контент отправляется в Tab через items*/
   return (
     <div className={styles.main}>
@@ -243,7 +229,7 @@ function Profile ({ prewie }) {
             </label>
           </form>
           {fileURL ?
-            <img src={fileURL} alt={''}/> : null}
+            <img src={fileURL} alt={''} className={styles.editImage}/> : null}
           <div className={`${global.flex}`} style={{ gap: '10px' }}>
             <WhiteButton text={'Отмена'} click={() => Over()}/>
             <GreenButton text={'Сохранить'} type={'submit'} form={'uploadImage'}

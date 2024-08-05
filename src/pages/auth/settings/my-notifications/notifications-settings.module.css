@@ -1,0 +1,34 @@
+.content{
+    gap: 27px;
+}
+
+.text_content{
+    gap: 10px;
+}
+
+/*.content + .content {*/
+/*    margin-top: 20px; !* Отступ между элементами .content *!*/
+/*}*/
+.avtor_list{
+    margin-top: 3vh;
+}
+.avtor{
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 800px;
+    min-width: 655px;
+    transition: all 0.2s ease-out;
+    padding: 10px 0;
+}
+
+.avtor:hover{
+    padding-left: 10px;
+    background: rgba(91, 95, 199, 0.1);
+}
+
+.gap{
+    padding-right: 10px;
+    gap: 10px;
+}

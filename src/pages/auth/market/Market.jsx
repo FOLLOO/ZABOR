@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import styles from './market.module.css'
 import global from '../../../global.module.css'
@@ -6,14 +6,30 @@ import SettingsTitle from '../../../components/toolbar/settings-title/SettingsTi
 import PlaylistsPost from '../../../components/post/post-cards/card-for-playlist/PlaylistsPost'
 import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import temp from '../../../asserts/temp/top-view-over-chinese-hot-pot.jpg'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteItemFromCart } from '../../../redux/slices/bascet'
+
 import logo from '../../../asserts/logo.svg'
 import hello_emoji from '../../../asserts/emoji/hello.png'
 import fire from '../../../asserts/emoji/Fire.svg'
+import close from '../../../asserts/icons/plus_white.svg'
+
+import Nothing from '../../nothing/Nothing'
 
 function Market (props) {
 
   const cartItems = useSelector((state) => state.cart.items)
+  const dispatch = useDispatch()
+
+  const handleClick = (data) => {
+    try{
+      dispatch(deleteItemFromCart(data));
+      window.location.reload()
+    }catch (e) {
+      console.log(e)
+    }
+  }
+
   // const count = cartItems.length;
   // подсчет итога
   const totalPrice = cartItems.reduce((acc, currentValue) => {
@@ -29,15 +45,24 @@ function Market (props) {
           <div className={styles.posts}>
             {cartItems.length > 0 ?
               cartItems.map((item) => (
+                <>
                 <PlaylistsPost blur
                                title={item.title}
                                image={item.coverUrl}
                                cost={item.price}
                                views={item.views_count}
                                description={item.description}/>
+                  <div className={styles.close}>
+                    <button className={styles.deleteButton}>
+                      <img src={close} alt={'close'} title={'Удалить'} className={styles.image} onClick={() => handleClick(item)}/>
+                    </button>
+                  </div>
+                </>
               ))
               :
-              <PlaylistsPost/>
+              <div className={`${global.flex} ${global.f_center} ${global.w100}`}>
+              <Nothing/>
+              </div>
             }
           </div>
         </div>

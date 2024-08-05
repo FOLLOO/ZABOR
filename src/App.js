@@ -26,6 +26,9 @@ import Market from './pages/auth/market/Market'
 import UserInterstings from './pages/unAuth/registration/userIntretings/select-group-tags/UserInterstings'
 import FinilyChoices from './pages/unAuth/registration/userIntretings/select-tags/FinilyChoices'
 import { OverlayContext } from './context/OverlayContext'
+import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
+import Post from './pages/auth/post/Post'
+import ClientError from './pages/404/ClientError'
 
 
 
@@ -45,6 +48,7 @@ function App () {
               <Route path="/settings/temp" element={<TempPAge/>}/>
               <Route path="/settings/myprofile" element={<MyProfileSettings/>}/>
               <Route path="/settings/mysubs" element={<MySubscribeSettings/>}/>
+              <Route path="/settings/mynoti" element={<MyNotificationsSettings/>}/>
             </Route>
             <Route path={'/main'} element={<Layout type={'auth'}/>}>
               <Route path="/main" element={<MainAfter/>}/>
@@ -68,20 +72,22 @@ function App () {
               <Route path={'/create/playlist'} element={<PlaylistCreate/>}/>
               <Route path={'my/group'} element={<MyGroupTags/>}/>
               <Route path={'my/tags'} element={<MyTags/>}/>
-
             </Route>
 
             <Route path="/" element={<Layout type={'auth'}/>}>
               <Route path="/auth" element={<>auth</>}/>
               <Route path="/profile/:id" element={<Profile/>}/>
-              <Route path={'/post/:id'} element={<PlaylistCreate/>}/>
+              <Route path={'/post/:id'} element={<Post/>}/>
             </Route>
+
             <Route path="/" element={<Layout type={'form'}/>}>
               <Route path={'/create/post'} element={<CreatePost/>}/>
               <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
               <Route path={'/tags'} element={<SelectTagsPage/>}/>
               <Route path={'/market'} element={<Market/>}/>
             </Route>
+
+            <Route path="*" element={<ClientError/>} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

@@ -8,7 +8,7 @@ import { IMAGE_URL } from '../../../../utils'
 import lock from '../../../../asserts/icons/Lock.svg'
 
 /** Отображение карточки поста использоуется в плейлисте*/
-function PlaylistsPost ({ title, description, blur, cost, views, image }) {
+function PlaylistsPost ({ title, description, blur, cost, views, image}) {
 
   return (
     <div className={`${styles.main} ${global.flex}`}>

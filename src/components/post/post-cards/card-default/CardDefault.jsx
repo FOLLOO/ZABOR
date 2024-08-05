@@ -19,7 +19,7 @@ import edit from '../../../../asserts/icons/edit.svg'
 import moveTo from '../../../../asserts/icons/folder-move.svg'
 import remover from '../../../../asserts/icons/contextMenu/trash red.svg'
 import { OverlayContext } from '../../../../context/OverlayContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IMAGE_URL } from '../../../../utils'
 import { useAuth } from '../../../../provider/AuthProvider'
 import { addItemToCart } from '../../../../redux/slices/bascet'
@@ -122,13 +122,14 @@ function CardDefault ({
                   <img src={plus} alt={'button img'}/>
                 </div>
               </button>
-              : null }
+              : <span className={styles.bascet_span}></span> }
                {/*<div className={global.skeleton}> /*/}
                {/*</div>}*/}
           </div>
 
         </div>
         <div className={`${styles.content} ${global.flex} ${global.f_dir_column}`}>
+        {/*<Link to={`/post${id}`}>*/}
           <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
             <div className={`${global.h4} ${styles.title}`}>
               {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
@@ -144,7 +145,6 @@ function CardDefault ({
                 <div className={global.skeleton}>
                   015₽
                 </div>
-
               }
             </div>
 
@@ -165,6 +165,7 @@ function CardDefault ({
               </div>
             }
           </div>
+          {/*</Link>*/}
           <div className={`${styles.analytych} ${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
             <div className={`${global.d3} ${styles.views}`}>
               {views ? views + ' просмотров' :

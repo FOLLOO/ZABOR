@@ -5,7 +5,7 @@ import ProfileCircle from '../profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../../provider/AuthProvider'
 
-function ProfileNickname ({ nickname, date, view, type, desc = false, img }) {
+function ProfileNickname ({ nickname, date, view, type, desc = false, img,  subs }) {
   const {user} = useAuth()
   const Default = () => {
     return (
@@ -27,7 +27,7 @@ function ProfileNickname ({ nickname, date, view, type, desc = false, img }) {
   const Post = () => {
     return (
       <div className={`${global.flex} ${global.f_dir_column} ${styles.post}`}>
-        <div className={global.t3}>
+        <div className={global.t1}>
           {nickname ? nickname : 'Anonymos'}
         </div>
         <div className={global.d3}>
@@ -37,10 +37,25 @@ function ProfileNickname ({ nickname, date, view, type, desc = false, img }) {
     )
   }
 
+  const SubesView = () => {
+    return (
+      <div className={`${global.flex} ${global.f_dir_column} ${styles.post}`}>
+        <div className={global.t1}>
+          {nickname ? nickname : 'Anonymos'}
+        </div>
+        <div className={global.d3}>
+          {subs ? new Intl.NumberFormat('ru-RU').format(subs) + 'Подписчиков' : 'Нет подписчиков'}
+        </div>
+      </div>
+    )
+  }
+
   const renderSwitch = (param) => {
     switch (param) {
       case 'post' :
         return <Post/>
+      case 'subs' :
+        return <SubesView/>
       case  'default' :
         return <Default/>
       default:

@@ -130,7 +130,7 @@ import './TipTap.css'
 //
 // export default TipTapEditor
 
-function TipTapEditor ({getValue}) {
+function TipTapEditor ({getValue, menu = true}) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -146,7 +146,7 @@ function TipTapEditor ({getValue}) {
 
   return (
     <>
-      {editor && <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
+      {menu && editor && <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
         <div className="control-group">
           <div className="button-group">
             <button

@@ -53,29 +53,24 @@ export const deltePost = createAsyncThunk('publication/deletePublication', async
   }
 });
 
+export const getPost = createAsyncThunk('publication/getPublication', async (id) => {
+  try {
+    const response = await axios.get(`/publication/getPublication/${id}`);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
 
 
-// export const fetchCreate = createAsyncThunk()
-
-// export const fetchRegistration = createAsyncThunk('auth/registration', async (regData) => {
-//  const {data} = await axios.post('/auth/registration', regData)
-//    .catch(error => {
-//     throw error.response.data
-//    })
-//  return data
-// })
-//
-// export const fetchAuth = createAsyncThunk('auth/check/token', async (token) => {
-//  const {data} = await axios.get(`/auth/login/access-token`)
-//  return data
-// })
-//
-//
-//
 const initialState = {
   userPosts:{
     items: [],
     status: 'loading',
+  },
+  OnePost:{
+    items: [],
+    status: 'loading'
   }
 }
 
@@ -99,6 +94,18 @@ const userPostsSlice = createSlice({
       })
       .addCase(deltePost.pending, (state, action) => {
         state.userPosts.items = state.userPosts.items.filter(obj => obj.id === action.payload);
+      })
+      .addCase(getPost.pending, (state) => {
+        state.OnePost.items = [];
+        state.OnePost.status = 'loading';
+      })
+      .addCase(getPost.fulfilled, (state, action) => {
+        state.OnePost.items = action.payload;
+        state.OnePost.status = 'loaded';
+      })
+      .addCase(getPost.rejected, (state) => {
+        state.OnePost.items = [];
+        state.OnePost.status = 'error';
       });
   }
 });

@@ -1,9 +1,9 @@
 
 .checkbox-wrapper-22 .switch {
     display: inline-block;
-    height: 31px;
+    height: 20px;
     position: relative;
-    width: 50px;
+    width: 40px;
 }
 
 .checkbox-wrapper-22 .switch input {
@@ -23,17 +23,17 @@
 
 .checkbox-wrapper-22 .slider:before {
     background-color: #fff;
-    bottom: 4px;
+    bottom: 3px;
     content: "";
-    height: 23px;
-    width: 23px;
-    left: 4px;
+    height: 14px;
+    width: 14px;
+    left: 3px;
     position: absolute;
-    transition: .4s;
+    transition: .2s;
 }
 
 .checkbox-wrapper-22 input:checked + .slider {
-    background-color: #5B11B9;
+    background-color: #9747FF;
 }
 
 .checkbox-wrapper-22 input:checked + .slider:before {

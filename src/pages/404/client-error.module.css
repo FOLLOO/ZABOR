@@ -1,0 +1,23 @@
+.main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    /*height: 10%;*/
+}
+.img{
+    /*width: 100px;*/
+    height: 300px;
+    margin: 5vh;
+}
+
+.main h3{
+    color: #828282;
+    text-align: center;
+}
+.button{
+    width: 300px;
+    margin: 2vh 0;
+}

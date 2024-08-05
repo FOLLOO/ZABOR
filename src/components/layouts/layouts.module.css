@@ -1,3 +1,15 @@
+
+/*.grid + .buttons{*/
+/*    visibility: hidden;*/
+/*}*/
+/*.grid2 + .buttons{*/
+/*    visibility: visible;*/
+/*}*/
+
+.buttons{
+    overflow: hidden
+}
+
 .grid{
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -14,6 +26,7 @@
     align-self: start;
     grid-row: span 2;
     padding-top: 1vh;
+    /*transition: all 1s ease-in-out;*/
 }
 .header{
     position: sticky;
@@ -30,7 +43,7 @@
 
 .grid2{
     display: grid;
-    grid-template-columns: 85px 1fr;
+    grid-template-columns: 80px 1fr;
     grid-template-rows: 70px 1fr auto;
     grid-template-areas:
     "menu header"

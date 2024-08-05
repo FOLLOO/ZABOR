@@ -26,6 +26,7 @@ import { useTags } from '../../../../context/TagsContext'
 import { useDispatch } from 'react-redux'
 import { createPost } from '../../../../redux/slices/post'
 import { useNavigate } from 'react-router-dom'
+import Textarea from '../../../../components/ui/input/textarea/Textarea'
 
 function CreatePost (props) {
 
@@ -102,21 +103,64 @@ function CreatePost (props) {
     setFile(null)
   }
   const handleChange = (event) => {
-    const uploadedFile = event.target.files[0]
-    setFile(uploadedFile)
+    const uploadedFile = event.target.files[0];
+    const WIDTH = 1250;
     if (uploadedFile) {
-      const fileURL = URL.createObjectURL(uploadedFile)
-      setFileURL(fileURL)
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4)$/i;
+      if (!allowedExtensions.exec(uploadedFile.name)) {
+        alert('Неверный формат файла. Пожалуйста, загрузите файл в формате .jpg, .jpeg, .png или .mp4.');
+        event.target.value = null; // Сбросить значение input
+        return;
+      }
+      let reader = new FileReader()
+      reader.readAsDataURL(uploadedFile)
+
+      reader.onload = (event) => {
+        let image_url = event.target.result;
+        let image =  document.createElement("img")
+
+        image.src = image_url;
+
+        image.onload = (e) => {
+          let canvas = document.createElement("canvas");
+          let ratio = WIDTH / e.target.width;
+          canvas.width = WIDTH;
+          canvas.height = e.target.height * ratio;
+
+          const context = canvas.getContext("2d")
+          context.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+          let new_image_url = context.canvas.toDataURL("image/jpeg", 90)
+
+          let new_image = document.createElement("img")
+          new_image.src = new_image_url;
+
+          setFileURL(new_image_url)
+
+          canvas.toBlob((blob) => {
+            // Создаем новый File объект из Blob
+            const newFile = new File([blob], uploadedFile.name, { type: 'image/jpeg' });
+            setFile(newFile); // Сохраняем File в состоянии
+          }, 'image/jpeg', 0.9);
+
+          console.log(file)
+          // setFile(new_image)
+          // console.log(new_image_url)
+          // console.log(fileURL)
+        }
+      }
+
+      // setFile(uploadedFile);
+      // const fileURL = URL.createObjectURL(uploadedFile);
+      // setFileURL(fileURL);
     }
+
+
   }
   useEffect(() => {
     console.log(file)
   },[file])
 
-// useEffect(() => {
-//   console.log('title: ',title , 'description: ', description)
-// },[title, description])
-//   console.log(file)
 
   return (
     <div className={global.pad}>
@@ -158,7 +202,7 @@ function CreatePost (props) {
                 <div className={global.skeleton}>
                   {/*Some*/}
                   <div className={styles.fileUpload}>
-                    <input type={'file'} onChange={handleChange}/>
+                    <input type={'file'}  className={styles.input} onChange={handleChange}/>
                     {/*<TransprantButton text={'Добавить файл'} type={'file'} />*/}
                   </div>
                 </div>
@@ -203,7 +247,7 @@ function CreatePost (props) {
                   {/*          place={'Описание'}*/}
                   {/*          value={description ? description : null} />*/}
 
-                  <TipTapEditor bubble place={'Напишите что нибудь'} getValue={setDescription}/>
+                  <TipTapEditor place={'Напишите что нибудь'} getValue={setDescription}/>
 
                 </div>
                 {/*{description}*/}

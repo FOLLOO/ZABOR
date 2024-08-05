@@ -9,7 +9,7 @@ import CardDefault from '../../../post/post-cards/card-default/CardDefault'
 
 import temp
   from '../../../../asserts/temp/smiling-handsome-young-man-city-street-taking-picture-from-vintage-camera.jpg'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../../../provider/AuthProvider'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
@@ -28,7 +28,6 @@ function UserPosts ({ data = [] }) {
   const { userData } = useSelector(state => state.userR)
 
   const navigate = useNavigate()
-
   // console.log('id', id , 'userID', user?.id)
 
   /** Нет постов*/
@@ -72,7 +71,7 @@ function UserPosts ({ data = [] }) {
                 <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
               : null}
             {data.length > 0 ?
-                data.map((message =>
+              data.map((message =>
               // <>
                 <CardDefault
                   data={message}

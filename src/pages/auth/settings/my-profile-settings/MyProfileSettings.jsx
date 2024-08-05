@@ -95,9 +95,6 @@ function MyProfileSettings ({}) {
   const [passwordRepeat, setPasswordRepeat] = useState('')
 
 
-
-
-
   const handleChange = (id, value) => {
     setSocialMedia((prevSocialMedia) =>
       prevSocialMedia.map((item) =>
@@ -128,7 +125,7 @@ function MyProfileSettings ({}) {
 
     // приход данных при загрузке старницы
   useEffect(() => {
-    if(user.length > 0){
+    if(user?.length > 0){
       setNick(user.nickname)
       setAboutMe(user.aboutMe)
       setBirthDay(user.date_of_birth)

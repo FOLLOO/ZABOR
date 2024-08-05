@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Header from '../layout/header/Header'
 import Footer from '../layout/footer/Footer'
 import { Outlet, useNavigate } from 'react-router-dom'
@@ -31,6 +31,15 @@ const Layout = ({type,
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const { overlay, setOverlay } = useContext(OverlayContext)
+
+  const openRef = useRef(false);
+
+  const toggleMenu = () => {
+    openRef.current = !openRef.current;
+    const gridClass = openRef.current ? styles.grid : styles.grid2;
+    document.querySelector("#menuContainer").className = gridClass;
+  };
+
   const Login = () => {
     return (
       <>
@@ -53,16 +62,16 @@ const Layout = ({type,
   const Auth = () => {
     return (
       <>
-        <div className={open ? styles.grid : styles.grid2}>
+        <div className={`${styles.grid2}`} id={'menuContainer'}>
           <div className={styles.leftHand}>
-            <div className={`${global.flex} ${global.f_dir_column}`}>
-              <TransprantButton left img={bar}  click={() => setOpen(!open)}/>
-              <TransprantButton left img={main} text={open ? 'Главная' : null}/>
-              <TransprantButton left img={popular} text={open ?'Популярное': null}/>
-              <TransprantButton left img={comments} text={open ?'Обсуждаемое': null}/>
-              <TransprantButton left img={subes} click={() => setOverlay(!overlay)} text={open ?'Подписки' : null}/>
-              <TransprantButton left img={liked} text={open ?'Понравилось' : null}/>
-              <TransprantButton left img={buyed} text={open ? 'Купленное': null}/>
+            <div className={`${global.flex} ${global.f_dir_column} ${styles.buttons}`}>
+              <TransprantButton left img={bar} click={toggleMenu} />
+              <TransprantButton left img={main} text={'Главная'}/>
+              <TransprantButton left img={popular} text={'Популярное'} />
+              <TransprantButton left img={comments} text={'Обсуждаемое'} />
+              <TransprantButton left img={subes} click={() => setOverlay(!overlay)} text={'Подписки'} />
+              <TransprantButton left img={liked} text={'Понравилось' } />
+              <TransprantButton left img={buyed} text={'Купленное' } />
             </div>
           </div>
           <div className={styles.header}>
@@ -103,7 +112,7 @@ const Layout = ({type,
             />
             <TransprantButton left img={outlet_bell1}
                               text={open ? 'Уведомления' : null}
-            click={() => navigate('/temp')}
+            click={() => navigate('/settings/mynoti')}
             />
             <TransprantButton left img={tag}
                               text={open ? 'Теги' : null}
@@ -115,7 +124,7 @@ const Layout = ({type,
         <Header auth settings/>
         </div>
         <div className={styles.content}>
-        <Outlet/>
+          <Outlet/>
         </div>
         <div className={styles.footer}>
           {/*<Footer/>*/}

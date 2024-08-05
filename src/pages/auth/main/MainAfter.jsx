@@ -82,10 +82,7 @@ function MainAfter (props) {
           ))
         :
           <>
-            <WhiteButton text={'Здесь был ТЕГ'}/>
-            <WhiteButton text={'Здесь был ТЕГ'}/>
-            <WhiteButton text={'Здесь был ТЕГ'}/>
-            <WhiteButton text={'Здесь был ТЕГ'}/>
+            <LittleTag text={'Ошибка при загрузке тегов...'}/>
           </>
         }
       </div>

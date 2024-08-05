@@ -25,6 +25,9 @@ const cartSlice = createSlice({
     addItemToCart: (state, action) => {
       state.items.push(action.payload);
     },
+    deleteItemFromCart: (state, action) => {
+      state.items.delete(action.payload);
+    },
     // Другие редьюсеры для управления корзиной
   },
   extraReducers: (builder) => {
@@ -38,10 +41,10 @@ const cartSlice = createSlice({
       .addCase(sendCartData.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
-      });
+      })
   },
 });
 
-export const { addItemToCart } = cartSlice.actions;
+export const { addItemToCart, deleteItemFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

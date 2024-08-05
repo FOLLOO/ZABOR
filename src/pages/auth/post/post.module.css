@@ -1,13 +1,12 @@
 
-
-
 .grid{
     display: grid;
     grid-template-columns: auto fit-content(350px);
-    grid-template-rows: 85px auto;
+    /*grid-template-rows: 25px auto;*/
 
     row-gap: 80px;
     column-gap: 70px;
+    transition: all 1s ease-in-out;
 }
 
 .span{
@@ -32,12 +31,43 @@
     display: flex;
     justify-content: space-between;
 }
-
-.button{
-    max-width: 270px;
-    width: 270px;
+.description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
+.alert-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+.alert-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+    opacity: 1;
+}
+.alert-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.button{
+    gap: 20px;
+
+    /*max-width: 400px;*/
+    width: 450px;
+
+}
+.he{
+    text-indent: 1.2em;
+}
 .inputDescription{
     width: 100%;
     height: fit-content;
@@ -46,8 +76,8 @@
     margin-bottom: 2vh;
 }
 .buttons{
-    display: flex;
-    flex-direction: column;
+    gap: 20px;
+    width: 100%;
 }
 
 .text{
@@ -110,14 +140,10 @@
     /*position: absolute;*/
     /*top: 49vh;*/
     z-index: 10;
-    height: 520px;
-
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.fileUpload .input{
-    /*font-size: 20px;*/
 }
 
 .delete{

@@ -51,7 +51,9 @@
     z-index: 99;
 
 }
-
+.profile{
+    padding-left: 20px;
+}
 .notifications::-webkit-scrollbar {
     width: 5px;
 }

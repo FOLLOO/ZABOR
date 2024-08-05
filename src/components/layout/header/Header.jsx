@@ -106,7 +106,11 @@ function Header (props) {
           {props.auth ?
             <>
               {/*<div className={styles.btn}>*/}
-              <TransprantButton notification={cartItems?.length} img={bascket} click={() => navigate('/market')}/>
+              <TransprantButton
+                nonePad
+                notification={cartItems?.length}
+                img={bascket}
+                click={() => navigate('/market')}/>
               {/*</div>*/}
               {/*<div className={styles.btn}>*/}
               <TransprantButton notification={notifications.length} img={bell} click={() => {setNotifications(!notifications);
@@ -162,7 +166,9 @@ function Header (props) {
                       <ContextDrop>
                         <ContextGroup>
                           <Link to={`/profile/${user?.id}`}>
+                            <div  className={styles.profile}>
                             <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`} nickname={user?.nickname ? user?.nickname : null} type={'default'} desc/>
+                            </div>
                           </Link>
                         </ContextGroup>
                         <ContextGroup>
