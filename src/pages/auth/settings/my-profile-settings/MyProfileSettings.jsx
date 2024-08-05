@@ -21,12 +21,17 @@ import a_link from '../../../../asserts/icons/Another Link (Link).svg'
 
 // import temp from '../../../../asserts/temp/full-shot-people-training-together.jpg'
 import { useAuth } from '../../../../provider/AuthProvider'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserData } from '../../../../redux/slices/user'
 // import userService from '../../../../services/UserService'
 
 // console.log(user)
 function MyProfileSettings ({}) {
 
   const { user, updateUser } = useAuth()
+  const dispatch = useDispatch()
+
+  const { userData } = useSelector(state => state.userR)
 
   const formattedDate = user?.date_of_birth ? new Date(user?.date_of_birth).toISOString().slice(0, 10) : '';
   const items = [
@@ -94,7 +99,19 @@ function MyProfileSettings ({}) {
   const [passwordAfter, setPasswordAfter] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
 
+  const getuUuser = () => {
+    try {
+      dispatch(getUserData(user.id))
+    }catch (e){
+      console.log(e)
+    }
+  }
 
+  useEffect(() => {
+    getuUuser()
+  },[])
+  console.log(user)
+  console.log(userData)
   const handleChange = (id, value) => {
     setSocialMedia((prevSocialMedia) =>
       prevSocialMedia.map((item) =>

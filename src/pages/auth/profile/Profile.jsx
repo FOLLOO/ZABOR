@@ -69,8 +69,8 @@ function Profile ({ prewie }) {
     // e.preventDefault()
     // console.log(happy)
     let value = localStorage.getItem('type')
-    console.log(value.toString())
-    alert('value', value)
+    // console.log(value.toString())
+    // alert('value', value)
     if (value === 'avatar') {
       formData.append('avatar', file)
       try {
@@ -143,23 +143,76 @@ function Profile ({ prewie }) {
   }
 
   const fileChange = (event) => {
+    // const uploadedFile = event.target.files[0]
+    // setFile(uploadedFile)
+    // if (uploadedFile) {
+    //   const fileURL = URL.createObjectURL(uploadedFile)
+    //   setFileURL(fileURL)
+    // }
+
     const uploadedFile = event.target.files[0]
-    setFile(uploadedFile)
-    if (uploadedFile) {
-      const fileURL = URL.createObjectURL(uploadedFile)
-      setFileURL(fileURL)
+    let WIDTH = 1250
+    // const AVATAR_WIDTH = 200;
+    const type = localStorage.getItem('type')
+
+    switch (type) {
+      case 'cover' :
+        WIDTH = 1920
+        break
+      case 'avatar' :
+        WIDTH = 400
+        break
+      default :
+        WIDTH = 1250
+        break
     }
+
+    if (uploadedFile) {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i
+      if (!allowedExtensions.exec(uploadedFile.name)) {
+        alert('Неверный формат файла. Пожалуйста, загрузите файл в формате .jpg, .jpeg, или .png')
+        event.target.value = null // Сбросить значение input
+        return
+      }
+      let reader = new FileReader()
+      reader.readAsDataURL(uploadedFile)
+      reader.onload = (event) => {
+        let image_url = event.target.result
+        let image = document.createElement('img')
+        image.src = image_url
+        image.onload = (e) => {
+          let canvas = document.createElement('canvas')
+          let ratio = WIDTH / e.target.width
+          canvas.width = WIDTH
+          canvas.height = e.target.height * ratio
+
+          const context = canvas.getContext('2d')
+          context.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+          let new_image_url = context.canvas.toDataURL('image/jpeg', 90)
+
+          let new_image = document.createElement('img')
+          new_image.src = new_image_url
+          setFileURL(new_image_url)
+          canvas.toBlob((blob) => {
+            // Создаем новый File объект из Blob
+            const newFile = new File([blob], uploadedFile.name, { type: 'image/jpeg' })
+            setFile(newFile) // Сохраняем File в состоянии
+          }, 'image/jpeg', 1)
+        }
+      }
+    }
+
   }
 
-  function Subscribe() {
+  function Subscribe () {
     const data = {
       authorId: id
     }
-    try{
-      dispatch(postSubscribe(data));
+    try {
+      dispatch(postSubscribe(data))
       setSub(!sub)
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e)
     }
   }
@@ -279,8 +332,8 @@ function Profile ({ prewie }) {
             :
             <div className={styles.follow}>
               {sub ?
-                <TransprantButton text={'Отписаться'} /> :
-                <WhiteButton text={'Подписаться'} click={() => Subscribe()}/> }
+                <TransprantButton text={'Отписаться'}/> :
+                <WhiteButton text={'Подписаться'} click={() => Subscribe()}/>}
             </div>}
         </div>
         <div className={styles.tab}>

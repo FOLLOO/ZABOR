@@ -15,7 +15,7 @@ import ContextDrop from '../../context-drop/ContextDrop'
 
 import bascket from '../../../asserts/icons/basket.svg'
 import arrowMenu from '../../../asserts/icons/arowMenu.svg'
-import bell from '../../../asserts/icons/settingsMenu/outlet-bell2.svg'
+import bell from '../../../asserts/icons/contextMenu/BELL4.svg'
 import tempIcon from '../../../asserts/icons/Файл.svg'
 import settings from '../../../asserts/icons/Settings.svg'
 import logout from '../../../asserts/icons/LogOut.svg'
@@ -106,26 +106,37 @@ function Header (props) {
           {props.auth ?
             <>
               {/*<div className={styles.btn}>*/}
-              <TransprantButton
-                nonePad
-                notification={cartItems?.length}
-                img={bascket}
-                click={() => navigate('/market')}/>
+              {/*<TransprantButton*/}
+              {/*  noPad*/}
+              {/*  notification={cartItems?.length}*/}
+              {/*  img={bascket}*/}
+              {/*  click={() => navigate('/market')}/>*/}
               {/*</div>*/}
+              <div >
+              <button className={styles.btn}  onClick={() => navigate('/market')}>
+                <img  src={bascket} alt={'arrow'} className={styles.ima}/>
+                {cartItems?.length > 0 ?
+                <div className={styles.count_span}>{cartItems?.length}</div>
+                  : null }
+              </button>
+
               {/*<div className={styles.btn}>*/}
-              <TransprantButton notification={notifications.length} img={bell} click={() => {setNotifications(!notifications);
-              getNoti()}}/>
+              {/*<TransprantButton notification={notifications.length} img={bell} click={() => {setNotifications(!notifications);*/}
+              {/*getNoti()}}/>*/}
               {/*</div>*/}
+
+              <button className={styles.btn}  onClick={() => {getNoti(); setNotifications(!notifications);}}>
+                <img  src={bell} className={styles.ima} alt={'arrow'}/>
+                {notifications.length > 0 ?
+                <div className={styles.count_span}>{notifications.length}</div>
+                : null}
+              </button>
+              </div>
+
               {
                 notifications ?
                   <div className={`${styles.notifications} ${global.shadowBliz}`}  ref={ref}>
                     <ContextDrop title={'Уведомления'}>
-                      {/*<ContextGroup noafter>*/}
-                      {/*  <div className={global.h3}>*/}
-                      {/*   <h3>Уведомления</h3>*/}
-                      {/*  </div>*/}
-                      {/*</ContextGroup>*/}
-
                       {notifications.length > 0 ? notifications.map((item) => (
                           <ContextGroup>
                          <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
@@ -156,11 +167,16 @@ function Header (props) {
                   </div>
                   : null
               }
+              <div className={`${global.flex} ${styles.gap}`}>
               <Link to={`/profile/${user?.id}`}>
                 <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`}  type={'default'} nickname={user?.nickname ? user.nickname : null}/>
               </Link>
-              <TransprantButton img={arrowMenu} click={() => setMenu(!menu)}/>
-              {
+              {/*<TransprantButton noPad img={arrowMenu} click={() => setMenu(!menu)}/>*/}
+              <button  onClick={() => setMenu(!menu)}>
+                <img  src={arrowMenu} alt={'arrow'}/>
+              </button>
+              </div>
+                {
                 menu ?
                     <div className={`${styles.contextMenu} ${global.shadowBliz}`} ref={ref}>
                       <ContextDrop>

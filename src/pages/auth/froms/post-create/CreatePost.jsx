@@ -144,19 +144,11 @@ function CreatePost (props) {
           }, 'image/jpeg', 0.9);
 
           console.log(file)
-          // setFile(new_image)
-          // console.log(new_image_url)
-          // console.log(fileURL)
         }
       }
-
-      // setFile(uploadedFile);
-      // const fileURL = URL.createObjectURL(uploadedFile);
-      // setFileURL(fileURL);
     }
-
-
   }
+
   useEffect(() => {
     console.log(file)
   },[file])

@@ -23,9 +23,12 @@
 }
 
 .trap2{
-    width: 40%;
+    width: fit-content;
+    min-width: 25%;
+
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .trap2 button img{
@@ -36,8 +39,9 @@
 .contextMenu{
     position: absolute;
     top: 7.5vh;
-    right: 7.5vw;
+    right: 6vw;
     z-index: 99;
+    width: 350px;
 }
 
 .notifications{
@@ -46,7 +50,7 @@
     overflow-y: scroll;
     position: absolute;
     top: 7.5vh;
-    right: 25vw;
+    right: 20vw;
 
     z-index: 99;
 
@@ -71,6 +75,38 @@
     background-color: rgba(196, 196, 196, 0.35);
 }
 
-/*.btn{*/
-/*    max-width: 50px;*/
-/*}*/
+.btn{
+    width: 70px;
+    /*overflow: hidden;*/
+}
+
+.btn .ima{
+    width: 24px;
+}
+.gap{
+    gap: 20px;
+}
+
+.count_span{
+    position: relative;
+    display: inline-block;
+    right: 10px;
+    bottom: 15px;
+/*display: block;*/
+
+    background: #5B11B9;
+    border-radius: 100%;
+    border: 1px solid white;
+    color: white;
+
+    min-height: 20px !important;
+    min-width: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+
+    padding: 2px;
+    text-align: center;
+    font-size: 12px;
+}

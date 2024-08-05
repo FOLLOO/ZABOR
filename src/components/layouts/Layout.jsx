@@ -74,8 +74,8 @@ const Layout = ({type,
               <TransprantButton left img={buyed} text={'Купленное' } />
             </div>
           </div>
-          <div className={styles.header}>
-            <Header auth/>
+          <div className={`${styles.header} ${global.padRilLeft}`}>
+            <Header  auth/>
           </div>
           <div className={styles.content}>
             <Outlet/>
