@@ -29,6 +29,7 @@ import { OverlayContext } from './context/OverlayContext'
 import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
 import Post from './pages/auth/post/Post'
 import ClientError from './pages/404/ClientError'
+import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
 
 
 
@@ -49,6 +50,7 @@ function App () {
               <Route path="/settings/myprofile" element={<MyProfileSettings/>}/>
               <Route path="/settings/mysubs" element={<MySubscribeSettings/>}/>
               <Route path="/settings/mynoti" element={<MyNotificationsSettings/>}/>
+              <Route path="/settings/creative_studio" element={<CreativeStudio/>}/>
             </Route>
             <Route path={'/main'} element={<Layout type={'auth'}/>}>
               <Route path="/main" element={<MainAfter/>}/>

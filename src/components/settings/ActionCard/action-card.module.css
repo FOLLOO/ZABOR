@@ -1,0 +1,17 @@
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: fit-content;
+    padding: 30px 25px 5px 25px;
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.back{
+    background: #fff;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}

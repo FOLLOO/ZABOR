@@ -36,7 +36,7 @@ function TransprantButton ({
           : null
         }
         {text ?
-          <div className={unique ? ` ${styles.text}` : ` ${styles.text}`} style={red ? { color: '#AD0000' } : null}>
+          <div className={unique ? ` ${global.text} ${global.bold}` : ` ${styles.text}`} style={red ? { color: '#AD0000' } : null}>
             {text}
           </div>
           : null

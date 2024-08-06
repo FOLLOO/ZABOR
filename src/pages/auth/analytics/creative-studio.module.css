@@ -1,0 +1,12 @@
+.grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin: 5vh 0;
+}
+
+.column{
+    display: flex;
+    gap: 65px;
+    flex-direction: column;
+}
