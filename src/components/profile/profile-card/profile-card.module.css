@@ -62,4 +62,15 @@
     gap: 10px
 }
 
+@media (max-width: 1600px) {
+    .main{
+        max-width: 100%;
+        max-height: 460px;
+        overflow: hidden;
+        background: white;
+        border-radius: 10px;
+        gap: 15px;
+    }
+}
+
 

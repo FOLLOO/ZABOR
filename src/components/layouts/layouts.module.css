@@ -18,6 +18,7 @@
     "menu header"
     "menu content"
     "footer footer";
+    padding-left: 10px;
 }
 
 .leftHand{
@@ -80,4 +81,27 @@
     "footer footer";
         padding-left: 10px;
     }
+}
+
+@media (max-width: 1250px) {
+    .grid2{
+        overflow-x: hidden;
+    }
+    .grid{
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid{
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        grid-template-rows: 70px 1fr auto;
+        grid-template-areas:
+    "menu header"
+    "menu content"
+    "footer footer";
+        padding-left: 10px;
+    }
+
 }

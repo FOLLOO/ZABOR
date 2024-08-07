@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom'
 import MessageBox from '../../../components/message-box/MessageBox'
 import { OverlayContext } from '../../../context/OverlayContext'
 import LittleTag from '../../../components/ui/input/little-tag/TagCheckBox'
+import Nothing from '../../nothing/Nothing'
+import Loading from '../../loading/Loading'
 
 function MainAfter (props) {
 
@@ -31,17 +33,11 @@ function MainAfter (props) {
           setErrMes(res.error.message)
         }
         if (res.error === undefined) {
-          // console.log(res)
-          // const pathname = localStorage.getItem('token') || '/main'
           setData(res.payload)
           setLoading(true)
-          // const {refreshToken} = res.payload.profile
-          // setCookie("refreshToken" , refreshToken)
         }
       })
   }
-  // console.log(data)
-
   const getTags = () => {
     dispatch(fetchTags())
       .then((res) => {
@@ -49,11 +45,7 @@ function MainAfter (props) {
           setErrMes(res.error.message)
         }
         if (res.error === undefined) {
-          // console.log(res.data)
-          // const pathname = localStorage.getItem('token') || '/main'
           setTags(res.payload)
-          // const {refreshToken} = res.payload.profile
-          // setCookie("refreshToken" , refreshToken)
         }
       })
   }
@@ -61,9 +53,8 @@ function MainAfter (props) {
   useEffect(() => {
     getPosts()
     getTags()
-    // console.log('help')
-    // console.log(loading)
   }, [loading])
+
 
   return (
     <div className={`${styles.main}`}>
@@ -86,9 +77,9 @@ function MainAfter (props) {
           </>
         }
       </div>
-
+      {data.length > 0 ?
       <div className={styles.grid}>
-        {data.length > 0 ? data.map(posts => (
+        {data.map(posts => (
           <Link to={`/post/${posts.id}`}>
             <CardLittle
               data={posts}
@@ -102,15 +93,13 @@ function MainAfter (props) {
               views={posts.views_count + 1}
             />
           </Link>
-        )) :
-        <>
-        <CardLittle title={'some'}/>
-        <CardLittle title={'some'}/>
-        <CardLittle title={'some'}/>
-        <CardLittle title={'some'}/>
-        </>
-        }
+        ))}
       </div>
+        :
+        <>
+          <Loading/>
+        </>
+      }
 
     </div>
   )

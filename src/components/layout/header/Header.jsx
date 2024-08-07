@@ -105,25 +105,13 @@ function Header (props) {
         <div className={styles.trap2}>
           {props.auth ?
             <>
-              {/*<div className={styles.btn}>*/}
-              {/*<TransprantButton*/}
-              {/*  noPad*/}
-              {/*  notification={cartItems?.length}*/}
-              {/*  img={bascket}*/}
-              {/*  click={() => navigate('/market')}/>*/}
-              {/*</div>*/}
-              <div >
+              <div className={styles.btns}>
               <button className={styles.btn}  onClick={() => navigate('/market')}>
                 <img  src={bascket} alt={'arrow'} className={styles.ima}/>
                 {cartItems?.length > 0 ?
                 <div className={styles.count_span}>{cartItems?.length}</div>
                   : null }
               </button>
-
-              {/*<div className={styles.btn}>*/}
-              {/*<TransprantButton notification={notifications.length} img={bell} click={() => {setNotifications(!notifications);*/}
-              {/*getNoti()}}/>*/}
-              {/*</div>*/}
 
               <button className={styles.btn}  onClick={() => {getNoti(); setNotifications(!notifications);}}>
                 <img  src={bell} className={styles.ima} alt={'arrow'}/>
@@ -188,7 +176,7 @@ function Header (props) {
                           </Link>
                         </ContextGroup>
                         <ContextGroup>
-                          <TransprantButton img={hole} text={'Творческая студия'} left />
+                          <TransprantButton img={hole} text={'Творческая студия'} left click={() => navigate('/settings/creative_studio')} />
                         </ContextGroup>
                         <ContextGroup noafter>
                           <TransprantButton img={settings} text={'Настройки'} left click={() => navigate('/settings/myprofile')}/>

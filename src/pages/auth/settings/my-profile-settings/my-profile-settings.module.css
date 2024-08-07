@@ -24,3 +24,9 @@
 .settings{
     margin-bottom: 5%;
 }
+
+@media (max-width: 1600px) {
+    .main{
+        padding-left: 20px;
+    }
+}

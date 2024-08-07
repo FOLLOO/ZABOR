@@ -57,9 +57,9 @@
 }
 
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
     .buttons{
-        width: 50%;
+        width: 60%;
         display: flex;
         justify-content: start;
     }
@@ -69,5 +69,11 @@
         width: 100%;
         display: flex;
         justify-content: start;
+    }
+}
+
+@media (max-width:  1024px) {
+    .tabcontent {
+        padding: 0;
     }
 }

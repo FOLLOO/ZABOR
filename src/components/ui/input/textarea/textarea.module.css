@@ -19,3 +19,10 @@
 
     color: #BEBEBE;
 }
+
+@media (max-width: 1600px) {
+    .input{
+        min-width: 500px;
+        max-width: max-content;
+    }
+}

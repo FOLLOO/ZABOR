@@ -1,0 +1,23 @@
+.grid{
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    gap: 45px;
+    margin: 3vh 10px;
+}
+
+.diagram{
+    /*min-height: 400px;*/
+    height: 400px;
+    /*max-height: 500px;*/
+}
+
+.flex{
+    display: flex;
+    flex-direction: column;
+    gap: 30px
+}
+
+/*.rightMenu{*/
+/*    position: sticky;*/
+/*    top: 5vh*/
+/*}*/

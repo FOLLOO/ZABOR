@@ -8,6 +8,7 @@ import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { useTags } from '../../../context/TagsContext'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../../../pages/loading/Loading'
 
 function SelectGroupTags ({ userChoice = false, tags = [], first }) {
 
@@ -43,21 +44,19 @@ function SelectGroupTags ({ userChoice = false, tags = [], first }) {
       <SettingsTitle bigTitle={userChoice ? 'Мои интересы' : 'Расскажите'}
                      title={userChoice ? null : 'На какую тематику будут посты?'}
                      description={userChoice ? 'Изменения сохраняются автоматически' : 'Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
-
       <form onSubmit={haddleSubmit}>
-        <SettingsBlock title={'Творческие теги'} button b_type={'submit'} b_text={'Сохранить'}>
+        <SettingsBlock title={'Творческие теги'} button={tags.length > 0} b_type={'submit'} b_text={'Сохранить'}>
+          {tags.length > 0 ?
           <div className={userChoice ? styles.grid5 : styles.grid}>
-            {tags.length > 0 ? tags.map((item) => (
+            {tags.map((item) => (
                 <TagCheckBox text={item.name} key={item.id} click={() => addTag(item.id)} />
-              )) :
-              <>
-                <TagCheckBox text={'Загрузка...'}/>
-                <TagCheckBox text={'Загрузка...'}/>
-                <TagCheckBox text={'Загрузка...'}/>
-                <TagCheckBox text={'Загрузка...'}/>
-              </>
-            }
+              ))}
           </div>
+            :
+            <>
+              <Loading/>
+            </>
+          }
         </SettingsBlock>
       </form>
 

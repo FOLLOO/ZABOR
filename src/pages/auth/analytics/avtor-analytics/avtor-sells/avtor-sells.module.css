@@ -1,0 +1,21 @@
+.diagram{
+    height: 700px;
+}
+
+.diagramAge{
+    height: 400px;
+}
+
+.diagramSex{
+    height: 400px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    row-gap: 30px;
+}
+
+.input{
+    width: 300px;
+}

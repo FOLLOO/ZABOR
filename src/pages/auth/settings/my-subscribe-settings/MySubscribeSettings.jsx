@@ -12,6 +12,7 @@ import Search from '../../../../components/layout/search/Search'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSubscribe } from '../../../../redux/slices/sub'
 import Nothing from '../../../nothing/Nothing'
+import Loading from '../../../loading/Loading'
 
 function MySubscribeSettings ({}) {
 
@@ -46,6 +47,7 @@ function MySubscribeSettings ({}) {
           titleWidth={400}
           // mainWidth={1400}
           title={'Ваши подписки'} >
+          <div className={styles.content}>
           <div className={styles.search}>
             <Search/>
           </div>
@@ -53,8 +55,16 @@ function MySubscribeSettings ({}) {
             {sub.items.length > 0 ? sub.items.map((item) => (
              <ProfileCard  nickname={item.nickname} image={item.coverUrl} id={item.id}/>
             )) :
-            <Nothing/>
+            // <Nothing/>
+            <>
+            <ProfileCard/>
+            <ProfileCard/>
+            <ProfileCard/>
+            <ProfileCard/>
+            <ProfileCard/>
+            </>
             }
+          </div>
           </div>
         </SettingsBlock>
       </div>

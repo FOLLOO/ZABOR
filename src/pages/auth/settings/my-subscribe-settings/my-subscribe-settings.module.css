@@ -35,3 +35,19 @@
     padding-right: 20px;
     margin-bottom: 20px;
 }
+
+@media (max-width: 1600px) {
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        padding: 2vh 0;
+    }
+    .content{
+        max-width: 900px;
+    }
+    .search{
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+}

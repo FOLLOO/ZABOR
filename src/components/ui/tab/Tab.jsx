@@ -9,10 +9,11 @@ const TabContent = (props) => (
   </div>
 );
 
-function Tab({ items = [] }) {
+function Tab({ items = [] , nav = '/profile', tit = false}) {
   const { id } = useParams();
   const { hash } = useLocation();
   const navigate = useNavigate();
+  const {pathname} = useLocation()
   const [active, setActive] = useState(0);
 
   // Set active tab based on hash when component mounts or hash changes
@@ -22,6 +23,7 @@ function Tab({ items = [] }) {
       if (!isNaN(hashIndex) && hashIndex >= 0 && hashIndex < items.length) {
         setActive(hashIndex);
       }
+      // if (hash)
     }
   }, [hash, items.length]);
 
@@ -29,7 +31,7 @@ function Tab({ items = [] }) {
     const index = +e.target.dataset.index;
     setActive(index);
     navigate({
-      pathname: `/profile/${id}`,
+      pathname: `${pathname}`,
       hash: `#${index}`
     });
   };
@@ -41,8 +43,9 @@ function Tab({ items = [] }) {
           {items.map((n, i) => (
             <button
               key={i}
-              className={`${styles.tablinks} ${i === active ? styles.active : ''}`}
+              className={`${styles.tablinks} ${i === active ? styles.active : ''} `}
               onClick={openTab}
+              title={n.desc || null}
               data-index={i}
             >
               {n.title}

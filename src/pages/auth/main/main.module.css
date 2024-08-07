@@ -51,3 +51,44 @@
     min-width: 120px;
     max-width: 300px;
 }
+
+@media (max-width: 1600px) {
+
+    .tags, .tags_hidden {
+        margin-top: 2vw;
+        display: grid;
+        grid-template-columns: repeat(8, auto);
+        gap: 10px;
+        overflow: hidden;
+        transition: all 1s ease-out;
+    }
+
+    .main{
+        padding: 0 10px 0 40px;
+
+        min-height: 100vh;
+        margin-bottom: 5vw;
+    }
+}
+
+@media (max-width: 1250px) {
+    .tags, .tags_hidden {
+        margin-top: 2vw;
+        display: grid;
+        grid-template-columns: repeat(6, auto);
+        gap: 10px;
+        overflow: hidden;
+        transition: all 1s ease-out;
+    }
+}
+
+@media (max-width: 1024px) {
+    .tags, .tags_hidden {
+        margin-top: 2vw;
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        gap: 10px;
+        overflow: hidden;
+        transition: all 1s ease-out;
+    }
+}

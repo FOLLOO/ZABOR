@@ -30,6 +30,8 @@ import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNo
 import Post from './pages/auth/post/Post'
 import ClientError from './pages/404/ClientError'
 import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
+import PostAnalytics from './pages/auth/analytics/post-analytics/PostAnalytics'
+import AvtorAnalytics from './pages/auth/analytics/avtor-analytics/AvtorAnalytics'
 
 
 
@@ -51,6 +53,11 @@ function App () {
               <Route path="/settings/mysubs" element={<MySubscribeSettings/>}/>
               <Route path="/settings/mynoti" element={<MyNotificationsSettings/>}/>
               <Route path="/settings/creative_studio" element={<CreativeStudio/>}/>
+              <Route path="/settings/post/analytics/" element={<PostAnalytics/>}/>
+              <Route path="/settings/post/analytics/:id" element={<PostAnalytics/>}/>
+
+              <Route path="/settings/avtor/analytics" element={<AvtorAnalytics/>}/>
+              <Route path="/settings/avtor/analytics/:id" element={<AvtorAnalytics/>}/>
             </Route>
             <Route path={'/main'} element={<Layout type={'auth'}/>}>
               <Route path="/main" element={<MainAfter/>}/>

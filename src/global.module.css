@@ -349,7 +349,7 @@
     .text {
         font-family: 'Lato', sans-serif;
         font-weight: normal; /*Light*/
-        font-size: 18pt; /* 20px / 1920px * 100 */
+        /*font-size: 18pt; !* 20px / 1920px * 100 *!*/
     }
 
 
@@ -378,4 +378,11 @@
         color: #828282;
     }
 
+}
+
+@media (max-width: 1600px) {
+
+    .padRilLeft{
+        padding-left: 40px;
+    }
 }

@@ -100,7 +100,7 @@ const Layout = ({type,
             <span style={{height: '1vh'}}/>
             <TransprantButton left img={analytychs}
                               text={open ? 'Творческая студия' : null}
-            click={() => navigate('/anal')}
+            click={() => navigate('/settings/creative_studio')}
             />
             <TransprantButton left img={profile}
                               text={open ? 'Личная информация' : null}
