@@ -14,7 +14,7 @@ function AvtorAnalytics (props) {
   const {id} = useParams()
   const {pathname} = useLocation()
   const navigate = useNavigate()
-  console.log(pathname)
+  // console.log(pathname)
   const tabContent = [
     {id: 0, title: 'Обзор', content: <AvtorReview/>  },
     {id: 1, title: 'Продажи', content: <AvtorSells/> },

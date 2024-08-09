@@ -15,7 +15,8 @@ function ActionCard({   children,
             <div>
                 {children}
             </div>
-            <TransprantButton unique text={'Еще'} click={click_nav} />
+          {b_text ?
+            <TransprantButton unique text={b_text} click={click_nav} /> : null}
         </div>
     );
 }

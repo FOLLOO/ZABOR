@@ -62,6 +62,15 @@ export const getPost = createAsyncThunk('publication/getPublication', async (id)
   }
 });
 
+export const getSamePost = createAsyncThunk('publication/getSimilarPublications', async (id) => {
+  try {
+    const response = await axios.get(`/publication/getSimilarPublications/${id}`);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 
 const initialState = {
   userPosts:{
@@ -69,6 +78,10 @@ const initialState = {
     status: 'loading',
   },
   OnePost:{
+    items: [],
+    status: 'loading'
+  },
+  SamePosts: {
     items: [],
     status: 'loading'
   }
@@ -106,7 +119,19 @@ const userPostsSlice = createSlice({
       .addCase(getPost.rejected, (state) => {
         state.OnePost.items = [];
         state.OnePost.status = 'error';
-      });
+      })
+      .addCase(getSamePost.pending, (state) => {
+        state.SamePosts.items = [];
+        state.SamePosts.status = 'loading';
+      })
+      .addCase(getSamePost.fulfilled, (state, action) => {
+        state.SamePosts.items = action.payload;
+        state.SamePosts.status = 'loaded';
+      })
+      .addCase(getSamePost.rejected, (state) => {
+        state.SamePosts.items = [];
+        state.SamePosts.status = 'error';
+      })
   }
 });
 

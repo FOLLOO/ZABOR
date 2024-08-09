@@ -49,7 +49,7 @@ class UserService {
   async updateUser(data) {
     const response = await axiosClassic.put('user/updateUser', data)
       .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       })
       .catch(error => {
         console.error('There was an error making the request!', error);

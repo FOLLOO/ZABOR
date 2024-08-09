@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from './post.module.css'
 import global from '../../../global.module.css'
 
+import start from '../../../asserts/icons/STAR.svg'
+
 import MessageBox from '../../../components/message-box/MessageBox'
 import ProfileNickname from '../../../components/profile/profile-nickname/ProfileNickname'
 import WhiteButton from '../../../components/ui/buttons/white-button/WhiteButton'
@@ -13,16 +15,19 @@ import { useAuth } from '../../../provider/AuthProvider'
 import { OverlayContext } from '../../../context/OverlayContext'
 import { useDispatch, useSelector } from 'react-redux'
 import {  CSSTransition } from 'react-transition-group'
-import { useNavigate, useParams } from 'react-router-dom'
-import { getPost } from '../../../redux/slices/post'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { getPost, getSamePost } from '../../../redux/slices/post'
 import { IMAGE_URL } from '../../../utils'
 import Nothing from '../../nothing/Nothing'
 import parse from 'html-react-parser';
+import Comment from '../../../components/comments/comment/Comment'
+import CommnetForm from '../../../components/comments/comments-form/CommnetForm'
+import { createComment } from '../../../redux/slices/comments'
 function Post (props) {
   const { user } = useAuth()
   const { overlay, setOverlay } = useContext(OverlayContext)
   const {id} = useParams()
-  const { OnePost } = useSelector(state => state.posts)
+  const { OnePost, SamePosts } = useSelector(state => state.posts)
   const dispatch = useDispatch()
 
   const openRef = useRef(false);
@@ -47,11 +52,36 @@ function Post (props) {
   }
   const description = OnePost?.items?.description || '';
 
+  const pageGetSamePost = () => {
+    try{
+      dispatch(getSamePost(id))
+    }
+    catch (e){
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
     // if (OnePost.status === 'loaded') return;
     pageGetPost()
+    pageGetSamePost()
   },[])
-
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log('Form submitted');
+  //   if (id) {
+  //     const data = {
+  //       text: 'fir',
+  //       publicationId: 150,
+  //       // commentId:
+  //     };
+  //     try {
+  //       dispatch(createComment(data));
+  //     } catch (e) {
+  //       console.error('Error:', e);
+  //     }
+  //   }
+  // };
   // console.log(OnePost)
   return (
     <div className={global.padLeft}>
@@ -66,7 +96,7 @@ function Post (props) {
         <span>
 
         </span>
-        <form  id={'save_my_post'}>
+        {/*<form  id={'save_my_post'}>*/}
           <div className={styles.content}>
             <div className={styles.spanImage}>
                 <div  className={styles.mainImage}>
@@ -77,7 +107,11 @@ function Post (props) {
                     objectFit: 'cover'
                   }}/>
                 </div>
-
+              <div className={styles.sato}>
+                <button>
+                  <img src={start} alt={'star'} />
+                </button>
+              </div>
             </div>
             <div className={styles.profile}>
               <ProfileNickname type={'post'} nickname={user?.nickname}/>
@@ -128,21 +162,32 @@ function Post (props) {
                 <Nothing />
               )}
             </div>
-
+            <div className={styles.comments}>
+            <CommnetForm/>
+            <Comment/>
+            </div>
           </div>
-        </form>
+        {/*</form>*/}
         <div className={styles.recomends}>
           <h4>Похожее</h4>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
-          <CardLittle/>
+          {SamePosts?.items.length > 0 ?
+            SamePosts?.items.map((posts) => (
+              <Link to={`/post/${posts.id}`}>
+                <CardLittle
+                  data={posts}
+                  // avatar={posts.user.files[0].url}
+                  blur
+                  img={posts.coverUrl}
+                  title={posts.title}
+                  price={posts.price}
+                  user_id={posts.userId}
+                  time={posts.createdAt}
+                  views={posts.views_count + 1}
+                />
+              </Link>
+            ))
+            : <> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/>
+          <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> </> }
         </div>
       </div>
 

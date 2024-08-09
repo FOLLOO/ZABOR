@@ -4,6 +4,9 @@ import styles from './render-type.module.css'
 import global from '../../../global.module.css'
 
 import ProfileCircle from '../../profile/profile-circle/ProfileCircle'
+import { IMAGE_URL } from '../../../utils'
+
+import temp from '../../../asserts/temp/beautiful-mountain-lake-background-remix.jpg'
 
 /** Компонент для рендеринга уведомлений */
 
@@ -30,7 +33,7 @@ function RenderType ({ avatar, views, postImage, text, date }) {
       </div>
       {postImage ?
       <div className={styles.postImage}>
-        <img src={postImage} alt={'post-img'}/>
+        <img src={`${IMAGE_URL}${postImage}`} alt={'post-image'}/>
       </div>
         : null}
     </div>

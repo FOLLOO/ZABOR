@@ -110,8 +110,8 @@ function MyProfileSettings ({}) {
   useEffect(() => {
     getuUuser()
   },[])
-  console.log(user)
-  console.log(userData)
+  // console.log(user)
+  // console.log(userData)
   const handleChange = (id, value) => {
     setSocialMedia((prevSocialMedia) =>
       prevSocialMedia.map((item) =>

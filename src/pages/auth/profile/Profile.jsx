@@ -5,6 +5,7 @@ import global from '../../../global.module.css'
 
 import temp from '../../../asserts/temp/temp.jpg'
 import edit from '../../../asserts/icons/edit.svg'
+import star from '../../../asserts/icons/STAR.svg'
 
 import Tab from '../../../components/ui/tab/Tab'
 import ProfileCircle from '../../../components/profile/profile-circle/ProfileCircle'
@@ -231,6 +232,7 @@ function Profile ({ prewie }) {
   /** Контент для Tab */
     // todo: При открытии плейлиста не отображается Находится ли он в нем уже или нет
 
+  const sortedArray = [...(userData?.items.publications || [])].sort((a, b) => b.id - a.id);
   const tabContent = [
       { title: 'Публикации', content: <UserPosts data={userData.items.publications}/> },
       { title: 'Плейлисты', content: <Playlists/> },

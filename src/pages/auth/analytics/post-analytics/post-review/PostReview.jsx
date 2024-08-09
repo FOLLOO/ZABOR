@@ -378,8 +378,8 @@ function PostReview (props) {
       </div>
       <div className={`${styles.rightMenu} ${styles.flex}`}>
         <InputDporDown />
-        <h3>Публикации</h3>
-        <CardLittle />
+        <h3>Публикация</h3>
+        <CardLittle title={'Та самя публикация'}/>
       </div>
     </div>
   )

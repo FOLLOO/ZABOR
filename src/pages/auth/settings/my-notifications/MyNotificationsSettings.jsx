@@ -10,6 +10,7 @@ import ProfileNickname from '../../../../components/profile/profile-nickname/Pro
 import { useDispatch, useSelector } from 'react-redux'
 import { getSubscribe } from '../../../../redux/slices/sub'
 import Nothing from '../../../nothing/Nothing'
+import { toggleNoti } from '../../../../redux/slices/notifications'
 
 function MyNotificationsSettings (props) {
 
@@ -17,7 +18,7 @@ function MyNotificationsSettings (props) {
   const dispatch = useDispatch()
 
   const getSub = () => {
-    if (sub.length < 0){
+    if (sub.length < 0 || sub.length === undefined){
       try{
         dispatch(getSubscribe())
       }catch (e) {
@@ -25,11 +26,24 @@ function MyNotificationsSettings (props) {
       }
     }
   }
-
   useEffect(() => {
     if (sub.status === 'loaded') return
     getSub()
   },[])
+
+  const postwToggleNoti = (id) => {
+    console.log(id)
+    const data = {
+      subscriptionId: id
+    }
+    // console.log(data)
+    try {
+      dispatch(toggleNoti(data))
+    }catch (e) {
+      console.log(e)
+    }
+  }
+
 
   return (
     <div className={global.padLeft}>
@@ -64,7 +78,7 @@ function MyNotificationsSettings (props) {
             <div className={global.text}>
               Уведомление от автора
             </div>
-            <InputToggle/>
+            <InputToggle change={() => console.log(sub)}/>
             </div>
           </div>
           )) : <Nothing/>}

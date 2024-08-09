@@ -34,7 +34,7 @@ function Playlists ({ data = [] }) {
   }
   const openFolder = (value, title, description) => {
     setOpen(!open)
-    setFolder({'title' : title, 'description': description})
+    setFolder({'id' : value,'title' : title, 'description': description})
     try{
       dispatch(getPublicationsInFolder(value))
       // console.log('suck yes')
@@ -51,7 +51,7 @@ function Playlists ({ data = [] }) {
 
   },[open])
 
-  console.log(userFolder?.items)
+  // console.log(userFolder?.items)
   /** ничего нет*/
   const NothingYeat = () => {
     return (

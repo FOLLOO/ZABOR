@@ -33,6 +33,15 @@ export const putPostToFolder = createAsyncThunk('publication/putPublicationInFol
   }
 });
 
+export const deleteFolder = createAsyncThunk('publication/deleteFolder', async (id) => {
+  try {
+    const response = await axios.delete(`/publication/deleteFolder/${id}`);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 export const getPublicationsInFolder = createAsyncThunk('publication/getPublicationsInFolder', async (id) => {
   try {
     const response = await axios.get('/publication/getPublicationsInFolder',  {

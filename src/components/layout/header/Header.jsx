@@ -74,9 +74,6 @@ function Header (props) {
   useEffect(() => {
     // Устанавливаем интервал в 10 минут (600000 миллисекунд)
     const interval = setInterval(getNoti, 600000);
-    // const interval = setInterval(getNoti, 1000);
-    // console.log(notification)
-
     // Возвращаем функцию очистки, чтобы остановить таймер при размонтировании компонента
     return () => clearInterval(interval);
   }, []);

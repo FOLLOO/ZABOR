@@ -13,6 +13,14 @@
     transition: all 150ms ease;
 }
 
+.red{
+    color: #AD0000;
+}
+
+.red:hover{
+    color: #fd4343;
+}
+
 /*ЗАменить на content */
 .button:hover{
     /*opacity: 60%;*/

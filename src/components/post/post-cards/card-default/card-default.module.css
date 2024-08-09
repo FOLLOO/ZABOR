@@ -9,10 +9,15 @@
 
 }
 
-.main:hover{
+.main:hover {
     box-shadow: 0 10px 36px 0 rgba(0, 0, 0, 0.16);
     /*backdrop-filter: blur(15px);*/
 }
+
+.cardImage:hover{
+    transform: scale(1.1%);
+}
+
 .temp{
     background: linear-gradient(0deg,rgba(255, 255, 255) 0%, rgba(16, 17, 18, 0.92) 25%, rgba(27, 28, 32, 0) 72%);
 }
@@ -26,9 +31,13 @@
 .actions{
     height: fit-content;
     padding: 25px;
-    gap: 10px;
-
+    gap: 20px;
 }
+
+.gap{
+    gap: 10px
+}
+
 .button{
     height: 35px;
     width: 62px;

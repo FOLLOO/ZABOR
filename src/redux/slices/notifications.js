@@ -12,6 +12,16 @@ export const getNotifications = createAsyncThunk('user/getNotifications', async 
 });
 
 
+export const toggleNoti = createAsyncThunk('user/toggleNotifications', async (data) => {
+  try {
+    const response = await axios.post('user/toggleNotifications', data );
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+
 const initialState = {
   notification:{
     items: [],

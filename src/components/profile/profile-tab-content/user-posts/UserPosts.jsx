@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './userPosts.module.css'
 import global from '../../../../global.module.css'
@@ -9,13 +9,17 @@ import CardDefault from '../../../post/post-cards/card-default/CardDefault'
 
 import temp
   from '../../../../asserts/temp/smiling-handsome-young-man-city-street-taking-picture-from-vintage-camera.jpg'
+import simpleFilter from '../../../../asserts/icons/simple-filter.svg'
+
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../../../provider/AuthProvider'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
 import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IMAGE_URL } from '../../../../utils'
+import LittleTag from '../../../ui/input/little-tag/TagCheckBox'
+import { fetchTags } from '../../../../redux/slices/tag'
 
 /** Посты пользователя */
 
@@ -24,13 +28,42 @@ function UserPosts ({ data = [] }) {
 
   const { user } = useAuth()
   const { id } = useParams()
+  const [sort, setSort] = useState(false)
+  const [open, setOpen] = useState(false)
+  const dispatch = useDispatch()
+  const [tags, setTags] = useState([])
 
   const { userData } = useSelector(state => state.userR)
-
+  const [datar, setDatar] = useState([])
   const navigate = useNavigate()
   // console.log('id', id , 'userID', user?.id)
-
+  useEffect(() => {
+    if (sort){
+      setDatar([...(data || [])].sort((a, b) => a.id - b.id))
+      console.log("kek")
+    }
+    else {
+    setDatar([...(data || [])].sort((a, b) => b.id - a.id))
+    }
+    // console.log("lol")
+  },[sort])
   /** Нет постов*/
+
+  const getTags = () => {
+    dispatch(fetchTags())
+      .then((res) => {
+        if (res.error) {
+          console.log(res.error.message)
+        }
+        if (res.error === undefined) {
+          setTags(res.payload)
+        }
+      })
+  }
+
+  useEffect(() => {
+    getTags()
+  }, [])
   const NothingYeat = () => {
     return (
       <GlassCard>
@@ -59,9 +92,26 @@ function UserPosts ({ data = [] }) {
     return (
       <>
         <div className={styles.title}>
-          <header>
-          <h2>Публикации</h2>
+          <header className={`${global.flex} ${global.f_a_center}`}>
+           <h2>Публикации</h2>
+            <div className={styles.button}>
+            <TransprantButton img={simpleFilter} left click={() => setSort(!sort)}/>
+            </div>
           </header>
+        </div>
+        <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
+          <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
+          {tags.length > 0 ?
+            tags.map(item => (
+              <div className={styles.b_width}>
+                <LittleTag text={item.name}/>
+              </div>
+            ))
+            :
+            <>
+              <LittleTag text={'Ошибка при загрузке тегов...'}/>
+            </>
+          }
         </div>
         <div className={styles.margin}>
           <div className={styles.grid}>
@@ -70,8 +120,8 @@ function UserPosts ({ data = [] }) {
                 :
                 <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
               : null}
-            {data.length > 0 ?
-              data.map((message =>
+            {datar.length > 0 ?
+              datar.map((message =>
               // <>
                 <CardDefault
                   data={message}

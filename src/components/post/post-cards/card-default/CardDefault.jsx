@@ -129,7 +129,7 @@ function CardDefault ({
 
         </div>
         <div className={`${styles.content} ${global.flex} ${global.f_dir_column}`}>
-        {/*<Link to={`/post${id}`}>*/}
+        <Link to={`/post/${id}`} className={`${global.flex} ${global.f_dir_column} ${styles.gap}`}>
           <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
             <div className={`${global.h4} ${styles.title}`}>
               {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
@@ -165,7 +165,7 @@ function CardDefault ({
               </div>
             }
           </div>
-          {/*</Link>*/}
+          </Link>
           <div className={`${styles.analytych} ${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
             <div className={`${global.d3} ${styles.views}`}>
               {views ? views + ' просмотров' :

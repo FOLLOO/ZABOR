@@ -5,6 +5,7 @@
 .about{
     max-width: 500px;
     max-height: 500px;
+    width: 100%;
     text-align: center;
     gap: 20px;
 
@@ -38,5 +39,13 @@
     /*font-size: 64px;*/
     /*font-weight: lighter;*/
     /*align-items: center;*/
+}
+
+.settingsContext{
+    width: 290px;
+    display: inline-block;
+    position: absolute;
+    z-index: 10;
+    /*right: 15vw;*/
 }
 

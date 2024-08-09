@@ -30,6 +30,23 @@
     z-index: 3;
 }
 
+.tags, .tags_hidden {
+    margin-top: 2vw;
+    display: grid;
+    grid-template-columns: repeat(9, auto);
+    gap: 10px;
+    overflow: hidden;
+    transition: all 1s ease-out;
+}
+
+.tags {
+    height: auto; /* конечное состояние */
+}
+
+.tags_hidden {
+    height: 40px; /* начальная высота для одной строки */
+}
+
 @media (max-width: 1500px) {
    .grid{
        grid-template-columns: repeat(2, 1fr);

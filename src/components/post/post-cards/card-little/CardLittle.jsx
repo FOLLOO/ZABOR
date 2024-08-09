@@ -46,7 +46,7 @@ function CardLittle ({
     if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){
       dispatch(addItemToCart(data));
     }
-    console.log(cartItems)
+    // console.log(cartItems)
   };
 
   return (

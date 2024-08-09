@@ -1,12 +1,15 @@
-
+.comments{
+    width: 100%;
+}
 .grid{
     display: grid;
-    grid-template-columns: auto fit-content(350px);
+    grid-template-columns: auto 370px;
     /*grid-template-rows: 25px auto;*/
 
     row-gap: 80px;
     column-gap: 70px;
     transition: all 1s ease-in-out;
+    overflow: hidden;
 }
 
 .span{
@@ -16,7 +19,9 @@
 .recomends{
     display: flex;
     flex-direction: column;
-    gap: 34px
+    gap: 34px;
+    max-height: 300vh;
+    overflow-y: hidden;
 }
 
 .content{

@@ -9,7 +9,7 @@ import temp from '../../asserts/temp/stir-fried-pork-with-korean-sauce-on-dark-b
 
 /** Компонент уведомлений В завичимости от типа (type)
  * уведомления меняются выходные данные */
-function Notification ({type, nickname, postName}) {
+function Notification ({type, nickname, postName, postImage, views, date}) {
 
   const messageType = (params) => {
     switch (params){
@@ -71,8 +71,8 @@ function Notification ({type, nickname, postName}) {
       default :
         return <RenderType
           text={`${postName}`}
-          postImage={temp}
-          views={'1 000 000'}
+          postImage={postImage ? postImage : temp}
+          views={date}
           date={'2 часа назад'}
         />;
     }

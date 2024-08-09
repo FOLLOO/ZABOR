@@ -25,6 +25,9 @@ import Notification from '../../components/notifications/Notification'
 import TagCheckBox from '../../components/ui/input/tag-checkbox/TagCheckBox'
 import SelectPost from '../../components/post/post-playlist/select-postORplaylist/SelectPost'
 import LittleTag from '../../components/ui/input/little-tag/TagCheckBox'
+import CommnetForm from '../../components/comments/comments-form/CommnetForm'
+import Comment from '../../components/comments/comment/Comment'
+import FileOut from '../../components/ui/output/file-out/FileOut'
 
 function Temp (props) {
   const { overlay, setOverlay } = useContext(OverlayContext)
@@ -37,7 +40,40 @@ function Temp (props) {
     // { title: 'Paris', content: <MessageBox  type={'help'}/> },
     // { title: 'Tokyo', content: <MessageBox  type={'buy'}/> },
   ];
-
+  const commentData = {
+    id: 1,
+    nickname: 'User1',
+    time: '2 часа назад',
+    text: 'Это основной комментарий.',
+    likes: 1200,
+    replies: [
+      {
+        id: 2,
+        nickname: 'User2',
+        time: '1 час назад',
+        text: 'Это ответ на основной комментарий.',
+        likes: 300,
+        replies: [
+          {
+            id: 3,
+            nickname: 'User3',
+            time: '30 минут назад',
+            text: 'Это ответ на первый ответ.',
+            likes: 100,
+            replies: []
+          }
+        ]
+      },
+      {
+        id: 4,
+        nickname: 'User4',
+        time: '45 минут назад',
+        text: 'Еще один ответ на основной комментарий.',
+        likes: 150,
+        replies: []
+      }
+    ]
+  };
 
 
   return (
@@ -164,6 +200,12 @@ function Temp (props) {
           <SelectPost title={'asldkjf'} img={temp} id={6} description={'asdf'}/>
           <div style={{margin: "60px"}}/>
           <LittleTag text={'hola'}/>
+          <div style={{margin: "60px"}}/>
+          <CommnetForm/>
+          <div style={{margin: "60px"}}/>
+          <Comment comment={commentData} replies={commentData.replies}/>
+          <div style={{margin: "60px"}}/>
+          <FileOut title={'Скачать файл сейчас'}/>
           <div style={{margin: "60px"}}/>
         </div>
       </>

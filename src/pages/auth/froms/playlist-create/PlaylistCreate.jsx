@@ -14,6 +14,7 @@ import { createFolder, putPostToFolder } from '../../../../redux/slices/folder'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../../loading/Loading'
 import SelectPost from '../../../../components/post/post-playlist/select-postORplaylist/SelectPost'
+import { getUserPost } from '../../../../redux/slices/post'
 
 function PlaylistCreate ({}) {
 
@@ -35,7 +36,6 @@ function PlaylistCreate ({}) {
 
   const submitForm = (e) => {
     e.preventDefault()
-
     const data = {
       name : title,
       description : description,
@@ -80,7 +80,21 @@ function PlaylistCreate ({}) {
       setPosts(prevPosts => prevPosts.filter(item => item !== value));
     }
   };
+  const getUSerPost = () => {
+    const id = user.id
+    try {
+      dispatch(getUserPost(id))
+    }
+    catch (e){
+      console.log()
+    }
+  }
 
+  useEffect(() => {
+    if (isLoading){
+      getUSerPost()
+    }
+  },[isLoading])
 
   if (isLoading){
     return <Loading/>
