@@ -32,6 +32,7 @@ import ClientError from './pages/404/ClientError'
 import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
 import PostAnalytics from './pages/auth/analytics/post-analytics/PostAnalytics'
 import AvtorAnalytics from './pages/auth/analytics/avtor-analytics/AvtorAnalytics'
+import Form from './pages/temp/A-Temp/Form'
 
 
 
@@ -94,6 +95,7 @@ function App () {
               <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
               <Route path={'/tags'} element={<SelectTagsPage/>}/>
               <Route path={'/market'} element={<Market/>}/>
+              <Route path={'/a_temp'} element={<Form/>}/>
             </Route>
 
             <Route path="*" element={<ClientError/>} />

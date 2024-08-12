@@ -11,6 +11,13 @@ import trash from '../../../../asserts/icons/contextMenu/trash red.svg'
 import save_i from '../../../../asserts/icons/contextMenu/save.svg'
 import submit from '../../../../asserts/icons/contextMenu/submit.svg'
 
+import add from '../../../../asserts/icons/contextMenu/Добавить.png'
+import photo from '../../../../asserts/icons/contextMenu/Фото.png'
+import video from '../../../../asserts/icons/contextMenu/Видео.png'
+import text from '../../../../asserts/icons/contextMenu/Текст.png'
+import fule from '../../../../asserts/icons/contextMenu/Файл.png'
+
+
 import ProfileNickname from '../../../../components/profile/profile-nickname/ProfileNickname'
 import WhiteButton from '../../../../components/ui/buttons/white-button/WhiteButton'
 import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
@@ -27,10 +34,18 @@ import { useDispatch } from 'react-redux'
 import { createPost } from '../../../../redux/slices/post'
 import { useNavigate } from 'react-router-dom'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
+import ChildBlock from '../../../temp/A-Temp/ChildBlock'
+import ContentAddBlock from './content-add-block/ContentAddBlock'
 
 function CreatePost (props) {
 
   const formData = new FormData()
+
+  const [childBlocks, setChildBlocks] = useState([{ id: 1, type: 'text', content: '' }]);
+  // const [type, setType] = useState('');
+
+
+
   const { groupTags, creativeTags } = useTags()
   const { user } = useAuth()
   const { overlay, setOverlay } = useContext(OverlayContext)
@@ -41,7 +56,7 @@ function CreatePost (props) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [errMes, setErrMes] = useState()
-
+  const [addBlock, setAddBlock] = useState(false)
   const [save, setSave] = useState(false)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -50,22 +65,16 @@ function CreatePost (props) {
   const toggleOverlay = () => {
     setOverlay(!overlay)
   }
-
-  // useEffect(() => {
-  //   // console.log(description)
-  //   // console.log(content)
-  // }, [description, content])
-
-  // console.log('1', groupTags, '2', creativeTags)
   function stripHtmlTags (html) {
     return html.replace(/<[^>]*>?/gm, '')
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(childBlocks);
     // console.log(description)
 
-    // formData.append('file', file)
+    formData.append('file', file)
     formData.append('title', title)
     formData.append('description', description)
     formData.append('ageLimitId', 1)
@@ -77,7 +86,8 @@ function CreatePost (props) {
     formData.append('creativeTags', JSON.stringify(user?.roleId === 1 ? creativeTags[0] : null))
     // formData.append('creativeTags', creativeTags[0]);
     // : null }
-    formData.append('blocks', JSON.stringify([{ type: 'text', content: content }]))
+    // formData.append('blocks', JSON.stringify([{ type: 'text', content: content }]))
+    formData.append('blocks', JSON.stringify(childBlocks))
     formData.append('cover', file)
     // const data = {
     //   file: null, // todo: Допилить
@@ -149,6 +159,23 @@ function CreatePost (props) {
     }
   }
 
+
+  const addChildBlock = () => {
+    setChildBlocks([
+      ...childBlocks,
+      { id: childBlocks.length + 1, type: 'text', content: '' },
+    ]);
+  };
+
+  const updateChildBlock = (childBlockId, updates) => {
+    setChildBlocks(
+      childBlocks.map((childBlock) =>
+        childBlock.id === childBlockId ? { ...childBlock, ...updates } : childBlock
+      )
+    );
+    // console.log(childBlocks)
+  };
+
   useEffect(() => {
     console.log(file)
   },[file])
@@ -198,7 +225,6 @@ function CreatePost (props) {
                     {/*<TransprantButton text={'Добавить файл'} type={'file'} />*/}
                   </div>
                 </div>
-
                 :
                 <div  className={styles.mainImage}>
                   <img src={fileURL} className={styles.image} width={1250} height={520} alt={'temp'} style={{
@@ -212,7 +238,7 @@ function CreatePost (props) {
                   {/*  /!*<TransprantButton text={'Добавить файл'} type={'file'} />*!/*/}
                   {/*</div>*/}
                   <div className={styles.delete}>
-                    <input type={'file'} id={'input_file'} style={{display: 'none'}} onChange={handleChange}/>
+                    <input type={'file'} id={'input_file'} style={{display: 'none'}}  onChange={handleChange}/>
                     <label htmlFor={'input_file'}>
                       <span className={styles.support}>
                           <h5>Импортировать новый файл</h5>
@@ -250,16 +276,69 @@ function CreatePost (props) {
             <input type={'text'} className={styles.title} value={title ? title : null}
                    onChange={e => setTitle(e.target.value)}/>
 
-            <div className={styles.text}>
-              <TipTapEditor bubble place={'Напишите что нибудь'} getValue={setContent}/>
-            </div>
+            {childBlocks.map((childBlock) => (
+              <ContentAddBlock
+                key={childBlock.id}
+                id={childBlock.id}
+                blockType={childBlock.blockType}
+                content={childBlock.content}
+                onUpdate={updateChildBlock}
+              />
+            ))}
 
             <div className={styles.buttons}>
               <div className={global.d3}>
                 Добавить блок
               </div>
-              <GreenButton text={'+'}/>
+              <button type={'button'} className={styles.buttonToAdd} onClick={addChildBlock}>
+                <img src={add} alt={'Добавить'}/>
+              </button>
+              {/*{*/}
+              {/*  addBlock ?*/}
+              {/*    <ContextDrop>*/}
+              {/*      <div className={`${global.flex} ${styles.contextAdd}`}>*/}
+              {/*        <button className={styles.buttonToAdd}  onClick={() => Open('text')}>*/}
+              {/*          <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>*/}
+              {/*            <img src={text} alt={'Добавить'}/>*/}
+              {/*            <div className={global.d3}>*/}
+              {/*              Текст*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </button>*/}
+              {/*        <button className={styles.buttonToAdd}  onClick={() => Open('video')}>*/}
+              {/*          <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>*/}
+              {/*            <img src={fule} alt={'Добавить'}/>*/}
+              {/*            <div className={global.d3}>*/}
+              {/*              Файл*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </button>*/}
+              {/*        <button className={styles.buttonToAdd}  onClick={() => Open('video')}>*/}
+              {/*          <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>*/}
+              {/*            <img src={video} alt={'Добавить'}/>*/}
+              {/*            <div className={global.d3}>*/}
+              {/*              Видео*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </button>*/}
+              {/*        <button className={styles.buttonToAdd}  onClick={() => Open('image')}>*/}
+              {/*          <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>*/}
+              {/*            <img src={photo} alt={'Добавить'}/>*/}
+              {/*            <div className={global.d3}>*/}
+              {/*              Фото*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </button>*/}
+              {/*      </div>*/}
+              {/*    </ContextDrop>*/}
+              {/*    : null }*/}
             </div>
+
+
+            {/*<div className={styles.text}>*/}
+            {/*  /!*<TipTapEditor bubble place={'Напишите что нибудь'} getValue={setContent}/>*!/*/}
+            {/*</div>*/}
+
 
           </div>
         </form>

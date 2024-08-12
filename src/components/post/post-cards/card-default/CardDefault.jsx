@@ -76,7 +76,13 @@ function CardDefault ({
       hash: `#${id}`
     });
   }
+  const Sceleton = () => {
+    return(
+      <div className={`${global.skeleton} ${styles.noImage}`}>
 
+      </div>
+    )
+  }
   const handleAddToCart = (e) => {
     // e.preventDefault()
     // setOverlay(!overlay);
@@ -207,7 +213,8 @@ function CardDefault ({
         </ContextDrop>
       </div> : null}
       {img ?
-        <img className={`${styles.cardImage}  ${blur ? global.blur : null}`} src={`${IMAGE_URL}${img}`} alt={'temp'}/>
+        <img className={`${styles.cardImage} ${blur ? global.blur : null}`} src={`${IMAGE_URL}${img}`}
+             alt={'temp'} />
         :
         <div className={`${global.skeleton} ${styles.noImage}`}>
 

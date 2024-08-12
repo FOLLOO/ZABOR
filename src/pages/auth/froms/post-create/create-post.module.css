@@ -46,8 +46,19 @@
     margin-bottom: 2vh;
 }
 .buttons{
+    /*width: 500px;*/
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.contextAdd{
+    padding: 10px;
+}
+
+.buttonToAdd:hover{
+    transform: scale(1.02);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .text{
