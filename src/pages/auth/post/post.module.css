@@ -1,13 +1,14 @@
 .comments{
-    width: 100%;
+    width: 70%;
 }
 .grid{
     display: grid;
+    margin: auto;
     grid-template-columns: auto 370px;
     /*grid-template-rows: 25px auto;*/
 
     row-gap: 80px;
-    column-gap: 70px;
+    /*column-gap: 70px;*/
     transition: all 1s ease-in-out;
     overflow: hidden;
 }
@@ -24,25 +25,38 @@
     overflow-y: hidden;
 }
 
+.video{
+    width: 100%;
+    margin: 2vh 0;
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+.fileUploadImage{
+    width: 100%;
+    margin: 2vh 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.textContent{
+    background: rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
 .content{
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
 }
 
 .profile{
     width: 100%;
     display: flex;
     justify-content: space-between;
-}
-.description{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
 }
 
 .alert-enter {
@@ -65,16 +79,28 @@
 
 .button{
     gap: 20px;
-
     /*max-width: 400px;*/
     width: 450px;
-
+}
+.topAction{
+    max-width: 100%;
+    min-width: 30%;
 }
 .he{
-    text-indent: 1.2em;
+    /*text-indent: 1em;*/
 }
+.image{
+    margin: auto;
+    border-radius: 10px;
+
+    overflow: hidden;
+    /*max-height: 520px;*/
+    width: 70%;
+    object-fit: cover;
+}
+
 .inputDescription{
-    width: 100%;
+    width: 70%;
     height: fit-content;
 }
 .inputDescription h4{
@@ -86,8 +112,9 @@
 }
 
 .text{
-    width: 65%;
+    width: 70%;
 }
+
 
 .main{
     position: sticky;
@@ -98,7 +125,7 @@
 }
 
 .title {
-    width: 65%;
+    width: 70%;
     max-width: 100%;
     /*background-color: #f5f5f5;*/
     color: #242424;
@@ -133,10 +160,15 @@
     /*left: 50vw;*/
     /*z-index: 99*/
 }
-
+.actionButtons{
+    margin: 2vh 0;
+    gap: 50px;
+    justify-content: space-between;
+}
 .spanImage{
     /*height: 520px;*/
     width: 100%;
+    margin: auto;
     /*max-height: 520px;*/
     max-width: 1250px;
 }
@@ -186,4 +218,41 @@
 
 .support p{
     text-align: center;
+}
+
+
+/*.description.active {*/
+/*    width: fit-content;*/
+/*}*/
+/*.description.unactive{*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    display: -webkit-box;*/
+/*    -webkit-line-clamp: 2; !* number of lines to show *!*/
+/*    line-clamp: 2;*/
+/*    -webkit-box-orient: vertical;*/
+/*}*/
+
+.description {
+    padding: 0 10px;
+    max-height: 100px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    transition: max-height 0.5s ease-out; /* Плавный переход */
+}
+
+.active.description {
+    max-height: 1000px; /* Замените на максимальную высоту описания */
+    transition: max-height 0.5s ease-in; /* Плавный переход при открытии */
+
+    display: block;
+    -webkit-line-clamp: none; /* number of lines to show */
+    line-clamp: none;
 }

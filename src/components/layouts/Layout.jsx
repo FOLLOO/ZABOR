@@ -27,6 +27,7 @@ import  popular from '../../asserts/icons/mainMenu/Популярное.svg'
 const Layout = ({type,
   // login = false,
   // isAuth = false
+  post = false
 }) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
@@ -74,7 +75,7 @@ const Layout = ({type,
               <TransprantButton left img={buyed} text={'Купленное' } />
             </div>
           </div>
-          <div className={`${styles.header} ${global.padRilLeft}`}>
+          <div className={`${styles.header}  ${post ? global.padRilLeft : styles.margin}`}>
             <Header  auth/>
           </div>
           <div className={styles.content}>

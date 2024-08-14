@@ -228,11 +228,12 @@ function Profile ({ prewie }) {
     if (userFolder.status === 'loaded') return
     getUserFolders()
   }, [])
-
+  console.log(userData)
   /** Контент для Tab */
     // todo: При открытии плейлиста не отображается, Находится ли он в нем уже или нет
 
   const sortedArray = [...(userData?.items.publications || [])].sort((a, b) => b.id - a.id);
+
   const tabContent = [
       { title: 'Публикации', content: <UserPosts data={userData.items.publications}/> },
       { title: 'Плейлисты', content: <Playlists/> },

@@ -89,6 +89,9 @@ function App () {
               <Route path="/profile/:id" element={<Profile/>}/>
               <Route path={'/post/:id'} element={<Post/>}/>
             </Route>
+            <Route path="/" element={<Layout post type={'auth'}/>}>
+              <Route path={'/post/:id'} element={<Post/>}/>
+            </Route>
 
             <Route path="/" element={<Layout type={'form'}/>}>
               <Route path={'/create/post'} element={<CreatePost/>}/>

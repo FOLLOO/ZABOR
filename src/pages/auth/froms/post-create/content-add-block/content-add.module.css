@@ -1,5 +1,5 @@
 .text{
-    width: 65%;
+    width: 70%;
 }
 
 .contextAdd{
@@ -10,6 +10,11 @@
     width: 600px;
     margin: 0 auto;
     padding: 20px;
+    height: 400px;
+}
+
+.video{
+    width: 100%;
 }
 
 
@@ -30,10 +35,24 @@
     opacity: 0;
     cursor: pointer;
 }
+.videoUploadInput {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    z-index: 1;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
 
 .imageUploadWrap {
     margin-top: 10px;
     /*border: 4px dashed #1FB264;*/
+    /*display: block;*/
     position: relative;
 }
 

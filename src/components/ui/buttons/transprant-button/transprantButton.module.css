@@ -22,18 +22,35 @@
 }
 
 /*ЗАменить на content */
-.button:hover{
-    /*opacity: 60%;*/
+/*.button:hover{*/
+/*    !*opacity: 60%;*!*/
+/*    color: #5B11B9 ;*/
+/*    !*transform: scale(1.01);*!*/
+/*    !*box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);*!*/
+/*    !*backdrop-filter: blur(15px);*!*/
+/*    !*border-radius: 5px;*!*/
+/*}*/
+
+.button:hover {
     color: #5B11B9 ;
-    /*box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);*/
-    /*backdrop-filter: blur(15px);*/
-    /*border-radius: 5px;*/
+
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.button:active{
-    /*box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);*/
-    /*backdrop-filter: blur(15px);*/
-    /*border-radius: 5px;*/
+.button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.button::after {
+    background-color: #fff;
+}
+
+.button:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
 }
 
 .content{

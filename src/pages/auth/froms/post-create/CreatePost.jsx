@@ -36,12 +36,14 @@ import { useNavigate } from 'react-router-dom'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
 import ChildBlock from '../../../temp/A-Temp/ChildBlock'
 import ContentAddBlock from './content-add-block/ContentAddBlock'
+import { any } from 'prop-types'
+import form from '../../../temp/A-Temp/Form'
 
 function CreatePost (props) {
 
   const formData = new FormData()
 
-  const [childBlocks, setChildBlocks] = useState([{ id: 1, type: 'text', content: '' }]);
+  const [childBlocks, setChildBlocks] = useState([{ id: 1, type: 'text', content: null, name: '' }]);
   // const [type, setType] = useState('');
 
 
@@ -71,8 +73,29 @@ function CreatePost (props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(childBlocks);
+    // console.log(childBlocks);
     // console.log(description)
+    const errors = []
+    if (!file){
+      errors.push('Загрузите фото или видео')
+    }
+    if (!title){
+      errors.push('Добавьте заголовок к посту')
+    }
+    if (!description){
+      errors.push('Добавьте описание')
+    }
+    if(errors.length > 0){
+      alert(errors.join('\n'))
+      return
+    }
+    const filterObj = childBlocks.map((obj) => {
+      const {
+        name,
+        ...rest
+      } = obj
+      return {...rest}
+    })
 
     formData.append('file', file)
     formData.append('title', title)
@@ -87,8 +110,16 @@ function CreatePost (props) {
     // formData.append('creativeTags', creativeTags[0]);
     // : null }
     // formData.append('blocks', JSON.stringify([{ type: 'text', content: content }]))
-    formData.append('blocks', JSON.stringify(childBlocks))
+    formData.append('blocks', JSON.stringify(filterObj))
     formData.append('cover', file)
+
+    if (childBlocks.length > 0){
+      for (const childBlock of childBlocks) {
+        if (childBlock.type === 'text') continue;
+        formData.append('file', childBlock.name)
+      }
+    }
+
     // const data = {
     //   file: null, // todo: Допилить
     //   title: title,
@@ -102,6 +133,7 @@ function CreatePost (props) {
     //   cover: null,
     // }
     try {
+      console.log('FormData:', formData);
       dispatch(createPost(formData))
       // navigate(`/profile/${user?.id}`)
     } catch (err) {
@@ -152,8 +184,7 @@ function CreatePost (props) {
             const newFile = new File([blob], uploadedFile.name, { type: 'image/jpeg' });
             setFile(newFile); // Сохраняем File в состоянии
           }, 'image/jpeg', 0.9);
-
-          console.log(file)
+          // console.log(file)
         }
       }
     }
