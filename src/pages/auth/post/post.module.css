@@ -256,3 +256,9 @@
     -webkit-line-clamp: none; /* number of lines to show */
     line-clamp: none;
 }
+
+@media (max-width: 1080px) {
+    .text{
+        width: 100%;
+    }
+}

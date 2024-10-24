@@ -11,6 +11,7 @@ import InputDporDown from '../../../components/ui/input/input-dropdown/InputDpor
 // import { useDispatch } from 'react-redux'
 // import { useAuth } from '../../../provider/AuthProvider'
 import userService from '../../../services/UserService'
+import {axiosClassic} from "../../../r-axios/axios";
 
 function Registration (props) {
 
@@ -38,14 +39,9 @@ function Registration (props) {
       value: 'ж'
     },
   ]
-// ZAEBALOOOO
-// ZAEBALOOOO
-// ZAEBALOOOO
-// ZAEBALOOOO
-// ZAEBALOOOO
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     if (password !== password1) {
       return setErrMes('Пароли не совпадают')
     }
@@ -56,12 +52,17 @@ function Registration (props) {
       sex,
       date_of_birth: DR,
     }
-    try{
-      userService().createNewUser(data)
-    }
-    catch (err){
-      // console.log(user)
-    }
+      // userService().createNewUser(data);
+      try {
+        const user = await axiosClassic.post(`/auth/registration`, data)
+            .catch(error => {
+              throw error.response.data
+            })
+        return user
+      } catch (e) {
+        throw Error(e)
+      }
+      // userService().createNewUser(data)
   }
 
   return (

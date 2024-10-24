@@ -1,184 +1,243 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import Header from '../layout/header/Header'
-import Footer from '../layout/footer/Footer'
-import { Outlet, useNavigate } from 'react-router-dom'
+import React, {useContext } from 'react';
 
-import global from '../../global.module.css'
+import {Outlet, useNavigate} from "react-router-dom";
+
+
 import styles from './layouts.module.css'
-import TransprantButton from '../ui/buttons/transprant-button/TransprantButton'
-import { OverlayContext, OverlayContextProvider } from '../../context/OverlayContext'
 
 
-import  analytychs from '../../asserts/icons/settingsMenu/Analytics.svg'
-import  bar from '../../asserts/icons/settingsMenu/BarMenu.svg'
-import  outlet_bell from '../../asserts/icons/settingsMenu/outlet-bell.svg'
-import  outlet_bell1 from '../../asserts/icons/settingsMenu/outlet-bell2.svg'
-import  profile from '../../asserts/icons/settingsMenu/Profile.svg'
-import  subes from '../../asserts/icons/settingsMenu/Subes.svg'
-import  tag from '../../asserts/icons/settingsMenu/tags1.svg'
+//images
+import menu_i from '../../asserts/icons/update/menu.svg';
+//main
+import home_i from '../../asserts/icons/update/home.svg';
+import star_i from '../../asserts/icons/update/star.svg';
+import subs_i from '../../asserts/icons/update/youtube.svg';
+import heart_i from '../../asserts/icons/update/heart.svg';
+import message_i from '../../asserts/icons/update/message-circle.svg';
+import ruble_i from '../../asserts/icons/update/russian-ruble.svg';
+//settings
+import bell_i from '../../asserts/icons/update/bell.svg';
+import stat_i from '../../asserts/icons/update/trending-up.svg';
+import user_cog_i from '../../asserts/icons/update/user-cog.svg';
+import tags_i from '../../asserts/icons/update/tags.svg';
 
-import  main from '../../asserts/icons/mainMenu/Главная.svg'
-import  buyed from '../../asserts/icons/mainMenu/Кулпенное.svg'
-import  comments from '../../asserts/icons/mainMenu/Обсуждаемое.svg'
-import  liked from '../../asserts/icons/mainMenu/Понравилось.svg'
-import  popular from '../../asserts/icons/mainMenu/Популярное.svg'
+//my components
+import TransprantButton from "../ui/buttons/transprant-button/TransprantButton";
+import {OverlayContext} from "../../context/OverlayContext";
+import Header from "../layout/header/Header";
+import Footer from "../layout/footer/Footer";
 
+/**
+ *
+ * @param type - значения 'settings' : для настроек 'base': для ЛК и т.д
+ * @returns {Element}
+ * @constructor
+ */
+const Layout = ({type}) => {
 
-const Layout = ({type,
-  // login = false,
-  // isAuth = false
-  post = false
-}) => {
-  const navigate = useNavigate()
-  const [open, setOpen] = useState(false)
-  const { overlay, setOverlay } = useContext(OverlayContext)
+    //todo: исправить overlay
+    const {overlay, setOverlay} = useContext(OverlayContext)
+    const navigate = useNavigate()
 
-  const openRef = useRef(false);
-
-  const toggleMenu = () => {
-    openRef.current = !openRef.current;
-    const gridClass = openRef.current ? styles.grid : styles.grid2;
-    document.querySelector("#menuContainer").className = gridClass;
-  };
-
-  const Login = () => {
-    return (
-      <>
-        <Header pad/>
-        <Outlet/>
-      </>
-    )
-  }
-  const NotAuth = () => {
-    return (
-      <>
-        <div className={styles.header}>
-        <Header loginn/>
-        </div>
-        <Outlet/>
-        <Footer noStick/>
-      </>
-    )
-  }
-  const Auth = () => {
-    return (
-      <>
-        <div className={`${styles.grid2}`} id={'menuContainer'}>
-          <div className={styles.leftHand}>
-            <div className={`${global.flex} ${global.f_dir_column} ${styles.buttons}`}>
-              <TransprantButton left img={bar} click={toggleMenu} />
-              <TransprantButton left img={main} text={'Главная'}/>
-              <TransprantButton left img={popular} text={'Популярное'} />
-              <TransprantButton left img={comments} text={'Обсуждаемое'} />
-              <TransprantButton left img={subes} click={() => setOverlay(!overlay)} text={'Подписки'} />
-              <TransprantButton left img={liked} text={'Понравилось' } />
-              <TransprantButton left img={buyed} text={'Купленное' } />
+    /**
+     *
+     * @example
+     * const menu = {
+     *             title: 'base',
+     *             navigation: [
+     *                 {
+     *                     title: 'Главная',
+     *                     ico: home_i,
+     *                     function: () => navigate('/'),
+     *                 },
+     *            ]
+     * },
+     * {
+     *             title: 'settings',
+     *             navigation: [
+     *                 {
+     *                     title: 'Главная',
+     *                     ico: home_i,
+     *                     function: () => navigate('/'),
+     *                 },
+     *            ]
+     * },
+     */
+    const menu = [
+        {
+            title: 'base',
+            navigation: [
+                {
+                    title: 'Главная',
+                    ico: home_i,
+                    function: () => navigate('/'),
+                },
+                {
+                    title: 'Популярное',
+                    ico: star_i,
+                    function: () => navigate('/popular'),
+                },
+                {
+                    title: 'Подписки',
+                    ico: subs_i,
+                    function: () => navigate('/subscribed'),
+                },
+                {
+                    title: 'Понравилось',
+                    ico: heart_i,
+                    function: () => navigate('/liked'),
+                },
+                {
+                    title: 'Обсуждаемое',
+                    ico: message_i,
+                    function: () => navigate('/talk'),
+                },
+                {
+                    title: 'Купленное',
+                    ico: ruble_i,
+                    function: () => navigate('/bought'),
+                },
+            ]
+        },
+        {
+            title: 'settings',
+            navigation: [
+                {
+                    title: 'Главная',
+                    ico: home_i,
+                    function: () => navigate('/'),
+                },
+                {
+                    title: 'Теги',
+                    ico: tags_i,
+                    //todo: изменить роутинг в group
+                    function: () => navigate('/settings/group'),
+                },
+                {
+                    title: 'Подписки',
+                    ico: subs_i,
+                    //todo: изменить роутинг в subs
+                    function: () => navigate('/settings/mysubs'),
+                },
+                {
+                    title: 'Уведомления',
+                    ico: bell_i,
+                    function: () => navigate('/settings/mynoti'),
+                },
+                {
+                    title: 'Аналитика',
+                    ico: stat_i,
+                    function: () => navigate('/settings/creative_studio'),
+                },
+                {
+                    title: 'Личный кабинет',
+                    ico: user_cog_i,
+                    function: () => navigate('/settings/myprofile'),
+                },
+                {
+                    title: 'overlay',
+                    ico: null,
+                    function:() => setOverlay(!overlay),
+                }
+            ]
+        }
+    ]
+    /**
+     * Возвращает шаблон SideBara необходимые условия для работы // type // menu //
+     * @returns {Element}
+     * @constructor
+     */
+    const LeftMenu = () => {
+        return (
+            <div className={styles.navbar}>
+                <div className={styles.menu_buttons}>
+                    <label htmlFor="leftMenu" className={styles.menu}>
+                        <img src={menu_i} alt="menu" />
+                    </label>
+                    {menu
+                        .find(item => item.title === type)
+                        ?.navigation.map((item) => (
+                            <TransprantButton left img={item.ico} text={item.title}
+                                              click={item.function}/>
+                        )) || null
+                    }
+                </div>
             </div>
-          </div>
-          <div className={`${styles.header}  ${post ? global.padRilLeft : styles.margin}`}>
-            <Header  auth/>
-          </div>
-          <div className={styles.content}>
-            <Outlet/>
-          </div>
-          <div className={styles.footer}>
-            <Footer/>
-          </div>
-
-        </div>
-      </>
-    )
-  }
-  const Settings = () => {
-    return (
-      <div className={open ? styles.grid : styles.grid2}>
-        <div className={styles.leftHand}>
-          <div className={`${global.flex} ${global.f_dir_column}`}>
-            {/*<span style={{height: '1vh'}}/>*/}
-            <TransprantButton left img={bar}
-                              text={open ? 'Меню' : null}
-                              click={() => setOpen(!open)}/>
-            <span style={{height: '1vh'}}/>
-            <TransprantButton left img={analytychs}
-                              text={open ? 'Творческая студия' : null}
-            click={() => navigate('/settings/creative_studio')}
-            />
-            <TransprantButton left img={profile}
-                              text={open ? 'Личная информация' : null}
-            click={() => navigate('/settings/myprofile')}
-            />
-            <TransprantButton left img={subes}
-                              text={open ? 'Подписки' : null}
-            click={() => navigate('/settings/mysubs')}
-            />
-            <TransprantButton left img={outlet_bell1}
-                              text={open ? 'Уведомления' : null}
-            click={() => navigate('/settings/mynoti')}
-            />
-            <TransprantButton left img={tag}
-                              text={open ? 'Теги' : null}
-            click={() => navigate('/group')}
-            />
-          </div>
-        </div>
-        <div className={styles.header}>
-        <Header auth settings/>
-        </div>
-        <div className={styles.content}>
-          <Outlet/>
-        </div>
-        <div className={styles.footer}>
-          {/*<Footer/>*/}
-        </div>
-
-      </div>
-    )
-  }
-  const Form = () => {
-    return (
-      <>
-        <Header auth pad/>
-        <Outlet/>
-      </>
-    )
-  }
-  const renderSwitch = (param) => {
-    switch (param){
-      case 'settings' :
-        return <Settings/>;
-      case 'login' :
-        return <Login/>
-      case 'notAuth' :
-        return <NotAuth/>
-      case 'auth' :
-        return <Auth/>
-      case 'form' :
-        return <Form/>
-      default:
-        return <h1> Ой!<br/> Ничего нет.</h1>;
+        )
     }
-  }
+    /**
+     * Возвращает классический шаблон
+     * @returns {Element}
+     * @constructor
+     */
+    const Base = () => {
+        return (
+            <div className={styles.column_flex}>
+                <div className={styles.row_flex}>
+                    <input className={styles.sidebar_input} type="checkbox" name="leftMenu" id="leftMenu"/>
+                    <LeftMenu/>
+                    <div className={`${styles.column_flex} ${styles.zIndex}`}>
+                        <Header auth/>
+                        <Outlet/>
+                    </div>
+                </div>
+                <Footer/>
+            </div>
+        )
+    }
+    /**
+     * Возвращает шаблон для неавторизованных пользователей
+     * @returns {Element}
+     * @constructor
+     */
+    const NotAuth = () => {
+        return (
+            <>
+                <div className={styles.header}>
+                    <Header loginn/>
+                </div>
+                <Outlet/>
+                <Footer noStick/>
+            </>
+        )
+    }
+    /**
+     *
+     * @param param - принимает значения из type
+     * @returns {Element}
+     * @example
+     * { renderSwitch(type) } // type: settings, base, default(NotAuth)
+     */
+    const renderSwitch = (param) => {
+        switch (param) {
+            case 'settings' :
+                return <Base/>;
+            case 'base' :
+                return <Base/>
+            default:
+                return <NotAuth/>;
+        }
+    }
 
-  return (
-    <>
-      { overlay ?
-        <>
-        <div className={styles.overlay}>
-          {/*FICHA*/}
-          <h5 onClick={() => setOverlay(!overlay)}> close </h5>
+    return (
+        <div>
+            {overlay ?
+                <>
+                    <div className={styles.overlay}>
+                        {/*FICHA*/}
+                        <h5 onClick={() => setOverlay(!overlay)}> close </h5>
+                    </div>
+                    <div className={styles.overlayActive}>
+                        {renderSwitch(type)}
+                    </div>
+                </>
+                :
+                <>
+                    {renderSwitch(type)}
+                </>
+            }
         </div>
-        <div className={styles.overlayActive}>
-          {renderSwitch(type)}
-        </div>
-        </>
-      :
-        <>
-          {renderSwitch(type)}
-        </>
-      }
-
-    </>
-  )
-}
+    );
+};
 
 export default Layout

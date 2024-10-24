@@ -23,7 +23,8 @@ import userService from "../services/UserService";
 const token = localStorage.getItem("token");
 // console.log(token)
 const options = {
-  baseURL: 'http://192.168.1.121:5000/api',
+  // baseURL: 'http://192.168.1.121:5000/api',
+  baseURL: 'http://192.168.0.101:5000/api',
   headers: {
     Authorization: `Bearer ${token}`, // Устанавливаем заголовок Authorization с токеном
     'Content-Type': 'application/json'

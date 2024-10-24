@@ -1,3 +1,19 @@
+:root{
+  /*TEXT*/
+  --text-xs: 0.75rem; /* 12px */
+  /*line-height: 1rem; !* 16px *!*/
+  --text-sm: 0.875rem; /* 14px */
+  /*line-height: 1.25rem; !* 20px *!*/
+  --text-base: 1rem; /* 16px */
+  /*line-height: 1.5rem; !* 24px *!*/
+  --text-lg: 1.125rem; /* 18px */
+  /*line-height: 1.75rem; !* 28px *!*/
+  --text-xl: 1.25rem; /* 20px */
+  /*line-height: 1.75rem; !* 28px *!*/
+}
+
+
+
 .overlay {
   position: fixed;
   display: none;
@@ -12,6 +28,106 @@
   cursor: pointer;
   overflow: hidden;
 }
+/*Lato*/
+
+
+
+
+/*h1{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: 200;*/
+/*  font-size: 64px;*/
+/*}*/
+
+/*h2{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: bold;*/
+/*  font-size: 48px;*/
+/*}*/
+
+/*h3{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: bold;*/
+/*  font-size: 32px;*/
+/*}*/
+
+/*h4{*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  font-weight: bold;*/
+/*  font-size: 24px;*/
+/*}*/
+
+
+
+h1{
+  font-family: 'Lato', sans-serif;
+  /*font-weight: 300;*/
+  /*font-size: 3.33333vw; !* 64px *!*/
+  font-size: 64px; /* 64px */
+}
+
+h2{
+  font-family: 'Lato', sans-serif;
+  /*font-weight: bold;*/
+  /*font-size: 2.5vw; !* 36/48px *!*/
+  font-size: 36px; /* 36/48px */
+}
+
+h3{
+  font-family: 'Lato', sans-serif;
+  /*font-weight: bold;*/
+  /*font-size: 1.70833vw; !* 32px *!*/
+  font-size: 32px; /* 32px */
+}
+
+h4{
+  font-family: 'Lato', sans-serif;
+  /*font-weight: bold;*/
+  font-size: 24px; /* 20/24px */
+}
+h5{
+
+}
+
+
+
+.caca{
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 800px;
+  height: 450px;
+}
+
+@media (max-width: 1600px) {
+
+  h1{
+    font-family: 'Lato', sans-serif;
+    /*font-weight: 200;*/
+    font-size: 64px; /* 64px */
+  }
+
+  h2{
+    font-family: 'Lato', sans-serif;
+    /*font-weight: bold;*/
+    font-size: 48px; /* 36/48px */
+  }
+
+  h3{
+    font-family: 'Lato', sans-serif;
+    /*font-weight: bold;*/
+    font-size: 32px; /* 32px */
+  }
+
+  h4{
+    font-family: 'Lato', sans-serif;
+    /*font-weight: bold;*/
+    font-size: 24px; /* 20/24px */
+  }
+  h5{
+
+  }
+
+}
+
 
 /* Inter Font */
 @font-face {
@@ -251,113 +367,3 @@
   font-style: italic;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*Lato*/
-
-
-
-
-/*h1{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: 200;*/
-/*  font-size: 64px;*/
-/*}*/
-
-/*h2{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: bold;*/
-/*  font-size: 48px;*/
-/*}*/
-
-/*h3{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: bold;*/
-/*  font-size: 32px;*/
-/*}*/
-
-/*h4{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: bold;*/
-/*  font-size: 24px;*/
-/*}*/
-
-
-
-h1{
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  font-size: 3.33333vw; /* 64px */
-}
-
-h2{
-  font-family: 'Lato', sans-serif;
-  font-weight: bold;
-  font-size: 2.5vw; /* 36/48px */
-}
-
-h3{
-  font-family: 'Lato', sans-serif;
-  font-weight: bold;
-  font-size: 1.70833vw; /* 32px */
-}
-
-h4{
-  font-family: 'Lato', sans-serif;
-  font-weight: bold;
-  font-size: 1.33333vw; /* 20/24px */
-}
-h5{
-
-}
-
-
-
-.caca{
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  width: 800px;
-  height: 450px;
-}
-
-@media (max-width: 1600px) {
-
-  h1{
-    font-family: 'Lato', sans-serif;
-    font-weight: 200;
-    font-size: 64px; /* 64px */
-  }
-
-  h2{
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    font-size: 48px; /* 36/48px */
-  }
-
-  h3{
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    font-size: 32px; /* 32px */
-  }
-
-  h4{
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    font-size: 24px; /* 20/24px */
-  }
-  h5{
-
-  }
-
-}

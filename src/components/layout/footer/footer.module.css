@@ -1,5 +1,5 @@
 .footer{
-    position: sticky;
+    position: static;
     bottom: 0;
     overflow: hidden;
     z-index: 100;

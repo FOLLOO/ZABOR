@@ -1,6 +1,7 @@
 import {useContext, createContext, useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import userService from "../services/UserService";
+import {useCookies} from "react-cookie";
 
 const AuthContext = createContext();
 
@@ -11,6 +12,7 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
   const lastPath = localStorage.getItem('lastPath') || null
+  const [cookie, setCookie] = useCookies()
   const refreshAction = async () => {
     try {
       const response = await userService.getNewTokens().then(res => res.data)
@@ -29,9 +31,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')))
     setToken(localStorage.getItem('token'));
+    setCookie('token', localStorage.getItem('token'), { path: '/' })
     setIsAuth(true) //временное решение
     // refreshAction()
-    return () => refreshAction()
+    // return () => refreshAction()
   }, [])
 
   const loginAction = async (email, password) => {
@@ -41,6 +44,7 @@ const AuthProvider = ({ children }) => {
         setUser(response.profile);
         localStorage.setItem('user', JSON.stringify(response.profile))
         setToken(response.token);
+        setCookie('token', response.token, { path: '/' })
         setIsAuth(true)
         return {path: lastPath ? lastPath : "/", token: response.token, email: response.email};
       } else {

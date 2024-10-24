@@ -144,13 +144,6 @@ function Profile ({ prewie }) {
   }
 
   const fileChange = (event) => {
-    // const uploadedFile = event.target.files[0]
-    // setFile(uploadedFile)
-    // if (uploadedFile) {
-    //   const fileURL = URL.createObjectURL(uploadedFile)
-    //   setFileURL(fileURL)
-    // }
-
     const uploadedFile = event.target.files[0]
     let WIDTH = 1250
     // const AVATAR_WIDTH = 200;
@@ -203,7 +196,6 @@ function Profile ({ prewie }) {
         }
       }
     }
-
   }
 
   function Subscribe () {

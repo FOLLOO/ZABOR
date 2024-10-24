@@ -44,7 +44,7 @@ function CreativeStudio (props) {
   }, [userData?.items?.publications?.length])
 
   return (
-    <div className={`${global.padLeft}`}>
+    <div className={`${styles.padLeft}`}>
       <BackCreate/>
       <SettingsTitle bigTitle={'Панель управления'}
                      description={'Следите за аналитикой на вашей старице автора'}

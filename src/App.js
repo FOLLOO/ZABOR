@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -25,7 +25,7 @@ import AuthProvider from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
 import UserInterstings from './pages/unAuth/registration/userIntretings/select-group-tags/UserInterstings'
 import FinilyChoices from './pages/unAuth/registration/userIntretings/select-tags/FinilyChoices'
-import { OverlayContext } from './context/OverlayContext'
+// import { OverlayContext } from './context/OverlayContext'
 import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
 import Post from './pages/auth/post/Post'
 import ClientError from './pages/404/ClientError'
@@ -33,13 +33,15 @@ import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
 import PostAnalytics from './pages/auth/analytics/post-analytics/PostAnalytics'
 import AvtorAnalytics from './pages/auth/analytics/avtor-analytics/AvtorAnalytics'
 import Form from './pages/temp/A-Temp/Form'
+// import axios from "axios";
 
 
 
-// axios.defaults.baseURL = 'https://192.168.1.121:5000'
+// axios.defaults.baseURL = 'http://localhost:5000'
 // axios.defaults.withCredentials = true
 
 /** манал это Route перделаай плиз */
+/** А может переписать все на Next.js */
 
 function App () {
   // const { overlay } = useContext(OverlayContext) // overlay находится в layouts
@@ -60,7 +62,7 @@ function App () {
               <Route path="/settings/avtor/analytics" element={<AvtorAnalytics/>}/>
               <Route path="/settings/avtor/analytics/:id" element={<AvtorAnalytics/>}/>
             </Route>
-            <Route path={'/main'} element={<Layout type={'auth'}/>}>
+            <Route path={'/main'} element={<Layout type={'base'}/>}>
               <Route path="/main" element={<MainAfter/>}/>
             </Route>
 
@@ -84,16 +86,16 @@ function App () {
               <Route path={'my/tags'} element={<MyTags/>}/>
             </Route>
 
-            <Route path="/" element={<Layout type={'auth'}/>}>
+            <Route path="/" element={<Layout type={'base'}/>}>
               <Route path="/auth" element={<>auth</>}/>
               <Route path="/profile/:id" element={<Profile/>}/>
               <Route path={'/post/:id'} element={<Post/>}/>
             </Route>
-            <Route path="/" element={<Layout post type={'auth'}/>}>
+            <Route path="/" element={<Layout post type={'base'}/>}>
               <Route path={'/post/:id'} element={<Post/>}/>
             </Route>
 
-            <Route path="/" element={<Layout type={'form'}/>}>
+            <Route path="/" element={<Layout type={'base'}/>}>
               <Route path={'/create/post'} element={<CreatePost/>}/>
               <Route path={'/group'} element={<SelectGroupTagsPage/>}/>
               <Route path={'/tags'} element={<SelectTagsPage/>}/>

@@ -21,8 +21,8 @@ function TransprantButton ({
       type={type ? type : null}
       style={stylee ? stylee : null}
       onClick={click ? click : null}>
-      {/*че за хуйню я тут понаписал */}
-      <div className={
+      {/*Какую-то хуйню я тут понаписал */}
+      <div  className={
         left ? `${styles.content} ${global.flex} ${global.f_a_center}` :
           noPad ? `${styles.noPad} ${global.flex} ${global.f_a_center}` :
             nonePad ? `${styles.none} ${global.flex} ${global.f_a_center} ${global.f_end}`
