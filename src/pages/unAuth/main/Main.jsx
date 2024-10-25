@@ -195,7 +195,7 @@ function Main (props) {
     <div className={`${global.flex} ${global.f_dir_column} ${global.pad} ${styles.buttons}`}>
       <div className={styles.registration} onClick={() => navigate('/registration')}>
         <GlassCard>
-          <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} style={{padding: "60px"}}>
+          <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} >
             <h2>Пройти регистрацию</h2>
             <img src={link} alt={'link'}/>
           </div>
@@ -204,7 +204,7 @@ function Main (props) {
 
     <div className={styles.registration} onClick={() => navigate('/login')}>
       <GlassCard>
-        <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} style={{padding: "60px"}}>
+        <div className={`${global.flex} ${global.f_center} ${global.f_ji_center} ${styles.register}`} >
           <h2>Посмотреть посты пользователей</h2>
           <img src={link} alt={'link'}/>
         </div>

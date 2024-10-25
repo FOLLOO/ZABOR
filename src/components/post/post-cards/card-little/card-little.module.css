@@ -38,16 +38,6 @@
     gap: 5px
 }
 
-.profile{
-    /*position: relative;*/
-    /*top: 1px;*/
-}
-
-.basket{
-    /*position: relative;*/
-    /*top: -80px*/
-}
-
 .cardImage{
     background: linear-gradient(0deg, rgba(16, 17, 18, 0.92) 25.68%, rgba(27, 28, 32, 0) 72.2%);
     /*background: -moz-linear-gradient();*/

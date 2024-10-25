@@ -10,10 +10,20 @@
   /*line-height: 1.75rem; !* 28px *!*/
   --text-xl: 1.25rem; /* 20px */
   /*line-height: 1.75rem; !* 28px *!*/
+  --text-2xl: 1.5rem; /* 24px  */
+  /*line-height: 2rem;*/
+  --text-3xl: 1.875rem; /* 30px */
+  /*line-height: 2.25rem;*/
+  --text-8xl: 6rem; /* 96px  */
+  /*line-height: 1;*/
+  
+  --t-c-description: #828282;
+  --tw-500: 500;
+  --tw-700: 700;
+  --tw-normal: normal;
+
+  --tf-LATO: 'Lato', sans-serif;
 }
-
-
-
 .overlay {
   position: fixed;
   display: none;
@@ -28,65 +38,28 @@
   cursor: pointer;
   overflow: hidden;
 }
-/*Lato*/
-
-
-
-
-/*h1{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: 200;*/
-/*  font-size: 64px;*/
-/*}*/
-
-/*h2{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: bold;*/
-/*  font-size: 48px;*/
-/*}*/
-
-/*h3{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: bold;*/
-/*  font-size: 32px;*/
-/*}*/
-
-/*h4{*/
-/*  font-family: 'Inter', sans-serif;*/
-/*  font-weight: bold;*/
-/*  font-size: 24px;*/
-/*}*/
-
-
 
 h1{
-  font-family: 'Lato', sans-serif;
-  /*font-weight: 300;*/
-  /*font-size: 3.33333vw; !* 64px *!*/
+  font-family: var(--tf-LATO);
   font-size: 64px; /* 64px */
 }
 
 h2{
-  font-family: 'Lato', sans-serif;
-  /*font-weight: bold;*/
-  /*font-size: 2.5vw; !* 36/48px *!*/
+  font-family: var(--tf-LATO);
   font-size: 36px; /* 36/48px */
 }
 
 h3{
-  font-family: 'Lato', sans-serif;
-  /*font-weight: bold;*/
-  /*font-size: 1.70833vw; !* 32px *!*/
+  font-family: var(--tf-LATO);
   font-size: 32px; /* 32px */
 }
 
 h4{
-  font-family: 'Lato', sans-serif;
-  /*font-weight: bold;*/
+  font-family: var(--tf-LATO);
   font-size: 24px; /* 20/24px */
 }
 h5{
-
+  font-family: var(--tf-LATO);
 }
 
 
@@ -100,26 +73,18 @@ h5{
 @media (max-width: 1600px) {
 
   h1{
-    font-family: 'Lato', sans-serif;
-    /*font-weight: 200;*/
     font-size: 64px; /* 64px */
   }
 
   h2{
-    font-family: 'Lato', sans-serif;
-    /*font-weight: bold;*/
     font-size: 48px; /* 36/48px */
   }
 
   h3{
-    font-family: 'Lato', sans-serif;
-    /*font-weight: bold;*/
     font-size: 32px; /* 32px */
   }
 
   h4{
-    font-family: 'Lato', sans-serif;
-    /*font-weight: bold;*/
     font-size: 24px; /* 20/24px */
   }
   h5{

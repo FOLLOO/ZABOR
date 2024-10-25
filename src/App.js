@@ -45,6 +45,61 @@ import Form from './pages/temp/A-Temp/Form'
 
 function App () {
   // const { overlay } = useContext(OverlayContext) // overlay находится в layouts
+
+  const routing = [
+    {
+      status: 'not-auth',
+      layout: <Layout />,
+      navigations: [
+        {
+          title: 'main',
+          url: '/',
+          component: <Main/>,
+          child: [
+            {
+              title: 'login',
+              component: <Authorization/>,
+              url: '/login', // 'login' ?
+            },
+            {
+              title: 'registration',
+              url: '/registration',
+              component: <Registration/>,
+            },
+            {
+              title: 'select',
+              url: '/select',
+              child: [
+                {
+                  title: 'tags',
+                  url: '/tags',
+                  component: <UserInterstings/>,
+                },
+                {
+                  title: 'creative_tags',
+                  url: '/creative_tags',
+                  component: <FinilyChoices/>
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      status: 'base',
+      layout: <Layout type="base"/>,
+      navigations: []
+    },
+    {
+      status: "settings",
+      layout: <Layout type="settings"/>,
+      navigations: []
+    }
+  ]
+
+
+
   return (
     <div  className="App">
       <BrowserRouter>
@@ -58,32 +113,19 @@ function App () {
               <Route path="/settings/creative_studio" element={<CreativeStudio/>}/>
               <Route path="/settings/post/analytics/" element={<PostAnalytics/>}/>
               <Route path="/settings/post/analytics/:id" element={<PostAnalytics/>}/>
-
               <Route path="/settings/avtor/analytics" element={<AvtorAnalytics/>}/>
               <Route path="/settings/avtor/analytics/:id" element={<AvtorAnalytics/>}/>
-            </Route>
-            <Route path={'/main'} element={<Layout type={'base'}/>}>
-              <Route path="/main" element={<MainAfter/>}/>
-            </Route>
-
-            <Route path="/temp" element={<Temp/>}/>
-            <Route path="/temp2" element={<TipTapEditor/>}/>
-
-            <Route path="/" element={<Layout type={'notAuth'}/>}>
-              <Route path="/" element={<Main/>}/>
-            </Route>
-
-            <Route path="/" element={<Layout type={'login'}/>}>
-              <Route path="/registration" element={<Registration/>}/>
-              <Route path="/select/tags" element={<UserInterstings/>}/>
-              <Route path="/select/creative_tags" element={<FinilyChoices/>}/>
-              <Route path="/login" element={<Authorization/>}/>
             </Route>
 
             <Route path="/" element={<Layout type={'settings'}/>}>
               <Route path={'/create/playlist'} element={<PlaylistCreate/>}/>
               <Route path={'my/group'} element={<MyGroupTags/>}/>
               <Route path={'my/tags'} element={<MyTags/>}/>
+            </Route>
+
+
+            <Route path={'/main'} element={<Layout type={'base'}/>}>
+              <Route path="/main" element={<MainAfter/>}/>
             </Route>
 
             <Route path="/" element={<Layout type={'base'}/>}>
@@ -102,6 +144,25 @@ function App () {
               <Route path={'/market'} element={<Market/>}/>
               <Route path={'/a_temp'} element={<Form/>}/>
             </Route>
+
+
+            <Route path="/temp" element={<Temp/>}/>
+            <Route path="/temp2" element={<TipTapEditor/>}/>
+
+            <Route path="/" element={<Layout type={'notAuth'}/>}>
+              <Route path="/" element={<Main/>}/>
+            </Route>
+
+            <Route path="/" element={<Layout type={'login'}/>}>
+              <Route path="/registration" element={<Registration/>}/>
+              <Route path="/select/tags" element={<UserInterstings/>}/>
+              <Route path="/select/creative_tags" element={<FinilyChoices/>}/>
+              <Route path="/login" element={<Authorization/>}/>
+            </Route>
+
+
+
+
 
             <Route path="*" element={<ClientError/>} />
           </Routes>

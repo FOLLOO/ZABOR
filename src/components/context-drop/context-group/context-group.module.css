@@ -1,9 +1,7 @@
 .group{
     width: 100%;
     gap: 5px;
-
     padding: 10px 0;
-
 }
 
 .group::after{
@@ -16,6 +14,5 @@
 .noafter{
     width: 100%;
     gap: 5px;
-
     padding: 10px 0;
 }

@@ -155,6 +155,7 @@
 }
 
 .register{
+    padding: 60px;
     gap: 10px;
     cursor: pointer;
 }

@@ -12,25 +12,19 @@
 }
 .menu_buttons{
     position: sticky;
-    /*height: 500px;*/
     top: 10px;
     overflow: hidden;
 }
 .navbar{
-    /*overflow: auto;*/
     margin: 2.5vh 0;
-    /*z-index: -1;*/
     min-width: 80px;
     width: 80px;
-    /*overflow: hidden;*/
-    /*background: red;*/
     transition: width 0.2s linear;
 }
 
 /*Checkbox и наш left menu*/
 .sidebar_input:checked + .navbar {
     width: 15vw;
-    /*background: blue;*/
 }
 
 
@@ -45,10 +39,8 @@
     flex-direction: column;
 }
 
-
 /*OVERLAY*/
-
-.overlayActive{
+.overlayActive, .overlay{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -56,12 +48,8 @@
 }
 
 .overlay{
-    position: absolute;
-    width:100%;
-    height:100%;
     background:#000;
     opacity:0.5;
-    overflow: hidden;
     z-index: 100;
 }
 

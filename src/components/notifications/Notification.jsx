@@ -1,8 +1,5 @@
 import React from 'react'
 
-import styles from './notification.module.css'
-import global from '../../global.module.css'
-
 import RenderType from './renderType/RenderType'
 
 import temp from '../../asserts/temp/stir-fried-pork-with-korean-sauce-on-dark-background.jpg'

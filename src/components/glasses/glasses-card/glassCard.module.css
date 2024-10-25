@@ -13,17 +13,7 @@
 .fit{
     width: fit-content;
 }
-
-.w100{
-    width: 100%;
-}
-
 .fitH{
     height: fit-content;
     padding: 20px;
-}
-
-.h100{
-    height: 100%;
-
 }

@@ -1,171 +1,57 @@
-
-.t1 {
-    font-family: 'Lato', sans-serif;
+.family{
+    font-family: var(--tf-LATO);
     font-weight: normal;
-    font-size: 14pt; /* 10px / 1920px * 100 */
 }
 
-.t2 {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal;
-    font-size: 16pt; /* 12px / 1920px * 100 */
-}
+.t1, .t2, .t3, .t4, .t5, .text, .h4{ composes: family; }
+.t1 { font-size: var(--text-xs); /* 10px / 1920px * 100 */}
+.t2 { font-size: var(--text-sm) /* 12px / 1920px * 100 */}
+.t3 { font-size: var(--text-base); /* 14px / 1920px * 100 */}
+.t4 { font-size: var(--text-lg); /* 16px / 1920px * 100 */ }
+.t5,.h4 { font-size: var(--text-xl); /* 16px / 1920px * 100 */ }
+.text { font-size: var(--text-xl); /* 20px / 1920px * 100 */ }
 
-.t3 {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal; /*Light*/
-    font-size: 18pt; /* 14px / 1920px * 100 */
-}
+.bold { font-weight: var(--tw-700); }
+.medium { font-weight: var(--tw-500); }
 
-.t4 {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal; /*Light*/
-    font-size: 20pt; /* 16px / 1920px * 100 */
-}
-
-.t5 {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal; /*Light*/
-    font-size: 22pt; /* 16px / 1920px * 100 */
-}
-
-.text {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal; /*Light*/
-    font-size: 13pt; /* 20px / 1920px * 100 */
-}
-
-.bold{
-    font-weight: 700;
-}
-.medium{
-    font-weight: 500;
-}
-
-
-
-.d1 {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    /*font-weight: 700;*/
-    font-weight: normal;
-    font-size: 1vw;
-    color: #828282;
-}
-
-.d2 {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    /*font-weight: 500;*/
-    font-weight: normal;
-    font-size: 0.89vw;
-    color: #828282;
-}
-
-.d3 {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 0.78vw;
-    color: #828282;
-}
-
-.h4{
-    /*font-family: 'Lato', sans-serif;*/
-    /*font-weight: bold;*/
-    /*font-size: 1.33333vw; !* 20/24px Переделать под 20px *! */
-
-
-    font-family: 'Lato', sans-serif;
-    /*font-weight: bold;*/
-    font-weight: normal;
-    font-size: 20px; /* 20/24px */
-}
+.d1, .d2, .d3{ color: var(--t-c-description); }
+.d1 { composes: text; }
+.d2 { composes: t3; }
+.d3 { composes: t1;}
 /*FLEX */
-.flex{
-    display: flex;
-}
+.flex{ display: flex; }
 /*JUSTIFY CONTENT*/
-.f_start{
-    justify-content: start;
-}
-.f_end{
-    justify-content: end;
-}
-.f_center{
-    justify-content: center;
-}
-.f_s_between{
-    justify-content: space-between;
-}
-.f_s_around{
-    justify-content: space-around;
-}
-.f_s_evenly{
-    justify-content: space-evenly;
-}
-/* JUSTIFY CONTENT*/
-
+.f_start{ justify-content: start; }
+.f_end{ justify-content: end; }
+.f_center{ justify-content: center; }
+.f_s_between{ justify-content: space-between; }
+.f_s_around{ justify-content: space-around; }
+.f_s_evenly{justify-content: space-evenly;}
 /*JUSTIFY ITEM*/
-.f_ji_stretch{
-    justify-items: stretch;
-}
-.f_ji_center{
-    justify-items: center;
-}
-.f_ji_start{
-    justify-items: stretch;
-}
-.f_ji_end{
-    justify-items: end;
-}
-/*JUSTIFY ITEM*/
-
+.f_ji_stretch{ justify-items: stretch; }
+.f_ji_center{ justify-items: center; }
+.f_ji_start{ justify-items: stretch; }
+.f_ji_end{ justify-items: end;}
 /*FLEX DIRECTION*/
-.f_dir_column{
-    flex-direction: column;
-}
-.f_dir_row{
-    flex-direction: row;
-}
-/*FLEX DIRECTION*/
+.f_dir_column{ flex-direction: column; }
+.f_dir_row{ flex-direction: row; }
 /*ALIGN ITEMS*/
 .f_a_center{
     align-items: center;
 }
-/*ALIGN ITEMS*/
-
-/*FLEX */
-
 /*GRID*/
-.grid{
-    display: grid;
-}
-/*GRID*/
+.grid{ display: grid; }
 
 /*HEIGHT*/
-.h100{
-    height: 100%;
-}
-/*HEIGHT*/
-
+.h100{ height: 100%; }
 /*WIDTH*/
-.w100{
-    width: 100%;
-}
-/*WIDTH*/
+.w100{width: 100%;}
 
-.shadowBliz{
-    box-shadow: rgba(0, 0 , 0 , 0.24) 0 3px 8px 0;
-}
-.blur{
-    filter: blur(20px);
-}
+.shadowBliz{ box-shadow: rgba(0, 0 , 0 , 0.24) 0 3px 8px 0; }
+.blur{ filter: blur(20px); }
 
 
-.pad{
-    padding: 0 120px;
-}
+.pad{ padding: 0 120px; }
 
 .padLeft{
     padding: 0 120px 0 35px ;
@@ -214,71 +100,42 @@
     }
 
     .t1 {
-        font-family: 'Lato', sans-serif;
-        font-weight: normal;
         font-size: 14pt; /* 10px / 1920px * 100 */
     }
 
     .t2 {
-        font-family: 'Lato', sans-serif;
-        font-weight: normal;
         font-size: 16pt; /* 12px / 1920px * 100 */
     }
 
     .t3 {
-        font-family: 'Lato', sans-serif;
-        font-weight: normal; /*Light*/
         font-size: 18pt; /* 14px / 1920px * 100 */
     }
 
     .t4 {
-        font-family: 'Lato', sans-serif;
-        font-weight: normal; /*Light*/
         font-size: 20pt; /* 16px / 1920px * 100 */
     }
 
     .t5 {
-        font-family: 'Lato', sans-serif;
-        font-weight: normal; /*Light*/
         font-size: 22pt; /* 16px / 1920px * 100 */
     }
 
-    .text {
-        font-family: 'Lato', sans-serif;
-        font-weight: normal; /*Light*/
-        /*font-size: 18pt; !* 20px / 1920px * 100 *!*/
-    }
-
-
-
     .d1 {
-        font-family: 'Lato', sans-serif;
-        font-style: normal;
-        font-weight: 700;
+        composes: bold;
         font-size: 18px;
-        color: #828282;
     }
 
     .d2 {
-        font-family: 'Lato', sans-serif;
-        font-style: normal;
-        font-weight: 500;
+        composes: medium;
         font-size: 16px;
-        color: #828282;
     }
 
     .d3 {
-        font-family: 'Lato', sans-serif;
-        font-style: normal;
-        font-weight: normal;
         font-size: 14px;
-        color: #828282;
     }
 
 }
 
 @media (max-width: 1600px) {
-
     .padRilLeft{
         padding-left: 40px;
     }

@@ -97,29 +97,18 @@
     border-radius: 4px 4px 2px 2px;
 }
 
-/*.title:hover {*/
-/*    outline: 1px solid lightgrey;*/
-/*}*/
 
 .save{
     margin-left: auto;
     width: 300px;
-    /*position: fixed;*/
-    /*top: 10vh;*/
-    /*left: 50vw;*/
-    /*z-index: 99*/
 }
 
 .spanImage{
-    /*height: 520px;*/
     width: 100%;
-    /*max-height: 520px;*/
     max-width: 1250px;
 }
 
 .fileUpload{
-    /*position: absolute;*/
-    /*top: 49vh;*/
     z-index: 10;
     height: 520px;
 
@@ -134,7 +123,6 @@
 .delete{
     opacity:0;
     height: 0;
-    /*transition: height 1s ease-in-out;*/
     transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
@@ -154,10 +142,6 @@
 .mainImage:hover .delete {
     height: 100%;
     opacity: 1;
-    /*transition:opacity 0.5s linear;*/
-
-    /*-moz-transition: opacity 0.5s linear;*/
-    /*-webkit-transition: opacity 0.5s linear;*/
 }
 
 .support h5{

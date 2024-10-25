@@ -2,13 +2,10 @@
     gap: 27px;
 }
 
-.text_content{
+.text_content, .gap{
     gap: 10px;
 }
 
-/*.content + .content {*/
-/*    margin-top: 20px; !* Отступ между элементами .content *!*/
-/*}*/
 .avtor_list{
     margin-top: 3vh;
 }
@@ -30,5 +27,4 @@
 
 .gap{
     padding-right: 10px;
-    gap: 10px;
 }

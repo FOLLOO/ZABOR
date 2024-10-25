@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import styles from './select-tags.module.css'
+// import styles from './select-tags.module.css'
 import global from '../../../../global.module.css'
 import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCreate'
 import SelectTags from '../../../../components/settings/Tags/SelectTags'
