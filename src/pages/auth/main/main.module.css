@@ -1,15 +1,15 @@
 .main{
-    padding: 0 120px 0 70px;
+    /*padding: 0 120px 0 70px;*/
     min-height: 100vh;
 
     margin-bottom: 5vw;
 }
 
 .tags, .tags_hidden {
-    margin-top: 2vw;
-    display: grid;
-    grid-template-columns: repeat(9, auto);
-    gap: 10px;
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     overflow: hidden;
     transition: all 1s ease-out;
 }
@@ -19,7 +19,7 @@
 }
 
 .tags_hidden {
-    height: 40px; /* начальная высота для одной строки */
+    height: 30px; /* начальная высота для одной строки */
 }
 
 
@@ -34,43 +34,43 @@
     max-width: 300px;
 }
 
-@media (max-width: 1600px) {
+/*@media (max-width: 1600px) {*/
 
-    .tags, .tags_hidden {
-        margin-top: 2vw;
-        display: grid;
-        grid-template-columns: repeat(8, auto);
-        gap: 10px;
-        overflow: hidden;
-        transition: all 1s ease-out;
-    }
+/*    .tags, .tags_hidden {*/
+/*        margin-top: 2vw;*/
+/*        display: grid;*/
+/*        grid-template-columns: repeat(8, auto);*/
+/*        gap: 10px;*/
+/*        overflow: hidden;*/
+/*        transition: all 1s ease-out;*/
+/*    }*/
 
-    .main{
-        padding: 0 10px 0 40px;
+/*    .main{*/
+/*        !*padding: 0 10px 0 40px;*!*/
 
-        min-height: 100vh;
-        margin-bottom: 5vw;
-    }
-}
+/*        min-height: 100vh;*/
+/*        margin-bottom: 5vw;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 1250px) {
-    .tags, .tags_hidden {
-        margin-top: 2vw;
-        display: grid;
-        grid-template-columns: repeat(6, auto);
-        gap: 10px;
-        overflow: hidden;
-        transition: all 1s ease-out;
-    }
-}
+/*@media (max-width: 1250px) {*/
+/*    .tags, .tags_hidden {*/
+/*        margin-top: 2vw;*/
+/*        display: grid;*/
+/*        grid-template-columns: repeat(6, auto);*/
+/*        gap: 10px;*/
+/*        overflow: hidden;*/
+/*        transition: all 1s ease-out;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 1024px) {
-    .tags, .tags_hidden {
-        margin-top: 2vw;
-        display: grid;
-        grid-template-columns: repeat(4, auto);
-        gap: 10px;
-        overflow: hidden;
-        transition: all 1s ease-out;
-    }
-}
+/*@media (max-width: 1024px) {*/
+/*    .tags, .tags_hidden {*/
+/*        margin-top: 2vw;*/
+/*        display: grid;*/
+/*        grid-template-columns: repeat(4, auto);*/
+/*        gap: 10px;*/
+/*        overflow: hidden;*/
+/*        transition: all 1s ease-out;*/
+/*    }*/
+/*}*/

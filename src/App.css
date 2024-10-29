@@ -25,13 +25,14 @@
   --tw-normal: normal;
 
   --tf-LATO: 'Lato', sans-serif;
+  /*--tf-LATO: 'Mont Bold', sans-serif;*/
 
   --base-p: 0.5rem 1rem; /* py-2 px-4 */
+
   --accent: #8F38FF;
-
   --accent-foreground: #dddddd;
-
   --end-foreground: #333333;
+  --red: #ff4444
 }
 .overlay {
   position: fixed;

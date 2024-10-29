@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 
 import styles from './little-tag.module.css'
 import global from '../../../../global.module.css'
-import close from '../../../../asserts/icons/close.svg'
+// import close from '../../../../asserts/icons/close.svg'
+import close from '../../../../asserts/icons/update/close-white.svg'
 function LittleTag ({text, click, onChange, name, id}) {
 
   const [checkedd, setCheckedd] = useState(false)
@@ -20,8 +21,11 @@ function LittleTag ({text, click, onChange, name, id}) {
               onChange={onChange}
       />
       <label  className={styles.checkbox_label} onClick={handleChange} htmlFor={id} >
-        <span className={`${styles.checkbox_text} ${global.text}`}>{text ? text : null}</span>
-        {checkedd ? <img src={close} className={styles.check_img} alt={''} />
+        <span className={`${styles.checkbox_text} ${global.base}`}>{text ? text : null}</span>
+        {checkedd ? <img src={close} alt={''}
+                         height={20} width={20}
+                         className={styles.check_img}
+            />
           : null}
       </label>
     </div>

@@ -7,31 +7,72 @@
  width: 100%;
 }
 
+.flex{
+    justify-content: start;
+}
+
 .menu{
-    margin: 5px 30px;
+    justify-content: start;
+    min-height: 2.5rem; /* h-10 */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    /*padding: 0.75rem 0.75rem; !* py-2 px-4 *!*/
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-radius: var(--rounded-md); /* rounded-md */
+    font-size: var(--text-base); /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition: scale 0.2s, border-color 0.2s, color 0.2s;
+    outline: none;
+    cursor: pointer;
+}
+/*.menu:hover{*/
+/*    color: var(--accent);*/
+/*    !*background-color: var(--accent-foreground);*!*/
+/*}*/
+.menu span{
+    visibility: hidden;
 }
 .menu_buttons{
     position: sticky;
     top: 10px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+.menu_buttons button, .menu{
+    margin: 5px 20px;
+}
+
 .navbar{
-    margin: 2.5vh 0;
+    margin: 0.7vh 4vw 0.7vh 0;
     min-width: 80px;
     width: 80px;
     transition: width 0.2s linear;
 }
 
-.button span{
-    display: none;
+/*.button span{*/
+/*    display: none;*/
+/*}*/
+.button{
+    display: flex;
+    /*justify-content: center;*/
+    padding: 0.5rem 2rem;
+    height: 100%;
+    width: 100%;
 }
-.sidebar_input:checked + .button span{
-    display: block;
+
+.sidebar_input:not(:checked) + .navbar, #span {
+    color: transparent;
 }
+
 /*Checkbox и наш left menu*/
-.sidebar_input:checked + .navbar {
-    width: 15vw;
+.sidebar_input:checked + .navbar, #span {
+    color: black;
+    width: 25vw;
 }
+
 
 
 .row_flex{

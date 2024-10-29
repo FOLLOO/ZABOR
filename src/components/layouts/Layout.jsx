@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {Outlet, useNavigate} from "react-router-dom";
 
@@ -22,7 +22,6 @@ import user_cog_i from '../../asserts/icons/update/user-cog.svg';
 import tags_i from '../../asserts/icons/update/tags.svg';
 
 //my components
-import TransprantButton from "../ui/buttons/transprant-button/TransprantButton";
 import {OverlayContext} from "../../context/OverlayContext";
 import Header from "../layout/header/Header";
 import Footer from "../layout/footer/Footer";
@@ -159,17 +158,14 @@ const Layout = ({type}) => {
                     <label htmlFor="leftMenu"
                            className={styles.menu}>
                         <img src={menu_i} alt="menu" />
+                        <span>МенюМеню</span>
                         {/*<Button img={menu_i} size={'2xl'} variant={'nt'} />*/}
                     </label>
                     {menu
                         .find(item => item.title === type)
                         ?.navigation.map((item) => (
-                            <button className={`${styles.button} ${global.xl2}`} key={item.title}>
-                                <img src={item.ico} alt="menu" />
-                                <span>{item.title} </span>
-                            </button>
-                            // <Button img={item.ico} size={'xl2'} variant={'nt'}
-                            //         click={item.function}>{item.title}</Button>
+                            <Button img={item.ico} img_size={'2xl'} size={'base'} variant={'default'} text_id={'span'} className={styles.flex}
+                                    click={item.function}>{item.title}</Button>
                         )) || null
                     }
                 </div>
@@ -188,7 +184,7 @@ const Layout = ({type}) => {
                     <input className={styles.sidebar_input} type="checkbox" name="leftMenu" id="leftMenu" />
                     <LeftMenu/>
                     <div className={`${styles.column_flex} ${styles.zIndex}`}>
-                        <Header auth/>
+                        <Header type={'auth'}/>
                         <Outlet/>
                     </div>
                 </div>
@@ -205,7 +201,7 @@ const Layout = ({type}) => {
         return (
             <>
                 <div className={styles.header}>
-                    <Header loginn/>
+                    <Header type={'unauthorized'}/>
                 </div>
                 <Outlet/>
                 <Footer noStick/>

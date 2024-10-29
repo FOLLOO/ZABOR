@@ -6,7 +6,7 @@ import global from '../../../global.module.css'
 function SettingsTitle ({bigTitle, title, description}) {
   return (
     <div className={styles.main}>
-        <h2 className={styles.h}>{bigTitle}</h2>
+        <h2 className={`${global.xl3} ${global.bold}`}>{bigTitle}</h2>
         <h3>{title}</h3>
       <div className={`${global.d3} ${styles.desc}`}>
         {description}

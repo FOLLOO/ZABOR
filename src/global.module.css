@@ -18,15 +18,21 @@
 .bold { font-weight: var(--tw-700); }
 .medium { font-weight: var(--tw-500); }
 
-.xs { composes: t1; height: var(--text-xs); width: var(--text-xs); }
-.sm { composes: t2; height: var(--text-sm); width: var(--text-sm); }
-.base { composes: t3; height: var(--text-base); width: var(--text-base); }
-.lg { composes: t4; height: var(--text-lg); width: var(--text-lg); }
-.xl { composes: t5; height: var(--text-xl); width: var(--text-xl); }
-.xl2 { font-family: var(--text-2xl); height: var(--text-2xl); width: var(--text-2xl); }
-.xl3 { font-family: var(--text-3xl); height: var(--text-3xl); width: var(--text-3xl); }
+.xs { composes: t1 }
+.sm { composes: t2;  }
+.base { composes: t3;  }
+.lg { composes: t4;  }
+.xl { composes: t5;  }
+.xl2 { font-size: var(--text-2xl);}
+.xl3 { font-size: var(--text-3xl); }
 /*.xl4 { font-size: 2rem; padding: 2rem 3.5rem; }*/
-
+.h-1, .h-1 img{height: var(--text-xs); width: var(--text-xs);}
+.h-2, .h-2 img{height: var(--text-sm); width: var(--text-sm);}
+.h-3, .h-3 img{height: var(--text-base); width: var(--text-base);}
+.h-4, .h-4 img{height: var(--text-lg); width: var(--text-lg);}
+.h-5{height: var(--text-xl); width: var(--text-xl);}
+.h-6{height: var(--text-2xl); width: var(--text-2xl);}
+.h-7{height: var(--text-3xl); width: var(--text-3xl);}
 
 .d1, .d2, .d3{ color: var(--t-c-description); }
 .d1 { composes: text; }
@@ -107,47 +113,47 @@
 /*// increase animation time to see effect in 'slow-mo'*/
 }
 
-@media (max-width: 1600px) {
+/*@media (max-width: 1600px) {*/
 
-    .pad{
-        padding: 0 10px;
-    }
+/*    .pad{*/
+/*        padding: 0 10px;*/
+/*    }*/
 
-    .t1 {
-        font-size: 14pt; /* 10px / 1920px * 100 */
-    }
+/*    .t1 {*/
+/*        font-size: 14pt; !* 10px / 1920px * 100 *!*/
+/*    }*/
 
-    .t2 {
-        font-size: 16pt; /* 12px / 1920px * 100 */
-    }
+/*    .t2 {*/
+/*        font-size: 16pt; !* 12px / 1920px * 100 *!*/
+/*    }*/
 
-    .t3 {
-        font-size: 18pt; /* 14px / 1920px * 100 */
-    }
+/*    .t3 {*/
+/*        font-size: 18pt; !* 14px / 1920px * 100 *!*/
+/*    }*/
 
-    .t4 {
-        font-size: 20pt; /* 16px / 1920px * 100 */
-    }
+/*    .t4 {*/
+/*        font-size: 20pt; !* 16px / 1920px * 100 *!*/
+/*    }*/
 
-    .t5 {
-        font-size: 22pt; /* 16px / 1920px * 100 */
-    }
+/*    .t5 {*/
+/*        font-size: 22pt; !* 16px / 1920px * 100 *!*/
+/*    }*/
 
-    .d1 {
-        composes: bold;
-        font-size: 18px;
-    }
+/*    .d1 {*/
+/*        composes: bold;*/
+/*        font-size: 18px;*/
+/*    }*/
 
-    .d2 {
-        composes: medium;
-        font-size: 16px;
-    }
+/*    .d2 {*/
+/*        composes: medium;*/
+/*        font-size: 16px;*/
+/*    }*/
 
-    .d3 {
-        font-size: 14px;
-    }
+/*    .d3 {*/
+/*        font-size: 14px;*/
+/*    }*/
 
-}
+/*}*/
 
 @media (max-width: 1600px) {
     .padRilLeft{

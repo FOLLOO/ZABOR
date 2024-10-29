@@ -6,21 +6,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Main from './pages/unAuth/main/Main'
 import Authorization from './pages/unAuth/authorization/Authorization'
 import Registration from './pages/unAuth/registration/Registration'
-import Temp from './pages/temp/Temp'
-import TipTapEditor from './components/temp/TipTapEditor'
 import Layout from './components/layouts/Layout'
-import TempPAge from './pages/temp/TempPAge'
 import CreatePost from './pages/auth/froms/post-create/CreatePost'
 import Profile from './pages/auth/profile/profile-page/Profile'
 import MyProfileSettings from './pages/auth/settings/my-profile-settings/MyProfileSettings'
 import MySubscribeSettings from './pages/auth/settings/my-subscribe-settings/MySubscribeSettings'
 import PlaylistCreate from './pages/auth/froms/playlist-create/PlaylistCreate'
-import SelectGroupTagsPage from './pages/auth/froms/select-group-tags/SelectGroupTagsPage'
-import SelectTagsPage from './pages/auth/froms/select-tags/SelectTagsPage'
-import MyGroupTags from './pages/auth/settings/my-tags/group/MyGroupTags'
-import MyTags from './pages/auth/settings/my-tags/tags/MyTags'
 
-import MainAfter from './pages/auth/main/MainAfter'
+import Publications from './pages/auth/main/Publications'
 import AuthProvider from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
 import UserInterstings from './pages/unAuth/registration/userIntretings/select-group-tags/UserInterstings'
@@ -28,16 +21,9 @@ import FinilyChoices from './pages/unAuth/registration/userIntretings/select-tag
 // import { OverlayContext } from './context/OverlayContext'
 import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
 import Post from './pages/auth/post/Post'
-import ClientError from './pages/404/ClientError'
 import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
-import PostAnalytics from './pages/auth/analytics/post-analytics/PostAnalytics'
-import AvtorAnalytics from './pages/auth/analytics/avtor-analytics/AvtorAnalytics'
-import Form from './pages/temp/A-Temp/Form'
-import UserPosts from "./components/profile/profile-tab-content/user-posts/UserPosts";
 import Playlists from "./pages/auth/profile/playlist-page/Playlists";
 import AboutMe from "./pages/auth/profile/about/AboutMe";
-import Playlist from "./components/post/post-playlist/Playlist";
-import Bascet from "./redux/slices/bascet";
 import {ProfileLayout} from "./pages/auth/profile/Layout/ProfileLayout";
 // import axios from "axios";
 
@@ -141,7 +127,7 @@ function App () {
         {
           title: 'publications',
           url: '/publications',
-          component: <MainAfter/>,
+          component: <Publications/>,
           child: [
             {
               title: 'id',
@@ -160,12 +146,95 @@ function App () {
         {
           title: 'basket',
           url: '/basket',
-          component: <Bascet/>,
+          component: <Market/>,
           child: [],
         },
       ]
     },
-
+    {
+      status: "settings",
+      url: '/settings',
+      layout: <Layout type="settings"/>,
+      navigations: [
+        {
+          title: '',
+          url: '/',
+          component: <CreativeStudio/>,
+          child: [],
+        },
+        {
+          title: 'config',
+          url: '/config',
+          component: <MyProfileSettings/>,
+          child: [],
+        },
+        {
+          title: 'notifications',
+          url: '/notifications',
+          component: <MyNotificationsSettings/>,
+          child: [],
+        },
+        {
+          title: 'subscribes',
+          url: '/subscribes',
+          component: <MySubscribeSettings/>,
+          child: [],
+        },
+        //   ]
+        // },
+        // {
+        //   title: 'author',
+        //   url: '/author',
+        //   component: null,
+        //   child: [
+        // {
+        //   title: 'analytics',
+        //   url: '/analytics',
+        //   component: <CreativeStudio/>,
+        //   child: [
+        //     {
+        //       title: 'post',
+        //       url: '/post',
+        //       component: <PostAnalytics/>,
+        //       child: [],
+        //     },
+        //     {
+        //       title: 'self',
+        //       url: '/self',
+        //       component: <AvtorAnalytics/>,
+        //       child: [],
+        //     },
+        //     //   ],
+        //     // },
+        //     {
+        //       title: 'select',
+        //       url: '/select',
+        //       component: null,
+        //       child: [
+        //         {
+        //           title: 'tags',
+        //           url: '/tags',
+        //           component: <UserInterstings/>,
+        //           child: []
+        //         },
+        //         {
+        //           title: 'creative_tags',
+        //           url: '/creative_tags',
+        //           component: <FinilyChoices/>,
+        //           child: []
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       title: 'balance',
+        //       url: '/balance',
+        //       component: null,
+        //       child: [],
+        //     }
+        //   ]
+        // },
+      ]
+    }
   ]
 
 

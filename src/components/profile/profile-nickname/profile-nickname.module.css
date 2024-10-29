@@ -1,5 +1,6 @@
 .main{
-    gap: 30px;
+    /*gap: 30px;*/
+    gap: 1rem;
     max-width: 300px;
 }
 

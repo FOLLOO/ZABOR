@@ -1,14 +1,16 @@
-.button-default-size {
+.base {
     min-height: 2.5rem; /* h-10 */
     padding: 0.5rem 1rem; /* py-2 px-4 */
 }
-
+.h-5{
+    padding: 0 .75rem;
+}
 .button {
-    composes: button-default-size;
+    composes: base;
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
     border-radius: var(--rounded-md); /* rounded-md */
     font-size: var(--text-base); /* text-sm */
     font-weight: 500; /* font-medium */
@@ -20,15 +22,21 @@
 .ghost:hover{
     color: var(--accent); /* text-accent-foreground */
 }
-
 .default:focus-visible {
     outline: 2px solid var(--t-c-description); /* custom ring color */
     outline-offset: 2px;
 }
 .default:hover{
-    background-color: var(--accent-foreground); /* bg-accent */
+    /*background-color: var(--accent-foreground); !* bg-accent *!*/
     color: var(--accent); /* text-accent-foreground */
 }
+.red-text{
+    color: var(--red);
+}
+.red-text:hover{
+    opacity: 0.7;
+}
+
 .button:disabled {
     opacity: 0.5;
     pointer-events: none;
@@ -37,3 +45,4 @@
 .nt span{
     display: none;
 }
+

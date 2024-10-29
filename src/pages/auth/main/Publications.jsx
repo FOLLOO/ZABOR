@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import styles from './main.module.css'
-import global from '../../../global.module.css'
+// import global from '../../../global.module.css'
 import SettingsTitle from '../../../components/toolbar/settings-title/SettingsTitle'
-import WhiteButton from '../../../components/ui/buttons/white-button/WhiteButton'
 import CardLittle from '../../../components/post/post-cards/card-little/CardLittle'
-import { fetchLogin } from '../../../redux/slices/user'
+// import { fetchLogin } from '../../../redux/slices/user'
 import { useDispatch } from 'react-redux'
 import { fetchPosts } from '../../../redux/slices/post'
 import { fetchTags } from '../../../redux/slices/tag'
@@ -13,10 +12,10 @@ import { Link } from 'react-router-dom'
 import MessageBox from '../../../components/message-box/MessageBox'
 import { OverlayContext } from '../../../context/OverlayContext'
 import LittleTag from '../../../components/ui/input/little-tag/TagCheckBox'
-import Nothing from '../../nothing/Nothing'
+// import Nothing from '../../nothing/Nothing'
 import Loading from '../../loading/Loading'
 
-function MainAfter (props) {
+export default function Publications () {
 
   const [errMes, setErrMes] = useState("")
   const [loading, setLoading] = useState(false)
@@ -64,8 +63,11 @@ function MainAfter (props) {
       }
       <SettingsTitle bigTitle={'Публикации'}/>
       <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
+          <div className={styles.b_width}>
         <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
+          </div>
         {tags.length > 0 ?
+            //todo: выбрать все
           tags.map(item => (
             <div className={styles.b_width}>
               <LittleTag text={item.name}/>
@@ -105,4 +107,3 @@ function MainAfter (props) {
   )
 }
 
-export default MainAfter
