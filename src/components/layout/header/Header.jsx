@@ -59,7 +59,7 @@ function Header (props) {
     }
   }
   const mainLink = (param) => {
-   return param ? navigate('/main') : navigate('/')
+   return param | navigate('/')
   }
 
   const getNoti = () => {

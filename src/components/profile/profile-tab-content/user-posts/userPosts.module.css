@@ -22,23 +22,32 @@
     gap: 30px
 }
 
-.title{
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(15px);
-    top: 70px;
-    position: sticky;
-    z-index: 3;
+.header{
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.some{
+    font-size: 32px;
 }
 
 .tags, .tags_hidden {
-    margin-top: 2vw;
-    display: grid;
-    grid-template-columns: repeat(9, auto);
+    /*margin-top: 2vw;*/
+    /*display: grid;*/
+    /*grid-template-columns: repeat(9, auto);*/
+    /*gap: 10px;*/
+    /*overflow: hidden;*/
+    /*transition: all 1s ease-out;*/
+
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     overflow: hidden;
-    transition: all 1s ease-out;
+    transition: height 1s ease-out;
 }
-
+.checkbox{
+    max-width: 150px;
+}
 .tags {
     height: auto; /* конечное состояние */
 }

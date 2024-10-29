@@ -59,21 +59,16 @@ export const getUserAvatar = createAsyncThunk('user/getAvatar', async () => {
   }
 });
 
-// export const fetchRegistration = createAsyncThunk('auth/registration', async (regData) => {
-//   const {data} = await axios.post('/auth/registration', regData)
-//     .catch(error => {
-//       throw error.response.data
-//     })
-//   return data
-// })
-//
-// export const fetchAuth = createAsyncThunk('auth/login/access-token', async (token) => {
-//   const {data} = await axios.get(`/auth/login/access-token`)
-//   return data
-// })
-//
-//
-//
+export const getUserCover = createAsyncThunk('user/getProfileCover', async () => {
+  try {
+    const response = await axios.get('/user/getProfileCover');
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+
 const initialState = {
   userData:{
     items: [],
@@ -102,18 +97,30 @@ const userSlice = createSlice({
         state.userData.items = []
         state.status = 'error';
       })
-      .addCase(getUserAvatar.pending, (state) => {
-        state.userData.avatar = 'not'
-        state.status = 'loading';
-      })
-      .addCase(getUserAvatar.fulfilled, (state, action) => {
-        state.userData.avatar = action.payload;
-        state.status = 'loaded';
-      })
-      .addCase(getUserAvatar.rejected, (state) => {
-        state.userData.avatar = 'err'
-        state.status = 'error';
-      })
+      // .addCase(getUserAvatar.pending, (state) => {
+      //   state.userData.avatar = 'not'
+      //   state.status = 'loading';
+      // })
+      // .addCase(getUserAvatar.fulfilled, (state, action) => {
+      //   state.userData.avatar = action.payload;
+      //   state.status = 'loaded';
+      // })
+      // .addCase(getUserAvatar.rejected, (state) => {
+      //   state.userData.avatar = 'err'
+      //   state.status = 'error';
+      // })
+        // .addCase(getUserCover.pending, (state) => {
+        //   state.userData.avatar = 'not'
+        //   state.status = 'loading';
+        // })
+        // .addCase(getUserCover.fulfilled, (state, action) => {
+        //   state.userData.avatar = action.payload;
+        //   state.status = 'loaded';
+        // })
+        // .addCase(getUserCover.rejected, (state) => {
+        //   state.userData.avatar = 'err'
+        //   state.status = 'error';
+        // })
   }
 })
 //

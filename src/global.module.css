@@ -3,7 +3,11 @@
     font-weight: normal;
 }
 
+
+
+
 .t1, .t2, .t3, .t4, .t5, .text, .h4{ composes: family; }
+
 .t1 { font-size: var(--text-xs); /* 10px / 1920px * 100 */}
 .t2 { font-size: var(--text-sm) /* 12px / 1920px * 100 */}
 .t3 { font-size: var(--text-base); /* 14px / 1920px * 100 */}
@@ -13,6 +17,16 @@
 
 .bold { font-weight: var(--tw-700); }
 .medium { font-weight: var(--tw-500); }
+
+.xs { composes: t1; height: var(--text-xs); width: var(--text-xs); }
+.sm { composes: t2; height: var(--text-sm); width: var(--text-sm); }
+.base { composes: t3; height: var(--text-base); width: var(--text-base); }
+.lg { composes: t4; height: var(--text-lg); width: var(--text-lg); }
+.xl { composes: t5; height: var(--text-xl); width: var(--text-xl); }
+.xl2 { font-family: var(--text-2xl); height: var(--text-2xl); width: var(--text-2xl); }
+.xl3 { font-family: var(--text-3xl); height: var(--text-3xl); width: var(--text-3xl); }
+/*.xl4 { font-size: 2rem; padding: 2rem 3.5rem; }*/
+
 
 .d1, .d2, .d3{ color: var(--t-c-description); }
 .d1 { composes: text; }

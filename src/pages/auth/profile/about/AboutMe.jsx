@@ -2,8 +2,9 @@ import React from 'react'
 
 import styles from './aboutMe.module.css'
 import global from '../../../../global.module.css'
-import GlassCard from '../../../glasses/glasses-card/GlassCard'
-import GreenButton from '../../../ui/buttons/green-button/GreenButton'
+
+import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
+import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
 
 function AboutMe ({data, text, social}) {

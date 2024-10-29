@@ -1,0 +1,39 @@
+.button-default-size {
+    min-height: 2.5rem; /* h-10 */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+}
+
+.button {
+    composes: button-default-size;
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--rounded-md); /* rounded-md */
+    font-size: var(--text-base); /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    outline: none;
+    cursor: pointer;
+}
+
+.ghost:hover{
+    color: var(--accent); /* text-accent-foreground */
+}
+
+.default:focus-visible {
+    outline: 2px solid var(--t-c-description); /* custom ring color */
+    outline-offset: 2px;
+}
+.default:hover{
+    background-color: var(--accent-foreground); /* bg-accent */
+    color: var(--accent); /* text-accent-foreground */
+}
+.button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.nt span{
+    display: none;
+}

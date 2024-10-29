@@ -1,10 +1,10 @@
-import React, {useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 
 import {Outlet, useNavigate} from "react-router-dom";
 
 
 import styles from './layouts.module.css'
-
+import global from '../../global.module.css'
 
 //images
 import menu_i from '../../asserts/icons/update/menu.svg';
@@ -26,6 +26,8 @@ import TransprantButton from "../ui/buttons/transprant-button/TransprantButton";
 import {OverlayContext} from "../../context/OverlayContext";
 import Header from "../layout/header/Header";
 import Footer from "../layout/footer/Footer";
+import Button from "../ui/buttons/button/Button";
+
 
 /**
  *
@@ -38,6 +40,9 @@ const Layout = ({type}) => {
     //todo: исправить overlay
     const {overlay, setOverlay} = useContext(OverlayContext)
     const navigate = useNavigate()
+
+
+
 
     /**
      *
@@ -151,14 +156,20 @@ const Layout = ({type}) => {
         return (
             <div className={styles.navbar}>
                 <div className={styles.menu_buttons}>
-                    <label htmlFor="leftMenu" className={styles.menu}>
+                    <label htmlFor="leftMenu"
+                           className={styles.menu}>
                         <img src={menu_i} alt="menu" />
+                        {/*<Button img={menu_i} size={'2xl'} variant={'nt'} />*/}
                     </label>
                     {menu
                         .find(item => item.title === type)
                         ?.navigation.map((item) => (
-                            <TransprantButton left img={item.ico} text={item.title}
-                                              click={item.function}/>
+                            <button className={`${styles.button} ${global.xl2}`} key={item.title}>
+                                <img src={item.ico} alt="menu" />
+                                <span>{item.title} </span>
+                            </button>
+                            // <Button img={item.ico} size={'xl2'} variant={'nt'}
+                            //         click={item.function}>{item.title}</Button>
                         )) || null
                     }
                 </div>
@@ -174,7 +185,7 @@ const Layout = ({type}) => {
         return (
             <div className={styles.column_flex}>
                 <div className={styles.row_flex}>
-                    <input className={styles.sidebar_input} type="checkbox" name="leftMenu" id="leftMenu"/>
+                    <input className={styles.sidebar_input} type="checkbox" name="leftMenu" id="leftMenu" />
                     <LeftMenu/>
                     <div className={`${styles.column_flex} ${styles.zIndex}`}>
                         <Header auth/>
