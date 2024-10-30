@@ -69,7 +69,7 @@ function Playlists ({ data = [] }) {
     return (
       <>
         <div className={`${styles.title}`}>
-          <h2>Плейлисты</h2>
+          <h1 className={`${global.xl3} ${global.bold}`}>Плейлисты</h1>
         </div>
         <div className={styles.margin}>
           <div className={styles.grid}>

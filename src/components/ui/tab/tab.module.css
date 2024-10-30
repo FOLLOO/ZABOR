@@ -5,6 +5,7 @@
 
 .buttons{
     width: 30%;
+    gap: 0.2rem;
     display: flex;
     justify-content: start;
 }
@@ -16,15 +17,15 @@
 
     font-family: var(--tf-LATO);
     font-weight: var(--tw-700);
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     text-align: left;
 
     /* Auto layout */
-    padding: 0.5rem ;
+    padding: 0.2rem 0.3rem ;
     margin-right: 0.5rem;
-    width: 100%;
+    width: max-content ;
     /*height: fit-content;*/
-    border-radius: var(--rounded-md);
+    /*border-radius: var(--rounded-md);*/
     color: #A3A3A3;
 
     transition: all 0.5s ease;

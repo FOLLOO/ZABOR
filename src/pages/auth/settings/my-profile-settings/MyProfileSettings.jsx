@@ -6,34 +6,36 @@ import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCr
 import SettingsTitle from '../../../../components/toolbar/settings-title/SettingsTitle'
 import SettingsBlock from '../../../../components/toolbar/settings-block/SettingsBlock'
 import InputText from '../../../../components/ui/input/input-text/InputText'
-import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
 import InputDporDown from '../../../../components/ui/input/input-dropdown/InputDporDown'
 // import ProfileCard from '../../../../components/profile/profile-card/ProfileCard'
 
 //img
-import vk from '../../../../asserts/icons/VK.svg'
-import twich from '../../../../asserts/icons/twich.svg'
+import vk from '../../../../asserts/icons/update/vk.svg'
+import twitch from '../../../../asserts/icons/update/twitch.svg'
 import mail from '../../../../asserts/icons/mail.svg'
 import telegram from '../../../../asserts/icons/Telegram.svg'
-import tikTok from '../../../../asserts/icons/tikTok.svg'
-import a_link from '../../../../asserts/icons/Another Link (Link).svg'
+import tikTok from '../../../../asserts/icons/update/tiktok.svg'
+import link from '../../../../asserts/icons/update/link-2.svg'
 
 // import temp from '../../../../asserts/temp/full-shot-people-training-together.jpg'
 import { useAuth } from '../../../../provider/AuthProvider'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getUserData } from '../../../../redux/slices/user'
+import Button from "../../../../components/ui/buttons/button/Button";
 // import userService from '../../../../services/UserService'
 
 // console.log(user)
-function MyProfileSettings ({}) {
+function MyProfileSettings () {
 
   const { user, updateUser } = useAuth()
+
   const dispatch = useDispatch()
 
-  const { userData } = useSelector(state => state.userR)
+  // const { userData } = useSelector(state => state.userR)
 
   const formattedDate = user?.date_of_birth ? new Date(user?.date_of_birth).toISOString().slice(0, 10) : '';
+
   const items = [
     {
       id: 1,
@@ -69,8 +71,8 @@ function MyProfileSettings ({}) {
     {
       socialMediumId: 4,
       text: '',
-      placeholder: 'Twich',
-      imgSrc: twich
+      placeholder: 'Twitch',
+      imgSrc: twitch
     },
     {
       socialMediumId: 5,
@@ -82,7 +84,7 @@ function MyProfileSettings ({}) {
       socialMediumId: 6,
       text: '',
       placeholder: 'Другое',
-      imgSrc: a_link
+      imgSrc: link
     }
   ];
 
@@ -95,9 +97,9 @@ function MyProfileSettings ({}) {
 
   const [socialMedia, setSocialMedia] = useState(initialSocialMediaData);
 
-  const [passwordBefore, setPasswordBefore] = useState('')
-  const [passwordAfter, setPasswordAfter] = useState('')
-  const [passwordRepeat, setPasswordRepeat] = useState('')
+  // const [passwordBefore, setPasswordBefore] = useState('')
+  // const [passwordAfter, setPasswordAfter] = useState('')
+  // const [passwordRepeat, setPasswordRepeat] = useState('')
 
   const getuUuser = () => {
     try {
@@ -154,13 +156,12 @@ function MyProfileSettings ({}) {
 // console.log(user)
   return (
     <div className={styles.main}>
-      <BackCreate sticky/>
+      <BackCreate />
       <SettingsTitle bigTitle={'Мой профиль'} description={'Эти данные отображаются на вашей странице в профиле'}/>
-
+      <hr/>
       <div className={styles.settings}>
         <form id={'user_information'}>
         <SettingsBlock
-          mainWidth={1400}
           title={'Публичная информация'} descripton={'Эта информация отображается всем. \n' +
           'На вашей странице профиля'} >
           <div className={styles.profileInputs}>
@@ -188,16 +189,11 @@ function MyProfileSettings ({}) {
                        value={birthDay ? birthDay : formattedDate  }
                        onChange={e=> setBirthDay(e.target.value)}
             />
-            {/*<InputText place={'Информация о себе'}/>*/}
-            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
-            {/*<GreenButton text={'Сохранить изменения'} unique/>*/}
           </div>
         </SettingsBlock>
         <SettingsBlock
-          mainWidth={1400}
           title={'Социальные сети'} >
           <div className={styles.profileInputs}>
-
             {socialMedia.map((item) => (
               <div key={item.socialMediumId} className={`${global.flex} ${styles.social}`}>
                 <InputText
@@ -206,24 +202,19 @@ function MyProfileSettings ({}) {
                   value={item.text}
                   onChange={(e) => handleChange(item.socialMediumId, e.target.value)}
                 />
-                <img src={item.imgSrc} alt="social" />
+                <img src={item.imgSrc} className={global['h-6']} alt="social" />
               </div>
             ))}
-
-            {/*<InputText place={'Информация о себе'}/>*/}
-            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
-            <GreenButton text={'Сохранить изменения'} unique
-                         form={'user_information'}
-                         type={'submit'}
-                         click={saveUser}
-            />
+            <Button variant={'color'} className={global.f_center}
+                    type={'submit'} onClick={saveUser} form={'user_information'}>
+              Сохранить изменения
+            </Button>
           </div>
         </SettingsBlock>
         </form>
 
         <form id={'user_login'}>
         <SettingsBlock
-          mainWidth={1400}
           title={'Параметры входа'} descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
           ' \n' +
           'и одну цифру'} red>
@@ -231,18 +222,11 @@ function MyProfileSettings ({}) {
             <InputText place={'Введите старый пароль'} type={'text'}/>
             <InputText place={'Введите новый пароль'} type={'password'}/>
             <InputText place={'Повторите новый пароль'} type={'password'}/>
-            {/*<InputText place={'Информация о себе'}/>*/}
-            {/*<Textarea place={'Информация о себе'} rows={15}/>*/}
-            <GreenButton text={'Сохранить изменения'} unique />
+            <Button variant={'color'} className={global.f_center} >
+              Сохранить изменения
+            </Button>
           </div>
         </SettingsBlock>
-        {/*<ProfileCard nickname={'Егор Антонов'}*/}
-        {/*             image={temp}*/}
-        {/*             description={'Я целеустремленный и креативный специалист, ' +*/}
-        {/*               'который постоянно находится в поиске новых возможностей для самореализации.' +*/}
-        {/*               'С радостью делюсь своими идеями и знаниями со всеми, кто меня окружает.' +*/}
-        {/*               ' Стремлюсь к постоянному саморазвитию и совершенствованию своих навыков'}/>*/}
-        {/*<ProfileCard />*/}
         </form>
       </div>
     </div>

@@ -11,8 +11,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSubscribe } from '../../../../redux/slices/sub'
 import Nothing from '../../../nothing/Nothing'
 import { toggleNoti } from '../../../../redux/slices/notifications'
+import {IMAGE_URL} from "../../../../utils";
 
-function MyNotificationsSettings (props) {
+function MyNotificationsSettings () {
 
   const { sub } = useSelector(state => state.subscribes)
   const dispatch = useDispatch()
@@ -46,41 +47,46 @@ function MyNotificationsSettings (props) {
 
 
   return (
-    <div className={global.padLeft}>
-      <BackCreate sticky />
-      <SettingsTitle bigTitle={'Мои уведомления'} description={'Изменения сохраняются автоматически'}/>
-
+    <div className={styles.main}>
+      <BackCreate />
+      <SettingsTitle
+          bigTitle={'Мои уведомления'}
+          description={'Изменения сохраняются автоматически'}/>
+      {/*<span style={{visibility: 'hidden', maxHeight: '1rem'}}>asdfas</span>*/}
+      <hr/>
       <SettingsBlock title={'Уведомления в браузере'} titleWidth={500}>
         <div className={`${global.flex} ${styles.content}`}>
-          <InputToggle id={1}/>
+          <InputToggle id={'all'}/>
           <div className={`${global.flex} ${global.f_dir_column} ${styles.text_content}`}>
-            <div className={global.text}>Уведомления в браузере</div>
-            <div className={global.d3}>
+            <label htmlFor={'all'}  className={global.t3}>Уведомления в браузере</label>
+            <dvi className={global.d3}>
               Вы можете настроить уведомления в настройках вашего браузера
-            </div>
+            </dvi>
           </div>
         </div>
       </SettingsBlock>
 
       <SettingsBlock title={'Уведомления от Авторов'} titleWidth={500}>
         <div className={`${global.flex} ${styles.content}`}>
-          <InputToggle id={2}/>
+          <InputToggle id={'all-not'}/>
           <div className={`${global.flex} ${global.f_dir_column} ${styles.text_content}`}>
-            <div className={global.text}>Отключить все уведомления от авторов</div>
+            <label htmlFor={'all-not'} className={global.t3}>Отключить все уведомления от авторов</label>
           </div>
         </div>
 
         <div className={styles.avtor_list}>
-          {sub?.items.length > 0 ? sub?.items.map((item) => (
-          <div className={`${styles.avtor} ${global.flex}`}>
-            <ProfileNickname type={'subs'} subs={item?.subs} nickname={item.nickname}/>
-            <div className={`${global.flex} ${styles.gap}`} >
-            <div className={global.text}>
-              Уведомление от автора
-            </div>
-            <InputToggle change={() => console.log(sub)}/>
-            </div>
-          </div>
+          {sub?.items.length > 0 ? sub?.items.map((item, index) => (
+            <label htmlFor={index} className={`${styles.avtor} ${global.flex}`}>
+              <ProfileNickname type={'subs'} id={item?.id}
+                               subs={item?.subs}
+                               img={`${IMAGE_URL}${item?.coverUrl}`} nickname={item.nickname}/>
+                <div className={`${global.flex} ${styles.gap}`} >
+                <div  className={global.t3}>
+                  Уведомление
+                </div>
+              <InputToggle id={index} change={() => console.log(sub)}/>
+              </div>
+            </label>
           )) : <Nothing/>}
 
         </div>

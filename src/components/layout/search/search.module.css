@@ -6,7 +6,7 @@
     /*background: #FFFFFF;*/
     border: 1px solid var(--t-c-description);
     border-radius: 30px;
-    padding: 5px 15px;
+    padding: 0.2rem 1rem;
 }
 .input::placeholder{
     color: var(--t-c-description);

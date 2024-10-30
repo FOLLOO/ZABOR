@@ -2,6 +2,7 @@
     min-height: 2.5rem; /* h-10 */
     padding: 0.5rem 1rem; /* py-2 px-4 */
 }
+
 .h-5{
     padding: 0 .75rem;
 }
@@ -14,9 +15,23 @@
     border-radius: var(--rounded-md); /* rounded-md */
     font-size: var(--text-base); /* text-sm */
     font-weight: 500; /* font-medium */
-    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    transition: all 0.2s ease-in-out ;
     outline: none;
     cursor: pointer;
+    user-select: none;
+}
+/*VARIANTS*/
+.color {
+    background: linear-gradient(87.1deg, var(--accent-plus) 0%, var(--accent) 100.61%);
+    color: var(--white);
+}
+.color:hover{
+    transition: all .3s ease-in-out;
+    transform: scale(0.98);
+}
+.color:focus-visible {
+    outline: 2px solid var(--accent); /* custom ring color */
+    outline-offset: 2px;
 }
 
 .ghost:hover{

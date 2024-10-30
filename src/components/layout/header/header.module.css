@@ -8,11 +8,15 @@
 .header{
     position: sticky;
     top: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    z-index: 99;
+
+    /*background-color: rgba(255, 255, 255, 0.1);*/
+    /*backdrop-filter: blur(10px);*/
+
+    background: white;
 
     gap: 1rem;
-    margin-top: 1vh;
+    padding: 1vh 0;
     composes: ac;
     justify-content: space-between;
 }
@@ -45,6 +49,8 @@
     top: calc(100% - 0.25rem);
 }
 .active {
+    z-index: 9999;
+    position: absolute;
     display: block;
     visibility: visible;
 }

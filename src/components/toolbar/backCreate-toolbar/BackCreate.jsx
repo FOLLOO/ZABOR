@@ -5,9 +5,9 @@ import styles from './back-create.module.css'
 
 import arrowBack from '../../../asserts/icons/Arrow back.svg'
 
-import TransprantButton from '../../ui/buttons/transprant-button/TransprantButton'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
+import Button from "../../ui/buttons/button/Button";
 function BackCreate ({description, greenText, button, sticky, click, greenButtonForm}) {
   //todo: лучше опрделять или props-ами прописывать?
 
@@ -16,7 +16,9 @@ function BackCreate ({description, greenText, button, sticky, click, greenButton
     <div className={sticky ? `${styles.main} ${styles.sticky}` : styles.main}>
       <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
         <div className={styles.back}>
-          <TransprantButton text={'Назад'} img={arrowBack} noPad click={() => navigate(-1)}/>
+          <Button img={arrowBack} className={global.p0} img_size={'h-5'} click={() => navigate(-1)}>
+              Назад
+          </Button>
         </div>
         {button ?
           <div className={`${styles.create} ${global.flex} ${global.f_a_center}`}>

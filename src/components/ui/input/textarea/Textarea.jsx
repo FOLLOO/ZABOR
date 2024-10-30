@@ -1,9 +1,8 @@
 import React from 'react'
 
 import styles from './textarea.module.css'
-import global from '../../../../global.module.css'
 
-function Textarea ({place, rows, value, onChange, back = true, req = false}) {
+function Textarea ({place, rows, value, onChange, req = false}) {
   return (
     <div className={styles.main}>
       <textarea
@@ -11,7 +10,7 @@ function Textarea ({place, rows, value, onChange, back = true, req = false}) {
         value={value}
         lang={'ru'}
         maxLength={3000}
-        className={back ? `${styles.input} ${styles.back}` : `${styles.input} ${styles.anotherBack}` }
+        className={styles.input}
         rows={rows}
         required={req}
         placeholder={place ? place : null}/>

@@ -1,30 +1,34 @@
-import React, {useContext, useState} from "react";
+//library
+import React, {useContext, useEffect, useState} from "react";
 import {Outlet, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 
+//css
 import styles from "../profile-page/profile.module.css";
 import global from "../../../../global.module.css";
 
-import {useAuth} from "../../../../provider/AuthProvider";
 
+//components
 import ProfileCircle from "../../../../components/profile/profile-circle/ProfileCircle";
-import TransprantButton from "../../../../components/ui/buttons/transprant-button/TransprantButton";
 import WhiteButton from "../../../../components/ui/buttons/white-button/WhiteButton";
 import GreenButton from "../../../../components/ui/buttons/green-button/GreenButton";
+import Button from "../../../../components/ui/buttons/button/Button";
 import Tab from "../../../../components/ui/tab/Tab";
 
+//project functions
+import {useAuth} from "../../../../provider/AuthProvider";
 import {IMAGE_URL} from "../../../../utils";
-import {postUserAvatar, postUserCover} from "../../../../redux/slices/user";
+import {getUserData, postUserAvatar, postUserCover} from "../../../../redux/slices/user";
 import {OverlayContext} from "../../../../context/OverlayContext";
 
+//img
 import edit from "../../../../asserts/icons/edit.svg";
-import Button from "../../../../components/ui/buttons/button/Button";
-
 
 
 export function ProfileLayout() {
 
     const {overlay, setOverlay} = useContext(OverlayContext)
+
 
     const {id} = useParams()
     const {user} = useAuth()
@@ -52,7 +56,7 @@ export function ProfileLayout() {
      * Этот код предназначен для сохранения изображения в БазеДанных!
      * Принимает тип (type) из localStorage, чтобы сохранить.  либо как аватарку, либо как обложку
      * @constructor
-     * @param event - просто event.listener
+     * @param e - просто event.listener
      */
     const saveImage = (e) => {
         // e.preventDefault()
@@ -142,6 +146,8 @@ export function ProfileLayout() {
         }
     }
 
+
+
     /**
      * Этот код предназначен для подписки!
      * @constructor
@@ -167,6 +173,20 @@ export function ProfileLayout() {
     //         console.log(e)
     //     }
     // }
+
+
+    const getUser = () => {
+            try {
+                dispatch(getUserData(id))
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+    useEffect(() => {
+        if (userData.status === 'loaded') return
+        getUser()
+    }, [userData.status])
 
         //todo: overlay don't work on publication page
 
@@ -219,7 +239,7 @@ export function ProfileLayout() {
                     <div className={styles.profile}>
                         <div className={styles.nickname}>
                             <ProfileCircle img={`${IMAGE_URL}${userData?.items.avatarUrl}`}
-                                           size={200}
+                                           size={150}
                                            edit={user?.id === Number(id) ? true : null}
                                            click={() => {
                                                new Over()
@@ -227,7 +247,7 @@ export function ProfileLayout() {
                                            }}/>
                             <div className={styles.subes}>
                                 {userData?.items?.user?.nickname ?
-                                    <h2 title={'Псевдоним пользователя'}>{userData?.items?.user?.nickname}</h2>
+                                    <h1 className={`${global.xl4} ${global.bold}`} title={'Псевдоним пользователя'}>{userData?.items?.user?.nickname}</h1>
                                     :
                                     <h2 className={global.skeleton}>NICKNAME</h2>
                                 }
@@ -235,7 +255,6 @@ export function ProfileLayout() {
                                     <div className={global.d2} title={'Количество подписчиков'}>
                                         {userData?.items?.user?.count_subscribers} Подписчик
                                     </div>
-                                    // <h2>{userData?.items?.user?.nickname}</h2>
                                     :
                                     <div className={global.d2}>
                                         Пока нет подписчиков
@@ -249,8 +268,7 @@ export function ProfileLayout() {
                                 {/*    new Over()*/}
                                 {/*    localStorage.setItem('type', 'cover')*/}
                                 {/*}}/>*/}
-                                <Button img={edit} size={'lg'} variant={'ghost'}
-
+                                <Button img={edit} img_size={'h-5'} variant={'ghost'}
                                         click={() => {
                                     new Over()
                                     localStorage.setItem('type', 'cover')

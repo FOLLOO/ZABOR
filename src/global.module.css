@@ -3,7 +3,9 @@
     font-weight: normal;
 }
 
-
+.p0{
+    padding: 0 !important;
+}
 
 
 .t1, .t2, .t3, .t4, .t5, .text, .h4{ composes: family; }
@@ -25,6 +27,7 @@
 .xl { composes: t5;  }
 .xl2 { font-size: var(--text-2xl);}
 .xl3 { font-size: var(--text-3xl); }
+.xl4 { font-size: var(--text-4xl); }
 /*.xl4 { font-size: 2rem; padding: 2rem 3.5rem; }*/
 .h-1, .h-1 img{height: var(--text-xs); width: var(--text-xs);}
 .h-2, .h-2 img{height: var(--text-sm); width: var(--text-sm);}
@@ -35,6 +38,7 @@
 .h-7{height: var(--text-3xl); width: var(--text-3xl);}
 
 .d1, .d2, .d3{ color: var(--t-c-description); }
+
 .d1 { composes: text; }
 .d2 { composes: t3; }
 .d3 { composes: t1;}

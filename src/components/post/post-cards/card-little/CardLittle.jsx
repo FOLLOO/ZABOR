@@ -3,19 +3,14 @@ import React, { useContext } from 'react'
 import styles from './card-little.module.css'
 import global from '../../../../global.module.css'
 
-import temp from '../../../../asserts/temp/temp2.jpg'
 import basket from '../../../../asserts/icons/basket.svg'
 import lock from '../../../../asserts/icons/Lock.svg'
 import plus from '../../../../asserts/icons/plus.svg'
 
 import ProfileCircle from '../../../profile/profile-circle/ProfileCircle'
-import WhiteButton from '../../../ui/buttons/white-button/WhiteButton'
-import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
-import whiteButton from '../../../ui/buttons/white-button/WhiteButton'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart, sendCartData } from '../../../../redux/slices/bascet'
-import store from '../../../../redux/store'
+import { addItemToCart } from '../../../../redux/slices/bascet'
 import { OverlayContext } from '../../../../context/OverlayContext'
 import { IMAGE_URL } from '../../../../utils'
 function CardLittle ({
@@ -39,9 +34,7 @@ function CardLittle ({
 
   const handleAddToCart = (e) => {
     e.preventDefault()
-
     setOverlay(!overlay);
-
     // Добавляем товар в корзину
     if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){
       dispatch(addItemToCart(data));
@@ -52,7 +45,6 @@ function CardLittle ({
   return (
     <div className={`${styles.main} ${global.shadowBliz}`}>
       <div className={image ? styles.temp : null}>
-
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
             <Link to={`/profile/${user_id}`}>
@@ -80,9 +72,9 @@ function CardLittle ({
       </div>
 
 
-      <div className={`${styles.content} ${global.flex} ${global.f_dir_column}`}>
+      <div className={`${styles.content} ${global.flex} `}>
         <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
-          <div className={`${global.t1} ${styles.title}`}>
+          <div className={`${global.t3} ${styles.title}`}>
             {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
             {/*Пришла и оторвало голову нам сумасшедшая весна*/}
             {title ? title :
@@ -91,12 +83,11 @@ function CardLittle ({
               </div>
             }
           </div>
-          <div className={`${global.t1} ${styles.title}`}>
+          <div className={`${global.t3} ${styles.title}`}>
             {price ?  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(price) :
               <div className={global.skeleton}>
-              015₽
+              15
               </div>
-
             }
           </div>
         </div>

@@ -1,6 +1,12 @@
 .main{
     padding: 0 35px;
 }
+.main hr{
+    border-top: 1px solid transparent;
+}
+.icons{
+    height: 1rem;
+}
 
 .profileInputs{
     display: flex;
@@ -9,8 +15,13 @@
 }
 
 .social{
+    align-items: center;
     width: 100%;
-    gap: 70px
+    gap: 2rem;
+}
+.social img{
+    user-select: none;
+    opacity: 0.9;
 }
 
 .profileInputs input, select{

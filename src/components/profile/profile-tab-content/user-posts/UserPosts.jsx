@@ -5,14 +5,13 @@ import global from '../../../../global.module.css'
 
 import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
-import CardDefault from '../../../post/post-cards/card-default/CardDefault'
+// import CardDefault from '../../../post/post-cards/card-default/CardDefault'
 
 // import simpleFilter from '../../../../asserts/icons/simple-filter.svg'
 import filter from '../../../../asserts/icons/update/sort-desc.svg'
 
 import {useNavigate, useParams} from 'react-router-dom'
 import {useAuth} from '../../../../provider/AuthProvider'
-import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
 import {useDispatch, useSelector} from 'react-redux'
 import {IMAGE_URL} from '../../../../utils'
 import LittleTag from '../../../ui/input/little-tag/TagCheckBox'
@@ -23,6 +22,7 @@ import WhiteButton from "../../../ui/buttons/white-button/WhiteButton";
 import {OverlayContext} from "../../../../context/OverlayContext";
 import {getUserFolder, putPostToFolder} from "../../../../redux/slices/folder";
 import Button from "../../../ui/buttons/button/Button";
+import CardLittle from "../../../post/post-cards/card-little/CardLittle";
 
 /** Посты пользователя */
 
@@ -45,7 +45,7 @@ function UserPosts({data = []}) {
     const [tags, setTags] = useState([])
     const [playlist, setPlaylist] = useState([])
 
-    const [datar, setDatar] = useState([]) // сортировка
+    const [sortData, setSortData] = useState([]) // сортировка
 
     const navigate = useNavigate()
 
@@ -112,14 +112,16 @@ function UserPosts({data = []}) {
     }, [overlay]);
 
     useEffect(() => {
-        if (sort) {
-            setDatar([...(data || [])].sort((a, b) => a.id - b.id))
-        } else {
-            setDatar([...(data || [])].sort((a, b) => b.id - a.id))
-        }
+        if (data.length > 0) {
+            if (sort) {
+                setSortData([...(data || [])].sort((a, b) => a.id - b.id))
+            } else {
+                setSortData([...(data || [])].sort((a, b) => b.id - a.id))
+            }
+        } return
     }, [sort, data])
 
-    const NothingYeat = () => {
+    const NothingYet = () => {
         return (
             <GlassCard>
                 <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
@@ -148,7 +150,7 @@ function UserPosts({data = []}) {
                 <div className={styles.title}>
                     <header className={`${global.flex} ${global.f_a_center} ${styles.some}`}>
                         <h3 className={styles.header}>Публикации</h3>
-                        <Button img={filter} size={'xl2'} click={() => setSort(!sort)}>
+                        <Button img={filter} img_size={'h-6'} click={() => setSort(!sort)}>
                         </Button>
                     </header>
                 </div>
@@ -175,10 +177,10 @@ function UserPosts({data = []}) {
                                 :
                                 <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
                             : null}
-                        {datar.length > 0 ?
-                            datar.map((message =>
+                        {sortData.length > 0 ?
+                            sortData.map((message =>
                                     // <>
-                                    <CardDefault
+                                    <CardLittle
                                         data={message}
                                         id={message?.id}
                                         userID={message?.userId}
@@ -186,7 +188,8 @@ function UserPosts({data = []}) {
                                         img={message?.coverUrl}
                                         blur={!!message?.price}
                                         views={message?.views_count + 1}
-                                        time={new Date(message?.createdAt).toLocaleDateString('ru-RU',)}
+                                        // time={new Date(message?.createdAt).toLocaleDateString('ru-RU',)}
+                                        time={message?.createdAt}
                                         title={message?.title}
                                         // todo: EDITABLE
                                         editable={Number(id) === user?.id}
@@ -196,7 +199,10 @@ function UserPosts({data = []}) {
                             ))
                             :
                             <>
-                                <CardDefault/>
+                                <CardLittle/>
+                                <CardLittle/>
+                                <CardLittle/>
+                                <CardLittle/>
                             </>
                         }
                     </div>
@@ -228,7 +234,7 @@ function UserPosts({data = []}) {
                     </AfterBlock>
                 </div>
                 : null}
-            {data ? UserPosts() : NothingYeat() }
+            {data ? UserPosts() : NothingYet() }
         </div>
     )
 }

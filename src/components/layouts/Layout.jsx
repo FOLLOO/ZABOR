@@ -4,7 +4,6 @@ import {Outlet, useNavigate} from "react-router-dom";
 
 
 import styles from './layouts.module.css'
-import global from '../../global.module.css'
 
 //images
 import menu_i from '../../asserts/icons/update/menu.svg';
@@ -109,7 +108,7 @@ const Layout = ({type}) => {
                 {
                     title: 'Главная',
                     ico: home_i,
-                    function: () => navigate('/'),
+                    function: () => navigate('/settings'),
                 },
                 {
                     title: 'Теги',
@@ -121,22 +120,22 @@ const Layout = ({type}) => {
                     title: 'Подписки',
                     ico: subs_i,
                     //todo: изменить роутинг в subs
-                    function: () => navigate('/settings/mysubs'),
+                    function: () => navigate('/settings/subscribes'),
                 },
                 {
                     title: 'Уведомления',
                     ico: bell_i,
-                    function: () => navigate('/settings/mynoti'),
+                    function: () => navigate('/settings/notifications'),
                 },
                 {
                     title: 'Аналитика',
                     ico: stat_i,
-                    function: () => navigate('/settings/creative_studio'),
+                    function: () => navigate('/settings'),
                 },
                 {
                     title: 'Личный кабинет',
                     ico: user_cog_i,
-                    function: () => navigate('/settings/myprofile'),
+                    function: () => navigate('/settings/config'),
                 },
                 {
                     title: 'overlay',
@@ -157,14 +156,14 @@ const Layout = ({type}) => {
                 <div className={styles.menu_buttons}>
                     <label htmlFor="leftMenu"
                            className={styles.menu}>
-                        <img src={menu_i} alt="menu" />
+                        <img src={menu_i} height={20} width={20} alt="menu" />
                         <span>МенюМеню</span>
                         {/*<Button img={menu_i} size={'2xl'} variant={'nt'} />*/}
                     </label>
                     {menu
                         .find(item => item.title === type)
                         ?.navigation.map((item) => (
-                            <Button img={item.ico} img_size={'2xl'} size={'base'} variant={'default'} text_id={'span'} className={styles.flex}
+                            <Button img={item.ico} img_size={'h-5'} size={'base'} variant={'default'} text_id={'span'} className={styles.flex}
                                     click={item.function}>{item.title}</Button>
                         )) || null
                     }

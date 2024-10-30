@@ -1,3 +1,11 @@
+.main{
+    padding-left: 1rem;
+    min-height: 80vh;
+}
+.main hr{
+    border-top: 1px solid transparent;
+}
+
 .content{
     gap: 27px;
 }
@@ -14,15 +22,15 @@
     align-items: center;
     margin: 10px 0;
     width: 100%;
-    max-width: 800px;
-    min-width: 655px;
+    padding: 10px;
+    /*max-width: 800px;*/
+    min-width: fit-content;
     transition: all 0.2s ease-out;
-    padding: 10px 0;
 }
 
 .avtor:hover{
-    padding-left: 10px;
-    background: rgba(91, 95, 199, 0.1);
+    /*padding-right: 0;*/
+    opacity: 0.9;
 }
 
 .gap{

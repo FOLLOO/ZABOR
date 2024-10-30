@@ -32,10 +32,13 @@ export default function Header ({type = 'unauthorized'}) {
     const {isAuth, user} = useAuth()
     const [notification, setNotification] = React.useState(false)
     const [profile, setProfile] = React.useState(false)
+    const profileRef = React.useRef(null);
+    function handleClickOutside(event){
 
-    function handleClickOutside(){
-        setNotification(false);
-        setProfile(false); //edit
+        if (profileRef.current && !profileRef.current.contains(event.target)) {
+            setNotification(false);
+            setProfile(false);
+        }
     }
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
@@ -76,7 +79,7 @@ export default function Header ({type = 'unauthorized'}) {
                         <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`} type={'default'}
                                          nickname={user?.nickname ? user.nickname : null}/>
                     </Link>
-                    <div className={profile ? `${styles.active} ${styles.menu}` : `${styles.menu} ${styles.default}`}>
+                    <div ref={profileRef} className={profile ? `${styles.active} ${styles.menu}` : `${styles.menu} ${styles.default}`}>
                         <ContextDrop>
                             <ContextGroup>
                                 <Link to={`/profile/${user?.id}`}>
@@ -89,16 +92,16 @@ export default function Header ({type = 'unauthorized'}) {
                                 </Link>
                             </ContextGroup>
                             <ContextGroup>
-                                <Button img={creative}  click={() => navigate('/settings')}>
+                                <Button img_size={'h-5'} img={creative}  click={() => navigate('/settings')}>
                                     Творческая студия
                                 </Button>
                             </ContextGroup>
                             <ContextGroup noafter>
                                 <div className={`${global.f_dir_column} ${global.flex}`}>
-                                <Button img={settings} click={() => navigate('/settings/confige')} className={global.f_start}>
+                                <Button img_size={'h-5'} img={settings} click={() => navigate('/settings/config')} className={global.f_start}>
                                     Настройки
                                 </Button>
-                                <Button img={logout} variant={'red-text'}
+                                <Button img_size={'h-5'} img={logout} variant={'red-text'}
                                         // click={logOut}
                                 >
                                     Выйти
@@ -107,7 +110,7 @@ export default function Header ({type = 'unauthorized'}) {
                             </ContextGroup>
                         </ContextDrop>
                     </div>
-                    <Button img={arrow} size={'lg'} click={(e) => setProfile(true)}></Button>
+                    <Button img={arrow} img_size={'h-6'} size={'lg'} click={(e) => setProfile(true)}></Button>
                 </div>
             </div>
         )
@@ -125,7 +128,7 @@ export default function Header ({type = 'unauthorized'}) {
     return (
         <nav className={`${global.flex} ${styles.header}`}>
             <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
-                <h1 className={global.xl3}>Zabor</h1>
+                <h1 className={global.xl2}>zabor.inc</h1>
             </Link>
             {renderSwitch(type)}
         </nav>

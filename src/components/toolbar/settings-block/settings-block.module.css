@@ -1,22 +1,25 @@
 .main{
-    margin-top: 45px;
-    gap: 40px
+    margin-top: 2rem;
+    gap: 3rem;
 }
-
-.Nomain{
-    gap: 40px
-}
-
 
 .title{
-    gap: 10px
+    gap: 10px;
+    width: 25rem;
 }
 
 .content{
     width: 100%;
-
 }
 
 .red{
     color: #FF6060 !important;
+}
+
+@media (max-width: 768px) {
+    .main{
+        margin: 2rem 0;
+        gap: 1rem;
+        flex-direction: column;
+    }
 }

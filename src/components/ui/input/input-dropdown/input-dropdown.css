@@ -1,7 +1,6 @@
 .select {
     position: relative;
     min-width: 200px;
-
 }
 
 .select svg {
@@ -16,37 +15,21 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     pointer-events: none;
+    transition: transform .2s ease;
 }
 
 .select select{
-
-    font-family: 'Lato', sans-serif;
-    font-weight: normal;
-    font-size: 13pt;
-
+    vertical-align: center;
     width: 100%;
     height: 100%;
-
-    padding: 13px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(15px);
-    /* Note: backdrop-filter has minimal browser support */
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255);
     border-radius: 5px;
-
+    font-size: var(--text-base );
+    border: 1px solid var(--accent-foreground);
+    transition: all 0.2s ease-in-out;
     -webkit-appearance: none;
-    /*padding: 7px 40px 7px 12px;*/
-    /*width: 100%;*/
-    /*border: 1px solid #E8EAED;*/
-    /*border-radius: 5px;*/
-    /*background: white;*/
-    /*box-shadow: 0 1px 3px -2px #9098A9;*/
-    /*cursor: pointer;*/
-    /*font-family: inherit;*/
-    /*font-size: 16px;*/
-    transition: all 150ms ease;
 }
-
 
 
 .select select:required:invalid {
@@ -60,16 +43,17 @@
     backdrop-filter: blur(15px);
 }
 
-
-
 .select select option[value=""][disabled] {
     display: none;
 }
 
-.select select:focus {
-    outline: none;
-    border-color: #076553;
-    /*box-shadow: 0 0 0 2px rgba(49, 49, 49, 0.2);*/
+.select select:focus-visible{
+    border: 1px solid var(--accent );
+}
+
+.select select:focus-visible + svg{
+    transform: rotate(180deg);
+    transition: all .2s ease-in-out;
 }
 
 .select select:hover + svg {
@@ -84,6 +68,3 @@
     user-select: none;
 }
 
-.pol{
-    color: #828282;
-}

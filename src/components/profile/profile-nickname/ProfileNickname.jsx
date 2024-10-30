@@ -5,7 +5,7 @@ import ProfileCircle from '../profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../../provider/AuthProvider'
 
-function ProfileNickname ({ nickname, date, view, type, desc = false, img,  subs }) {
+function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  subs }) {
 
   const {user} = useAuth()
   const Default = () => {
@@ -41,9 +41,9 @@ function ProfileNickname ({ nickname, date, view, type, desc = false, img,  subs
   const SubesView = () => {
     return (
       <div className={`${global.flex} ${global.f_dir_column} ${styles.post}`}>
-        <div className={global.t1}>
+        <Link to={`/profile/${id}`} className={global.t3}>
           {nickname ? nickname : 'Anonymos'}
-        </div>
+        </Link>
         <div className={global.d3}>
           {subs ? new Intl.NumberFormat('ru-RU').format(subs) + 'Подписчиков' : 'Нет подписчиков'}
         </div>

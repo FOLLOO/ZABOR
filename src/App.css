@@ -14,10 +14,12 @@
   /*line-height: 2rem;*/
   --text-3xl: 1.875rem; /* 30px */
   /*line-height: 2.25rem;*/
+  --text-4xl: 2rem; /* 30px */
+
   --text-8xl: 6rem; /* 96px  */
   /*line-height: 1;*/
 
-  --rounded-md: 0.375rem;
+  --rounded-md: .5rem;
   
   --t-c-description: #828282;
   --tw-500: 500;
@@ -29,7 +31,9 @@
 
   --base-p: 0.5rem 1rem; /* py-2 px-4 */
 
+  --white: white;
   --accent: #8F38FF;
+  --accent-plus: #B780FF;
   --accent-foreground: #dddddd;
   --end-foreground: #333333;
   --red: #ff4444
