@@ -19,7 +19,7 @@ function RenderType ({ avatar, views, postImage, text, date }) {
         </div>
         : null}
       <div className={`${styles.content} ${global.flex} ${global.f_dir_column} ${global.f_s_between}`}>
-        <div className={`${styles.title} ${global.text} ${global.bold}`}>
+        <div className={`${styles.title} ${global.t3} ${global.medium}`}>
           {text ? text : null}
         </div>
         <div className={`${styles.analytycs} ${global.flex} ${views ? global.f_s_between : null}`}>

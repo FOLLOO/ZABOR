@@ -18,6 +18,7 @@
 .text { font-size: var(--text-xl); /* 20px / 1920px * 100 */ }
 
 .bold { font-weight: var(--tw-700); }
+.medbol { font-weight: 600; }
 .medium { font-weight: var(--tw-500); }
 
 .xs { composes: t1 }

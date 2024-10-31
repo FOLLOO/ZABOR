@@ -75,8 +75,6 @@ function CardLittle ({
       <div className={`${styles.content} ${global.flex} `}>
         <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
           <div className={`${global.t3} ${styles.title}`}>
-            {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
-            {/*Пришла и оторвало голову нам сумасшедшая весна*/}
             {title ? title :
               <div className={global.skeleton}>
                 Пришла и оторвало голову нам сумасшедшая весна

@@ -4,8 +4,10 @@
 .grid{
     display: grid;
     margin: auto;
-    grid-template-columns: auto 370px;
-    row-gap: 80px;
+    /*grid-template-columns: auto fit-content(100%);*/
+    grid-template-columns: 1fr auto;
+    row-gap: 1rem;
+    column-gap: 1rem;
     transition: all 1s ease-in-out;
     overflow: hidden;
 }
@@ -37,15 +39,18 @@
 }
 
 .textContent{
-    background: rgba(0, 0, 0, 0.06);
-    padding: 20px;
-    border-radius: 10px;
+    /*background: rgba(0, 0, 0, 0.06);*/
+    padding: .5rem;
 }
 
+.input{
+    position: absolute;
+    visibility: hidden;
+}
 
 .content{
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     flex-direction: column;
     gap: 40px;
 }
@@ -87,16 +92,16 @@
 }
 .image{
     margin: auto;
-    border-radius: 10px;
+    border-radius: var(--rounded-md);
 
     overflow: hidden;
     /*max-height: 520px;*/
-    width: 70%;
+    /*width: 70%;*/
     object-fit: cover;
 }
 
 .inputDescription{
-    width: 70%;
+    width: 100%;
     height: fit-content;
 }
 .inputDescription h4{
@@ -214,7 +219,7 @@
 
 .description {
     padding: 0 10px;
-    max-height: 100px;
+    height: 80px;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -224,17 +229,24 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
 
-    transition: max-height 0.5s ease-out; /* Плавный переход */
+    transition: all .5s cubic-bezier(0.04, 0.51, 0.97, 0.46); /* Плавный переход */
 }
 
-.active.description {
-    max-height: 1000px; /* Замените на максимальную высоту описания */
-    transition: max-height 0.5s ease-in; /* Плавный переход при открытии */
-
-    display: block;
-    -webkit-line-clamp: none; /* number of lines to show */
-    line-clamp: none;
+.input:checked + .description{
+         height: 100%;
+        transition: all .5s cubic-bezier(0.04, 0.51, 0.97, 0.46); /* Плавный переход при открытии */
+        -webkit-line-clamp: none; /* number of lines to show */
+        line-clamp: none;
 }
+
+/*.active.description {*/
+/*    max-height: 1000px; !* Замените на максимальную высоту описания *!*/
+/*    transition: max-height 0.5s ease-in; !* Плавный переход при открытии *!*/
+
+/*    display: block;*/
+/*    -webkit-line-clamp: none; !* number of lines to show *!*/
+/*    line-clamp: none;*/
+/*}*/
 
 @media (max-width: 1080px) {
     .text{

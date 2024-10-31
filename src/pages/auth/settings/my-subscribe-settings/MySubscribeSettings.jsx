@@ -14,7 +14,7 @@ import { getSubscribe } from '../../../../redux/slices/sub'
 import Nothing from '../../../nothing/Nothing'
 import Loading from '../../../loading/Loading'
 
-function MySubscribeSettings ({}) {
+function MySubscribeSettings () {
 
   const dispatch = useDispatch()
   // const [mySubes, setMySubes] = useState()
@@ -33,19 +33,17 @@ function MySubscribeSettings ({}) {
   useEffect(() => {
     if (sub.status === 'loaded') return;
     getSub()
-  },[5000])
+  },[])
 
   // console.log(sub)
 
   return (
     <div className={styles.main}>
       <BackCreate sticky/>
-      <SettingsTitle bigTitle={'Мой подписки'} description={'Изменения сохраняются автоматически'}/>
+      <SettingsTitle bigTitle={'Подписки'} description={'Изменения сохраняются автоматически'}/>
 
       <div className={styles.settings}>
         <SettingsBlock
-          titleWidth={400}
-          // mainWidth={1400}
           title={'Ваши подписки'} >
           <div className={styles.content}>
           <div className={styles.search}>
@@ -53,7 +51,7 @@ function MySubscribeSettings ({}) {
           </div>
           <div className={styles.grid}>
             {sub.items.length > 0 ? sub.items.map((item) => (
-             <ProfileCard  nickname={item.nickname} image={item.coverUrl} id={item.id}/>
+             <ProfileCard  nickname={item.nickname} image={item.coverUrl} description={item.aboutMe} id={item.id}/>
             )) :
             // <Nothing/>
             <>

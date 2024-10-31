@@ -10,7 +10,7 @@ import GreenButton from '../../../ui/buttons/green-button/GreenButton'
 // import simpleFilter from '../../../../asserts/icons/simple-filter.svg'
 import filter from '../../../../asserts/icons/update/sort-desc.svg'
 
-import {useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import {useAuth} from '../../../../provider/AuthProvider'
 import {useDispatch, useSelector} from 'react-redux'
 import {IMAGE_URL} from '../../../../utils'
@@ -179,7 +179,7 @@ function UserPosts({data = []}) {
                             : null}
                         {sortData.length > 0 ?
                             sortData.map((message =>
-                                    // <>
+                                    <Link to={`/publications/${message.id}`}>
                                     <CardLittle
                                         data={message}
                                         id={message?.id}
@@ -196,6 +196,7 @@ function UserPosts({data = []}) {
                                         description={message?.description.replace(/<[^>]*>?/gm, '')}
                                         price={message?.price ? message?.price : 'Бесплатно'}
                                         image/>
+                                    </Link>
                             ))
                             :
                             <>

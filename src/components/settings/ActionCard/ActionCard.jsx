@@ -11,7 +11,7 @@ function ActionCard({   children,
                         click_nav}) {
     return (
         <div className={back ? `${styles.main} ${styles.back}` : `${styles.main}`}>
-            <h4>{title}</h4>
+            <h4 className={`${global.t5} ${global.bold}`}>{title}</h4>
             <div>
                 {children}
             </div>

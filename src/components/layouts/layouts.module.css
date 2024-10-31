@@ -49,7 +49,10 @@
     margin: 0.7vh 1vw 0.7vh 0;
     min-width: 80px;
     width: 80px;
-    transition: width 0.2s linear;
+
+    /*transition: width .5s cubic-bezier(0.04, 0.51, 0.97, 0.46); !* Плавный переход *!*/
+
+    transition: width 0.2s ease-out;
 }
 
 /*.button span{*/

@@ -13,6 +13,8 @@ import { getUserAvatar, getUserData } from '../../../redux/slices/user'
 import { useAuth } from '../../../provider/AuthProvider'
 import { IMAGE_URL } from '../../../utils'
 import Nothing from '../../nothing/Nothing'
+import CardLittle from "../../../components/post/post-cards/card-little/CardLittle";
+import LittleTag from "../../../components/ui/input/little-tag/TagCheckBox";
 
 function CreativeStudio (props) {
 
@@ -44,14 +46,14 @@ function CreativeStudio (props) {
   }, [userData?.items?.publications?.length])
 
   return (
-    <div className={`${styles.padLeft}`}>
+    <div className={`${styles.main}`}>
       <BackCreate/>
       <SettingsTitle bigTitle={'Панель управления'}
                      description={'Следите за аналитикой на вашей старице автора'}
       />
       <div className={`${styles.grid}`}>
         <div className={`${styles.column}`}>
-          <ActionCard title={'Последняя публикация'} click_nav={() => navigate('/')}>
+            <h1 className={`${global.t5} ${global.bold}`}>Последняя публикация</h1>
             <Link to={`/settings/post/analytics/${lastPost?.id}`}>
               <CardDefault
                 data={lastPost}
@@ -69,9 +71,10 @@ function CreativeStudio (props) {
                 price={lastPost?.price ? lastPost?.price : 'Бесплатно'}
                 image/>
             </Link>
-          </ActionCard>
           <ActionCard title={'Опубликованные посты'} back
                       click_nav={() => navigate('/')}>
+            <ContextGroup>
+
             {userData?.items.publications?.length > 0 ?
               userData?.items.publications.slice(0, 5)
                 .map((message) => (
@@ -79,57 +82,53 @@ function CreativeStudio (props) {
                  <Notification postName={message.title} nickname={user.nickname} />
                 </div>
               )) : <Nothing/>}
-          </ActionCard>
-        </div>
-        <div className={`${styles.column}`}>
-          <ActionCard back title={'Аналитика'} click_nav={() => navigate('/')}>
-            <ContextGroup>
-              <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
-                <h5>
-                  Число подписчиков
-                </h5>
-                <h1>
-                  10K
-                </h1>
-              </div>
-              <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
-                <h5>
-                  Количество купленных <br/> постов за все время
-                </h5>
-                <h1>
-                  100K
-                </h1>
-              </div>
+
             </ContextGroup>
-            <ContextGroup>
-              <h4>Лучшее видео</h4>
+            <ContextGroup noafter>
+              <h4 className={`${global.t5} ${global.bold}`}>Лучшие публикации</h4>
               <div className={`${global.d3}`}>
                 За последние 28 дней
               </div>
-            </ContextGroup>
-            <ContextGroup noafter>
-              {/*{userData?.items.publications?.length > 0 ?*/}
-              {/*  userData?.items.publications.slice(0, 1)*/}
-              {/*    .map((message) => (*/}
-              {/*      <div >*/}
-              {/*        <Notification postName={message.title} nickname={user.nickname} />*/}
-              {/*      </div>*/}
-              {/*    )) : <Notification/>}*/}
-
               {userData?.items?.publications?.length > 0 ?
-                userData.items.publications
-                  // .sort((a, b) => b.views_count || 1 - a.views_count || 1) // Сортировка по убыванию views_count
-                  .slice(0, 2) // Ограничение на 1 элемент (или замените 1 на любое другое число)
-                  .map((message) => (
-                    <div key={message.id}>
-                      <Notification postName={message.title} nickname={user.nickname} />
-                    </div>
-                  )) : <Notification />}
-
+                  userData.items.publications
+                      // .sort((a, b) => b.views_count || 1 - a.views_count || 1) // Сортировка по убыванию views_count
+                      .slice(0, 2) // Ограничение на 1 элемент (или замените 1 на любое другое число)
+                      .map((message) => (
+                          <div key={message.id}>
+                            <Notification postName={message.title} nickname={user.nickname} />
+                          </div>
+                      )) : <Notification />}
 
             </ContextGroup>
           </ActionCard>
 
+        </div>
+        <div className={`${styles.column}`}>
+          <ActionCard back title={'Аналитика'} click_nav={() => navigate('/')}>
+              <ContextGroup>
+                  <div className={styles.income}>
+                      <h4 className={`${global.t5} ${global.medium}`}>10 000</h4>
+                      <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
+                          <h4 className={`${global.d3} `}>12 сделок </h4>
+                          <h4 className={`${global.t3} `}>+10% </h4>
+                      </div>
+                  </div>
+              </ContextGroup>
+
+              <ContextGroup noafter>
+                  <h4 className={`${global.t5} ${global.bold}`}>Доход</h4>
+                  <div className={`${global.d3}`}>
+                      За последние 28 дней
+                  </div>
+                  <div className={styles.income}>
+                      <h4 className={`${global.t5} ${global.medium}`}>10 000</h4>
+                      <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
+                          <h4 className={`${global.d3} `}>12 сделок </h4>
+                          <h4 className={`${global.t3} `}>+10% </h4>
+                    </div>
+                </div>
+            </ContextGroup>
+          </ActionCard>
           <ActionCard title={'Последние комментарии'} back
                       click_nav={() => navigate('/')}>
             <Notification type={'com-post'}/>
@@ -139,37 +138,10 @@ function CreativeStudio (props) {
             <Notification type={'com-post'}/>
           </ActionCard>
         </div>
-        <div className={`${styles.column}`}>
-          <ActionCard title={'Доход'} back click_nav={() => navigate('/')}>
-            <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
-              <h5>
-                За все время
-              </h5>
-              <h1>
-                10K
-              </h1>
-            </div>
-            <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
-              <h5>
-                За все месяц
-              </h5>
-              <h1>
-                10K
-              </h1>
-            </div>
-            <div className={`${global.flex} ${global.f_a_center} ${global.f_s_between}`}>
-              <h5>
-                За все день
-              </h5>
-              <h1>
-                10K
-              </h1>
-            </div>
-          </ActionCard>
-          <ActionCard title={'Новости'} click_nav={() => navigate('/')}>
-            <CardDefault/>
-          </ActionCard>
-        </div>
+        <ActionCard title={'Новости'} click_nav={() => navigate('/')}>
+          <CardLittle/>
+        </ActionCard>
+
       </div>
     </div>
   )

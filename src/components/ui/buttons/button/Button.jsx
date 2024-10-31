@@ -19,7 +19,7 @@ export default function Button({
                type={type} form={form} onClick={click}>
            {img ? <img src={img} alt={'.'} className={`${global[img_size]}`}/> : null}
            <span
-           id={text_id} className={`${global[size]}`}
+           id={text_id} className={`${global[size]} ${global.medbol}`}
            > {children} </span>
        </button>
     );

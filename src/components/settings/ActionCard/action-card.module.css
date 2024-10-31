@@ -4,7 +4,8 @@
     flex-direction: column;
     gap: 24px;
     height: fit-content;
-    padding: 30px 25px 5px 25px;
+    /*padding: 30px 25px 5px 25px;*/
+    padding:  1rem;
 
     border-radius: 10px;
     overflow: hidden;

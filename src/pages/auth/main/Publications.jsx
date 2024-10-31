@@ -82,7 +82,7 @@ export default function Publications () {
       {data.length > 0 ?
       <div className={styles.grid}>
         {data.map(posts => (
-          <Link to={`/post/${posts.id}`}>
+          <Link to={`/publications/${posts.id}`}>
             <CardLittle
               data={posts}
               avatar={posts.user.files[0].url}

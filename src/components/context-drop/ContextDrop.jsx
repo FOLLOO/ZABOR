@@ -6,7 +6,7 @@ function ContextDrop ({children, title, width, }) {
   return (
     <div className={`${styles.mainDrop}  ${global.f_dir_column}`} style={{width: width ? width : null}}>
       {title ?
-        <h1>
+        <h1 >
           {title}
         </h1>
           : null}

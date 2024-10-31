@@ -42,7 +42,7 @@ function Authorization () {
         setCookie('token', token, { path: '/' })
         setCookie('email', email, { path: '/' })
 
-        navigate('/main')
+        navigate('/publications')
       })
   }
 

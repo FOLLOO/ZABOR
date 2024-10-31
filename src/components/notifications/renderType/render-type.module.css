@@ -1,6 +1,9 @@
 .main{
     max-width: 500px;
-    width: 500px;
+    /*width: 500px;*/
+
+    width: 100%;
+
     gap: 10px;
     background: white;
     padding: 7px;

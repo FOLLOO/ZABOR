@@ -1,4 +1,8 @@
 .main{
+    /*border: 1px solid var(--accent-foreground);*/
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
+
+
     max-width: 300px;
     max-height: 460px;
     overflow: hidden;
@@ -14,12 +18,15 @@
     padding: 10px 0;
 
     cursor: pointer;
-
-    transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /*transition: background-color 2s ease-in-out;*/
+    transition: all .5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .main:hover{
-    transform: scale(1.01);
+    box-shadow: none ;
+    /*background-color: red;*/
+    /*transform: scale(1.01);*/
+    opacity: 0.9;
 }
 
 .userDescription{
@@ -52,7 +59,7 @@
     padding: 0 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px
+    gap: .5rem;
 }
 
 .buttons{

@@ -7,13 +7,14 @@ import WhiteButton from '../../ui/buttons/white-button/WhiteButton'
 import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { IMAGE_URL } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
+import Button from "../../ui/buttons/button/Button";
 
 function ProfileCard ({ image, nickname, description, id }) {
   const navigate = useNavigate()
   return (
-    <div className={`${styles.main} ${global.shadowBliz}`}>
+    <div className={`${styles.main} `}>
       <div className={styles.title}>
-        <div className={global.h4}>
+        <div className={`${global.t4} ${global.bold}`}>
           Об авторе
         </div>
       </div>
@@ -28,7 +29,7 @@ function ProfileCard ({ image, nickname, description, id }) {
       <div className={styles.content}>
         <div className={styles.userNickname}>
           {nickname ?
-          <div className={global.h4}>
+          <div className={`${global.t4} ${global.bold}`}>
             {nickname}
           </div>
             :
@@ -39,20 +40,26 @@ function ProfileCard ({ image, nickname, description, id }) {
         </div>
         <div className={styles.userDescription}>
           {description ?
-            <div className={global.d2}>
+            <div className={global.d3}>
               {description}
             </div>
             :
-            <div className={global.skeleton}>
-              Какое то поисание очень интерсеное и так далее алва фыдвлоа лыдвоа оывадл оыдао ыдлво
-            </div>
+              <div className={global.d2}>
+                Автор не добавил описание
+              </div>
+            // <div className={global.skeleton}>
+            //   Какое то поисание очень интерсеное и так далее алва фыдвлоа лыдвоа оывадл оыдао ыдлво
+            // </div>
           }
         </div>
         <div className={styles.buttons}>
           {nickname ?
             <>
-            <GreenButton text={'Вы подписаны'} />
-            <WhiteButton text={'К автору'} click={() => navigate(`/profile/${id}`)} />
+            {/*<GreenButton text={'Вы подписаны'} />*/}
+                <Button variant={'color'} className={global.f_center} >
+                    Вы подписаны
+                </Button>
+            {/*<WhiteButton text={'К автору'} click={() => navigate(`/profile/${id}`)} />*/}
             </>
             :
             <>

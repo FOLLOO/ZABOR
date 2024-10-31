@@ -1,28 +1,50 @@
+.main{
+padding: 0  1rem;
+}
+
 .grid{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    /*margin: 1vh 0;*/
-}
 
+
+    gap: 1.5rem;
+    margin-bottom: 5vh;
+}
+.income{
+    padding: 1rem 0;
+}
 .column{
     display: flex;
-    gap: 65px;
+    gap: 1.5rem;
     flex-direction: column;
 }
 
-@media (max-width: 1600px) {
-    .grid{
-        display:grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
-        gap: 10px;
-        margin: 5vh 0;
-    }
+.column h1{
+    font-size: var(--text-2xl);
+}
 
-    .column{
-        display: flex;
-        gap: 35px;
-        flex-direction: column;
+.column h5{
+    font-size: var(--text-base);
+}
+
+@media (max-width: 1080px) {
+    .grid{
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/*@media (max-width: 1600px) {*/
+/*    .grid{*/
+/*        display:grid;*/
+/*        grid-template-columns: repeat(2, 1fr);*/
+/*        justify-items: center;*/
+/*        gap: 10px;*/
+/*        margin: 5vh 0;*/
+/*    }*/
+
+/*    .column{*/
+/*        display: flex;*/
+/*        gap: 35px;*/
+/*        flex-direction: column;*/
+/*    }*/
+/*}*/

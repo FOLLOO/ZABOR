@@ -26,7 +26,9 @@
   --tw-700: 700;
   --tw-normal: normal;
 
-  --tf-LATO: 'Lato', sans-serif;
+  /*--tf-LATO: 'Lato', sans-serif;*/
+  /*--tf-LATO: 'Open Sans', sans-serif;*/
+  --tf-LATO: 'Inter', sans-serif;
   /*--tf-LATO: 'Mont Bold', sans-serif;*/
 
   --base-p: 0.5rem 1rem; /* py-2 px-4 */

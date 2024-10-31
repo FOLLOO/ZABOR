@@ -108,7 +108,7 @@ function App () {
             //   title: 'playlistsID',
             //   url: '/playlists/:id',
             //   component: <Playlists/>,
-            //   child: []
+            //   child: [] Ебанат говорит давай крепкое
             // },
             {
               title: 'create',
@@ -128,20 +128,19 @@ function App () {
           title: 'publications',
           url: '/publications',
           component: <Publications/>,
-          child: [
+          child: []
+        },
             {
               title: 'id',
-              url: '/:id',
+              url: '/publications/:id',
               component: <Post/>,
               child: []
             },
             {
               title: 'create',
-              url: '/create',
+              url: '/publications/create',
               component: <CreatePost/>,
               child: []
-            }
-          ],
         },
         {
           title: 'basket',
