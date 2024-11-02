@@ -1,5 +1,5 @@
 .comments{
-    width: 70%;
+    /*width: 70%;*/
 }
 .grid{
     display: grid;
@@ -113,7 +113,7 @@
 }
 
 .text{
-    width: 70%;
+    /*width: 70%;*/
 }
 
 
@@ -126,7 +126,7 @@
 }
 
 .title {
-    width: 70%;
+    /*width: 70%;*/
     max-width: 100%;
     /*background-color: #f5f5f5;*/
     color: #242424;

@@ -22,10 +22,13 @@ function BackCreate ({description, greenText, button, sticky, click, greenButton
         </div>
         {button ?
           <div className={`${styles.create} ${global.flex} ${global.f_a_center}`}>
-            <div className={`${styles.desc} ${global.d3} `}>
+            <div className={`${styles.desc} ${global.d2} `}>
               {description}
             </div>
-            <GreenButton text={greenText} click={click} unique form={greenButtonForm}/>
+            {/*<GreenButton text={greenText} click={click} unique form={greenButtonForm}/>*/}
+              <Button variant={'color'} click={click} form={greenButtonForm}>
+              {greenText}
+              </Button>
           </div>
           : null }
       </div>

@@ -2,14 +2,23 @@
 
 
 .grid{
-    display: grid;
-    grid-template-columns: auto fit-content(350px);
-    grid-template-rows: 85px auto;
-
-    row-gap: 30px;
-    column-gap: 70px;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    padding: 0  1rem;
+    /*display: grid;*/
+    /*grid-template-columns: auto fit-content(350px);*/
+    /*grid-template-rows: 85px auto;*/
+    /**/
+    /*row-gap: 30px;*/
+    /*column-gap: 70px;*/
 }
-
+.image{
+    overflow: hidden;
+    max-height: 520px;
+    /*max-width: 1250px;*/
+    object-fit: cover;
+}
 .span{
     grid-column: span 2;
 }
@@ -28,7 +37,7 @@
 }
 
 .profile{
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -39,7 +48,7 @@
 }
 
 .inputDescription{
-    width: 70%;
+    width: 100%;
     height: fit-content;
 }
 .inputDescription h4{
@@ -62,7 +71,7 @@
 }
 
 .text{
-    width: 70%;
+    /*width: 70%;*/
 }
 
 .main{
@@ -74,7 +83,7 @@
 }
 
 .title {
-    width: 70%;
+    /*width: 70%;*/
     max-width: 100%;
     /*background-color: #f5f5f5;*/
     color: #242424;
@@ -110,7 +119,7 @@
 
 .fileUpload{
     z-index: 10;
-    height: 520px;
+    /*height: 520px;*/
 
     display: flex;
     justify-content: center;
@@ -122,15 +131,17 @@
 
 .delete{
     opacity:0;
-    height: 0;
+    /*height: 0;*/
     transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
 
-    position: relative;
-    bottom: 300px;
-    left: 330px;
-    padding: 10px;
+    position: absolute;
+
+    bottom: 50%;
+    left: 25%;
+    /*left: 330px;*/
+    /*padding: 10px;*/
     width: 500px;
     background: rgba(255, 255, 255, 0);
     backdrop-filter: blur(10px);
@@ -138,9 +149,11 @@
     border-radius: 10px;
     border: 1px dashed rgb(136, 136, 136);
 }
-
+.mainImage{
+    position: relative;
+}
 .mainImage:hover .delete {
-    height: 100%;
+    /*height: fit-content;*/
     opacity: 1;
 }
 

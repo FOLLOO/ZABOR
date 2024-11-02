@@ -27,6 +27,9 @@ html {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
   font-size: 18px;
+
+  scroll-behavior: smooth;
+  scroll-snap-align: end;
 }
 
 /* Reapply the pointer cursor for anchor tags */

@@ -40,8 +40,6 @@ const Layout = ({type}) => {
     const navigate = useNavigate()
 
 
-
-
     /**
      *
      * @example

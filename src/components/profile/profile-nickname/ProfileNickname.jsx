@@ -5,6 +5,19 @@ import ProfileCircle from '../profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../../provider/AuthProvider'
 
+/**
+ *
+ * @param id
+ * @param nickname
+ * @param date
+ * @param view
+ * @param type - post subs default
+ * @param desc
+ * @param img
+ * @param subs
+ * @returns {Element}
+ * @constructor
+ */
 function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  subs }) {
 
   const {user} = useAuth()

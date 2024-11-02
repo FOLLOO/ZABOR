@@ -28,7 +28,8 @@ function TipTapEditor ({getValue, menu = true}) {
 
   return (
     <div className="backp">
-      {menu && editor && <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
+      {menu && editor &&
+          <BubbleMenu className="bubble-menu" tippyOptions={{ duration: 100 }} editor={editor}>
         <div className="control-group">
           <div className="button-group">
             <button
@@ -118,9 +119,11 @@ function TipTapEditor ({getValue, menu = true}) {
             </button>
           </div>
         </div>
-      </BubbleMenu>}
+      </BubbleMenu>
+      }
 
-      {editor && <FloatingMenu className="floating-menu" tippyOptions={{ duration: 100 }} editor={editor}>
+      {editor &&
+          <FloatingMenu className="floating-menu" tippyOptions={{ duration: 100 }} editor={editor}>
         <div className="control-group">
           <div className="button-group">
             <button
@@ -160,8 +163,9 @@ function TipTapEditor ({getValue, menu = true}) {
               H2 - Заголовок 2
             </button>
             <button
-              onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-              className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
+                type={'button'}
+                onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+                className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
             >
               H3 - Заголовок 3
             </button>
@@ -210,7 +214,8 @@ function TipTapEditor ({getValue, menu = true}) {
             </button>
           </div>
         </div>
-      </FloatingMenu>}
+      </FloatingMenu>
+      }
 
       <EditorContent editor={editor} />
     </div>

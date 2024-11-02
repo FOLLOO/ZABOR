@@ -24,6 +24,7 @@ import bell from '../../../asserts/icons/update/bell.svg'
 import settings from '../../../asserts/icons/update/settings.svg'
 import logout  from '../../../asserts/icons/update/log-out.svg'
 import creative from '../../../asserts/icons/update/youtube.svg'
+import create from '../../../asserts/icons/update/plus.svg'
 
 
 export default function Header ({type = 'unauthorized'}) {
@@ -92,9 +93,23 @@ export default function Header ({type = 'unauthorized'}) {
                                 </Link>
                             </ContextGroup>
                             <ContextGroup>
+                                <div className={`${global.flex} ${global.f_dir_column }`}>
+
                                 <Button img_size={'h-5'} img={creative}  click={() => navigate('/settings')}>
                                     Творческая студия
                                 </Button>
+                                { user?.roleId === 1 ?
+                                        <Button img_size={'h-5'} img={create} click={() => navigate('/group')}>
+                                            Создать публикацию
+                                        </Button>
+                                        :
+                                        <Button img_size={'h-5'} img={create}
+                                                click={() => navigate('/publications/create')}>
+                                            Создать пост
+                                        </Button>
+                                    // <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
+                                    }
+                                </div>
                             </ContextGroup>
                             <ContextGroup noafter>
                                 <div className={`${global.f_dir_column} ${global.flex}`}>

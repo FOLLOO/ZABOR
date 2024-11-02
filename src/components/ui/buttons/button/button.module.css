@@ -20,6 +20,11 @@
     cursor: pointer;
     user-select: none;
 }
+.button:disabled{
+    cursor: not-allowed;
+}
+
+
 /*VARIANTS*/
 .color {
     background: linear-gradient(87.1deg, var(--accent-plus) 0%, var(--accent) 100.61%);
@@ -44,6 +49,7 @@
 .default:hover{
     /*background-color: var(--accent-foreground); !* bg-accent *!*/
     color: var(--accent); /* text-accent-foreground */
+    /*transition: 1s ;*/
 }
 .red-text{
     color: var(--red);

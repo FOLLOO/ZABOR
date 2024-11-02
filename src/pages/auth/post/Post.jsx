@@ -39,7 +39,7 @@ function Post() {
     const [sharee, setSharee] = useState(false)
 
     const CommentsRef = useRef(null)
-    const executeScroll = (re) => re.current.scrollIntoView()
+    // const executeScroll = (re) => re.current.scrollIntoView()
 
 
     const parser = new DOMParser()
@@ -66,13 +66,13 @@ function Post() {
         pageGetSamePost() //todo: присылать похожие посты вместе с постом?
     }, [])
 
-    // const shuffledPosts = [...SamePosts?.items];
-    //
-    // // Перемешиваем массив
-    // for (let i = shuffledPosts.length - 1; i > 0; i--) {
-    //     const j = Math.floor(Math.random() * (i + 1));
-    //     [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]];
-    // }
+    const shuffledPosts = [...SamePosts?.items];
+
+    // Перемешиваем массив
+    for (let i = shuffledPosts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]];
+    }
     // console.log(OnePost)
     return (
         <div>
@@ -117,7 +117,7 @@ function Post() {
                                 <TransprantButton img={favorites}/>
                                 <TransprantButton img={like}/>
                                 {/*<TransprantButton img={comments} click={() => navigate('#comments')}/>*/}
-                                <Link to={'#comments'}>Comm</Link>
+                                <a href={'#comments'}>Comm</a>
                             </div>
                             <div className={global.flex}>
                                 <TransprantButton img={report} click={() => setOverlay(!overlay)}/>
@@ -164,7 +164,7 @@ function Post() {
                             <Nothing/>
                         )}
                     </div>
-                    <div className={styles.comments} id="comments"
+                    <div className={styles.comments} id={"comments"}
                          // ref={CommentsRef}
                     >
                         <CommnetForm/>
@@ -174,24 +174,24 @@ function Post() {
                 {/*</form>*/}
                 <div className={styles.recomends}>
                     <h1 className={`${global.t4} ${global.bold}`}>Похожее</h1>
-                    {/*{shuffledPosts?.length > 0 ?*/}
-                    {/*    shuffledPosts?.map((posts) => (*/}
-                    {/*        <Link to={`/post/${posts.id}`}>*/}
-                    {/*            <CardLittle*/}
-                    {/*                data={posts}*/}
-                    {/*                // avatar={posts.user.files[0].url}*/}
-                    {/*                blur*/}
-                    {/*                img={posts.coverUrl}*/}
-                    {/*                title={posts.title}*/}
-                    {/*                price={posts.price}*/}
-                    {/*                user_id={posts.userId}*/}
-                    {/*                time={posts.createdAt}*/}
-                    {/*                views={posts.views_count + 1}*/}
-                    {/*            />*/}
-                    {/*        </Link>*/}
-                    {/*    ))*/}
-                    {/*    : <> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/>*/}
-                    {/*        <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> </>}*/}
+                    {shuffledPosts?.length > 0 ?
+                        shuffledPosts?.map((posts) => (
+                            <Link to={`/post/${posts.id}`}>
+                                <CardLittle
+                                    data={posts}
+                                    // avatar={posts.user.files[0].url}
+                                    blur
+                                    img={posts.coverUrl}
+                                    title={posts.title}
+                                    price={posts.price}
+                                    user_id={posts.userId}
+                                    time={posts.createdAt}
+                                    views={posts.views_count + 1}
+                                />
+                            </Link>
+                        ))
+                        : <> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/>
+                            <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> </>}
                 </div>
             </div>
 

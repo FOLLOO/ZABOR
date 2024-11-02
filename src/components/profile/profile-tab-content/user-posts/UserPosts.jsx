@@ -171,12 +171,8 @@ function UserPosts({data = []}) {
                     }
                 </div>
                 <div className={styles.margin}>
+
                     <div className={styles.grid}>
-                        {Number(id) === user?.id ? user?.roleId === 1 ?
-                                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
-                                :
-                                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
-                            : null}
                         {sortData.length > 0 ?
                             sortData.map((message =>
                                     <Link to={`/publications/${message.id}`}>

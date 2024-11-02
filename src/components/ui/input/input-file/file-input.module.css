@@ -1,0 +1,75 @@
+.main{
+    width: 100%;
+}
+
+.input_file {
+    width: 100%;
+    display: flex;
+}
+.input_file_text {
+    display: block;
+
+    vertical-align: top;
+    width: 100%;
+    max-width: 300px;
+    overflow: hidden;
+
+    height: 100%;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 5px;
+    font-size: var(--text-base );
+    border: 1px solid var(--accent-foreground);
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+.input_file_btn {
+    position: relative;
+    text-decoration: none;
+    vertical-align: middle;
+    color: rgb(255 255 255);
+    text-align: center;
+    background-color: var(--accent);
+    line-height: 22px;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0;
+
+    min-height: 2.5rem; /* h-10 */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+
+    border: 1px solid var(--accent-plus);
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    /*justify-content: center;*/
+    border-radius: var(--rounded-md); /* rounded-md */
+    font-size: var(--text-base); /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition: all 0.2s ease-in-out ;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+}
+.input_file input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+.input_file_btn:focus-visible{
+    border: 1px solid var(--accent-plus);
+}
+.input_file_btn:hover {
+    background-color: var(--accent-plus );
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .13),
+    0 0 0 0 rgba(0, 0, 0, .11);
+}
+.input_file_btn::placeholder + .input_file_text{
+    color: #BEBEBE;
+}
