@@ -1,0 +1,27 @@
+
+.buttonsParent{
+    gap: .5rem;
+    user-select: none;
+}
+
+.button{
+    border-radius: 100%;
+    border: 2px solid var(--accent);
+    padding: .75rem;
+    transition: all .2s ease-in-out;
+}
+
+.button:focus{
+    background-color:   var(--accent-plus);
+}
+
+.button:hover {
+    padding: .5rem;
+    margin: .25rem;
+    box-shadow: 0 0 0 .4rem var(--accent-plus);
+}
+
+
+.buttonsImage{
+    filter: invert(20%) sepia(243%) saturate(1576%) hue-rotate(245deg) brightness(137%) contrast(73%);
+}

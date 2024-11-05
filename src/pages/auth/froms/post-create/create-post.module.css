@@ -47,17 +47,21 @@
     width: 270px;
 }
 
-.inputDescription{
+.mainInputs{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    max-width: 1250px;
     width: 100%;
     height: fit-content;
 }
-.inputDescription h4{
+.mainInputs h4{
     margin-bottom: 10px;
 }
 .buttons{
     /*width: 500px;*/
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 10px;
 }
@@ -68,18 +72,6 @@
 .buttonToAdd:hover{
     transform: scale(1.02);
     background: rgba(0, 0, 0, 0.06);
-}
-
-.text{
-    /*width: 70%;*/
-}
-
-.main{
-    position: sticky;
-    top: 0;
-    z-index: 99;
-    background: rgb(255,255,255);
-    /*background: linear-gradient(0deg, rgba(255,255,255,0) 35%, rgba(255,255,255,1) 60%);*/
 }
 
 .title {
@@ -98,7 +90,7 @@
     font-weight: bold;
     font-size: 2.5vw; /* 36/48px */
 
-    box-shadow: 0px 10px 20px -18px;
+    box-shadow: 0 10px 20px -18px;
 }
 
 .title:focus {
@@ -106,8 +98,16 @@
     border-radius: 4px 4px 2px 2px;
 }
 
+.dateLabel{
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    overflow-wrap: break-word;
+}
 
 .save{
+    position: absolute;
+    z-index: 999;
+    right: 1rem;
     margin-left: auto;
     width: 300px;
 }

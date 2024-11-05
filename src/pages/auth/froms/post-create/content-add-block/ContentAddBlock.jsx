@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 //css
 import styles from './content-add.module.css'
 import global from '../../../../../global.module.css'
+
 //image
-import text from '../../../../../asserts/icons/contextMenu/Текст.png'
-import fule from '../../../../../asserts/icons/contextMenu/Файл.png'
-import video from '../../../../../asserts/icons/contextMenu/Видео.png'
-import photo from '../../../../../asserts/icons/contextMenu/Фото.png'
+import textIcon from '../../../../../asserts/icons/update/text.svg'
+import fileIcon from '../../../../../asserts/icons/update/file.svg'
+import videoIcon from '../../../../../asserts/icons/update/file-video-2.svg'
+import photoIcon from '../../../../../asserts/icons/update/file-image.svg'
+
 //components
 import TipTapEditor from '../../../../../components/temp/TipTapEditor'
-import GreenButton from '../../../../../components/ui/buttons/green-button/GreenButton'
+import Button from "../../../../../components/ui/buttons/button/Button";
+import RoundButton from "../../../../../components/ui/buttons/rounded-button/RoundedButton";
 
 const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
 
@@ -91,42 +94,13 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
     }
   }
 
-
   const DefaultButtons = () => {
     return (
         <div className={`${global.flex} ${styles.contextAdd}`}>
-          <button type="button" className={styles.buttonToAdd} onClick={() => setType('text')}>
-            <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>
-              <img src={text} alt={'Добавить'}/>
-              <div className={global.d3}>
-                Текст
-              </div>
-            </div>
-          </button>
-          <button type="button" className={styles.buttonToAdd} onClick={() => setType('file')}>
-            <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>
-              <img src={fule} alt={'Добавить'}/>
-              <div className={global.d3}>
-                Файл
-              </div>
-            </div>
-          </button>
-          <button type="button" className={styles.buttonToAdd} onClick={() => setType('video')}>
-            <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>
-              <img src={video} alt={'Добавить'}/>
-              <div className={global.d3}>
-                Видео
-              </div>
-            </div>
-          </button>
-          <button type="button" className={styles.buttonToAdd} onClick={() => setType('image')}>
-            <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>
-              <img src={photo} alt={'Добавить'}/>
-              <div className={global.d3}>
-                Фото
-              </div>
-            </div>
-          </button>
+          <RoundButton onClick={() => setType('text')} img={textIcon} text={'Текст'}/>
+          <RoundButton onClick={() => setType('file')} img={fileIcon} text={'Файла'}/>
+          <RoundButton onClick={() => setType('video')} img={videoIcon} text={'Видео'}/>
+          <RoundButton onClick={() => setType('image')} img={photoIcon} text={'Фото'}/>
         </div>
     )
   }
@@ -141,13 +115,18 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
     )
   }
 
-   const Image = () => {
+  const Image = () => {
     return (
         <div className={styles.fileUpload}>
-          <GreenButton
-              click={() => document.getElementById(`${id}`).click()}
-              text={!fileURL ? 'Выбрать фото' : 'Изменить фото'}
-          />
+
+          <div className={styles.buttonWidth}>
+            <Button variant={'color'}  type={'button'}
+                    className={global.f_center}
+                    click={() => document.getElementById(`${id}`).click()}>
+              {!fileURL ? 'Выбрать фото' : 'Изменить фото'}
+            </Button>
+          </div>
+
           <div className={styles.imageUploadWrap}>
             <input
                 id={id}
@@ -174,10 +153,13 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
   const Video = () => {
     return (
         <div className={styles.fileUpload}>
-          <GreenButton
-              click={() => document.getElementById(`${id}`).click()}
-              text={!value ? 'Выбрать видео' : 'Изменить видео'}
-          />
+          <div className={styles.buttonWidth}>
+            <Button variant={'color'} type={'button'}
+                    className={global.f_center}
+                    click={() => document.getElementById(`${id}`).click()}>
+              {!fileURL ? 'Выбрать фото' : 'Изменить фото'}
+            </Button>
+          </div>
           <div className={styles.imageUploadWrap}>
             <input
                 id={id}
@@ -218,7 +200,7 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
 
   return (
       <div className={styles.text}>
-        {renderSwitch(type)}
+      {renderSwitch(type)}
       </div>
   )
 }

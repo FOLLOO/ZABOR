@@ -4,50 +4,37 @@ import global from '../../../../global.module.css'
 import styles from './create-post.module.css'
 
 import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCreate'
-import CardLittle from '../../../../components/post/post-cards/card-little/CardLittle'
 
-import temp from '../../../../asserts/temp/temp1.png'
-import trash from '../../../../asserts/icons/contextMenu/trash red.svg'
-import save_i from '../../../../asserts/icons/contextMenu/save.svg'
-import submit from '../../../../asserts/icons/contextMenu/submit.svg'
-
-import add from '../../../../asserts/icons/contextMenu/Добавить.png'
-import photo from '../../../../asserts/icons/contextMenu/Фото.png'
-import video from '../../../../asserts/icons/contextMenu/Видео.png'
-import text from '../../../../asserts/icons/contextMenu/Текст.png'
-import fule from '../../../../asserts/icons/contextMenu/Файл.png'
+import trash from '../../../../asserts/icons/update/trash-2.svg'
+import archive from '../../../../asserts/icons/update/archive-restore.svg'
+import plus from '../../../../asserts/icons/update/plus.svg'
+import minus from '../../../../asserts/icons/update/plus-1.svg'
+import send from '../../../../asserts/icons/update/send.svg'
 
 
-import ProfileNickname from '../../../../components/profile/profile-nickname/ProfileNickname'
-import WhiteButton from '../../../../components/ui/buttons/white-button/WhiteButton'
-import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
-import TipTapEditor from '../../../../components/temp/TipTapEditor'
-import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
 import {OverlayContext} from '../../../../context/OverlayContext'
 import MessageBox from '../../../../components/message-box/MessageBox'
 import {useAuth} from '../../../../provider/AuthProvider'
 import ContextDrop from '../../../../components/context-drop/ContextDrop'
 import ContextGroup from '../../../../components/context-drop/context-group/ContextGroup'
-import TransprantButton from '../../../../components/ui/buttons/transprant-button/TransprantButton'
 import {useTags} from '../../../../context/TagsContext'
 import {useDispatch} from 'react-redux'
 import {createPost} from '../../../../redux/slices/post'
-import {useNavigate} from 'react-router-dom'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
-import ChildBlock from '../../../temp/A-Temp/ChildBlock'
+
 import ContentAddBlock from './content-add-block/ContentAddBlock'
-import {any} from 'prop-types'
-import form from '../../../temp/A-Temp/Form'
+
 import Button from "../../../../components/ui/buttons/button/Button";
 import InputText from "../../../../components/ui/input/input-text/InputText";
 import InputFile from "../../../../components/ui/input/input-file/InputFile";
+import InputToggle from "../../../../components/ui/input/input-toggle/InputCheckbox";
+import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
 
-function CreatePost(props) {
+function CreatePost() {
 
     const formData = new FormData()
 
     const [childBlocks, setChildBlocks] = useState([{id: 1, type: 'text', content: null, name: ''}]);
-    // const [type, setType] = useState('');
 
 
     const {groupTags, creativeTags} = useTags()
@@ -58,21 +45,12 @@ function CreatePost(props) {
     const [fileURL, setFileURL] = useState(null)
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [errMes, setErrMes] = useState()
-    const [addBlock, setAddBlock] = useState(false)
     const [save, setSave] = useState(false)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [content, setContent] = useState('')
 
-    const toggleOverlay = () => {
-        setOverlay(!overlay)
-    }
 
-    function stripHtmlTags(html) {
-        return html.replace(/<[^>]*>?/gm, '')
-    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -144,9 +122,7 @@ function CreatePost(props) {
         }
     }
 
-    const deleteFile = () => {
-        setFile(null)
-    }
+
     const handleChange = (event) => {
         const uploadedFile = event.target.files[0];
         const WIDTH = 1250;
@@ -201,18 +177,21 @@ function CreatePost(props) {
         ]);
     };
 
+    const deleteChildBlock = () => {
+        setChildBlocks(prevBlocks => prevBlocks.slice(0, prevBlocks.length - 1));
+    };
+
     const updateChildBlock = (childBlockId, updates) => {
         setChildBlocks(
             childBlocks.map((childBlock) =>
                 childBlock.id === childBlockId ? {...childBlock, ...updates} : childBlock
             )
         );
-        // console.log(childBlocks)
     };
 
     useEffect(() => {
-        console.log(file)
-    }, [file])
+        // console.log(file)
+    }, [file, childBlocks])
 
 
     return (
@@ -224,39 +203,56 @@ function CreatePost(props) {
             <div className={styles.grid}>
                 <div className={styles.main}>
                     <BackCreate greenText={'Сохранить'} click={() => setSave(!save)} button
-                                description={'Так будет выглядеть ваш пост'}/>
+                                description={'Как будет выглядеть ваш пост?'}/>
                     {
                         save ?
                             <div className={styles.save}>
                                 <ContextDrop>
                                     <ContextGroup>
-                                        <TransprantButton img={submit} text={'Опубликовать'} type={'submit'} left
-                                                          form={'save_my_post'}/>
+                                        <Button type={'submit'} img={send} img_size={'h-5'}>
+                                            Опубликовать
+                                        </Button>
                                     </ContextGroup>
                                     <ContextGroup>
-                                        Data
+                                        <div className={global.flex}>
+                                            <InputToggle/>
+                                            <div className={`${global.flex} ${global.f_dir_column} ${styles.dateLabel}`}>
+                                            <h3 className={`${global.t3} ${global.medium} `}>
+                                                Отложенная
+                                                публикация</h3>
+                                            <h3 className={`${global.d3} ${global.medium}  `}>
+                                                Выберете дату публикации
+                                            </h3>
+                                            </div>
+                                        </div>
+                                        <InputText place={'Отложенная публикация'} type={'date'}
+                                            // value={birthDay ? birthDay : formattedDate  }
+                                            // onChange={e=> setBirthDay(e.target.value)}
+                                        />
                                     </ContextGroup>
                                     <ContextGroup noafter>
-                                        <TransprantButton img={save_i} text={'В черновик'} left/>
-                                        <TransprantButton img={trash} text={'Удалить'} red left/>
+                                        <div className={`${global.flex} ${global.f_dir_column}`}>
+                                            <Button type={'submit'} img={archive} img_size={'h-5'}>
+                                                В черновик
+                                            </Button>
+                                            <Button variant={'red-text'} img={trash} img_size={'h-5'}>
+                                                Удалить
+                                            </Button>
+                                        </div>
                                     </ContextGroup>
                                 </ContextDrop>
                             </div>
                             : null
                     }
                 </div>
-
+                {/*todo: по клику плавное появление меню сохранения*/}
                 <form onSubmit={handleSubmit} id={'save_my_post'}>
                     <div className={styles.content}>
                         <div className={styles.spanImage}>
                             {/*<InputFile onChange={handleChange} value={fileURL} />*/}
 
                             {file === null || file === undefined ?
-                                // <div className={styles.fileUpload}>
-                                //     <input type={'file'} className={styles.input}
-                                //     onChange={handleChange}/>
-                                // </div>
-                                <InputFile onChange={handleChange} value={fileURL} />
+                                <InputFile onChange={handleChange} value={fileURL} id={'mainImage'} />
                                 :
                                 <div className={styles.mainImage}>
                                     <img src={fileURL} className={styles.image} width={1250} height={520} alt={'temp'}/>
@@ -273,12 +269,15 @@ function CreatePost(props) {
                                 </div>
                             }
                         </div>
-                        <div className={styles.inputDescription}>
+                        {/*<div className={styles.inputDescription}>*/}
+                        <div className={styles.mainInputs}>
+                            <h2 className={`${global.t3} ${global.medium}`}>Заголовок поста</h2>
+                            <InputText place="Добавьте заголовок" value={title}
+                                       onChange={(e) => setTitle(e.target.value)}/>
+                            <h2 className={`${global.t3} ${global.medium}`}>Описание</h2>
                             <div className={global.d3}>
                                 <Textarea place={'Добавьте описание'} rows={10}/>
                             </div>
-                            <InputText place="Добавьте заголовок" value={title}
-                                       onChange={(e) => setTitle(e.target.value)}/>
                         </div>
 
                         {childBlocks.map((childBlock) => (
@@ -291,12 +290,8 @@ function CreatePost(props) {
                             />
                         ))}
                         <div className={styles.buttons}>
-                            <div className={global.d3}>
-                                Добавить блок
-                            </div>
-                            <button type={'button'} className={styles.buttonToAdd} onClick={addChildBlock}>
-                                <img src={add} alt={'Добавить'}/>
-                            </button>
+                            <RoundButton text={'Добавить блок'} img={plus} onClick={addChildBlock}/>
+                            <RoundButton text={'Удалить  блок'} img={minus} onClick={deleteChildBlock}/>
                         </div>
                     </div>
                 </form>

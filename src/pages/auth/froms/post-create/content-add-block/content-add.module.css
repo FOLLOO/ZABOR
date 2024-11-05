@@ -3,6 +3,7 @@
 }
 
 .contextAdd{
+    gap: .5rem;
     justify-content: center;
 }
 
@@ -10,7 +11,8 @@
     width: 600px;
     margin: 0 auto;
     padding: 20px;
-    height: 400px;
+    min-height: 400px;
+    height: 100%;
 }
 
 .video{
@@ -39,6 +41,9 @@
     padding: 0 15px 15px 15px;
 }
 
+.buttonWidth button{
+    width: 100%;
+}
 
 .delete{
     position: absolute;
@@ -84,4 +89,8 @@
 .removeImage:global(:active) {
     border: 0;
     transition: all .2s ease;
+}
+
+.fileUploadImage{
+    width: 100%;
 }
