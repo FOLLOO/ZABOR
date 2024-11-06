@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import styles from './authorization.module.css'
 import global from '../../../global.module.css'
 import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
 import InputText from '../../../components/ui/input/input-text/InputText'
 // import InputCheckbox from '../../../components/ui/input/input-toggle/InputCheckbox'
-import GreenButton from '../../../components/ui/buttons/green-button/GreenButton'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useCookies } from 'react-cookie'
 import { useAuth } from '../../../provider/AuthProvider'
+import Button from "../../../components/ui/buttons/button/Button";
 
 /*** headers не содержит refreshToken -> он как бы есть, но его с axios не вытащить
  * https://github.com/axios/axios/issues/295
@@ -46,61 +46,46 @@ function Authorization () {
       })
   }
 
-  // useEffect(() => {
-  //
-  //   console.log('Cookies after setting:', cookie);
-  // }, [cookie]);
-
   return (
     <div className={styles.back}>
-      <div className={styles.state}>
+        <div className={styles['form-style']}>
         <GlassCard>
-          <div className={`
-          ${global.flex} ${global.f_s_around} 
-          ${styles.flex}
-          `}>
+          <div className={`${styles.flex}`}>
             <div className={`${styles.logo}`}>
-              <div
-                className={`${global.flex} ${global.f_ji_center} ${global.f_center} ${global.f_a_center} ${global.h100}`}>
-                <h2>
-                  {/*naZAБORe*/}
-                  ZAБOR
-                </h2>
-              </div>
+                <Link to={'/'} className={`${global.xl4} `}>
+                  zabor.inc
+                </Link>
+                <p className={`${global.d3} ${styles.decriptionText}`}>
+                    zabor — это платформа, на которой люди объединяют свои деньги или другие ресурсы через интернет, чтобы поддержать усилия других людей или организаций.
+                </p>
             </div>
-            <div className={`${styles.form} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`}
-                 style={{ width: '100%' }}>
-              <div className={styles.title}>
-                <h1>
-                  Авторизация
-                </h1>
-              </div>
+            <div className={`${styles.form}`}>
               <form className={styles.signIn} onSubmit={handleSubmit}>
                 <InputText
                   value={email ? email : null}
                   onChange={e => setEmail(e.target.value)}
-                  place={'Введите Email'} type={'email'} height={'50px'}/>
+                  place={'Введите Email'} type={'email'} />
                 <InputText
                   value={password ? password : null}
                   onChange={e => setPassword(e.target.value)}
-                  place={'Введите Пароль'} type={'password'} height={'50px'}/>
-
-                <div className={`${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
-                  <div className={`${global.flex} ${global.f_a_center} ${styles.com}`}>
-
-                  </div>
-                  <div className={global.d2}>
-                    <Link to={'/registration'}>
-                      Зарегистрироваться
-                    </Link>
-                  </div>
+                  place={'Введите Пароль'} type={'password'} />
+                <div className={`${styles.link}`}>
+                    <div className={global.d3}>
+                        <Link to={'/registration'}>
+                          Зарегистрироваться
+                        </Link>
+                    </div>
                 </div>
-                <GreenButton text={'Войти'} unique type={'submit'}/>
+                  <div className={styles.button}>
+                    <Button variant={'outlet'} className={`${global.f_center} ${styles.button}`} type={'submit'}>
+                      Войти
+                    </Button>
+                  </div>
               </form>
             </div>
           </div>
         </GlassCard>
-      </div>
+        </div>
     </div>
   )
 }

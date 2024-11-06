@@ -201,7 +201,7 @@ const Layout = ({type}) => {
                     <Header type={'unauthorized'}/>
                 </div>
                 <Outlet/>
-                <Footer noStick/>
+                {/*<Footer noStick/>*/}
             </>
         )
     }

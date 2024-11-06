@@ -39,12 +39,12 @@ function MyProfileSettings () {
   const items = [
     {
       id: 1,
-      title: 'Мужской',
+      title: 'Я парень',
       value: 'м'
     },
     {
       id: 2,
-      title: 'Женский',
+      title: 'Я девушка',
       value: 'ж'
     },
   ]
@@ -158,7 +158,7 @@ function MyProfileSettings () {
     <div className={styles.main}>
       <BackCreate />
       <SettingsTitle bigTitle={'Мой профиль'} description={'Эти данные отображаются на вашей странице в профиле'}/>
-      <hr/>
+      <hr className={styles.transprent}/>
       <div className={styles.settings}>
         <form id={'user_information'}>
         <SettingsBlock
@@ -167,7 +167,7 @@ function MyProfileSettings () {
           <div className={styles.profileInputs}>
             <InputText place={'Nickname (псевдоним)'}
                        onChange={e => setNick(e.target.value)}
-                       value={nick ? nick : user?.nickname}/>
+                       value={nick ? nick : null}/>
             {/*<InputText place={'Информация о себе'}/>*/}
               <Textarea place={'Информация о себе'} rows={10}
                         value={aboutMe ? aboutMe : user?.aboutMe}
@@ -212,16 +212,16 @@ function MyProfileSettings () {
           </div>
         </SettingsBlock>
         </form>
-
+        <hr className={styles.hr}/>
         <form id={'user_login'}>
         <SettingsBlock
           title={'Параметры входа'} descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
           ' \n' +
           'и одну цифру'} red>
           <div className={styles.profileInputs}>
-            <InputText place={'Введите старый пароль'} type={'text'}/>
-            <InputText place={'Введите новый пароль'} type={'password'}/>
-            <InputText place={'Повторите новый пароль'} type={'password'}/>
+            <InputText place={'Введите старый пароль'} type={'text'} autocomplete={'new-password'}/>
+            <InputText place={'Введите новый пароль'} type={'password'} autocomplete={'new-password'}/>
+            <InputText place={'Повторите новый пароль'} type={'password'} autocomplete={'new-password'}/>
             <Button variant={'color'} className={global.f_center} >
               Сохранить изменения
             </Button>

@@ -137,6 +137,12 @@ a, a:link, a:visited  {
 
 a:hover  {
   text-decoration: none;
+  color: var(--accent-plus)
+}
+
+a:focus {
+  text-decoration: none;
+  color: var(--accent-plus)
 }
 
 /* Common */

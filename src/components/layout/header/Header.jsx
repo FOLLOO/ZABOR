@@ -25,6 +25,7 @@ import settings from '../../../asserts/icons/update/settings.svg'
 import logout  from '../../../asserts/icons/update/log-out.svg'
 import creative from '../../../asserts/icons/update/youtube.svg'
 import create from '../../../asserts/icons/update/plus.svg'
+import {useSelector} from "react-redux";
 
 
 export default function Header ({type = 'unauthorized'}) {
@@ -34,8 +35,9 @@ export default function Header ({type = 'unauthorized'}) {
     const [notification, setNotification] = React.useState(false)
     const [profile, setProfile] = React.useState(false)
     const profileRef = React.useRef(null);
-    function handleClickOutside(event){
 
+    const cartItems = useSelector((state) => state.cart.items)
+    function handleClickOutside(event){
         if (profileRef.current && !profileRef.current.contains(event.target)) {
             setNotification(false);
             setProfile(false);
@@ -66,10 +68,19 @@ export default function Header ({type = 'unauthorized'}) {
                     <Search/>
                 </div>
                 <div className={`${global.flex} ${styles.buttons}`}>
+                    <div className={styles.desctopButtons}>
+
                     <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}/>
+                    {cartItems.length === 0 ? null :
+                        <span className={styles.basketCount}>{cartItems.length}</span>
+                    }
                     <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}/>
-                    <div
-                        className={notification ? `${styles.active} ${styles.dropdown_menu}` : `${styles.dropdown_menu} ${styles.default}`}>
+                    {cartItems.length === 0 ? null :
+                        <span className={styles.basketCount}>{cartItems.length}</span>
+                    }
+                    </div>
+
+                    <div className={notification ? `${styles.active} ${styles.dropdown_menu}` : `${styles.dropdown_menu} ${styles.default}`}>
                         <ContextDrop title={'Уведомления'}>
                             <ContextGroup>
                                 <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
@@ -111,6 +122,21 @@ export default function Header ({type = 'unauthorized'}) {
                                     }
                                 </div>
                             </ContextGroup>
+                            <div className={styles.mobileButtons}>
+                            <ContextGroup >
+                                <div className={`${global.f_dir_column} ${global.flex}`}>
+                                    <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}
+                                            className={global.f_start}>
+                                        Корзина
+                                    </Button>
+                                    <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}
+                                        // click={logOut}
+                                    >
+                                        Уведомления
+                                    </Button>
+                                </div>
+                            </ContextGroup>
+                            </div>
                             <ContextGroup noafter>
                                 <div className={`${global.f_dir_column} ${global.flex}`}>
                                 <Button img_size={'h-5'} img={settings} click={() => navigate('/settings/config')} className={global.f_start}>

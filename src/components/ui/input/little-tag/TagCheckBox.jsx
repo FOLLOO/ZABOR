@@ -21,7 +21,7 @@ function LittleTag ({text, click, onChange, name, id}) {
               onChange={onChange}
       />
       <label  className={styles.checkbox_label} onClick={handleChange} htmlFor={id} >
-        <span className={`${styles.checkbox_text} ${global.base}`}>{text ? text : null}</span>
+        <span className={`${styles.checkbox_text} ${global.sm}`}>{text ? text : null}</span>
         {checkedd ? <img src={close} alt={''}
                          height={20} width={20}
                          className={styles.check_img}

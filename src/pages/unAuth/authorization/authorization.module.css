@@ -1,35 +1,78 @@
-
 .back{
-    padding-top: 20px;
-    background-color: #ffffff;
-    background-image: radial-gradient(rgba(12, 12, 12, 0.171) 2px, transparent 0);
-    background-size: 100px 100px;
-    background-position: -5px -5px
-
+    /*--white: red;*/
+    --input-bg-color: #292929;
+    --input-border-color: rgba(99, 99, 99, 0.5);
+    --input-text-color: white;
+    --input-placeholder-color: #707070;
+    --b-otlet-color: white;
 }
-.state{
-    padding: 130px 150px;
+.button{
+    width: 100%;
+}
+.back{
+    padding: 2rem 0;
+    min-height: 100vh;
+    height: 100%;
+    /*height: 100vh;*/
+
+    /*background-image: url("../../../asserts/background/abstract resin blur.png");*/
+    background-image: url("../../../asserts/background/purple blue zabor.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+    display: flex;
+    /*align-items: start;*/
+    justify-content: right;
+}
+.link{
+    align-self: end;
+    justify-self: right;
+}
+
+.form-style{
+    max-width: 700px;
+    /*max-height: 600px;*/
+    min-height: 100%;
+
+    margin: 2rem 0;
+    /*margin-right: 2rem;*/
 }
 .title{
+    color: var(--white);
     text-align: center;
 }
 .flex{
-    padding: 100px 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 2rem;
+    /*padding: 100px 30px;*/
 }
 .com{
     gap:20px
 }
+.decriptionText{
+    max-width: 400px;
+}
 .logo{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
     width: 100%;
 }
 
 .form{
-    padding: 0 70px;
+
+    /*padding: 0 70px;*/
     width: 100%;
-    gap: 42px;
+    gap: 1rem;
 }
 .signIn {
-    max-height: 545px;
+    /*max-height: 545px;*/
 }
 .signIn > div {
     margin: 15px 0;

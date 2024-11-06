@@ -1,3 +1,4 @@
+:global(.sidebar_input){}
 
 .sidebar_input[name="leftMenu"]{
     position: absolute;
@@ -104,5 +105,12 @@
 }
 
 /*Overlay*/
+
+@media (max-width: 768px) {
+    .sidebar_input:checked + .navbar, #span {
+        color: black;
+        width: 35vw;
+    }
+}
 
 

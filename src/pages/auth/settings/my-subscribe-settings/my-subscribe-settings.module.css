@@ -22,6 +22,7 @@
 }
 
 .settings{
+    min-height: 50vh;
     margin-bottom: 5%;
 }
 

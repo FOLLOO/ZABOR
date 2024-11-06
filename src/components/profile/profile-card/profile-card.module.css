@@ -10,6 +10,9 @@
     background: white;
     border-radius: 5px;
 
+    border: 0 solid var(--accent-foreground);
+
+
     display: flex;
     flex-direction: column;
 
@@ -24,6 +27,7 @@
 
 .main:hover{
     box-shadow: none ;
+    border: 1px solid var(--accent-foreground);
     /*background-color: red;*/
     /*transform: scale(1.01);*/
     opacity: 0.9;

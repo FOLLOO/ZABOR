@@ -1,6 +1,22 @@
+.basketCount{
+    position: relative;
+    left: -30px;
+    bottom: -30px;
+
+
+
+    background: var(--accent);
+    color: white;
+    font-size: var(--text-s);
+    padding: .1rem .3rem;
+    border-radius: 100%;
+    height: fit-content;
+    text-align: center;
+}
+
 .buttons{
     width: fit-content;
-    gap: 0.5rem
+    /*gap: 0.5rem*/
 }
 .ac{
     align-items: center;
@@ -61,4 +77,20 @@
 .search{
     width: 100%;
     max-width: 450px;
+}
+.mobileButtons{
+    display: none;
+}
+.desctopButtons{
+    display: block;
+}
+
+@media (max-width: 425px) {
+    .mobileButtons{
+        display: block;
+    }
+
+    .desctopButtons{
+        display: none;
+    }
 }

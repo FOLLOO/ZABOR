@@ -52,12 +52,30 @@
 .tags_hidden {
     height: 35px; /* начальная высота для одной строки */
 }
+@media (max-width: 1440px) {
+    .grid{
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
 
 @media (max-width: 1200px) {
    .grid{
        grid-template-columns: repeat(3, 1fr);
 
    }
+}
+
+@media (max-width: 1024px) {
+    .grid{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .grid a{
+        min-width: 300px;
+    }
+
 }
 
 

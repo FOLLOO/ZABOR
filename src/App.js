@@ -25,6 +25,7 @@ import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
 import Playlists from "./pages/auth/profile/playlist-page/Playlists";
 import AboutMe from "./pages/auth/profile/about/AboutMe";
 import {ProfileLayout} from "./pages/auth/profile/Layout/ProfileLayout";
+import ClientError from "./pages/404/ClientError";
 // import axios from "axios";
 
 
@@ -50,18 +51,6 @@ function App () {
           child: [],
         },
         {
-          title: 'login',
-          component: <Authorization/>,
-          url: '/login', // 'login' ?
-          child: [],
-        },
-        {
-          title: 'registration',
-          url: '/registration',
-          component: <Registration/>,
-          child: [],
-        },
-        {
           title: 'select',
           url: '/select',
           component: null,
@@ -80,6 +69,24 @@ function App () {
             }
           ]
         }
+      ]
+    },
+    {
+      status: "login",
+      layout: null,
+      navigations: [
+        {
+          title: 'login',
+          component: <Authorization/>,
+          url: '/login', // 'login' ?
+          child: [],
+        },
+        {
+          title: 'registration',
+          url: '/registration',
+          component: <Registration/>,
+          child: [],
+        },
       ]
     },
     {
@@ -243,8 +250,6 @@ function App () {
       const { url, component, child } = route;
       const fullPath = `${parentPath}${url.startsWith('/') ? url : `/${url}`}`;
 
-      // console.log(url, fullPath)
-
       // Проверяем, есть ли вложенные маршруты
       if (child && child.length > 0) {
         return (
@@ -259,69 +264,6 @@ function App () {
 
   return (
     <div  className="App">
-      {/*<BrowserRouter>*/}
-      {/*  <AuthProvider>*/}
-      {/*    <Routes>*/}
-      {/*      <Route path="/settings" element={<Layout type={'settings'}/>}>*/}
-      {/*        <Route path="/settings/temp" element={<TempPAge/>}/>*/}
-      {/*        <Route path="/settings/myprofile" element={<MyProfileSettings/>}/>*/}
-      {/*        <Route path="/settings/mysubs" element={<MySubscribeSettings/>}/>*/}
-      {/*        <Route path="/settings/mynoti" element={<MyNotificationsSettings/>}/>*/}
-      {/*        <Route path="/settings/creative_studio" element={<CreativeStudio/>}/>*/}
-      {/*        <Route path="/settings/post/analytics/" element={<PostAnalytics/>}/>*/}
-      {/*        <Route path="/settings/post/analytics/:id" element={<PostAnalytics/>}/>*/}
-      {/*        <Route path="/settings/avtor/analytics" element={<AvtorAnalytics/>}/>*/}
-      {/*        <Route path="/settings/avtor/analytics/:id" element={<AvtorAnalytics/>}/>*/}
-      {/*      </Route>*/}
-
-      {/*      <Route path="/" element={<Layout type={'settings'}/>}>*/}
-      {/*        <Route path={'/create/playlist'} element={<PlaylistCreate/>}/>*/}
-      {/*        <Route path={'my/group'} element={<MyGroupTags/>}/>*/}
-      {/*        <Route path={'my/tags'} element={<MyTags/>}/>*/}
-      {/*      </Route>*/}
-
-
-      {/*      <Route path={'/main'} element={<Layout type={'base'}/>}>*/}
-      {/*        <Route path="/main" element={<MainAfter/>}/>*/}
-      {/*      </Route>*/}
-
-      {/*      <Route path="/" element={<Layout type={'base'}/>}>*/}
-      {/*        <Route path="/auth" element={<>auth</>}/>*/}
-      {/*        <Route path="/profile/:id" element={<Profile/>}/>*/}
-      {/*        <Route path={'/post/:id'} element={<Post/>}/>*/}
-      {/*      </Route>*/}
-      {/*      <Route path="/" element={<Layout post type={'base'}/>}>*/}
-      {/*        <Route path={'/post/:id'} element={<Post/>}/>*/}
-      {/*      </Route>*/}
-
-      {/*      <Route path="/" element={<Layout type={'base'}/>}>*/}
-      {/*        <Route path={'/create/post'} element={<CreatePost/>}/>*/}
-      {/*        <Route path={'/group'} element={<SelectGroupTagsPage/>}/>*/}
-      {/*        <Route path={'/tags'} element={<SelectTagsPage/>}/>*/}
-      {/*        <Route path={'/market'} element={<Market/>}/>*/}
-      {/*        <Route path={'/a_temp'} element={<Form/>}/>*/}
-      {/*      </Route>*/}
-
-
-      {/*      <Route path="/temp" element={<Temp/>}/>*/}
-      {/*      <Route path="/temp2" element={<TipTapEditor/>}/>*/}
-
-      {/*      <Route path="/" element={<Layout type={'notAuth'}/>}>*/}
-      {/*        <Route path="/" element={<Main/>}/>*/}
-      {/*      </Route>*/}
-
-      {/*      <Route path="/" element={<Layout type={'login'}/>}>*/}
-      {/*        <Route path="/registration" element={<Registration/>}/>*/}
-      {/*        <Route path="/select/tags" element={<UserInterstings/>}/>*/}
-      {/*        <Route path="/select/creative_tags" element={<FinilyChoices/>}/>*/}
-      {/*        <Route path="/login" element={<Authorization/>}/>*/}
-      {/*      </Route>*/}
-
-
-      {/*      <Route path="*" element={<ClientError/>} />*/}
-      {/*    </Routes>*/}
-      {/*  </AuthProvider>*/}
-      {/*</BrowserRouter>*/}
       <BrowserRouter>
         <AuthProvider>
           <Routes>
@@ -334,6 +276,7 @@ function App () {
                   {renderRoutes(routeGroup.navigations, routeGroup.url || '')}
                 </Route>
             ))}
+              <Route path="*" element={<ClientError/>} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
