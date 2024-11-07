@@ -1,78 +1,87 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import styles from './aboutMe.module.css'
 import global from '../../../../global.module.css'
 
-import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
-import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
-import { useNavigate } from 'react-router-dom'
+//image
+import vk from '../../../../asserts/icons/update/vk.svg' //vk
+import twitch from '../../../../asserts/icons/update/twitch.svg'
+import mail from '../../../../asserts/icons/mail.svg'
+import telegram from '../../../../asserts/icons/telegram.svg' //telegram
+import tiktok from '../../../../asserts/icons/update/tiktok.svg'
+import youtube from '../../../../asserts/icons/update/youtube.svg' //youtube
+import link from '../../../../asserts/icons/update/link-2.svg'
 
-function AboutMe ({data, text, social}) {
+// import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
+// import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
+import {useNavigate, useParams} from 'react-router-dom'
+import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserData} from "../../../../redux/slices/user";
 
-  const navigate = useNavigate()
+function AboutMe () {
+    const {id} = useParams()
+
+    const dispatch = useDispatch()
+    // const navigate = useNavigate()
+
+    const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
+
+    const getUser = () => {
+        try {
+            dispatch(getUserData(id))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    function setImageToButton(name) {
+        switch (name) {
+            case 'twitch':
+                return twitch;
+            case 'mail':
+                return mail;
+            case 'telegram':
+                return telegram;
+            case 'vk':
+                return vk;
+            case 'youtube':
+                return youtube;
+            case 'tiktok':
+                return tiktok;
+            default: return link;
+        }
+    }
+
+    useEffect(() => {
+        if (userData.status === 'loaded') return
+        getUser()
+    },[userData.status])
 
   return (
     // margin потому что там ток один атрибут
-    <div className={styles.margin}>
-      <GlassCard>
-        <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
-        ${global.f_a_center} ${styles.main}`}>
-          <h3>Обо мне</h3>
-          <div className={global.d2}>
-            {data?.aboutMe ? data?.aboutMe : 'Пока что ничего нет 🤔'}
-          </div>
-          {data?.aboutMe ? null :
-            <div className={styles.addButton}>
-            <GreenButton text={'Добавить'} unique click={() => navigate('/settings/myprofile')}/>
-            </div>
-          }
-        </div>
-      </GlassCard>
-      <div className={`${styles.infCards} `}>
-        <GlassCard>
-          <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
-        ${global.f_a_center} ${styles.main}`}>
-            <h3>Достижения</h3>
-            <div className={global.d2}>
-              {text ? text : 'Пока что ничего нет 🤔'}
-            </div>
-            {text ? null :
-              <div className={styles.addButton}>
-                <GreenButton text={'Посмотреть'} unique/>
+      <div className={styles.main}>
+          <section className={styles.descriptionBlock}>
+              <h1 className={global.t5}>Обо мне</h1>
+              <p className={`${styles.description} ${global.t2}`}>
+                {userData?.items?.user?.aboutMe}
+              </p>
+              <div className={styles.userSocialLinks}>
+                  {userData?.items?.socialMedia?.map((item, index) => (
+                      item.text === '' ? null :
+                    <RoundButton text={item.socialMedium.name} img={setImageToButton(item.socialMedium.name)} variant={'black'}/>
+                  ))}
               </div>
-            }
-          </div>
-        </GlassCard>
-        <GlassCard>
-          <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
-        ${global.f_a_center} ${styles.main}`}>
-            <h3>Социальные сети</h3>
-            <div className={global.d2}>
-              {text ? text : 'Пока что ничего нет 🤔'}
-            </div>
-            {text ? null :
-              <div className={styles.addButton}>
-                <GreenButton text={'Добавить соц.сеть'} click={() => navigate('/settings/myprofile')} unique/>
-              </div>
-            }
-          </div>
-        </GlassCard>
-        <GlassCard>
-          <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
-        ${global.f_a_center} ${styles.main}`}>
-            <h3>Цели</h3>
-            <div className={global.d2}>
-              {text ? text : 'Пока что ничего нет 🤔'}
-            </div>
-            {text ? null :
-              <div className={styles.addButton}>
-                <GreenButton text={'Добавить цели'} unique/>
-              </div>
-            }
-          </div>
-        </GlassCard>
+          </section>
+          <hr/>
+          <secition className={styles.achievementsBlock}>
+
+          </secition>
+          <hr/>
+          <section className={styles.goalsBlock}>
+
+          </section>
       </div>
-    </div>
   )
 }
 

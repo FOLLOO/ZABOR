@@ -46,15 +46,12 @@ class UserService {
     return response;
   }
 
-  async updateUser(data) {
-    const response = await axiosClassic.put('user/updateUser', data)
-      .then(response => {
-      // console.log(response.data);
-      })
+  async updateUser(uData) {
+    const {data} = await axiosClassic.put('user/updateUser', uData)
       .catch(error => {
         console.error('There was an error making the request!', error);
       });
-    return response
+    return data
   }
 }
 

@@ -1,38 +1,55 @@
 /*margin потому что там ток один атрибут*/
 
-.margin{
-    margin-top: 5%;
-}
-
 .main{
-    text-align: center;
-    gap: 30px;
-    padding: 30px;
-}
-
-.addButton{
-    width: 300px;
-}
-
-.infCards{
-    display: flex;
-    justify-content: space-between;
     margin-top: 2%;
-    gap: 60px
+    min-height: 50vh;
+    display: flex;
+    gap: 1rem;
 }
 
-@media (max-width: 1250px) {
-    .margin{
-        /*width: 100%;*/
-        /*margin: auto;*/
-        /*max-width: 1000px;*/
-    }
-    .infCards{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /*justify-content: space-between;*/
-        margin-top: 2%;
-        gap: 50px
+.description{
+    text-indent: initial;
+    line-height: normal;
+    /*margin: 0 ;*/
+}
+
+.userSocialLinks{
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    justify-content: center;
+}
+.descriptionBlock, .achievementsBlock, .goalsBlock{
+    /*display: flex;*/
+    width: 100%;
+}
+
+@media (max-width: 1080px) {
+    .main{
+        display: flex;
+        flex-wrap: wrap;
     }
 
+    .main > .descriptionBlock, .achievementsBlock{
+        width: 50%;
+    }
+
+    .userSocialLinks{
+        justify-content: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .main{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .goalsBlock, .descriptionBlock, .achievementsBlock{
+        width: 100%;
+    }
+
+    .userSocialLinks{
+        justify-content: center;
+    }
 }
