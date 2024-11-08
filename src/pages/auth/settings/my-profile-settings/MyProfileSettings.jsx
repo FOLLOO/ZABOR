@@ -29,8 +29,6 @@ function MyProfileSettings() {
 
     const dispatch = useDispatch()
 
-    // const { userData } = useSelector(state => state.userR)
-    // const formattedDate = user?.date_of_birth ? new Date(user?.date_of_birth).toISOString().slice(0, 10) : '';
 
     const slectOpotionItems = [
         {
@@ -95,12 +93,12 @@ function MyProfileSettings() {
     const [aboutMe, setAboutMe] = useState('')
     const [sex, setSex] = useState('')
     const [birthDay, setBirthDay] = useState(new Date())
-    // const [links, setLinks] = useState([])
+
     const [socialMedia, setSocialMedia] = useState(initialSocialMediaData);
 
-    // const [passwordBefore, setPasswordBefore] = useState('')
-    // const [passwordAfter, setPasswordAfter] = useState('')
-    // const [passwordRepeat, setPasswordRepeat] = useState('')
+    const [passwordBefore, setPasswordBefore] = useState('')
+    const [passwordAfter, setPasswordAfter] = useState('')
+    const [passwordRepeat, setPasswordRepeat] = useState('')
 
     const getUser = () => {
         try {
@@ -118,11 +116,10 @@ function MyProfileSettings() {
         setAboutMe(user?.aboutMe)
         setBirthDay(user?.date_of_birth)
         setSex(user?.sex)
-        const result = initialSocialMediaData.map(item1 => {
-            const item2 = user?.usersSocialMedia.find(item => item.id === item1.id)
-            return {
-                ...item1,
-                text: item1.text ? item1.text : (item2 ? item2.text : '')
+
+        const result = initialSocialMediaData.map(baseObj => {
+            const userObject = user?.usersSocialMedia.find(item => item.socialMediumId === baseObj.socialMediumId)
+            return {...baseObj, text: userObject?.text ? userObject.text : ''
             }
         })
         setSocialMedia(result)
@@ -140,7 +137,6 @@ function MyProfileSettings() {
 
     function saveUser(e) {
         e.preventDefault()
-
         const data = {
             nickname: nick,
             sex: sex,
@@ -148,7 +144,6 @@ function MyProfileSettings() {
             aboutMe: aboutMe,
             socialMedia: socialMedia
         }
-
         try {
             updateUser(data)
         } catch (err) {
@@ -156,14 +151,15 @@ function MyProfileSettings() {
         }
     }
 
-    // приход данных при загрузке страницы
-    // useMemo(() => {
-    //
-    //     setNick(user.nickname)
-    //     setAboutMe(user.aboutMe)
-    //     setBirthDay(user.date_of_birth)
-    //     setSex(user.sex)
-    // }, )
+    function updatePassword(e){
+        e.preventDefault()
+
+
+
+        const data = {
+
+        }
+    }
 
     return (
         <div className={styles.main}>
@@ -211,7 +207,7 @@ function MyProfileSettings() {
                                 <div key={item.socialMediumId} className={`${global.flex} ${styles.social}`}>
                                     <InputText
                                         place={item?.placeholder}
-                                        value={item.text}
+                                        value={item.text ? item.text : null}
                                         onChange={(e) => handleChange(item.socialMediumId, e.target.value)}
                                     />
                                     <img src={item?.imgSrc} className={global['h-6']} alt="social"/>
@@ -234,9 +230,9 @@ function MyProfileSettings() {
                             ' \n' +
                             'и одну цифру'} red>
                         <div className={styles.profileInputs}>
-                            <InputText place={'Введите старый пароль'} type={'text'} autocomplete={'new-password'}/>
-                            <InputText place={'Введите новый пароль'} type={'password'} autocomplete={'new-password'}/>
-                            <InputText place={'Повторите новый пароль'} type={'password'}
+                            <InputText place={'Введите старый пароль'}   value={passwordBefore ? passwordBefore : null} onChange={(e) => setPasswordBefore(e.target.value)} type={'text'} autocomplete={'new-password'} />
+                            <InputText place={'Введите новый пароль'}    value={passwordAfter ? passwordAfter : null} onChange={(e) => setPasswordAfter(e.target.value)} type={'password'} autocomplete={'new-password'}/>
+                            <InputText place={'Повторите новый пароль'}  value={passwordRepeat ? passwordRepeat : null} onChange={(e) => setPasswordRepeat(e.target.value)}  type={'password'}
                                        autocomplete={'new-password'}/>
                             <Button type={'button'} variant={'color'} className={global.f_center}>
                                 Сохранить изменения

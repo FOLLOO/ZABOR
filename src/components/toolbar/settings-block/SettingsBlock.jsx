@@ -16,7 +16,7 @@ function SettingsBlock ({ children,
           {title ? title : null}
         </div>
         {button ? <GreenButton text={b_text} type={b_type}  /> : null }
-        <div className={red ? `${global.d2} ${styles.red}` : global.d2}>
+        <div className={red ? `${global.d3} ${styles.red}` : global.d3}>
           {descripton ? descripton : null}
         </div>
       </div>

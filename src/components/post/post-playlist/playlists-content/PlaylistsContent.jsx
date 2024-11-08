@@ -25,11 +25,12 @@ function PlaylistsContent ({title, description, data, folder}) {
    const navigate = useNavigate()
    const dispatch = useDispatch()
   // console.log(data)
-  // console.log(folder)
+  console.log(folder)
 
    const clickDeleteFolder = () => {
      const id = folder.id;
      try {
+         console.log(id)
        dispatch(deleteFolder(id))
        navigate(-1)
      }

@@ -171,7 +171,6 @@ function UserPosts({data = []}) {
                     }
                 </div>
                 <div className={styles.margin}>
-
                     <div className={styles.grid}>
                         {sortData.length > 0 ?
                             sortData.map((message =>

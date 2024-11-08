@@ -116,7 +116,7 @@
 
     .navbar  button:hover {
         color: transparent;
-        width: 25vw;
+        /*width: 25vw;*/
     }
 
 }
