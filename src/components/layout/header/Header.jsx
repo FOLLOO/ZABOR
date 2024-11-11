@@ -31,7 +31,7 @@ import {useSelector} from "react-redux";
 export default function Header ({type = 'unauthorized'}) {
 
     const navigate = useNavigate()
-    const {isAuth, user} = useAuth()
+    const {isAuth, user, logOut} = useAuth()
     const [notification, setNotification] = React.useState(false)
     const [profile, setProfile] = React.useState(false)
     const profileRef = React.useRef(null);
@@ -48,6 +48,15 @@ export default function Header ({type = 'unauthorized'}) {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
+    function clickLogOut(){
+        try{
+            logOut()
+            navigate('/login')
+        }catch(e){
+            console.log(e)
+        }
+    }
+
   const Unauthorized = () => {
     return (
         <div className={`${global.flex} ${styles.buttons}`}>
@@ -60,7 +69,7 @@ export default function Header ({type = 'unauthorized'}) {
         </div>
     )
   }
-
+//todo: UserInterestes RUD -> app.js and authorInterestes
     const Authorized = () => {
         return (
             <div className={`${global.flex} ${styles.auth_buttons}`}>
@@ -143,7 +152,7 @@ export default function Header ({type = 'unauthorized'}) {
                                     Настройки
                                 </Button>
                                 <Button img_size={'h-5'} img={logout} variant={'red-text'}
-                                        // click={logOut}
+                                        click={clickLogOut}
                                 >
                                     Выйти
                                 </Button>

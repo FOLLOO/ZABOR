@@ -1,74 +1,92 @@
 import React, { useEffect, useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+
+//css
 import styles from './select-tags.module.css'
-import global from '../../../global.module.css'
+import {createUserInterests, fetchCreativeTags} from '../../../redux/slices/tag'
+
+//utils
+import { useTags } from '../../../context/TagsContext'
+
+//components
 import SettingsTitle from '../../toolbar/settings-title/SettingsTitle'
 import SettingsBlock from '../../toolbar/settings-block/SettingsBlock'
 import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
-import WhiteButton from '../../ui/buttons/white-button/WhiteButton'
-import { useTags } from '../../../context/TagsContext'
-import { useNavigate } from 'react-router-dom'
-import registration from '../../../pages/unAuth/registration/Registration'
-import { useDispatch } from 'react-redux'
-import { createUserInterests } from '../../../redux/slices/tag'
 
-function SelectTags ({ userChoice = false, tags = [], first }) {
+function SelectTags ({ userChoice = false, first }) {
 
-  const { addCreativeTag, creativeTags  } = useTags()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [creativeeTags, setCreativeeTags] = useState([])
 
-  const addTag = (id) => {
-    if (!creativeeTags.includes(id)){
-      setCreativeeTags([...creativeeTags, id])
-      // console.log(selectTag)
+  const { addCreativeTag, groupTags  } = useTags()
+  const { creative_tags } = useSelector(state => state.allTags)
+
+  const [tags, setTags] = useState([])
+  const [loading, setLoading] = useState(true)
+
+
+  const getTags = () => {
+    const data = {
+      groups : groupTags.join(',')
     }
-    else{
-      const index = creativeeTags.indexOf(id);
-      if (index > -1) { // only splice array when item is found
-        creativeeTags.splice(index, 1); // 2nd parameter means remove one item only
-      }
-      // console.log(creativeeTags)
+    try{
+      dispatch(fetchCreativeTags(data)).then((response) => {
+        if(response){
+          setLoading(false)
+        }
+      })
+    }
+    catch (err){
+      console.log(err)
     }
   }
-  // useEffect(() => {
-  //   console.log(creativeeTags)
-  // },[creativeeTags])
-  const haddleSubmit = () => {
-    addCreativeTag(creativeeTags)
+
+  const addTag = (id) => {
+    if (!tags.includes(id)){
+      setTags([...tags, id])
+    }
+    else{
+      const index = tags.indexOf(id);
+      if (index > -1) { // only splice array when item is found
+        tags.splice(index, 1); // 2nd parameter means remove one item only
+      }
+    }
+  }
+  const postAuthorTags = () => {
+    addCreativeTag(tags)
     navigate('/create/post')
   }
 
-  const RegistrationInterestings = (e) => {
+  const postNewUserTags = (e) => {
     e.preventDefault()
-    // console.log(creativeeTags)
     try{
-      const transformedData = creativeeTags.map(tag => ({ id: tag }));
-    dispatch(createUserInterests(transformedData))
+      const transformedData = tags.map(tag => ({ id: tag }));
+      dispatch(createUserInterests(transformedData))
     }catch (err){
       console.log(err)
     }
-
+    navigate('/publications')
   }
+
+  useEffect(() => {
+    getTags()
+  }, [loading])
 
   return (
     <div>
       <SettingsTitle bigTitle={userChoice ? 'Определите интересующие вас теги' : 'Определите теги'}
                      description={'Это необходимо для рекомендации. Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
-      <form onSubmit={first ? RegistrationInterestings : haddleSubmit}>
+      <form onSubmit={first ? postNewUserTags : postAuthorTags}>
         <SettingsBlock  title={'Творческие теги'} button b_type={'submit'} b_text={'Сохранить'}>
           <div className={styles.grid}>
             {
-              tags.length > 0 ? tags.map((item) => (
+              creative_tags?.items?.length > 0 ? creative_tags?.items?.map((item) => (
                   <TagCheckBox text={item.name} click={() => addTag(item.id)}/>
                 ))
                 : null
             }
-            {/*<WhiteButton text={'инфа'}/>*/}
-            {/*<WhiteButton text={'инфа'}/>*/}
-            {/*<WhiteButton text={'инфа'}/>*/}
-            {/*<WhiteButton text={'инфа'}/>*/}
           </div>
         </SettingsBlock>
       </form>

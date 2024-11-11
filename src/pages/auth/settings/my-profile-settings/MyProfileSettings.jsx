@@ -20,7 +20,7 @@ import link from '../../../../asserts/icons/update/link-2.svg'
 
 import {useAuth} from '../../../../provider/AuthProvider'
 import {useDispatch} from 'react-redux'
-import {getUserData} from '../../../../redux/slices/user'
+import {getUserData, postUserPassword} from '../../../../redux/slices/user'
 import Button from "../../../../components/ui/buttons/button/Button";
 
 function MyProfileSettings() {
@@ -30,7 +30,7 @@ function MyProfileSettings() {
     const dispatch = useDispatch()
 
 
-    const slectOpotionItems = [
+    const selectOptionItems = [
         {
             id: 1,
             title: 'Я парень',
@@ -154,10 +154,28 @@ function MyProfileSettings() {
     function updatePassword(e){
         e.preventDefault()
 
+        if(!passwordBefore && !passwordAfter && !passwordRepeat){
+            alert('Не все поля заполнены')
+            console.log(passwordRepeat, passwordBefore, passwordAfter)
+        }
 
+        if(passwordAfter !== passwordRepeat){
+            alert('пароли не совпадают')
+        }
 
         const data = {
-
+            newPassword: passwordAfter,
+            oldPassword: passwordBefore,
+        }
+        try {
+            dispatch(postUserPassword(data)).then((response) => {
+                if (response.payload?.message.toLowerCase() === 'password updated'){
+                    window.location.reload()
+                    alert('Пароль успешно изменен')
+                }
+            })
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -190,7 +208,7 @@ function MyProfileSettings() {
                         title={'Личная информация'}
                         descripton={'Необходимо для рекомендаций. Не отображается на странице профиля'}>
                         <div className={styles.profileInputs}>
-                            <InputDporDown data={slectOpotionItems}
+                            <InputDporDown data={selectOptionItems}
                                            value={sex ? sex : null}
                                            onChange={e => setSex(e.target.value)}
                             />
@@ -223,7 +241,7 @@ function MyProfileSettings() {
                     </SettingsBlock>
                 </form>
                 <hr className={styles.hr}/>
-                <form id={'user_login'}>
+                <form id={'user_login'} onSubmit={updatePassword}>
                     <SettingsBlock
                         title={'Параметры входа'}
                         descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
@@ -234,7 +252,7 @@ function MyProfileSettings() {
                             <InputText place={'Введите новый пароль'}    value={passwordAfter ? passwordAfter : null} onChange={(e) => setPasswordAfter(e.target.value)} type={'password'} autocomplete={'new-password'}/>
                             <InputText place={'Повторите новый пароль'}  value={passwordRepeat ? passwordRepeat : null} onChange={(e) => setPasswordRepeat(e.target.value)}  type={'password'}
                                        autocomplete={'new-password'}/>
-                            <Button type={'button'} variant={'color'} className={global.f_center}>
+                            <Button type={'submit'} variant={'color'} className={global.f_center}>
                                 Сохранить изменения
                             </Button>
                         </div>

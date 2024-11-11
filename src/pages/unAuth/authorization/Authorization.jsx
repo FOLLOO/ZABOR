@@ -7,7 +7,6 @@ import InputText from '../../../components/ui/input/input-text/InputText'
 // import InputCheckbox from '../../../components/ui/input/input-toggle/InputCheckbox'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useCookies } from 'react-cookie'
 import { useAuth } from '../../../provider/AuthProvider'
 import Button from "../../../components/ui/buttons/button/Button";
 
@@ -23,8 +22,6 @@ function Authorization () {
   const [email, setEmail] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [errMes, setErrMes] = useState('')
-  // eslint-disable-next-line no-unused-vars
-  const [cookie, setCookie] = useCookies()
 
   const navigate = useNavigate()
 
@@ -33,15 +30,11 @@ function Authorization () {
 
     await loginAction(email, password)
       .then((res) => {
-        // console.log(res)
         if (res.error) {
           return setErrMes(res.error.message)
         }
-        const { token, email} = res
-        localStorage.setItem('token', token) //Где то вроде используется
-        setCookie('token', token, { path: '/' })
-        setCookie('email', email, { path: '/' })
-
+        const { token} = res
+        localStorage.setItem('token', token)
         navigate('/publications')
       })
   }

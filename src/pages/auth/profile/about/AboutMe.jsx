@@ -14,7 +14,7 @@ import link from '../../../../asserts/icons/update/link-2.svg'
 
 // import GlassCard from '../../../../components/glasses/glasses-card/GlassCard'
 // import GreenButton from '../../../../components/ui/buttons/green-button/GreenButton'
-import {useNavigate, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserData} from "../../../../redux/slices/user";
@@ -39,7 +39,7 @@ function AboutMe () {
         switch (name) {
             case 'twitch':
                 return twitch;
-            case 'mail':
+            case 'email':
                 return mail;
             case 'telegram':
                 return telegram;

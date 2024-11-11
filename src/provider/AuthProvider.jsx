@@ -48,10 +48,11 @@ const AuthProvider = ({ children }) => {
       if (response.token) {
         setUser(response.profile);
         localStorage.setItem('user', JSON.stringify(response.profile))
-        setToken(response.token);
-        setCookie('token', response.token, { path: '/' })
+        // setToken(response.token);
+        // console.log(token)
+        // setCookie('token', response.token, { path: '/' })
         setIsAuth(true)
-        return {path: lastPath ? lastPath : "/", token: response.token, email: response.email};
+        return {path: lastPath ? lastPath : "/", token: response.token};
       } else {
         throw {error: response.response.data.message};
       }

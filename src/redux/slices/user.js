@@ -1,14 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {axiosClassic as axios} from '../../r-axios/axios'
-// // import axios from "axios";
-
-// export const getUserData = createAsyncThunk('user/getUser', async (param) => {
-//   const response = await axios.get('/user/getUser', param)
-//     .catch(error => {
-//       throw error.response.data
-//     })
-//   return response
-// })
 
 export const getUserData = createAsyncThunk('user/getUser', async (id) => {
   try {
@@ -22,6 +13,16 @@ export const getUserData = createAsyncThunk('user/getUser', async (id) => {
     throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
   }
 });
+
+export const postUserPassword = createAsyncThunk('user/updatePassword', async (data) => {
+  try{
+    const response = await axios.put('/user/updatePassword', data);
+    return response.data;
+  }catch(error){
+    throw error.response.data;
+  }
+})
+
 
 export const postUserAvatar = createAsyncThunk('user/takeAvatar', async (data) => {
   try {
@@ -59,14 +60,6 @@ export const getUserAvatar = createAsyncThunk('user/getAvatar', async () => {
   }
 });
 
-export const getUserCover = createAsyncThunk('user/getProfileCover', async () => {
-  try {
-    const response = await axios.get('/user/getProfileCover');
-    return response.data; // Возвращаем данные из ответа
-  } catch (error) {
-    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
-  }
-});
 
 
 const initialState = {
@@ -97,36 +90,7 @@ const userSlice = createSlice({
         state.userData.items = []
         state.status = 'error';
       })
-      // .addCase(getUserAvatar.pending, (state) => {
-      //   state.userData.avatar = 'not'
-      //   state.status = 'loading';
-      // })
-      // .addCase(getUserAvatar.fulfilled, (state, action) => {
-      //   state.userData.avatar = action.payload;
-      //   state.status = 'loaded';
-      // })
-      // .addCase(getUserAvatar.rejected, (state) => {
-      //   state.userData.avatar = 'err'
-      //   state.status = 'error';
-      // })
-        // .addCase(getUserCover.pending, (state) => {
-        //   state.userData.avatar = 'not'
-        //   state.status = 'loading';
-        // })
-        // .addCase(getUserCover.fulfilled, (state, action) => {
-        //   state.userData.avatar = action.payload;
-        //   state.status = 'loaded';
-        // })
-        // .addCase(getUserCover.rejected, (state) => {
-        //   state.userData.avatar = 'err'
-        //   state.status = 'error';
-        // })
   }
 })
-//
-// export const SelectIsAuth = state => Boolean(state.auth.data);
-// export const selectAuthData = state => state.auth?.data;
-//
+
 export const userReducer = userSlice.reducer;
-//
-// export const { logout } = authSlince.actions

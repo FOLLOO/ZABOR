@@ -216,13 +216,13 @@ body{
   overflow-x: hidden;
 }
 
-p{
-  text-indent: 1em;
-  line-height: 1.6;
-  font-size: 14pt;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
+/*p{*/
+/*  text-indent: 1em;*/
+/*  line-height: 1.6;*/
+/*  font-size: 14pt;*/
+/*  margin-top: 1em;*/
+/*  margin-bottom: 1em;*/
+/*}*/
 
 @media (max-width: 1080px) {
   html {

@@ -16,8 +16,8 @@ import PlaylistCreate from './pages/auth/froms/playlist-create/PlaylistCreate'
 import Publications from './pages/auth/main/Publications'
 import AuthProvider from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
-import UserInterstings from './pages/unAuth/registration/userIntretings/select-group-tags/UserInterstings'
-import FinilyChoices from './pages/unAuth/registration/userIntretings/select-tags/FinilyChoices'
+// import UserInterstings from './pages/unAuth/registration/userIntretings/group/setUserInteresting'
+// import FinilyChoices from './pages/unAuth/registration/userIntretings/tags/FinilyChoices'
 // import { OverlayContext } from './context/OverlayContext'
 import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
 import Post from './pages/auth/post/Post'
@@ -26,6 +26,8 @@ import Playlists from "./pages/auth/profile/playlist-page/Playlists";
 import AboutMe from "./pages/auth/profile/about/AboutMe";
 import {ProfileLayout} from "./pages/auth/profile/Layout/ProfileLayout";
 import ClientError from "./pages/404/ClientError";
+import SetUserInteresting from "./pages/unAuth/registration/userIntretings/group/SetUserInteresting";
+import FinalChoices from "./pages/unAuth/registration/userIntretings/tags/FinalChoices";
 // import axios from "axios";
 
 
@@ -50,25 +52,6 @@ function App () {
           component: <Main/>,
           child: [],
         },
-        {
-          title: 'select',
-          url: '/select',
-          component: null,
-          child: [
-            {
-              title: 'tags',
-              url: '/tags',
-              component: <UserInterstings/>,
-              child: []
-            },
-            {
-              title: 'creative_tags',
-              url: '/creative_tags',
-              component: <FinilyChoices/>,
-              child: []
-            }
-          ]
-        }
       ]
     },
     {
@@ -87,6 +70,25 @@ function App () {
           component: <Registration/>,
           child: [],
         },
+        {
+          title: 'select',
+          url: '/select',
+          component: null,
+          child: [
+            {
+              title: 'group_tags',
+              url: '/group_tags',
+              component: <SetUserInteresting/>,
+              child: []
+            },
+            {
+              title: 'tags',
+              url: '/tags',
+              component: <FinalChoices/>,
+              child: []
+            }
+          ]
+        }
       ]
     },
     {

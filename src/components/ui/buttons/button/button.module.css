@@ -78,10 +78,7 @@
     color: var(--b-otlet-color);
     position: relative;
 }
-/*.outlet:hover{*/
-/*    color: var(--accent-plus);*/
-/*    opacity: 0.7;*/
-/*}*/
+
 .outlet:focus-visible, .outlet:focus {
     outline: 2px solid var(--accent-plus); /* custom ring color */
     outline-offset: 2px;

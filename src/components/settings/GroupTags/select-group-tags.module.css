@@ -1,11 +1,29 @@
 .grid{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
+    /*display: grid;*/
+    /*grid-template-columns: repeat(6, 1fr);*/
+    /*gap: 20px;*/
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .grid5{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    /*display: grid;*/
+    /*grid-template-columns: repeat(5, 1fr);*/
+    /*gap: 20px;*/
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+
+.saveButton{
+    position: fixed;
+    z-index: 99;
+    width: 300px;
+    right: 1rem;
+    bottom: 1rem;
+}
+.saveButton button{
+    --b-otlet-color: black;
+    background: white;
+    border: 1px solid var(--input-border-color);
 }

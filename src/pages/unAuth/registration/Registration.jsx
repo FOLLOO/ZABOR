@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from '../authorization/authorization.module.css'
 import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
 import global from '../../../global.module.css'
@@ -8,7 +8,7 @@ import InputDporDown from '../../../components/ui/input/input-dropdown/InputDpor
 import {axiosClassic} from "../../../r-axios/axios";
 import Button from "../../../components/ui/buttons/button/Button";
 
-function Registration(props) {
+function Registration() {
 
     // const navigate = useNavigate()
     // const dispatch = useDispatch()
@@ -47,7 +47,6 @@ function Registration(props) {
             sex,
             date_of_birth: DR,
         }
-        // userService().createNewUser(data);
         try {
             const user = await axiosClassic.post(`/auth/registration`, data)
                 .catch(error => {
@@ -57,8 +56,10 @@ function Registration(props) {
         } catch (e) {
             throw Error(e)
         }
-        // userService().createNewUser(data)
     }
+    useEffect(() => {
+
+    }, [errMes])
 
     return (
         <div className={styles.back}>
@@ -107,6 +108,9 @@ function Registration(props) {
                                            required
                                            onChange={e => setPassword1(e.target.value)}
                                 />
+
+                                <p className={`${styles.error} ${global.d3}`}>{errMes}</p>
+
                                 <div className={`${global.flex} ${global.f_end} ${global.f_a_center}`}>
                                     <div className={global.d3}>
                                         <Link to={'/login'}>
@@ -114,6 +118,7 @@ function Registration(props) {
                                         </Link>
                                     </div>
                                 </div>
+
                                 <Button variant={'outlet'} className={`${global.f_center} ${styles.button}`} type={'submit'}>
                                     Зарегистрироваться
                                 </Button>
