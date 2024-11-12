@@ -103,22 +103,22 @@
     opacity:0.5;
     z-index: 100;
 }
+
+.sidebar_input:checked + .navbar button:hover {
+    color: var(--accent);
+}
+
+.navbar  button:hover {
+    color: transparent;
+    /*width: 25vw;*/
+}
+
 @media (max-width: 1080px) {
     /*Checkbox и наш left menu*/
     .sidebar_input:checked + .navbar, #span {
         color: black;
         width: 25vw;
     }
-
-    .sidebar_input:checked + .navbar button:hover {
-        color: var(--accent);
-    }
-
-    .navbar  button:hover {
-        color: transparent;
-        /*width: 25vw;*/
-    }
-
 }
 /*Overlay*/
 

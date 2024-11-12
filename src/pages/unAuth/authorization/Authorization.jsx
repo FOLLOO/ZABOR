@@ -33,7 +33,7 @@ function Authorization () {
         if (res.error) {
           return setErrMes(res.error.message)
         }
-        const { token} = res
+        const {token} = res
         localStorage.setItem('token', token)
         navigate('/publications')
       })

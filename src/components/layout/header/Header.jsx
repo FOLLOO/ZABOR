@@ -97,7 +97,7 @@ export default function Header ({type = 'unauthorized'}) {
                         </ContextDrop>
                     </div>
                     <Link to={`/profile/${user?.id}`}>
-                        <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`} type={'default'}
+                        <ProfileNickname img={user?.avatar ? `${IMAGE_URL}${user.avatar}` : null} type={'default'}
                                          nickname={user?.nickname ? user.nickname : null}/>
                     </Link>
                     <div ref={profileRef} className={profile ? `${styles.active} ${styles.menu}` : `${styles.menu} ${styles.default}`}>
@@ -105,7 +105,7 @@ export default function Header ({type = 'unauthorized'}) {
                             <ContextGroup>
                                 <Link to={`/profile/${user?.id}`}>
                                     <div  className={styles.profile}>
-                                        <ProfileNickname img={`${IMAGE_URL}${user?.avatar}`}
+                                        <ProfileNickname img={user?.avatar ? `${IMAGE_URL}${user.avatar}` : null}
                                                          nickname={user?.nickname ? user?.nickname : null}
                                                          type={'default'}
                                                          desc/>

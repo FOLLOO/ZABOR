@@ -35,7 +35,7 @@ export function ProfileLayout() {
 
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
-
+    const [image, setImage] = useState(false)
     // const [sub, setSub] = useState(false)
 
     const dispatch = useDispatch()
@@ -49,6 +49,7 @@ export function ProfileLayout() {
      *
      */
     function Over() {
+        setImage(!image)
         setOverlay(!overlay)
     }
 
@@ -197,7 +198,7 @@ export function ProfileLayout() {
             { title: 'Об авторе',  url: './about'},
         ]
 
-
+    console.log('overlay', overlay ,'\n', 'image', image)
     return (
         <div className={styles.main}>
             <div className={styles.prewieImage}>
@@ -207,7 +208,7 @@ export function ProfileLayout() {
                     <div className={global.skeleton} title={'Превью пользователя'}></div>
                 }
             </div>
-            {overlay ?
+            {image ?
                 <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}
                      title={'Форма добавления изображение для ava'}>
                     <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
@@ -238,7 +239,7 @@ export function ProfileLayout() {
                 <div className={styles.content}>
                     <div className={styles.profile}>
                         <div className={styles.nickname}>
-                            <ProfileCircle img={`${IMAGE_URL}${userData?.items.avatarUrl}`}
+                            <ProfileCircle img={userData.items?.avatarUrl ? `${IMAGE_URL}${userData?.items.avatarUrl}` : null}
                                            size={150}
                                            edit={user?.id === Number(id) ? true : null}
                                            click={() => {

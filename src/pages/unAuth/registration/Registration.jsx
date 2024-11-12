@@ -3,14 +3,14 @@ import styles from '../authorization/authorization.module.css'
 import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
 import global from '../../../global.module.css'
 import InputText from '../../../components/ui/input/input-text/InputText'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
 import {axiosClassic} from "../../../r-axios/axios";
 import Button from "../../../components/ui/buttons/button/Button";
 
 function Registration() {
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     // const dispatch = useDispatch()
 
     const [nickname, setNickname] = useState('')
@@ -48,11 +48,13 @@ function Registration() {
             date_of_birth: DR,
         }
         try {
-            const user = await axiosClassic.post(`/auth/registration`, data)
+            return await axiosClassic.post(`/auth/registration`, data)
+                .then(res => res.data ?
+                    navigate('/select/group_tags')
+                    : setErrMes('Пользователь с таким email или nickname уже существует!'))
                 .catch(error => {
                     throw error.response.data
                 })
-            return user
         } catch (e) {
             throw Error(e)
         }

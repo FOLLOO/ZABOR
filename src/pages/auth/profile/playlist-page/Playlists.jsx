@@ -11,11 +11,15 @@ import PlaylistsContent from '../../../../components/post/post-playlist/playlist
 import { useDispatch, useSelector } from 'react-redux'
 import { getPublicationsInFolder, getUserFolder } from '../../../../redux/slices/folder'
 import { useNavigate, useParams } from 'react-router-dom'
+import Button from "../../../../components/ui/buttons/button/Button";
+import {useAuth} from "../../../../provider/AuthProvider";
 
 
-function Playlists ({ data = [] }) {
+function Playlists () {
 
   const { id } = useParams()
+  const { user } = useAuth()
+
   const dispatch = useDispatch()
   const { dataInFolder, userFolder } = useSelector(state => state.folder)
 
@@ -46,24 +50,50 @@ function Playlists ({ data = [] }) {
   }, [userFolder?.items?.length < 0])
 
   /** Отображение пустоты */
+  // const NothingYet = () => {
+  //   return (
+  //     <GlassCard>
+  //       <div className={`${global.flex} ${global.f_center} ${global.f_dir_column}
+  //       ${global.f_a_center} ${styles.main}`}>
+  //         <h3>Плейлисты</h3>
+  //         <div className={global.d2}>
+  //           {userFolder?.items.length > 0 ? userFolder?.items : 'Пока что ничего нет 🤔'}
+  //         </div>
+  //         {userFolder?.items.length > 0 ? null :
+  //           <div className={styles.addButton}>
+  //             <GreenButton text={'Создать'} unique/>
+  //           </div>
+  //         }
+  //       </div>
+  //     </GlassCard>
+  //   )
+  // }
   const NothingYet = () => {
     return (
-      <GlassCard>
-        <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
-        ${global.f_a_center} ${styles.main}`}>
-          <h3>Плейлисты</h3>
+        <div className={`${styles.main}`}>
           <div className={global.d2}>
-            {userFolder?.items.length > 0 ? userFolder?.items : 'Пока что ничего нет 🤔'}
+            Мы ничего не смогли найти
           </div>
-          {userFolder?.items.length > 0 ? null :
-            <div className={styles.addButton}>
-              <GreenButton text={'Создать'} unique/>
-            </div>
-          }
+          {user.id === Number(id) ?
+          <div className={styles.addButton}>
+            {user?.roleId === 1 ?
+                <Button variant={'outlet'} click={() => navigate('/group')}
+                        className={`${global.f_center} ${global.w100}`}>
+                  Стать автором
+                </Button>
+                :
+                <Button variant={'outlet'} click={() => navigate('/create/post')}
+                        className={`${global.f_center} ${global.w100}`}>
+                  Создать плейлист
+                </Button>
+            }
+          </div>
+               : null }
         </div>
-      </GlassCard>
     )
   }
+
+
   /** Отображение плейлистов */
   const AllPlaylists = () => {
     return (

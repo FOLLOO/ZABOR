@@ -80,15 +80,15 @@ const userSlice = createSlice({
     builder
       .addCase(getUserData.pending, (state) => {
         state.userData.items = []
-        state.status = 'loading';
+        state.userData.status = 'loading';
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.userData.items = action.payload;
-        state.status = 'loaded';
+        state.userData.status = 'loaded';
       })
       .addCase(getUserData.rejected, (state) => {
         state.userData.items = []
-        state.status = 'error';
+        state.userData.status = 'error';
       })
   }
 })

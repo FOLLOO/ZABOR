@@ -22,8 +22,11 @@
     right: 1rem;
     bottom: 1rem;
 }
+.padding{
+    padding: 0 1rem;
+}
 .saveButton button{
-    --b-otlet-color: black;
-    background: white;
-    border: 1px solid var(--input-border-color);
+    /*--b-otlet-color: black;*/
+    /*background: white;*/
+    /*border: 1px solid var(--input-border-color);*/
 }

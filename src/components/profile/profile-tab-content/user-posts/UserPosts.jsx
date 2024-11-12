@@ -39,6 +39,8 @@ function UserPosts({data = []}) {
 
     const [sort, setSort] = useState(false) // сортировка
     const [open, setOpen] = useState(false) // теги
+    const [plstOpen, setPlstOpen] = useState(false) // плейлист
+
 
     const dispatch = useDispatch()
 
@@ -51,6 +53,7 @@ function UserPosts({data = []}) {
 
 
     function Over() {
+        setPlstOpen(!plstOpen)
         setOverlay(!overlay)
     }
 
@@ -123,25 +126,25 @@ function UserPosts({data = []}) {
 
     const NothingYet = () => {
         return (
-            <GlassCard>
-                <div className={`${global.flex} ${global.f_center} ${global.f_dir_column} 
-        ${global.f_a_center} ${styles.main}`}>
-                    <h3>Публикации</h3>
-                    <div className={global.d2}>
-                        {/*Какое-то говно переделать нужно*/}
-                        Пока что ничего нет 🤔
-                    </div>
-                    {id === user?.id ?
-                        <div className={styles.addButton}>
-                            {user.roleId === 1 ?
-                                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/group')}/>
-                                :
-                                <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
-                            }
-                        </div>
-                        : null}
+            <div className={`${styles.main}`}>
+                <div className={global.d2}>
+                    Мы ничего не смогли найти
                 </div>
-            </GlassCard>
+                <div className={styles.addButton}>
+                    {user?.roleId === 1 ?
+                        <Button variant={'outlet'} click={() => navigate('/group')}
+                                className={`${global.f_center} ${global.w100}`}>
+                            Стать автором
+                        </Button>
+                        :
+                        <Button variant={'outlet'} click={() => navigate('/create/post')}
+                                className={`${global.f_center} ${global.w100}`}>
+                            Создать публикацию
+                        </Button>
+
+                    }
+                </div>
+            </div>
         )
     }
     const UserPosts = () => {
@@ -150,30 +153,30 @@ function UserPosts({data = []}) {
                 <div className={styles.title}>
                     <header className={`${global.flex} ${global.f_a_center} ${styles.some}`}>
                         <h3 className={styles.header}>Публикации</h3>
-                        <Button img={filter} img_size={'h-6'} click={() => setSort(!sort)}>
-                        </Button>
+                        {sortData.length > 0 ?
+                        <Button img={filter} img_size={'h-6'} click={() => setSort(!sort)}></Button>
+                            : null }
                     </header>
                 </div>
                 <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
+                    {tags.length > 0 && sortData.length > 0 ?
                     <div className={styles.checkbox}>
                         <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
-                    </div>
-                    {tags.length > 0 ?
+                    </div> : null
+                    }
+                    {tags.length > 0 && sortData.length > 0 ?
                         tags.map(item => (
                             <div>
                                 <LittleTag text={item.name}/>
                             </div>
                         ))
-                        :
-                        <>
-                            <LittleTag text={'...'}/>
-                        </>
+                        : null
                     }
                 </div>
                 <div className={styles.margin}>
-                    <div className={styles.grid}>
                         {sortData.length > 0 ?
-                            sortData.map((message =>
+                    <div className={styles.grid}>
+                        {sortData.map((message =>
                                     <Link to={`/publications/${message.id}`}>
                                     <CardLittle
                                         data={message}
@@ -192,16 +195,9 @@ function UserPosts({data = []}) {
                                         price={message?.price ? message?.price : 'Бесплатно'}
                                         image/>
                                     </Link>
-                            ))
-                            :
-                            <>
-                                <CardLittle/>
-                                <CardLittle/>
-                                <CardLittle/>
-                                <CardLittle/>
-                            </>
-                        }
+                            )) }
                     </div>
+                            : <NothingYet/>}
                 </div>
             </>
         )
@@ -209,7 +205,7 @@ function UserPosts({data = []}) {
 
     return (
         <div className={styles.margin}>
-            {overlay ?
+            {plstOpen ?
                 <div className={styles.addToPalylist}>
                     <AfterBlock>
                         <h2>Выберете плейлист</h2>

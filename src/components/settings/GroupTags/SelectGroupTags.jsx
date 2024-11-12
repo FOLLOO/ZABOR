@@ -63,15 +63,18 @@ export default function SelectGroupTags ({ userChoice = false, first }) {
 
   return (
     <div>
+      <div className={styles.padding}>
+
       <SettingsTitle bigTitle={userChoice ? 'Мои интересы' : 'Расскажите'}
                      title={userChoice ? null : 'На какую тематику будут посты?'}
                      description={'Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
+      </div>
       <form onSubmit={setTags}>
           {tags?.items?.length > 0 ?
           <div className={userChoice ? styles.grid5 : styles.grid}>
             {tags?.items.map((item) => (
-                // <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} />
-                <TagCheckBox text={item.name} key={item.id} id={item.id}  />
+                <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} />
+                // <TagCheckBox text={item.name} key={item.id} id={item.id}  />
               ))}
           </div>
               : <Loading/>

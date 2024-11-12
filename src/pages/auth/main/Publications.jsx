@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import styles from './main.module.css'
-// import global from '../../../global.module.css'
 import SettingsTitle from '../../../components/toolbar/settings-title/SettingsTitle'
 import CardLittle from '../../../components/post/post-cards/card-little/CardLittle'
-// import { fetchLogin } from '../../../redux/slices/user'
 import { useDispatch } from 'react-redux'
 import { fetchPosts } from '../../../redux/slices/post'
 import { fetchTags } from '../../../redux/slices/tag'
@@ -12,7 +10,6 @@ import { Link } from 'react-router-dom'
 import MessageBox from '../../../components/message-box/MessageBox'
 import { OverlayContext } from '../../../context/OverlayContext'
 import LittleTag from '../../../components/ui/input/little-tag/TagCheckBox'
-// import Nothing from '../../nothing/Nothing'
 import Loading from '../../loading/Loading'
 
 export default function Publications () {
@@ -53,7 +50,6 @@ export default function Publications () {
     getPosts()
     getTags()
   }, [loading])
-
 
   return (
     <div className={`${styles.main}`}>

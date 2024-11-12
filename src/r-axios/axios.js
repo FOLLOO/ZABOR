@@ -20,12 +20,13 @@
 import axios from "axios" ;
 import {getAccessToken, removeFromStorage} from "../services/AuthServices";
 import userService from "../services/UserService";
+import {IMAGE_URL} from "../utils";
 const token = localStorage.getItem("token");
 
 // console.log(token)
 const options = {
   // baseURL: 'http://192.168.1.121:5000/api',
-  baseURL: 'http://localhost:5000/api',
+  baseURL: `${IMAGE_URL}/api`,
   headers: {
     Authorization: `Bearer ${token}`, // Устанавливаем заголовок Authorization с токеном
     'Content-Type': 'application/json'

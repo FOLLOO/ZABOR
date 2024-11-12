@@ -5,6 +5,9 @@ import {useDispatch, useSelector} from 'react-redux'
 
 //css
 import styles from './select-tags.module.css'
+import global from "../../../global.module.css";
+import component from '../GroupTags/select-group-tags.module.css'
+
 import {createUserInterests, fetchCreativeTags} from '../../../redux/slices/tag'
 
 //utils
@@ -14,6 +17,7 @@ import { useTags } from '../../../context/TagsContext'
 import SettingsTitle from '../../toolbar/settings-title/SettingsTitle'
 import SettingsBlock from '../../toolbar/settings-block/SettingsBlock'
 import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
+import Button from "../../ui/buttons/button/Button";
 
 function SelectTags ({ userChoice = false, first }) {
 
@@ -63,35 +67,45 @@ function SelectTags ({ userChoice = false, first }) {
     e.preventDefault()
     try{
       const transformedData = tags.map(tag => ({ id: tag }));
-      dispatch(createUserInterests(transformedData))
+      dispatch(createUserInterests(transformedData)).then((response) => {
+        if(response){
+          navigate('/publications')
+        }
+      })
     }catch (err){
       console.log(err)
     }
-    navigate('/publications')
   }
 
   useEffect(() => {
     getTags()
-  }, [loading])
+  }, [])
 
   return (
-    <div>
-      <SettingsTitle bigTitle={userChoice ? 'Определите интересующие вас теги' : 'Определите теги'}
-                     description={'Это необходимо для рекомендации. Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
-      <form onSubmit={first ? postNewUserTags : postAuthorTags}>
-        <SettingsBlock  title={'Творческие теги'} button b_type={'submit'} b_text={'Сохранить'}>
-          <div className={styles.grid}>
-            {
-              creative_tags?.items?.length > 0 ? creative_tags?.items?.map((item) => (
-                  <TagCheckBox text={item.name} click={() => addTag(item.id)}/>
-                ))
-                : null
-            }
-          </div>
-        </SettingsBlock>
-      </form>
+      <div>
+        <div className={component.padding}>
 
-    </div>
+          <SettingsTitle bigTitle={userChoice ? 'Определите интересующие вас теги' : 'Определите теги'}
+                         description={'Это необходимо для рекомендации. Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
+        </div>
+        <form onSubmit={first ? postNewUserTags : postAuthorTags}>
+            <div className={component.grid}>
+              {
+                creative_tags?.items?.length > 0 ? creative_tags?.items?.map((item) => (
+                        <TagCheckBox id={item.id} key={item.id}
+                            text={item.name}
+                            click={() => addTag(item.id)}/>
+                    ))
+                    : null
+              }
+            </div>
+          <div className={component.saveButton}>
+            <Button type={'submit'} variant={'outlet'} className={`${global.f_center} ${global.w100}`}>
+              Сохранить
+            </Button>
+          </div>
+        </form>
+      </div>
   )
 }
 
