@@ -1,9 +1,6 @@
 .basketCount{
-    position: relative;
-    left: -30px;
-    bottom: -30px;
-
-
+    position: absolute;
+    right: .5rem;
 
     background: var(--accent);
     color: white;
@@ -21,6 +18,11 @@
 .ac{
     align-items: center;
 }
+
+.button_abs{
+    position: relative;
+}
+
 .header{
     position: sticky;
     top: 0;
@@ -82,7 +84,7 @@
     display: none;
 }
 .desctopButtons{
-    display: block;
+    display: flex;
 }
 
 @media (max-width: 1080px) {

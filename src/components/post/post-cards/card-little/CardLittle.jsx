@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import styles from './card-little.module.css'
 import global from '../../../../global.module.css'
@@ -11,8 +11,8 @@ import ProfileCircle from '../../../profile/profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart } from '../../../../redux/slices/bascet'
-import { OverlayContext } from '../../../../context/OverlayContext'
-import { IMAGE_URL } from '../../../../utils'
+// import { OverlayContext } from '../../../../context/OverlayContext'
+import {IMAGE_URL, toggleOverlay} from '../../../../utils'
 function CardLittle ({
   image = false,
   title,
@@ -30,11 +30,12 @@ function CardLittle ({
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
-  const {overlay, setOverlay} = useContext(OverlayContext)
+  // const {overlay, setOverlay} = useContext(OverlayContext)
 
   const handleAddToCart = (e) => {
     e.preventDefault()
-    setOverlay(!overlay);
+      toggleOverlay('addToBasket')
+    // setOverlay(!overlay);
     // Добавляем товар в корзину
     if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){
       dispatch(addItemToCart(data));

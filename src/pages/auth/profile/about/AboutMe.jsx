@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
 import styles from './aboutMe.module.css'
 import global from '../../../../global.module.css'
@@ -15,28 +15,20 @@ import link from '../../../../asserts/icons/update/link-2.svg'
 import {useNavigate, useParams} from 'react-router-dom'
 import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserData} from "../../../../redux/slices/user";
-import Button from "../../../../components/ui/buttons/button/Button";
 import {useAuth} from "../../../../provider/AuthProvider";
 import Loading from "../../../loading/Loading";
+import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 
 function AboutMe() {
     const {id} = useParams()
     const {user} = useAuth()
 
 
-    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
 
-    // const getUser = () => {
-    //     try {
-    //         dispatch(getUserData(id))
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
+
 
     function setImageToButton(name) {
         switch (name) {
@@ -57,27 +49,8 @@ function AboutMe() {
         }
     }
 
-    function isMe() {
-        return user.id === Number(id)
-    }
+    const isMe = () => { return user?.id === Number(id) }
 
-    const NothingYet = () => {
-        return (
-            <div className={`${styles.nothing}`}>
-                <div className={global.d2}>
-                    Мы ничего не смогли найти
-                </div>
-                {isMe ?
-                    <div className={styles.addButton}>
-                        <Button variant={'outlet'} click={() => navigate('/group')}
-                                className={`${global.f_center} ${global.w100}`}>
-                            Рассказать о себе
-                        </Button>
-                    </div>
-                    : null}
-            </div>
-        )
-    }
 
     if(userData.status !== 'loaded'){
         return <Loading/>
@@ -85,7 +58,7 @@ function AboutMe() {
 
     return (
         // margin потому что там ток один атрибут
-        isMe && user.aboutMe ?
+        isMe && userData?.items?.user?.aboutMe ?
             <div className={styles.main}>
                 <section className={styles.descriptionBlock}>
                     <h1 className={global.t5}> {isMe ? 'Обо мне' : 'Oб авторе'}</h1>
@@ -93,7 +66,7 @@ function AboutMe() {
                         {userData?.items?.user?.aboutMe}
                     </p>
                     <div className={styles.userSocialLinks}>
-                        {userData?.items?.socialMedia?.map((item, index) => (
+                        {userData?.items?.socialMedia?.map((item) => (
                             item.text === '' ? null :
                                 <RoundButton text={item.socialMedium.name}
                                              img={setImageToButton(item.socialMedium.name)} variant={'black'}/>
@@ -110,7 +83,12 @@ function AboutMe() {
                 </section>
             </div>
             :
-            <NothingYet/>
+            <NothingYet
+                isMe={isMe()}
+                // isAuthor={user?.roleId === 1}
+                onButtonClick={() => navigate('/settings/config')}
+                buttonText="Рассказать о себе"
+            />
     )
 }
 

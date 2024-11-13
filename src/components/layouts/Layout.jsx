@@ -25,6 +25,8 @@ import {OverlayContext} from "../../context/OverlayContext";
 import Header from "../layout/header/Header";
 import Footer from "../layout/footer/Footer";
 import Button from "../ui/buttons/button/Button";
+import global from "../../global.module.css";
+import {toggleOverlay} from "../../utils";
 
 
 /**
@@ -225,21 +227,41 @@ const Layout = ({type}) => {
 
     return (
         <div>
-            {overlay ?
-                <>
-                    <div className={styles.overlay}>
-                        {/*FICHA*/}
-                        <h5 onClick={() => setOverlay(!overlay)}> close </h5>
-                    </div>
-                    <div className={styles.overlayActive}>
-                        {renderSwitch(type)}
-                    </div>
-                </>
-                :
+            {/*{overlay ?*/}
+            {/*    <>*/}
+            {/*        <div className={styles.overlay}>*/}
+            {/*            /!*FICHA*!/*/}
+            {/*            <h5 onClick={() => setOverlay(!overlay)}> close </h5>*/}
+            {/*        </div>*/}
+            {/*        <div className={styles.overlayActive}>*/}
+            {/*            {renderSwitch(type)}*/}
+            {/*        </div>*/}
+            {/*    </>*/}
+            {/*    :*/}
                 <>
                     {renderSwitch(type)}
+
+                    <dialog id={'addToBasket'} className={styles.dialog} onClick={() => toggleOverlay('addToBasket')}>
+                        <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}>
+                                <div className={styles.support}>
+                                    <h1 className={global.xl3}>Добавлено  в  корзину!</h1>
+                                    <p className={global.d3}>Удалить пост можно будет в корзине</p>
+                                </div>
+                            <div className={`${global.flex} ${global.f_dir_column}`} style={{gap: '1rem'}}>
+                                <Button variant={'outlet'}
+                                        className={`${global.w100} ${global.f_center}`}>
+                                    Продолжить покупки
+                                </Button>
+                                <Button variant={'color'} type={'submit'}
+                                        className={`${global.w100} ${global.f_center}`}
+                                        onClick={() => navigate('/basket')}>
+                                    Перейти в корзину
+                                </Button>
+                            </div>
+                        </div>
+                    </dialog>
                 </>
-            }
+            {/*}*/}
         </div>
     );
 };

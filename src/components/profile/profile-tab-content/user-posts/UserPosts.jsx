@@ -3,11 +3,8 @@ import React, {useContext, useEffect, useState} from 'react'
 import styles from './userPosts.module.css'
 import global from '../../../../global.module.css'
 
-import GlassCard from '../../../glasses/glasses-card/GlassCard'
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
-// import CardDefault from '../../../post/post-cards/card-default/CardDefault'
 
-// import simpleFilter from '../../../../asserts/icons/simple-filter.svg'
 import filter from '../../../../asserts/icons/update/sort-desc.svg'
 
 import {Link, useNavigate, useParams} from 'react-router-dom'
@@ -23,6 +20,7 @@ import {OverlayContext} from "../../../../context/OverlayContext";
 import {getUserFolder, putPostToFolder} from "../../../../redux/slices/folder";
 import Button from "../../../ui/buttons/button/Button";
 import CardLittle from "../../../post/post-cards/card-little/CardLittle";
+import NothingYet from "../../../../pages/nothing/nothing-yet/NothingYet";
 
 /** Посты пользователя */
 
@@ -123,30 +121,8 @@ function UserPosts({data = []}) {
             }
         } return
     }, [sort, data])
+    const isMe = () => { return user?.id === Number(id) }
 
-    const NothingYet = () => {
-        return (
-            <div className={`${styles.main}`}>
-                <div className={global.d2}>
-                    Мы ничего не смогли найти
-                </div>
-                <div className={styles.addButton}>
-                    {user?.roleId === 1 ?
-                        <Button variant={'outlet'} click={() => navigate('/group')}
-                                className={`${global.f_center} ${global.w100}`}>
-                            Стать автором
-                        </Button>
-                        :
-                        <Button variant={'outlet'} click={() => navigate('/create/post')}
-                                className={`${global.f_center} ${global.w100}`}>
-                            Создать публикацию
-                        </Button>
-
-                    }
-                </div>
-            </div>
-        )
-    }
     const UserPosts = () => {
         return (
             <>
@@ -197,7 +173,14 @@ function UserPosts({data = []}) {
                                     </Link>
                             )) }
                     </div>
-                            : <NothingYet/>}
+                            :
+                            <NothingYet
+                            isMe={isMe()}
+                            isAuthor={user?.roleId === 1}
+                            onButtonClick={() => navigate('/group')}
+                            buttonText="Создать публикацию"
+                            />
+                        }
                 </div>
             </>
         )

@@ -1,5 +1,5 @@
 //library
-import React, {useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {Outlet, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 
@@ -10,8 +10,6 @@ import global from "../../../../global.module.css";
 
 //components
 import ProfileCircle from "../../../../components/profile/profile-circle/ProfileCircle";
-import WhiteButton from "../../../../components/ui/buttons/white-button/WhiteButton";
-import GreenButton from "../../../../components/ui/buttons/green-button/GreenButton";
 import Button from "../../../../components/ui/buttons/button/Button";
 import Tab from "../../../../components/ui/tab/Tab";
 
@@ -19,24 +17,20 @@ import Tab from "../../../../components/ui/tab/Tab";
 import {useAuth} from "../../../../provider/AuthProvider";
 import {IMAGE_URL} from "../../../../utils";
 import {getUserData, postUserAvatar, postUserCover} from "../../../../redux/slices/user";
-import {OverlayContext} from "../../../../context/OverlayContext";
 
 //img
 import edit from "../../../../asserts/icons/edit.svg";
+import {postSubscribe} from "../../../../redux/slices/sub";
 
 
 export function ProfileLayout() {
-
-    const {overlay, setOverlay} = useContext(OverlayContext)
-
 
     const {id} = useParams()
     const {user} = useAuth()
 
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
-    const [image, setImage] = useState(false)
-    // const [sub, setSub] = useState(false)
+
 
     const dispatch = useDispatch()
     const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
@@ -48,28 +42,26 @@ export function ProfileLayout() {
      * @constructor
      *
      */
-    function Over() {
-        setImage(!image)
-        setOverlay(!overlay)
-    }
+     const over = () => {
+         const dialog = document.getElementById('setImage_dialog')
+         const isOpen = dialog.open;
+         isOpen ?  dialog.close() : dialog.showModal()
+     }
+
 
     /**
-     * Этот код предназначен для сохранения изображения в БазеДанных!
-     * Принимает тип (type) из localStorage, чтобы сохранить.  либо как аватарку, либо как обложку
+     * Этот код предназначен для сохранения изображения в БД!
+     * Принимает тип (type: cover || avatar) из localStorage, чтобы сохранить.  либо как аватарку, либо как обложку
      * @constructor
-     * @param e - просто event.listener
      */
-    const saveImage = (e) => {
+    const saveImage = () => {
         // e.preventDefault()
-        // console.log(happy)
         let value = localStorage.getItem('type')
-        // console.log(value.toString())
-        // alert('value', value)
         if (value === 'avatar') {
             formData.append('avatar', file)
             try {
                 dispatch(postUserAvatar(formData))
-                Over()
+                over()
             } catch (err) {
                 console.log(err)
             }
@@ -78,14 +70,12 @@ export function ProfileLayout() {
             formData.append('cover', file)
             try {
                 dispatch(postUserCover(formData))
-                Over()
+                over()
             } catch (err) {
                 console.log(err)
             }
-        } else {
-            alert('💀 Something wrong with your params 💀')
-            localStorage.removeItem('type')
         }
+        localStorage.removeItem('type')
     }
     /**
      * Этот код предназначен для сохранения изображения в useState!
@@ -163,18 +153,16 @@ export function ProfileLayout() {
      *             console.log(e)
      *         }
      */
-    // function Subscribe () {
-    //     const data = {
-    //         authorId: id
-    //     }
-    //     try {
-    //         dispatch(postSubscribe(data))
-    //         setSub(!sub)
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
-
+    function Subscribe () {
+        const data = {
+            authorId: id
+        }
+        try {
+            dispatch(postSubscribe(data))
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const getUser = () => {
             try {
@@ -190,15 +178,13 @@ export function ProfileLayout() {
     }, [userData.status])
 
         //todo: overlay don't work on publication page
-
-        //  Данные для /Tabs
+        //Данные для /Tabs
     const tabContent = [
             { title: 'Публикации', url: '.'},
             { title: 'Плейлисты',  url: './playlists'},
             { title: 'Об авторе',  url: './about'},
         ]
 
-    console.log('overlay', overlay ,'\n', 'image', image)
     return (
         <div className={styles.main}>
             <div className={styles.prewieImage}>
@@ -208,32 +194,36 @@ export function ProfileLayout() {
                     <div className={global.skeleton} title={'Превью пользователя'}></div>
                 }
             </div>
-            {image ?
-                <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}
-                     title={'Форма добавления изображение для ava'}>
+
+            <dialog  id={'setImage_dialog'} className={styles.dialog} onClick={() => over()}>
+                <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`} 
+                        title={'Форма добавления изображение для ava'}>
                     <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
                         <input type={'file'} id={'input_file'} style={{display: 'none'}} onChange={fileChange}/>
                         <label htmlFor={'input_file'}>
-                          <span className={styles.support}>
-                              <header>
-                              <h5>{fileURL ? 'Изменить изображение' : 'Импортировать новый файл'}</h5>
-                              <p className={global.d2}>Допустимые форматы: .jpeg .jpg .png</p>
-                              </header>
-                          </span>
+                          <div className={styles.support}>
+                              <h1 className={global.t3}>{fileURL ? 'Изменить изображение' : 'Импортировать новый файл'}</h1>
+                              <p className={global.d3}>Допустимые форматы: .jpeg .jpg .png</p>
+                          </div>
                         </label>
                     </form>
                     {fileURL ?
                         <img src={fileURL} alt={''} className={styles.editImage}/> : null}
-                    <div className={`${global.flex}`} style={{gap: '10px'}}>
-                        <WhiteButton text={'Отмена'} click={() => Over()}/>
-                        <GreenButton text={'Сохранить'} type={'submit'} form={'uploadImage'}
-                            // click={() => saveImage()}
-                                     unique
-                        />
+                    <div className={`${global.flex}`} style={{gap: '1rem'}}>
+                        <Button variant={'outlet'}
+                                className={`${global.w100} ${global.f_center}`} >
+                            Отмена
+                        </Button>
+                         <Button variant={'color'} type={'submit'}
+                                 className={`${global.w100} ${global.f_center}`}
+                                 form={'uploadImage'}
+                                 disabled={!fileURL}
+                                 onClick={() =>saveImage()}>
+                             Сохранить
+                         </Button>
                     </div>
                 </div>
-                : null
-            }
+            </dialog>
 
             <div>
                 <div className={styles.content}>
@@ -243,7 +233,7 @@ export function ProfileLayout() {
                                            size={150}
                                            edit={user?.id === Number(id) ? true : null}
                                            click={() => {
-                                               new Over()
+                                               over()
                                                localStorage.setItem('type', 'avatar')
                                            }}/>
                             <div className={styles.subes}>
@@ -265,22 +255,19 @@ export function ProfileLayout() {
                         </div>
                         {user?.id === Number(id) ?
                             <div className={styles.edit}>
-                                {/*<TransprantButton text={'Изменить обложку'} img={edit} left click={() => {*/}
-                                {/*    new Over()*/}
-                                {/*    localStorage.setItem('type', 'cover')*/}
-                                {/*}}/>*/}
                                 <Button img={edit} img_size={'h-5'} variant={'ghost'}
                                         click={() => {
-                                    new Over()
-                                    localStorage.setItem('type', 'cover')
+                                            over()
+                                            localStorage.setItem('type', 'cover')
                                 }}> Изменить обложку </Button>
                             </div>
                             :
                             <div className={styles.follow}>
-                                <Button> Не работает </Button>
-                                {/*{sub ?*/}
-                                {/*    <TransprantButton text={'Отписаться'}/> :*/}
-                                {/*    <WhiteButton text={'Подписаться'} click={() => Subscribe()}/>}*/}
+                                <Button variant={'outlet'}
+                                        click={() => Subscribe()}>
+
+                                    Подписаться
+                                </Button>
                             </div>}
                     </div>
                 <Tab items={tabContent}/>

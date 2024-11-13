@@ -3,3 +3,13 @@
 
 // export const IMAGE_URL = 'http://192.168.0.101:5000'
 export const IMAGE_URL = 'http://192.168.0.106:5000'
+
+export const toggleOverlay = (id) => {
+    const dialog = document.getElementById(id)
+    if(!dialog){
+        console.log('Error with dialog id ', id)
+    }else{
+        const isOpen = dialog.open;
+        isOpen ?  dialog.close() : dialog.showModal()
+    }
+}

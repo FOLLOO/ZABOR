@@ -78,15 +78,18 @@ export default function Header ({type = 'unauthorized'}) {
                 </div>
                 <div className={`${global.flex} ${styles.buttons}`}>
                     <div className={styles.desctopButtons}>
-
-                    <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}/>
-                    {cartItems.length === 0 ? null :
-                        <span className={styles.basketCount}>{cartItems.length}</span>
-                    }
-                    <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}/>
-                    {cartItems.length === 0 ? null :
-                        <span className={styles.basketCount}>{cartItems.length}</span>
-                    }
+                        <div className={styles.button_abs}>
+                            <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}/>
+                            {cartItems.length === 0 ? null :
+                                <span className={styles.basketCount}>{cartItems.length}</span>
+                            }
+                        </div>
+                        <div className={styles.button_abs}>
+                            <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}/>
+                            {cartItems.length === 0 ? null :
+                                <span className={styles.basketCount}>{cartItems.length}</span>
+                            }
+                        </div>
                     </div>
 
                     <div className={notification ? `${styles.active} ${styles.dropdown_menu}` : `${styles.dropdown_menu} ${styles.default}`}>
@@ -138,9 +141,7 @@ export default function Header ({type = 'unauthorized'}) {
                                             className={global.f_start}>
                                         Корзина
                                     </Button>
-                                    <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}
-                                        // click={logOut}
-                                    >
+                                    <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}>
                                         Уведомления
                                     </Button>
                                 </div>
@@ -152,8 +153,7 @@ export default function Header ({type = 'unauthorized'}) {
                                     Настройки
                                 </Button>
                                 <Button img_size={'h-5'} img={logout} variant={'red-text'}
-                                        click={clickLogOut}
-                                >
+                                        click={clickLogOut}>
                                     Выйти
                                 </Button>
                                 </div>
