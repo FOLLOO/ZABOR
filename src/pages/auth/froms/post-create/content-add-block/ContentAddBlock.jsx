@@ -10,9 +10,10 @@ import videoIcon from '../../../../../asserts/icons/update/file-video-2.svg'
 import photoIcon from '../../../../../asserts/icons/update/file-image.svg'
 
 //components
-import TipTapEditor from '../../../../../components/temp/TipTapEditor'
+// import TipTapEditor from '../../../../../components/temp/TipTapEditor'
 import Button from "../../../../../components/ui/buttons/button/Button";
 import RoundButton from "../../../../../components/ui/buttons/rounded-button/RoundedButton";
+import EditorMd from "../../../../../components/editor/EditorMD";
 
 const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
 
@@ -107,11 +108,9 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
 
   const Text = () => {
     return (
-        <TipTapEditor
-            bubble
-            place={'Напишите что нибудь'}
-            getValue={handleContentChange}
-        />
+        <>
+          <EditorMd/>
+        </>
     )
   }
 

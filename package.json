@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@editorjs/editorjs": "^2.30.7",
+    "@editorjs/header": "^2.8.8",
     "@nivo/bar": "^0.87.0",
     "@nivo/core": "^0.87.0",
     "@nivo/line": "^0.87.0",
@@ -16,6 +18,7 @@
     "@tiptap/react": "^2.4.0",
     "@tiptap/starter-kit": "^2.4.0",
     "axios": "^1.7.2",
+    "editorjs-html": "^3.4.3",
     "html-react-parser": "^5.1.12",
     "js-cookie": "^3.0.5",
     "prop-types": "^15.8.1",

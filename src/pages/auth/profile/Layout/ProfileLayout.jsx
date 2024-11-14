@@ -153,7 +153,7 @@ export function ProfileLayout() {
      *             console.log(e)
      *         }
      */
-    function Subscribe () {
+    const subscribe = () => {
         const data = {
             authorId: id
         }
@@ -163,6 +163,30 @@ export function ProfileLayout() {
             console.log(e)
         }
     }
+
+    // function some(digits){
+    //     if(digits.length <= 0){
+    //         return []
+    //     }
+    //
+    //     digits.split('')
+    //     const arr = [null, 'abc', 'def', 'ghi' ,'jkl' ,'mno' ,'pqrs','tuv' ,'wxyz'];
+    //
+    //     const result = []
+    //     const first = []
+    //     const other = []
+    //
+    //     first.push(arr[digits[0] - 1].split(''))
+    //     for(let i = 1; i < digits.length; i++){
+    //         other.push(arr[digits[i] - 1].split(''))
+    //     }
+    //     for(let p = 0; p < first[0].length; p++){
+    //         for (let k = 0; k < other[0].length; k++){
+    //             result.push(first[0][p] + other[0][k])
+    //         }
+    //     }
+    //     return result
+    // }
 
     const getUser = () => {
             try {
@@ -264,8 +288,7 @@ export function ProfileLayout() {
                             :
                             <div className={styles.follow}>
                                 <Button variant={'outlet'}
-                                        click={() => Subscribe()}>
-
+                                        click={() => subscribe()}>
                                     Подписаться
                                 </Button>
                             </div>}
