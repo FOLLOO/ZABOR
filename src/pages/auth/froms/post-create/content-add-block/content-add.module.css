@@ -1,4 +1,5 @@
 .text{
+    padding: 0 1rem;
     width: 100%;
 }
 
@@ -8,11 +9,12 @@
 }
 
 .fileUpload {
-    width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 400px;
+    width: 100%;
+    /*margin: 0 auto;*/
+    /*padding: 20px;*/
+    /*height: 400px;*/
     height: 100%;
+    object-fit: cover;
 }
 
 .video{
@@ -33,7 +35,6 @@
 }
 
 .imageUploadWrap {
-    margin-top: 10px;
     position: relative;
 }
 
@@ -42,6 +43,7 @@
 }
 
 .buttonWidth button{
+    margin-bottom: 1rem;
     width: 100%;
 }
 
@@ -93,4 +95,14 @@
 
 .fileUploadImage{
     width: 100%;
+    object-fit: cover;
+    max-height: 400px;
+}
+.main{
+    width: 100%;
+}
+
+.fileUploadContent{
+    max-height: 400px;
+    object-fit: cover;
 }

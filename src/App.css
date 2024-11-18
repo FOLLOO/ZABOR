@@ -66,27 +66,27 @@
 
 h1{
   font-family: var(--tf-LATO);
-  font-size: 64px; /* 64px */
+  /*font-size: 64px; !* 64px *!*/
 }
 
 h2{
   font-family: var(--tf-LATO);
-  font-size: 36px; /* 36/48px */
+  /*font-size: 36px; !* 36/48px *!*/
 }
 
 h3{
   font-family: var(--tf-LATO);
   /*font-size: 32px; !* 32px *!*/
-  font-size: var(--text-3xl);
+  /*font-size: var(--text-3xl);*/
 }
 
 h4{
   font-family: var(--tf-LATO);
   /*font-size: 24px; !* 20/24px *!*/
-  font-size: var(--text-2xl);
+  /*font-size: var(--text-2xl);*/
 }
 h5{
-  font-family: var(--tf-LATO);
+  /*font-family: var(--tf-LATO);*/
 }
 
 

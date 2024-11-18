@@ -12,13 +12,11 @@
     border: 2px solid var(--accent);
     padding: .75rem;
 }
-.base:focus{
-    background-color:   var(--accent-plus);
-}
+
 .base:hover {
     padding: .5rem;
     margin: .25rem;
-    box-shadow: 0 0 0 .4rem var(--accent-plus);
+    box-shadow: 0 0 0 .2rem var(--accent);
 }
 .base img{
     filter: invert(20%) sepia(243%) saturate(1576%) hue-rotate(245deg) brightness(137%) contrast(73%);

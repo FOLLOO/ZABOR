@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, {memo, useMemo, useState} from 'react'
+import { v4 as uuidv4 } from 'uuid';
 //css
 import styles from './content-add.module.css'
 import global from '../../../../../global.module.css'
@@ -14,24 +15,24 @@ import photoIcon from '../../../../../asserts/icons/update/file-image.svg'
 import Button from "../../../../../components/ui/buttons/button/Button";
 import RoundButton from "../../../../../components/ui/buttons/rounded-button/RoundedButton";
 import EditorMd from "../../../../../components/editor/EditorMD";
-
+import edjsHTML from 'editorjs-html';
 const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
 
   const [type, setType] = useState(blockType)
-  const [value, setValue] = useState(content)
+  // const [value, setValue] = useState(content)
   const [fileURL, setFileURL] = useState(null)
 
-  const handleContentChange = (event) => {
-    if (event.target === undefined) {
-      const newContent = event
-      setValue(newContent)
-      onUpdate(id, { type: type, content: newContent })
-    } else {
-      const newContent = event.target.value
-      setValue(newContent)
-      onUpdate(id, { type: type, content:  newContent })
-    }
+  const [data, setData] = useState({
+    "time": new Date().getTime(),
+    "blocks": [],
+  })
+
+  const handleContentChange = (param) => {
+      const edjsHTMLparser = edjsHTML()
+      const cont = edjsHTMLparser.parse(param)
+      onUpdate(id, { type: type, content: cont.join('\n') })
   }
+  // console.log(data
 
   const handleVideoChange = (event) => {
     const uploadedFile = event.target.files[0]
@@ -43,7 +44,7 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
         return
       }
       const newContent = URL.createObjectURL(uploadedFile)
-      setValue(newContent)
+      setFileURL(newContent)
       onUpdate(id, { type: 'file', content: uploadedFile.name, name: uploadedFile })
     }
   }
@@ -106,11 +107,9 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
     )
   }
 
-  const Text = () => {
+  function Text(){
     return (
-        <>
-          <EditorMd/>
-        </>
+          <EditorMd value={data} change={handleContentChange} ID={`editor-${uuidv4().toString()}`}/>
     )
   }
 
@@ -159,37 +158,47 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
               {!fileURL ? 'Выбрать фото' : 'Изменить фото'}
             </Button>
           </div>
+            {!fileURL ? (
           <div className={styles.imageUploadWrap}>
-            <input
+                <input
                 id={id}
                 className={styles.videoUploadInput}
                 type="file"
                 onChange={handleVideoChange}
                 accept="video/*"
             />
-            {!value ? (
                 <div className={`${global.d1} ${styles.delete}`}>Или перетащите видео сюда</div>
-            ) : null}
           </div>
-          <div className={styles.fileUploadContent}>
-            {value ? (
+            ) : null}
+            {fileURL ? (
                 <video controls className={styles.video}>
-                  <source src={value} type="video/mp4"/>
+                  <source src={fileURL} type="video/mp4"/>
                   Извините, ваш браузер не поддерживает воспроизведение видео.
                 </video>
             ) : null}
-          </div>
         </div>
     )
   }
 
 
+  // const renderSwitch = useMemo(() => {
+  //   switch (type) {
+  //     case 'text' :
+  //       return <Text/>
+  //     case 'image' :
+  //       return <Image/>
+  //     case  'video' :
+  //       return <Video/>
+  //     default:
+  //       return <DefaultButtons/>
+  //   }
+  // }, [type])
   const renderSwitch = (param) => {
     switch (param) {
       case 'text' :
         return <Text/>
       case 'image' :
-        return <Image/>
+        return <Image />
       case  'video' :
         return <Video/>
       default:
@@ -197,9 +206,13 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
     }
   }
 
+  const render = useMemo(() => renderSwitch(type), [type, fileURL])
+
+
   return (
       <div className={styles.text}>
-      {renderSwitch(type)}
+      {render}
+        {/*  <EditorMd value={data} change={setData}/>*/}
       </div>
   )
 }

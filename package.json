@@ -3,8 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@editorjs/code": "^2.9.2",
+    "@editorjs/delimiter": "^1.4.2",
     "@editorjs/editorjs": "^2.30.7",
     "@editorjs/header": "^2.8.8",
+    "@editorjs/inline-code": "^1.5.1",
+    "@editorjs/link": "^2.6.2",
+    "@editorjs/list": "^1.10.0",
+    "@editorjs/marker": "^1.4.0",
+    "@editorjs/quote": "^2.7.2",
+    "@editorjs/raw": "^2.5.0",
+    "@editorjs/warning": "^1.4.0",
     "@nivo/bar": "^0.87.0",
     "@nivo/core": "^0.87.0",
     "@nivo/line": "^0.87.0",
@@ -31,6 +40,7 @@
     "react-transition-group": "^4.4.5",
     "react-virtualized-auto-sizer": "^1.0.24",
     "react-window": "^1.8.10",
+    "uuid": "^11.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

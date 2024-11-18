@@ -6,12 +6,10 @@
 }
 
 
-
-
 .fileUpload {
-    width: 600px;
+    width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    /*padding: 20px;*/
     height: 400px;
 }
 .imageUploadWrap {

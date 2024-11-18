@@ -29,6 +29,7 @@ import InputText from "../../../../components/ui/input/input-text/InputText";
 import InputFile from "../../../../components/ui/input/input-file/InputFile";
 import InputToggle from "../../../../components/ui/input/input-toggle/InputCheckbox";
 import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
+import {useNavigate} from "react-router-dom";
 
 function CreatePost() {
 
@@ -41,6 +42,8 @@ function CreatePost() {
     const {user} = useAuth()
     const {overlay, setOverlay} = useContext(OverlayContext)
 
+    const navigate = useNavigate()
+
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
 
@@ -48,6 +51,7 @@ function CreatePost() {
     const [save, setSave] = useState(false)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [price, setPrice] = useState()
 
 
 
@@ -116,12 +120,11 @@ function CreatePost() {
         try {
             console.log('FormData:', formData);
             dispatch(createPost(formData))
-            // navigate(`/profile/${user?.id}`)
+            navigate(`/profile/${user?.id}`)
         } catch (err) {
             console.log(err)
         }
     }
-
 
     const handleChange = (event) => {
         const uploadedFile = event.target.files[0];
@@ -190,7 +193,7 @@ function CreatePost() {
     };
 
     useEffect(() => {
-        // console.log(file)
+        // console.log(childBlocks)
     }, [file, childBlocks])
 
 
@@ -209,7 +212,7 @@ function CreatePost() {
                             <div className={styles.save}>
                                 <ContextDrop>
                                     <ContextGroup>
-                                        <Button type={'submit'} img={send} img_size={'h-5'}>
+                                        <Button type={'submit'} form={'save_my_post'} img={send} img_size={'h-5'}>
                                             Опубликовать
                                         </Button>
                                     </ContextGroup>
@@ -274,9 +277,13 @@ function CreatePost() {
                             <h2 className={`${global.t3} ${global.medium}`}>Заголовок поста</h2>
                             <InputText place="Добавьте заголовок" value={title}
                                        onChange={(e) => setTitle(e.target.value)}/>
+                            <h2 className={`${global.t3} ${global.medium}`}>Цена</h2>
+                            <InputText place="Определите цену" type={'number'} value={price}
+                                       onChange={(e) => setPrice(e.target.value)}/>
                             <h2 className={`${global.t3} ${global.medium}`}>Описание</h2>
                             <div className={global.d3}>
-                                <Textarea place={'Добавьте описание'} rows={10}/>
+                                <Textarea place={'Добавьте описание'} rows={10}
+                                          onChange={(e) => setDescription(e.target.value)}/>
                             </div>
                         </div>
 

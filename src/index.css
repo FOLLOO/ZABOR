@@ -212,7 +212,7 @@ legend {
 body{
   font-family: 'Lato', sans-serif;
   /*font-weight: 700;*/
-  font-size: 20px;
+  font-size: var(--text-lg);
   overflow-x: hidden;
 }
 
@@ -227,10 +227,33 @@ body{
 body .w-md-editor {
   --md-editor-font-family: 'Lato', sans-serif !important;
 }
-body .w-md-editor-toolbar li > button svg{
-  width: 1.2rem;
-  height: 1.2rem;
+
+body .ce-toolbar__content, .ce-block__content{
+  max-width: 100%;
 }
+body .ce-popover-item__icon{
+  width: 30px;
+  height: 30px;
+}
+body .ce-popover-item__icon svg, .ce-popover--inline .ce-popover-item__icon svg{
+  width: 24px;
+  height: 24px;
+}
+body .cdx-list__item{
+  padding: 0 ;
+  line-height: normal;
+}
+
+body #editorjs a{
+  text-decoration: underline;
+}
+body .cdx-block{
+  padding: .2rem 0;
+}
+body .codex-editor__redactor{
+  padding-bottom: 3rem !important;
+}
+
 
 @media (max-width: 1080px) {
   html {
