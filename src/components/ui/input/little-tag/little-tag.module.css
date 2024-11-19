@@ -5,7 +5,7 @@
     text-wrap: none;
     border-radius: 100px;
     border-image-slice: 30%;
-    border: solid 1px transparent;
+    border: solid 2px transparent;
     background-image: linear-gradient(white, white),
     linear-gradient(to bottom, #B780FF, #8F38FF);
     background-origin: border-box;
@@ -22,7 +22,7 @@
     overflow: hidden;
     border-radius: 100px;
     background: rgba(105, 52, 173, 0.8);
-    border: solid 1px transparent;
+    border: solid 2px transparent;
     color: white;
     transition: 1s;
 }

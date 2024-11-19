@@ -41,7 +41,7 @@ function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  s
   const Post = () => {
     return (
       <div className={`${global.flex} ${global.f_dir_column} ${styles.post}`}>
-        <div className={global.t1}>
+        <div className={global.t3}>
           {nickname ? nickname : 'Anonymos'}
         </div>
         <div className={global.d3}>

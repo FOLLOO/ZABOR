@@ -34,7 +34,8 @@ html {
 
 /* Reapply the pointer cursor for anchor tags */
 a, button {
-  cursor: revert;
+  /*cursor: revert;*/
+  cursor: pointer;
 }
 
 /* Remove list styles (bullets/numbers) */

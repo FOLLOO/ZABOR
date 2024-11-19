@@ -11,12 +11,14 @@ function TransprantButton ({
   noPad = false,
   form,
   type,
+    title,
   // notification_count,
   notification = false
 }) {
   return (
     <button
       form={form}
+      title={title}
       className={styles.button}
       type={type ? type : null}
       style={stylee ? stylee : null}

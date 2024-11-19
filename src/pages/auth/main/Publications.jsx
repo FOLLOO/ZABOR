@@ -9,7 +9,7 @@ import { fetchTags } from '../../../redux/slices/tag'
 import { Link } from 'react-router-dom'
 import MessageBox from '../../../components/message-box/MessageBox'
 import { OverlayContext } from '../../../context/OverlayContext'
-import LittleTag from '../../../components/ui/input/little-tag/TagCheckBox'
+import LittleTag from '../../../components/ui/input/little-tag/LittleTag'
 import Loading from '../../loading/Loading'
 
 export default function Publications () {
@@ -66,7 +66,7 @@ export default function Publications () {
             //todo: выбрать все
           tags.map(item => (
             <div className={styles.b_width}>
-              <LittleTag text={item.name}/>
+              <LittleTag text={item.name} id={item.id} key={item.id} />
             </div>
           ))
         :

@@ -1,46 +1,45 @@
-import React, {useContext, useEffect, useRef, useState} from 'react'
-
-import styles from './post.module.css'
-import global from '../../../global.module.css'
-
-import favorites from '../../../asserts/icons/post/favorites.svg'
-import like from '../../../asserts/icons/post/like.svg'
-import report from '../../../asserts/icons/post/report.svg'
-import comments from '../../../asserts/icons/post/comments.svg'
-import share from '../../../asserts/icons/post/share.svg'
-
-import MessageBox from '../../../components/message-box/MessageBox'
-import ProfileNickname from '../../../components/profile/profile-nickname/ProfileNickname'
-import CardLittle from '../../../components/post/post-cards/card-little/CardLittle'
-import {useAuth} from '../../../provider/AuthProvider'
-import {OverlayContext} from '../../../context/OverlayContext'
+import React, { useEffect, useState} from 'react'
+import parse from 'html-react-parser';
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, useNavigate, useParams} from 'react-router-dom'
-import {getPost, getSamePost} from '../../../redux/slices/post'
-import {IMAGE_URL} from '../../../utils'
-import Nothing from '../../nothing/Nothing'
-import parse from 'html-react-parser';
+
+//styles
+import styles from './post.module.css'
+import dialog from '../../auth/profile/profile-page/profile.module.css'
+import global from '../../../global.module.css'
+
+//img
+import bookmark from '../../../asserts/icons/update/bookmark.svg'
+import like from '../../../asserts/icons/update/heart.svg'
+import report from '../../../asserts/icons/update/alert-triangle.svg'
+import comment from '../../../asserts/icons/update/message-circle.svg'
+import share from '../../../asserts/icons/update/share-2.svg'
+import video from '../../../asserts/icons/contextMenu/Видео.png'
+
+//components
+import ProfileNickname from '../../../components/profile/profile-nickname/ProfileNickname'
+import CardLittle from '../../../components/post/post-cards/card-little/CardLittle'
 import Comment from '../../../components/comments/comment/Comment'
 import CommnetForm from '../../../components/comments/comments-form/CommnetForm'
-import video from '../../../asserts/icons/contextMenu/Видео.png'
 import TransprantButton from '../../../components/ui/buttons/transprant-button/TransprantButton'
 import ContextDrop from '../../../components/context-drop/ContextDrop'
 import Button from "../../../components/ui/buttons/button/Button";
 
+//utils
+import {useAuth} from '../../../provider/AuthProvider'
+import {getPost, getSamePost} from '../../../redux/slices/post'
+import {IMAGE_URL} from '../../../utils'
+import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
+import Textarea from "../../../components/ui/input/textarea/Textarea";
+
 function Post() {
     const {user} = useAuth()
-    const {overlay, setOverlay} = useContext(OverlayContext)
     const {id} = useParams()
     const {OnePost, SamePosts} = useSelector(state => state.posts)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const openRef = useRef(false);
 
     const [sharee, setSharee] = useState(false)
-
-    const CommentsRef = useRef(null)
-    // const executeScroll = (re) => re.current.scrollIntoView()
-
 
     const parser = new DOMParser()
     const pageGetPost = () => {
@@ -51,7 +50,6 @@ function Post() {
         }
     }
     const description = OnePost?.items?.description || '';
-
     const pageGetSamePost = () => {
         try {
             dispatch(getSamePost(id))
@@ -60,11 +58,23 @@ function Post() {
         }
     }
 
+    const toggleOverlay = () => {
+        const dialog = document.getElementById('support')
+        const isOpen = dialog.open;
+        console.log(isOpen)
+        return isOpen ? dialog.close()  : dialog.showModal()
+    }
+
+
     useEffect(() => {
-        if (OnePost.status === 'loaded') return;
+        if (OnePost.status === 'loaded' && OnePost.items.id === id) return;
         pageGetPost()
-        pageGetSamePost() //todo: присылать похожие посты вместе с постом?
-    }, [])
+        }, [])
+
+    useEffect(() => {
+        if(SamePosts.status === 'loaded' && OnePost.items.id === id) return;
+        pageGetSamePost() // присылать похожие посты вместе с постом?
+    }, []);
 
     const shuffledPosts = [...SamePosts?.items];
 
@@ -73,61 +83,49 @@ function Post() {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]];
     }
-    // console.log(OnePost)
     return (
         <div>
-            {overlay ?
-                <MessageBox type={'help'} visability={true}/>
-                : null
-            }
             <div className={styles.grid}>
-        <span>
-
-        </span>
-                <span>
-
-        </span>
                 <div className={styles.content}>
-                    <div className={`${styles.profile} ${styles.text}`}>
-                        <ProfileNickname type={'post'} nickname={user?.nickname}/>
-                        <div className={`${styles.button} ${global.flex} `}>
-
-                            <Button variant={'color'} className={global.f_center}>
-                                Подписаться
-                            </Button>
-                        </div>
-                    </div>
-
-                    <div className={`${styles.mainImage} ${global.flex} ${global.f_a_center}`}>
+                    <div className={`${styles.text} ${global.flex} ${global.f_a_center}`}>
                         <img src={`${IMAGE_URL}${OnePost?.items.coverUrl}`} className={styles.image} alt={'temp'}/>
                     </div>
 
-                    <div className={styles.inputDescription}>
-                        <input type="checkbox" className={styles.input} id='desi' />
-                        <div className={`${global.d3} ${styles.description}`} >
-                            {description ? parse(description) : <Nothing/>}
+
+                    <div className={styles.text}>
+                        <div className={`${styles.actionButtons} ${global.flex}`}>
+                            <div className={`${global.flex} ${global.f_a_center}`}>
+                                <TransprantButton img={like} title={'Нравится'}/>
+                                <TransprantButton img={bookmark} title={'Избранное'}/>
+                                <a href={'#comments'} className={`${global.w100} ${global.flex} ${global.f_center}`}>
+                                    <TransprantButton img={comment} title={'Комментарии'}/>
+                                </a>
+                            </div>
+                            <div className={global.flex}>
+                                <TransprantButton img={report} click={(e) => toggleOverlay(e)}
+                                                  title={'Обратиться в поддержку'}/>
+                                <TransprantButton img={share} click={() => setSharee(!sharee)} title={'Поделиться'}/>
+                            </div>
                         </div>
-                      <label htmlFor='desi' className={global.d3}> Развернуть </label>
+                    </div>
+
+                    <div className={`${styles.profile} ${styles.text}`}>
+                        <ProfileNickname type={'post'} nickname={user?.nickname}/>
+                        <Button variant={'color'} className={global.f_center}>
+                            Подписаться
+                        </Button>
+                    </div>
+
+                    <div className={`${styles.text} ${styles.mb}`}>
+                        <input type="checkbox" className={styles.input} id='desi'/>
+                        <div className={`${global.d2} ${styles.description}`}>
+                            {description ? parse(description) : 'Автор не добавил описания'}
+                        </div>
+                        <label htmlFor='desi' className={global.d3}> Развернуть </label>
                     </div>
 
                     <div className={styles.text}>
-                        <h2 className={`${global.xl4} ${global.bold}`}>{OnePost?.items.title || `Пост ${id}`}</h2>
-                        <div className={`${styles.actionButtons} ${global.flex}`}>
-                            <div className={global.flex}>
-                                <TransprantButton img={favorites}/>
-                                <TransprantButton img={like}/>
-                                {/*<TransprantButton img={comments} click={() => navigate('#comments')}/>*/}
-                                <a href={'#comments'}>Comm</a>
-                            </div>
-                            <div className={global.flex}>
-                                <TransprantButton img={report} click={() => setOverlay(!overlay)}/>
-                                <TransprantButton img={share} click={() => setSharee(!sharee)}/>
-                            </div>
-                        </div>
-                        {overlay ?
-                            <MessageBox type={'help'}/>
-                            : null}
-
+                        <h2 className={`${global.xl3} ${global.bold}`}>{OnePost?.items.title || `Пост ${id}`}</h2>
                         {sharee ?
                             <div className={styles.sharee}>
                                 <ContextDrop>
@@ -160,13 +158,9 @@ function Post() {
                                     )
                                 );
                             })
-                        ) : (
-                            <Nothing/>
-                        )}
+                        ) : null}
                     </div>
-                    <div className={styles.comments} id={"comments"}
-                         // ref={CommentsRef}
-                    >
+                    <div className={styles.text} id={"comments"}>
                         <CommnetForm/>
                         <Comment/>
                     </div>
@@ -178,6 +172,7 @@ function Post() {
                         shuffledPosts?.map((posts) => (
                             <Link to={`/post/${posts.id}`}>
                                 <CardLittle
+                                    key={posts.id}
                                     data={posts}
                                     // avatar={posts.user.files[0].url}
                                     blur
@@ -194,6 +189,28 @@ function Post() {
                             <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> <CardLittle/> </>}
                 </div>
             </div>
+
+            <dialog id={'support'} className={dialog.dialog} >
+                <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
+                    {/*<div className={dialog.support}>*/}
+                        <h1 className={global.xl3}>О чем желаете сообщить?</h1>
+                        <p className={global.d3}>Мы обязательно рассмотрим ваше обращение</p>
+                    {/*</div>*/}
+                    <InputDporDown data={[{id: 1, title: 'Куда', value: 'м'}, {id: 2,title: 'Сюда',value: 'ж'},]}/>
+                    <Textarea rows={5} place={'В чем проблема?'}/>
+                    <div className={`${global.flex} ${global.f_dir_column}`} style={{gap: '1rem'}}>
+                        <Button variant={'outlet'} click={() => toggleOverlay()}
+                                className={`${global.w100} ${global.f_center}`}>
+                            Отменить
+                        </Button>
+                        <Button variant={'color'} type={'submit'}
+                                className={`${global.w100} ${global.f_center}`}
+                                onClick={() => navigate('/basket')}>
+                            Отправить
+                        </Button>
+                    </div>
+                </div>
+            </dialog>
 
         </div>
     )

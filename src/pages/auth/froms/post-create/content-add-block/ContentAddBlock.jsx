@@ -1,5 +1,6 @@
-import React, {memo, useMemo, useState} from 'react'
+import React, {useMemo, useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import edjsHTML from 'editorjs-html';
 //css
 import styles from './content-add.module.css'
 import global from '../../../../../global.module.css'
@@ -11,15 +12,12 @@ import videoIcon from '../../../../../asserts/icons/update/file-video-2.svg'
 import photoIcon from '../../../../../asserts/icons/update/file-image.svg'
 
 //components
-// import TipTapEditor from '../../../../../components/temp/TipTapEditor'
 import Button from "../../../../../components/ui/buttons/button/Button";
 import RoundButton from "../../../../../components/ui/buttons/rounded-button/RoundedButton";
 import EditorMd from "../../../../../components/editor/EditorMD";
-import edjsHTML from 'editorjs-html';
-const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
+const ContentAddBlock = ({ id, blockType,  onUpdate }) => {
 
   const [type, setType] = useState(blockType)
-  // const [value, setValue] = useState(content)
   const [fileURL, setFileURL] = useState(null)
 
   const [data, setData] = useState({
@@ -180,19 +178,6 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
     )
   }
 
-
-  // const renderSwitch = useMemo(() => {
-  //   switch (type) {
-  //     case 'text' :
-  //       return <Text/>
-  //     case 'image' :
-  //       return <Image/>
-  //     case  'video' :
-  //       return <Video/>
-  //     default:
-  //       return <DefaultButtons/>
-  //   }
-  // }, [type])
   const renderSwitch = (param) => {
     switch (param) {
       case 'text' :
@@ -208,13 +193,12 @@ const ContentAddBlock = ({ id, blockType, content, onUpdate }) => {
 
   const render = useMemo(() => renderSwitch(type), [type, fileURL])
 
-
   return (
       <div className={styles.text}>
-      {render}
-        {/*  <EditorMd value={data} change={setData}/>*/}
+        {render}
       </div>
   )
+
 }
 
 export default ContentAddBlock

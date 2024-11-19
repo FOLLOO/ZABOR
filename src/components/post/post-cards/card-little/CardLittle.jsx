@@ -40,16 +40,15 @@ function CardLittle ({
     if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){
       dispatch(addItemToCart(data));
     }
-    // console.log(cartItems)
   };
 
   return (
-    <div className={`${styles.main} ${global.shadowBliz}`}>
+    <div className={`${styles.main}`}>
       <div className={image ? styles.temp : null}>
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
             <Link to={`/profile/${user_id}`}>
-            <ProfileCircle size={30} img={avatar ? `${IMAGE_URL}${avatar}` : null} />
+                <ProfileCircle size={30} img={avatar ? `${IMAGE_URL}${avatar}` : null} />
             </Link>
           </div>
 
@@ -62,13 +61,14 @@ function CardLittle ({
           </div>
 
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
-            {/*<TransprantButton text={'+'} img={basket} stylee={{background: 'white', width: '55px', padding: 0}}/>*/}
+
             <button className={styles.button} onClick={handleAddToCart}>
               <div  className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                   <img src={basket} alt={'img'}/>
                   <img src={plus} alt={'img'}/>
               </div>
             </button>
+
           </div>
       </div>
 
@@ -82,11 +82,11 @@ function CardLittle ({
               </div>
             }
           </div>
-          <div className={`${global.t3} ${styles.title}`}>
-            {price ?  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(price) :
-              <div className={global.skeleton}>
-              15
-              </div>
+          <div className={`${global.t3} ${styles.price}`}>
+            {price > 0 ?  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(price) :
+              // <div className={global.skeleton}>
+              'Бесплатно'
+              // </div>
             }
           </div>
         </div>

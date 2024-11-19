@@ -1,26 +1,25 @@
 import React, {useContext, useEffect, useState} from 'react'
-
+import {Link, useNavigate, useParams} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+//styles
 import styles from './userPosts.module.css'
 import global from '../../../../global.module.css'
-
+//coponents
 import GreenButton from '../../../ui/buttons/green-button/GreenButton'
-
-import filter from '../../../../asserts/icons/update/sort-desc.svg'
-
-import {Link, useNavigate, useParams} from 'react-router-dom'
-import {useAuth} from '../../../../provider/AuthProvider'
-import {useDispatch, useSelector} from 'react-redux'
-import {IMAGE_URL} from '../../../../utils'
-import LittleTag from '../../../ui/input/little-tag/TagCheckBox'
-import {fetchTags} from '../../../../redux/slices/tag'
+import LittleTag from '../../../ui/input/little-tag/LittleTag'
 import AfterBlock from "../../../after-overlay-block/AfterBlock";
 import SelectPost from "../../../post/post-playlist/select-postORplaylist/SelectPost";
 import WhiteButton from "../../../ui/buttons/white-button/WhiteButton";
-import {OverlayContext} from "../../../../context/OverlayContext";
-import {getUserFolder, putPostToFolder} from "../../../../redux/slices/folder";
 import Button from "../../../ui/buttons/button/Button";
 import CardLittle from "../../../post/post-cards/card-little/CardLittle";
 import NothingYet from "../../../../pages/nothing/nothing-yet/NothingYet";
+//img
+import filter from '../../../../asserts/icons/update/sort-desc.svg'
+//utils
+import {useAuth} from '../../../../provider/AuthProvider'
+import {fetchTags} from '../../../../redux/slices/tag'
+import {OverlayContext} from "../../../../context/OverlayContext";
+import {getUserFolder, putPostToFolder} from "../../../../redux/slices/folder";
 
 /** Посты пользователя */
 
@@ -119,7 +118,8 @@ function UserPosts({data = []}) {
             } else {
                 setSortData([...(data || [])].sort((a, b) => b.id - a.id))
             }
-        } return
+        }
+
     }, [sort, data])
     const isMe = () => { return user?.id === Number(id) }
 
@@ -150,37 +150,35 @@ function UserPosts({data = []}) {
                     }
                 </div>
                 <div className={styles.margin}>
-                        {sortData.length > 0 ?
-                    <div className={styles.grid}>
-                        {sortData.map((message =>
+                    {sortData.length > 0 ?
+                        <div className={styles.grid}>
+                            {sortData.map((message =>
                                     <Link to={`/publications/${message.id}`}>
-                                    <CardLittle
-                                        data={message}
-                                        id={message?.id}
-                                        userID={message?.userId}
-                                        avatar_img={`${IMAGE_URL}${userData.avatar.url}`} //todo: Пока что ничего нет
-                                        img={message?.coverUrl}
-                                        blur={!!message?.price}
-                                        views={message?.views_count + 1}
-                                        // time={new Date(message?.createdAt).toLocaleDateString('ru-RU',)}
-                                        time={message?.createdAt}
-                                        title={message?.title}
-                                        // todo: EDITABLE
-                                        editable={Number(id) === user?.id}
-                                        description={message?.description.replace(/<[^>]*>?/gm, '')}
-                                        price={message?.price ? message?.price : 'Бесплатно'}
-                                        image/>
+                                        <CardLittle
+                                            data={message}
+                                            id={message?.id}
+                                            userID={message?.userId}
+                                            avatar={`${userData.items.avatarUrl}`}
+                                            img={message?.coverUrl}
+                                            blur={!!message?.price}
+                                            views={message?.views_count + 1}
+                                            time={message?.createdAt}
+                                            title={message?.title}
+                                            editable={Number(id) === user?.id}
+                                            description={message?.description.replace(/<[^>]*>?/gm, '')}
+                                            price={message?.price ? message?.price : 'Бесплатно'}
+                                            image/>
                                     </Link>
-                            )) }
-                    </div>
-                            :
-                            <NothingYet
+                            ))}
+                        </div>
+                        :
+                        <NothingYet
                             isMe={isMe()}
                             isAuthor={user?.roleId === 1}
                             onButtonClick={() => navigate('/group')}
                             buttonText="Создать публикацию"
-                            />
-                        }
+                        />
+                    }
                 </div>
             </>
         )

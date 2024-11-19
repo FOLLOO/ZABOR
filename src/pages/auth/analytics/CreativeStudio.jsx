@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+//styles
 import styles from './creative-studio.module.css'
 import global from '../../../global.module.css'
+
+//component
 import BackCreate from '../../../components/toolbar/backCreate-toolbar/BackCreate'
 import SettingsTitle from '../../../components/toolbar/settings-title/SettingsTitle'
 import ActionCard from '../../../components/settings/ActionCard/ActionCard'
 import CardDefault from '../../../components/post/post-cards/card-default/CardDefault'
-import { Link, useNavigate } from 'react-router-dom'
 import Notification from '../../../components/notifications/Notification'
 import ContextGroup from '../../../components/context-drop/context-group/ContextGroup'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserAvatar, getUserData } from '../../../redux/slices/user'
-import { useAuth } from '../../../provider/AuthProvider'
-import { IMAGE_URL } from '../../../utils'
 import Nothing from '../../nothing/Nothing'
 import CardLittle from "../../../components/post/post-cards/card-little/CardLittle";
-import LittleTag from "../../../components/ui/input/little-tag/TagCheckBox";
 
-function CreativeStudio (props) {
+//utils
+import { getUserData } from '../../../redux/slices/user'
+import { useAuth } from '../../../provider/AuthProvider'
+import { IMAGE_URL } from '../../../utils'
+
+function CreativeStudio () {
 
   const [lastPost, setLastPost] = useState()
   const { user } = useAuth()

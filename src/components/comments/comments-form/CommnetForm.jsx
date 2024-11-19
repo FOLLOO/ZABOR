@@ -3,12 +3,11 @@ import React, { useEffect, useState } from 'react'
 import styles from './comment-form.module.css'
 import global from '../../../global.module.css'
 
-import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import Textarea from '../../ui/input/textarea/Textarea'
-import TransprantButton from '../../ui/buttons/transprant-button/TransprantButton'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createComment } from '../../../redux/slices/comments'
+import Button from "../../ui/buttons/button/Button";
 
 function CommnetForm ({ click }) {
 
@@ -49,11 +48,11 @@ function CommnetForm ({ click }) {
       </div>
       <div className={styles.flex}>
         <div className={styles.button}>
-          <TransprantButton text={'Отмена'} click={click}/>
+          <Button click={click}>Отмена</Button>
         </div>
         <div className={styles.button}>
           {/*<button type="submit" form={'HORVA'}>Отправить</button>*/}
-          <GreenButton text={'Отправить'} type={'submit'} form={'HORVA'}/>
+          <Button variant={'color'} type={'submit'} form={'HORVA'}>Отправить</Button>
         </div>
       </div>
     </form>

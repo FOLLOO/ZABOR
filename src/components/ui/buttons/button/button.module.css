@@ -13,7 +13,7 @@
     align-items: center;
     /*justify-content: center;*/
     border-radius: var(--rounded-md); /* rounded-md */
-    font-size: var(--text-base); /* text-sm */
+    /*font-size: var(--text-sm); !* text-sm *!*/
     font-weight: 500; /* font-medium */
     transition: all 0.2s ease-in-out ;
     outline: none;

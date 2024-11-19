@@ -1,4 +1,5 @@
 import React, {memo, useEffect, useRef} from "react";
+
 import EditorJS from "@editorjs/editorjs";
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
@@ -12,7 +13,6 @@ import InlineCode from '@editorjs/inline-code'
 
 const EditorComponent = ({change, value, ID}) => {
     const ejInstance = useRef();
-
     useEffect(() => {
         if (!ejInstance.current) {
             const editor = new EditorJS({

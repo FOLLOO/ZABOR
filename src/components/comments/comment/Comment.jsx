@@ -2,17 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import styles from './comment.module.css'
 import global from '../../../global.module.css'
-import { symbol } from 'prop-types'
-import ProfileCircle from '../../profile/profile-circle/ProfileCircle'
 import ProfileNickname from '../../profile/profile-nickname/ProfileNickname'
 import grayLike from '../../../asserts/icons/GrayLike.svg'
 import arrow_down from '../../../asserts/icons/arowMenu.svg'
 import trash from '../../../asserts/icons/contextMenu/trash red.svg'
 import TransprantButton from '../../ui/buttons/transprant-button/TransprantButton'
 import CommnetForm from '../comments-form/CommnetForm'
-import ContextGroup from '../../context-drop/context-group/ContextGroup'
 import ContextDrop from '../../context-drop/ContextDrop'
-import Nothing from '../../../pages/nothing/Nothing'
 function Comment({ comment=[], replies=[] }) {
 
   const [answ, setAnsw] = useState(false);
@@ -36,7 +32,6 @@ function Comment({ comment=[], replies=[] }) {
     <>
     { comment.length > 0 ?
     <div className={styles.pad}>
-
       <div className={`${styles.sender_information} ${global.flex}`}>
         <ProfileNickname size={50} type={'default'} nickname={comment?.nickname} />
         <div className={`${styles.time} ${global.d3}`}>
@@ -91,7 +86,7 @@ function Comment({ comment=[], replies=[] }) {
         </div>
       )}
     </div>
-        : <Nothing text={'Пока что нет комментариев'}/>}
+        : null}
     </>
   );
 }

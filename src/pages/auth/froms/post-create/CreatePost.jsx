@@ -1,46 +1,49 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from "react-router-dom";
 
 import global from '../../../../global.module.css'
 import styles from './create-post.module.css'
 
+//components
 import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCreate'
+import ContextDrop from '../../../../components/context-drop/ContextDrop'
+import ContextGroup from '../../../../components/context-drop/context-group/ContextGroup'
+import Textarea from '../../../../components/ui/input/textarea/Textarea'
+import ContentAddBlock from './content-add-block/ContentAddBlock'
+import Button from "../../../../components/ui/buttons/button/Button";
+import InputText from "../../../../components/ui/input/input-text/InputText";
+import InputFile from "../../../../components/ui/input/input-file/InputFile";
+import InputToggle from "../../../../components/ui/input/input-toggle/InputCheckbox";
+import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
+import LittleTag from "../../../../components/ui/input/little-tag/LittleTag";
+import SettingsBlock from "../../../../components/toolbar/settings-block/SettingsBlock";
 
+//img
 import trash from '../../../../asserts/icons/update/trash-2.svg'
 import archive from '../../../../asserts/icons/update/archive-restore.svg'
 import plus from '../../../../asserts/icons/update/plus.svg'
 import minus from '../../../../asserts/icons/update/plus-1.svg'
 import send from '../../../../asserts/icons/update/send.svg'
 
-
-import {OverlayContext} from '../../../../context/OverlayContext'
-import MessageBox from '../../../../components/message-box/MessageBox'
+//utils
 import {useAuth} from '../../../../provider/AuthProvider'
-import ContextDrop from '../../../../components/context-drop/ContextDrop'
-import ContextGroup from '../../../../components/context-drop/context-group/ContextGroup'
 import {useTags} from '../../../../context/TagsContext'
-import {useDispatch} from 'react-redux'
 import {createPost} from '../../../../redux/slices/post'
-import Textarea from '../../../../components/ui/input/textarea/Textarea'
+import {fetchCreativeTags} from "../../../../redux/slices/tag";
 
-import ContentAddBlock from './content-add-block/ContentAddBlock'
 
-import Button from "../../../../components/ui/buttons/button/Button";
-import InputText from "../../../../components/ui/input/input-text/InputText";
-import InputFile from "../../../../components/ui/input/input-file/InputFile";
-import InputToggle from "../../../../components/ui/input/input-toggle/InputCheckbox";
-import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
-import {useNavigate} from "react-router-dom";
+
 
 function CreatePost() {
-
     const formData = new FormData()
 
     const [childBlocks, setChildBlocks] = useState([{id: 1, type: 'text', content: null, name: ''}]);
 
-
     const {groupTags, creativeTags} = useTags()
     const {user} = useAuth()
-    const {overlay, setOverlay} = useContext(OverlayContext)
+    const { creative_tags } = useSelector(state => state.allTags)
+
 
     const navigate = useNavigate()
 
@@ -53,27 +56,36 @@ function CreatePost() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState()
 
+    const [searchTags, setSerchTags] = useState('')
+    const [loading, setLoading] = useState(true)
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // console.log(childBlocks);
-        // console.log(description)
-        const errors = []
-        if (!file) {
-            errors.push('Загрузите фото или видео')
-        }
-        if (!title) {
-            errors.push('Добавьте заголовок к посту')
-        }
-        if (!description) {
-            errors.push('Добавьте описание')
-        }
+        const errors = [];
+
+        let checkboxes = document.getElementsByName("checkbox");
+        let selectedCboxes = Array.prototype.slice.call(checkboxes)
+            .filter(ch => ch.checked == true)
+            .map(ch => ch.id);
+
+        const validations = [
+            { condition: !file, message: 'Загрузите фото или видео' },
+            { condition: !title, message: 'Добавьте заголовок к посту' },
+            { condition: !description, message: 'Добавьте описание' },
+            { condition: selectedCboxes.length === 0, message: 'Выберете хотя бы один тег' },
+        ];
+        validations.forEach(({ condition, message }) => {
+            if (condition) {
+                errors.push(message);
+            }
+        });
         if (errors.length > 0) {
-            alert(errors.join('\n'))
-            return
+            alert(errors.join('\n'));
+            return;
         }
+
         const filterObj = childBlocks.map((obj) => {
             const {
                 name,
@@ -86,15 +98,10 @@ function CreatePost() {
         formData.append('title', title)
         formData.append('description', description)
         formData.append('ageLimitId', 1)
-        formData.append('tags', '[4]')
-        formData.append('price', 0)
-        // { user.roleId === 1 ?
+        formData.append('tags', JSON.stringify(selectedCboxes))
+        formData.append('price', price)
         formData.append('groupTags', JSON.stringify(user?.roleId === 1 ? groupTags[0] : null))
-        // formData.append('groupTags', groupTags[0]);
         formData.append('creativeTags', JSON.stringify(user?.roleId === 1 ? creativeTags[0] : null))
-        // formData.append('creativeTags', creativeTags[0]);
-        // : null }
-        // formData.append('blocks', JSON.stringify([{ type: 'text', content: content }]))
         formData.append('blocks', JSON.stringify(filterObj))
         formData.append('cover', file)
 
@@ -106,12 +113,12 @@ function CreatePost() {
         }
 
         // const data = {
-        //   file: null, // todo: Допилить
+        //   file: null, // todo: Допилить добавление файлов
         //   title: title,
         //   description: description,
         //   ageLimitId: 1, // todo: Допилить
-        //   tags: [4], // todo: Допилить
-        //   price: 0, // todo: Допилить
+        //   tags: [4], //
+        //   price: 0, //
         //   groupTags: groupTags[0],
         //   creativeTags: creativeTags[0],
         //   blocks: [{ type: "text", content: content  }],
@@ -123,6 +130,20 @@ function CreatePost() {
             navigate(`/profile/${user?.id}`)
         } catch (err) {
             console.log(err)
+        }
+    }
+
+
+
+    const getTags = () => {
+        try{
+            dispatch(fetchCreativeTags()).then((response) => {
+                if(response){
+                    setLoading(false)
+                }
+            })
+        }catch (e){
+            console.log(e)
         }
     }
 
@@ -196,13 +217,13 @@ function CreatePost() {
         // console.log(childBlocks)
     }, [file, childBlocks])
 
+    useEffect(() => {
+        if(creative_tags.status === 'loading')
+            return getTags()
+    }, []);
 
     return (
         <div>
-            {overlay ?
-                <MessageBox type={'help'} visability={true}/>
-                : null
-            }
             <div className={styles.grid}>
                 <div className={styles.main}>
                     <BackCreate greenText={'Сохранить'} click={() => setSave(!save)} button
@@ -229,8 +250,6 @@ function CreatePost() {
                                             </div>
                                         </div>
                                         <InputText place={'Отложенная публикация'} type={'date'}
-                                            // value={birthDay ? birthDay : formattedDate  }
-                                            // onChange={e=> setBirthDay(e.target.value)}
                                         />
                                     </ContextGroup>
                                     <ContextGroup noafter>
@@ -252,8 +271,6 @@ function CreatePost() {
                 <form onSubmit={handleSubmit} id={'save_my_post'}>
                     <div className={styles.content}>
                         <div className={styles.spanImage}>
-                            {/*<InputFile onChange={handleChange} value={fileURL} />*/}
-
                             {file === null || file === undefined ?
                                 <InputFile onChange={handleChange} value={fileURL} id={'mainImage'} />
                                 :
@@ -272,15 +289,25 @@ function CreatePost() {
                                 </div>
                             }
                         </div>
-                        {/*<div className={styles.inputDescription}>*/}
                         <div className={styles.mainInputs}>
-                            <h2 className={`${global.t3} ${global.medium}`}>Заголовок поста</h2>
+                            <h2 className={`${global.t3} `}>Заголовок поста</h2>
                             <InputText place="Добавьте заголовок" value={title}
                                        onChange={(e) => setTitle(e.target.value)}/>
-                            <h2 className={`${global.t3} ${global.medium}`}>Цена</h2>
+                            <h2 className={`${global.t3} `}>Цена</h2>
                             <InputText place="Определите цену" type={'number'} value={price}
                                        onChange={(e) => setPrice(e.target.value)}/>
-                            <h2 className={`${global.t3} ${global.medium}`}>Описание</h2>
+                            <SettingsBlock title={'Добавьте теги'} descripton={'Хоп-хей ла-ла лей'}>
+                                <div className={styles.tags}>
+                                {creative_tags.items.length !== 0 ?
+                                    creative_tags.items.map((item, i) => (
+                                        <div className={styles.tagsWidth}>
+                                            <LittleTag id={item.id} text={item.name} key={i} name={'checkbox'}/>
+                                        </div>
+                                    ))
+                                : null}
+                                </div>
+                            </SettingsBlock>
+                            <h2 className={`${global.t3} `}>Описание</h2>
                             <div className={global.d3}>
                                 <Textarea place={'Добавьте описание'} rows={10}
                                           onChange={(e) => setDescription(e.target.value)}/>
