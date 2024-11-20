@@ -95,11 +95,25 @@
 }
 
 @media (max-width: 425px) {
+    .header{
+        padding-left: 5vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
     .mobileButtons{
         display: block;
     }
 
     .desctopButtons{
         display: none;
+    }
+
+    .search{
+        display: none;
+    }
+    .auth_buttons{
+        justify-content: space-between;
+        width: fit-content;
     }
 }

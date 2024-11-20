@@ -12,6 +12,9 @@
     display: flex;
     gap: 7px;
 }
+.beMaxSize{
+    width: 40vw;
+}
 /*.whiteButton:hover{*/
 /*    box-shadow: 0 0 5px rgb(255, 255, 255),*/
 /*    0 0 5px rgba(255, 255, 255, 0.8),*/
@@ -135,4 +138,18 @@
     height: 36px;
     cursor: pointer;
 
+}
+
+@media (max-width: 425px) {
+    .check{
+        display: flex;
+        flex-direction: column;
+    }
+    .posts{
+        width: 90vw;
+        order: 1
+    }
+    .bascket{
+        order: 2
+    }
 }

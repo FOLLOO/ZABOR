@@ -105,6 +105,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.basket{
+    height: 1.5rem;
+
+}
 .price{
     width: fit-content;
     font-weight: bold;
@@ -113,4 +117,11 @@
 
 .analytych{
     cursor: default;
+}
+
+@media (max-width: 425px) {
+    .main{
+        width: 100vw;
+        max-width: none;
+    }
 }

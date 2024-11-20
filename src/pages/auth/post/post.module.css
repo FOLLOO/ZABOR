@@ -1,7 +1,6 @@
 
 .grid{
 
-
     display: grid;
     margin: auto;
     /*grid-template-columns: auto fit-content(100%);*/
@@ -250,8 +249,50 @@
 .textContent p{
     padding: .5rem 0;
 }
+
+.mainAfterPost{
+    display: none;
+}
+
 @media (max-width: 1080px) {
     .text{
+        /*width: 100%;*/
+    }
+    .grid{
+        display: flex;
+        padding: 7vw;
+    }
+    .mainAfterPost{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         width: 100%;
+    }
+    .afterpost{
+        display: flex;
+        gap: 1rem;
+        overflow: auto;
+        max-width: 70vw;
+        margin-bottom: 2rem;
+    }
+    .afterpost::-webkit-scrollbar {
+        display: none;
+    }
+    .recomends{
+        display: none;
+    }
+}
+
+@media (max-width: 425px) {
+    .grid{
+        padding: 1rem;
+    }
+
+    .text{
+        width: 90vw;
+    }
+
+    .afterpost{
+        max-width: 90vw;
     }
 }

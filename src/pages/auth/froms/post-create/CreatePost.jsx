@@ -294,7 +294,7 @@ function CreatePost() {
                             <InputText place="Добавьте заголовок" value={title}
                                        onChange={(e) => setTitle(e.target.value)}/>
                             <h2 className={`${global.t3} `}>Цена</h2>
-                            <InputText place="Определите цену" type={'number'} value={price}
+                            <InputText place="Определите цену" type={'number'} value={price > 99999 ? 99999 : price} maxValue={99999} minValue={0}
                                        onChange={(e) => setPrice(e.target.value)}/>
                             <SettingsBlock title={'Добавьте теги'} descripton={'Хоп-хей ла-ла лей'}>
                                 <div className={styles.tags}>

@@ -93,7 +93,7 @@ function Playlists () {
         ) :
             <NothingYet
                 isMe={isMe()}
-                isAuthor={user.roleId === 1}
+                isAuthor={user?.roleId === 1}
                 onButtonClick={() => navigate('/create/post')}
                 buttonText="Создать плейлист"
             />

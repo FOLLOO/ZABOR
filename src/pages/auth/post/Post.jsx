@@ -14,7 +14,7 @@ import like from '../../../asserts/icons/update/heart.svg'
 import report from '../../../asserts/icons/update/alert-triangle.svg'
 import comment from '../../../asserts/icons/update/message-circle.svg'
 import share from '../../../asserts/icons/update/share-2.svg'
-import video from '../../../asserts/icons/contextMenu/Видео.png'
+// import video from '../../../asserts/icons/contextMenu/Видео.png'
 
 //components
 import ProfileNickname from '../../../components/profile/profile-nickname/ProfileNickname'
@@ -26,14 +26,14 @@ import ContextDrop from '../../../components/context-drop/ContextDrop'
 import Button from "../../../components/ui/buttons/button/Button";
 
 //utils
-import {useAuth} from '../../../provider/AuthProvider'
+// import {useAuth} from '../../../provider/AuthProvider'
 import {getPost, getSamePost} from '../../../redux/slices/post'
 import {IMAGE_URL} from '../../../utils'
 import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
 import Textarea from "../../../components/ui/input/textarea/Textarea";
 
 function Post() {
-    const {user} = useAuth()
+    // const {user} = useAuth()
     const {id} = useParams()
     const {OnePost, SamePosts} = useSelector(state => state.posts)
     const dispatch = useDispatch()
@@ -110,7 +110,9 @@ function Post() {
                     </div>
 
                     <div className={`${styles.profile} ${styles.text}`}>
-                        <ProfileNickname type={'post'} nickname={user?.nickname}/>
+                        <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname} img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`}
+                        id={OnePost?.items.user?.id}
+                        />
                         <Button variant={'color'} className={global.f_center}>
                             Подписаться
                         </Button>
@@ -160,6 +162,29 @@ function Post() {
                             })
                         ) : null}
                     </div>
+                    <div className={styles.mainAfterPost}>
+                    <h1 className={`${global.xl2} ${global.bold}`}>Похожее</h1>
+                    <div className={styles.afterpost}>
+                        {shuffledPosts?.length > 0 ?
+                            shuffledPosts?.slice(0, 6).map((posts) => (
+                                <Link to={`/publication/${posts.id}`}>
+                                    <CardLittle
+                                        key={posts.id}
+                                        data={posts}
+                                        // avatar={posts.user.files[0].url}
+                                        blur
+                                        img={posts.coverUrl}
+                                        title={posts.title}
+                                        price={posts.price}
+                                        user_id={posts.userId}
+                                        time={posts.createdAt}
+                                        views={posts.views_count + 1}
+                                    />
+                                </Link>
+                            ))
+                            : null }
+                    </div>
+                    </div>
                     <div className={styles.text} id={"comments"}>
                         <CommnetForm/>
                         <Comment/>
@@ -170,7 +195,7 @@ function Post() {
                     <h1 className={`${global.t4} ${global.bold}`}>Похожее</h1>
                     {shuffledPosts?.length > 0 ?
                         shuffledPosts?.map((posts) => (
-                            <Link to={`/post/${posts.id}`}>
+                            <Link to={`/publication/${posts.id}`}>
                                 <CardLittle
                                     key={posts.id}
                                     data={posts}

@@ -23,3 +23,9 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 425px) {
+    .title{
+        max-width: 90vw;
+    }
+}

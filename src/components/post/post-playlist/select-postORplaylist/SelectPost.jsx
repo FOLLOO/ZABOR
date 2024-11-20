@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import styles from './select-post.module.css'
 import global from '../../../../global.module.css'
@@ -14,8 +14,8 @@ function SelectPost ({ title, img, description, onChange, id }) {
   // console.log(checked, id)
 
   return (
-    <div className={`${styles.main} ${checked ? styles.checked : styles.unchecked}`}   >
-      <label htmlFor={id} >
+    <label htmlFor={id} className={`${styles.main} ${checked ? styles.checked : styles.unchecked}`}   >
+      <div  >
         <div className={`${styles.content}`}>
           <div className={`${styles.image}`}>
             {img ?
@@ -30,15 +30,15 @@ function SelectPost ({ title, img, description, onChange, id }) {
               {title ? title : null}
             </div>
             <div className={`${styles.description} ${global.d2}`}>
-              {title ? title : null}
+              {description ? description : null}
             </div>
           </div>
         </div>
-      </label>
+      </div>
       <div className={`${styles.action}`} onClick={handleToggle} >
         <input type="checkbox" id={id} checked={checked} onChange={onChange} className={styles.checkbox}/>
       </div>
-    </div>
+    </label>
   )
 }
 

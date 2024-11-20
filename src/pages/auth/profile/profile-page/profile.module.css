@@ -181,3 +181,16 @@
 /*        padding-right: 10px;*/
 /*    }*/
 /*}*/
+
+@media (max-width: 425px) {
+    .profile{
+        top: -2rem;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .nickname{
+        align-items: center;
+        gap: 1rem
+    }
+}

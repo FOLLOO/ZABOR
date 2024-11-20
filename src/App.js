@@ -113,15 +113,9 @@ function App () {
               component: <Playlists/>,
               child: [],
             },
-            // {
-            //   title: 'playlistsID',
-            //   url: '/playlists/:id',
-            //   component: <Playlists/>,
-            //   child: [] Ебанат говорит давай крепкое
-            // },
             {
               title: 'create',
-              url: '/playlist/create',
+              url: '/playlists/create',
               component: <PlaylistCreate/>,
               child: []
             },
@@ -135,13 +129,19 @@ function App () {
         },
         {
           title: 'publications',
+          url: '/publications/:group',
+          component: <Publications/>,
+          child: []
+        },
+        {
+          title: 'publications',
           url: '/publications',
           component: <Publications/>,
           child: []
         },
             {
               title: 'id',
-              url: '/publications/:id',
+              url: '/publication/:id',
               component: <Post/>,
               child: []
             },
@@ -188,59 +188,6 @@ function App () {
           component: <MySubscribeSettings/>,
           child: [],
         },
-        //   ]
-        // },
-        // {
-        //   title: 'author',
-        //   url: '/author',
-        //   component: null,
-        //   child: [
-        // {
-        //   title: 'analytics',
-        //   url: '/analytics',
-        //   component: <CreativeStudio/>,
-        //   child: [
-        //     {
-        //       title: 'post',
-        //       url: '/post',
-        //       component: <PostAnalytics/>,
-        //       child: [],
-        //     },
-        //     {
-        //       title: 'self',
-        //       url: '/self',
-        //       component: <AvtorAnalytics/>,
-        //       child: [],
-        //     },
-        //     //   ],
-        //     // },
-        //     {
-        //       title: 'select',
-        //       url: '/select',
-        //       component: null,
-        //       child: [
-        //         {
-        //           title: 'tags',
-        //           url: '/tags',
-        //           component: <UserInterstings/>,
-        //           child: []
-        //         },
-        //         {
-        //           title: 'creative_tags',
-        //           url: '/creative_tags',
-        //           component: <FinilyChoices/>,
-        //           child: []
-        //         }
-        //       ]
-        //     },
-        //     {
-        //       title: 'balance',
-        //       url: '/balance',
-        //       component: null,
-        //       child: [],
-        //     }
-        //   ]
-        // },
       ]
     }
   ]

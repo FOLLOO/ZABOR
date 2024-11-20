@@ -8,6 +8,16 @@
     transition: all 0.2s;
 }
 
+.description{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    max-width: 400px;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
 
 .unchecked{
     border-top: 1px solid #CDCDCD;

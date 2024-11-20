@@ -1,5 +1,6 @@
 .main{
-    padding: 0 35px;
+    /*padding: 0 35px;*/
+    max-width: 700px;
 }
 
 .profileInputs{
@@ -13,12 +14,9 @@
     gap: 70px
 }
 
-.profileInputs input, select{
-    max-width: 500px;
-}
-
 .profileInputs button{
-    max-width: 300px;
+    align-self: end;
+    max-width: fit-content;
 }
 
 .settings{
@@ -30,7 +28,8 @@
 }
 
 .search{
-    margin-bottom: 20px;
+    margin: 1rem 0;
+    /*max-width: 500px;*/
 }
 
 .posts{

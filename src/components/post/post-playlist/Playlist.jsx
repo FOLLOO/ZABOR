@@ -3,13 +3,12 @@ import React from 'react'
 import styles from './playlist.module.css'
 import global from '../../../global.module.css'
 
-import temp from '../../../asserts/temp/temp.jpg'
-import GreenButton from '../../ui/buttons/green-button/GreenButton'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE_URL } from '../../../utils'
+import Button from "../../ui/buttons/button/Button";
 
 /** Карточка плейлиста используется на вкладке Плейлисты внутри профиля*/
-function Playlist ({title, description, image, add}) {
+function Playlist ({title, description, image, add, uder_id}) {
 
   const navigate = useNavigate()
 
@@ -25,7 +24,9 @@ function Playlist ({title, description, image, add}) {
       <div className={`${styles.text} ${global.flex} ${global.f_dir_column}`}>
         {
           add ?
-            <GreenButton text={'Создать плелист'} unique click={() => navigate('/create/playlist')}/>
+              <Button variant={'color'}
+                      className={global.f_center}
+                      click={() => navigate(`./create`)}>Создать плейлист</Button>
             : null
         }
         <div className={styles.title}>

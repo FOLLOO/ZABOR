@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react'
 
 import styles from './playlist-create.module.css'
 import global from '../../../../global.module.css'
-import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCreate'
 import SettingsTitle from '../../../../components/toolbar/settings-title/SettingsTitle'
-import SettingsBlock from '../../../../components/toolbar/settings-block/SettingsBlock'
 import Search from '../../../../components/layout/search/Search'
 import InputText from '../../../../components/ui/input/input-text/InputText'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
 import { useAuth } from '../../../../provider/AuthProvider'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFolder, putPostToFolder } from '../../../../redux/slices/folder'
-import { useNavigate } from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import Loading from '../../../loading/Loading'
 import SelectPost from '../../../../components/post/post-playlist/select-postORplaylist/SelectPost'
 import { getUserPost } from '../../../../redux/slices/post'
+import Button from "../../../../components/ui/buttons/button/Button";
+import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 
-function PlaylistCreate ({}) {
+function PlaylistCreate () {
 
   const { user } = useAuth()
   const dispatch = useDispatch();
@@ -25,14 +25,15 @@ function PlaylistCreate ({}) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
+  const [filtredData, setFiltredData] = useState([])
+  const [search, setSearch] = useState('')
+
   const { userPosts } = useSelector(state => state.posts)
   const isLoading = userPosts.status === 'loading'
+  const {id} = useParams()
 
   const [posts, setPosts] = useState([])
-  // useEffect(() => {
-  //   if (isLoading) return
-  //   // console.log(userPosts.items)
-  // }, [isLoading])
+
 
   const submitForm = (e) => {
     e.preventDefault()
@@ -64,7 +65,7 @@ function PlaylistCreate ({}) {
           }
         }
       })
-      navigate(`/profile/${user?.id}#1`)
+      navigate(`/profile/${user?.id}/playlists`)
     }catch (err){
       console.log(err)
     }
@@ -81,7 +82,6 @@ function PlaylistCreate ({}) {
     }
   };
   const getUSerPost = () => {
-    const id = user.id
     try {
       dispatch(getUserPost(id))
     }
@@ -89,6 +89,19 @@ function PlaylistCreate ({}) {
       console.log()
     }
   }
+
+  useEffect(() => {
+    if (search) {
+      // Фильтруем данные по заголовку
+      const filteredItems = userPosts.items.filter(item =>
+          item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase())
+      );
+      setFiltredData(filteredItems);
+    } else {
+      // Если search пуст, можно вернуть изначальные данные
+      setFiltredData(userPosts.items);
+    }
+  }, [search, userPosts.items])
 
   useEffect(() => {
     if (isLoading){
@@ -100,77 +113,55 @@ function PlaylistCreate ({}) {
     return <Loading/>
   }
 
+  //todo: создать поиск постов, по этому же запросу сделать
+  // добавление треков -> таким образом приложение будет работать быстрее
+
   return (
     <div className={styles.main}>
-      <div className={`${styles.navigate}`}>
-      <BackCreate button greenText={'Сохранить'} greenButtonForm={'save_playlist'}/>
-      </div>
       <SettingsTitle bigTitle={'Создать плейлист'} />
       <div className={styles.settings}>
-        <SettingsBlock
-          titleWidth={400}
-          mainWidth={1400}
-          title={'Заголовок и описание'} >
           <form id={'save_playlist'} onSubmit={submitForm}>
-          <div className={styles.profileInputs}>
-            <InputText  place={'Название плейлиста'}
-                        value={title ? title : null}
-                        onChange={(e) => setTitle(e.target.value)}/>
-            {/*<InputText place={'Информация о себе'}/>*/}
-            <Textarea place={'Описание плейлиста'} rows={10}
-                      value={description ? description : null}
-                      onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
+            <div className={styles.profileInputs}>
+              <InputText place={'Название плейлиста'}
+                           value={title ? title : null} required
+                           onChange={(e) => setTitle(e.target.value)}/>
+              <Textarea place={'Описание плейлиста'} rows={6} req
+                        value={description ? description : null}
+                        onChange={(e) => setDescription(e.target.value)}
+              />
+              <Button variant={'color'} type={'submit'}>
+                Сохранить
+              </Button>
+            </div>
           </form>
-        </SettingsBlock>
-          {/*На будущее*/}
-            {/*<SettingsBlock*/}
-            {/*  titleWidth={400}*/}
-            {/*  mainWidth={1400}*/}
-            {/*  title={'Приватность'} >*/}
-            {/*  <div className={`${global.flex} ${styles.toggle}`}>*/}
-            {/*    <InputToggle/>*/}
-            {/*    <SettingsBlock noMargin titleWidth={'100%'} mainWidth={'100%'}*/}
-            {/*    title={'Виден всем'} descripton={'Этот плейлист будет отображаться на странице вашего профиля всем пользователям'}*/}
-            {/*    >*/}
-
-            {/*    </SettingsBlock>*/}
-            {/*  </div>*/}
-            {/*</SettingsBlock>*/}
-        <SettingsBlock
-          titleWidth={400}
-          mainWidth={1400}
-          title={'Ваши видео'}
-          descripton={'Можете сразу добавить ваши видео в плейлист'}
-        >
-          <div className={styles.search}>
-            <Search/>
-          </div>
-          <div className={`${global.flex} ${global.f_dir_column} ${styles.posts}`}>
+        <div className={styles.search}>
+          <Search placeholder={'Найти пост'} value={search} onChange={(e) => setSearch(e.target.value) } />
+        </div>
+        <div className={`${global.flex} ${global.f_dir_column} ${styles.posts}`}>
             {user?.roleId === 1 ?
-              <>
-                У вас нет видео
-              </>
+              <NothingYet />
               :
-              userPosts.items.map((item) => (
-                // <PlaylistsPost views={item.views_count ? item.views_count : 1 }
-                //                cost={item.price ? item.price : 'Бесплатно'}
-                //                title={item.title}
-                //                description={item.description}
-                //
-                // />
+              search ?
+                  filtredData.map((item) => (
+                      <SelectPost
+                          title={item?.title}
+                          id={item?.id}
+                          img={`${item?.coverUrl}`}
+                          onChange={(event) => addPosts(item?.id, event.target.checked)}
+                          description={item.description}
+                      />
+                  ))
+                  : userPosts.items.map((item) => (
                 <SelectPost
                   title={item?.title}
                   id={item?.id}
+                  img={`${item?.coverUrl}`}
                   onChange={(event) => addPosts(item?.id, event.target.checked)}
                   description={item.description}
                 />
               ))
             }
-
           </div>
-        </SettingsBlock>
       </div>
     </div>
   )

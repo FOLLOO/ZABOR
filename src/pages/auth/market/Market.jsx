@@ -12,12 +12,12 @@ import PlaylistsPost from '../../../components/post/post-cards/card-for-playlist
 import Button from "../../../components/ui/buttons/button/Button";
 
 //img
-import temp from '../../../asserts/temp/top-view-over-chinese-hot-pot.jpg'
 import fire from '../../../asserts/emoji/Fire.svg'
 import close from '../../../asserts/icons/plus_white.svg'
 
 //utils
 import { deleteItemFromCart } from '../../../redux/slices/bascet'
+import NothingYet from "../../nothing/nothing-yet/NothingYet";
 
 
 function Market () {
@@ -65,13 +65,9 @@ function Market () {
                     </>
                 ))
                 :
-                <PlaylistsPost blur
-                               title={"ТАНТАРЫ"}
-                               image={temp}
-                               cost={10000}
-                               views={10000}
-                               description={"laks djflkja sdfjlajsd lfkalksd jflk ask ldf asdjf lkasdjf lasdjflkasjdf"}/>
-
+                <div className={styles.beMaxSize}>
+                  <NothingYet/>
+                </div>
               }
           </div>
 

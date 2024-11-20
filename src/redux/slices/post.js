@@ -6,8 +6,8 @@ export const fetchPosts = createAsyncThunk('publication/getMainPublications', as
   try {
     const response = await axios.get('/publication/getMainPublications', {
       params: {
-        group: 'main', // Пример значения для group, замените на нужное вам
-        creative_tags: [1, 2] // Пример значения для creative_tags, замените на нужное вам
+        group: params.group, // Пример значения для group, замените на нужное вам
+        creative_tags: params.creative_tags // Пример значения для creative_tags, замените на нужное вам
       }
     });
     return response.data; // Возвращаем данные из ответа

@@ -206,7 +206,7 @@ export function ProfileLayout() {
     const tabContent = [
             { title: 'Публикации', url: '.'},
             { title: 'Плейлисты',  url: './playlists'},
-            { title: 'Об авторе',  url: './about'},
+            { title: 'Автор',  url: './about'},
         ]
 
     return (

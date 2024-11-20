@@ -153,7 +153,7 @@ function UserPosts({data = []}) {
                     {sortData.length > 0 ?
                         <div className={styles.grid}>
                             {sortData.map((message =>
-                                    <Link to={`/publications/${message.id}`}>
+                                    <Link to={`/publication/${message.id}`}>
                                         <CardLittle
                                             data={message}
                                             id={message?.id}

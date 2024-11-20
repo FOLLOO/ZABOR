@@ -43,3 +43,10 @@
     -webkit-line-clamp: 2;
     white-space: nowrap;
 }
+
+@media (max-width: 425px) {
+    .main{
+        width: 90vw;
+        max-width: none;
+    }
+}

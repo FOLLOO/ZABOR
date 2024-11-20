@@ -189,4 +189,52 @@
     }
 }
 
+@media (max-width: 425px) {
+    .navbar{
+        position: fixed;
+        left: -25%;
+        height: 100vw;
+        transition: all .1s ease-in-out;
+    }
+
+    .sidebar_input:not(:checked) + .navbar{
+        left: -25%;
+    }
+    .sidebar_input:checked ~ .column_flex:after{
+        content: '';
+        position: absolute;
+        width: 100vw;
+        height: 200vh;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.8;
+        background-color: var(--black);
+    }
+
+    .sidebar_input:checked ~ .column_flex{
+        max-height: 200vh;
+        overflow: hidden;
+    }
+    .sidebar_input:checked ~ .footer{
+        display: none;
+    }
+
+        /*Checkbox и наш left menu*/
+    .sidebar_input:checked + .navbar, #span{
+        color: black;
+        transition: all .2s ease-in-out;
+        /*top: 5rem;*/
+        top: 0;
+        width: 60vw;
+        height: 100vh;
+        left: 0;
+        background: white;
+        z-index: 999;
+    }
+
+
+}
+
 

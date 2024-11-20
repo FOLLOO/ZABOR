@@ -25,7 +25,7 @@ function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  s
     return (
       <div>
         <Link to={`/profile/${user?.id}`} className={` ${global.flex} ${global.f_dir_column}  ${styles.hola}`}>
-          <div className={`${global.t3}`}>
+          <div className={`${global.t3} ${styles.default_nickname}`}>
             {nickname ? nickname : 'not-authorized'}
           </div>
           {desc ?
@@ -41,9 +41,9 @@ function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  s
   const Post = () => {
     return (
       <div className={`${global.flex} ${global.f_dir_column} ${styles.post}`}>
-        <div className={global.t3}>
+        <Link to={`/profile/${id}`} className={global.t3}>
           {nickname ? nickname : 'Anonymos'}
-        </div>
+        </Link>
         <div className={global.d3}>
           {date ? date : 'Вчера '} | {view ? view : ' 10К'} просмотров
         </div>

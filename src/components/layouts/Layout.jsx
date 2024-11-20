@@ -73,32 +73,32 @@ const Layout = ({type}) => {
                 {
                     title: 'Главная',
                     ico: home_i,
-                    function: () => navigate('/'),
+                    function: () => navigate('/publications'),
                 },
                 {
                     title: 'Популярное',
                     ico: star_i,
-                    function: () => navigate('/popular'),
+                    function: () => navigate(`/publications/popular`),
                 },
                 {
                     title: 'Подписки',
                     ico: subs_i,
-                    function: () => navigate('/subscribed'),
+                    function: () => navigate(`/publications/subscriptions`),
                 },
                 {
                     title: 'Понравилось',
                     ico: heart_i,
-                    function: () => navigate('/liked'),
+                    function: () => navigate(`/publications/likes`),
                 },
                 {
                     title: 'Обсуждаемое',
                     ico: message_i,
-                    function: () => navigate('/talk'),
+                    function: () => navigate('/publications/discussed'),
                 },
                 {
                     title: 'Купленное',
                     ico: ruble_i,
-                    function: () => navigate('/bought'),
+                    function: () => navigate('/publications/available'),
                 },
             ]
         },
@@ -178,7 +178,7 @@ const Layout = ({type}) => {
      */
     const Base = () => {
         return (
-            <div className={styles.column_flex}>
+            <div className={styles.column_flex} id={'column'}>
                 <div className={styles.row_flex}>
                     <input className={styles.sidebar_input} type="checkbox" name="leftMenu" id="leftMenu" />
                     <LeftMenu/>

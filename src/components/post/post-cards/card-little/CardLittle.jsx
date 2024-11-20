@@ -44,7 +44,7 @@ function CardLittle ({
 
   return (
     <div className={`${styles.main}`}>
-      <div className={image ? styles.temp : null}>
+      {/*<div className={image ? styles.temp : null}>*/}
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
             <Link to={`/profile/${user_id}`}>
@@ -52,8 +52,8 @@ function CardLittle ({
             </Link>
           </div>
 
-          <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>
-            {blur ?
+              <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>
+            {blur && !editable ?
               <img src={lock} alt={'lock'}/>
               :
               <img src={lock} alt={'lock'} style={{opacity: "1%"}}/>
@@ -61,14 +61,13 @@ function CardLittle ({
           </div>
 
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
-
-            <button className={styles.button} onClick={handleAddToCart}>
+              {editable ? null :
+              <button className={styles.button} onClick={handleAddToCart}>
               <div  className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                   <img src={basket} alt={'img'}/>
                   <img src={plus} alt={'img'}/>
               </div>
-            </button>
-
+            </button>}
           </div>
       </div>
 
@@ -109,7 +108,7 @@ function CardLittle ({
 
         </div>
       </div>
-      </div>
+      {/*</div>*/}
       {img ?
         <img className={`${styles.cardImage}  ${blur ? null : null}`} src={`${IMAGE_URL}${img}`} alt={'temp'}/>
       :

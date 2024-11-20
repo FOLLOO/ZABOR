@@ -3,8 +3,8 @@ import React from 'react'
 import styles from './playlists-post.module.css'
 import global from '../../../../global.module.css'
 
-import temp from '../../../../asserts/temp/people-doing-outdoor-training.jpg'
 import lock from '../../../../asserts/icons/Lock.svg'
+import {IMAGE_URL} from "../../../../utils";
 
 /** Отображение карточки поста использоуется в плейлисте*/
 function PlaylistsPost ({ title, description, blur, cost, views, image}) {
@@ -15,8 +15,8 @@ function PlaylistsPost ({ title, description, blur, cost, views, image}) {
         {image ?
           <>
             <img
-                //src={`${IMAGE_URL}${image}`}
-                 src={temp}
+                src={`${IMAGE_URL}${image}`}
+                 // src={temp}
                  className={blur ? `${styles.img}` : `${styles.img}` } alt={'playlist-post'}/>
 
             <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>

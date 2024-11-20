@@ -1,5 +1,6 @@
 .main{
-    gap: 30px
+    gap: 1rem;
+    /*flex-direction: column;*/
 }
 
 .about{
@@ -49,3 +50,11 @@
     /*right: 15vw;*/
 }
 
+@media (max-width: 1600px) {
+    .main{
+        flex-direction: column;
+    }
+    .about{
+        position: static;
+    }
+}
