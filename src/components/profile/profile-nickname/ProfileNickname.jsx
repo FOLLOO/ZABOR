@@ -25,7 +25,7 @@ function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  s
     return (
       <div>
         <Link to={`/profile/${user?.id}`} className={` ${global.flex} ${global.f_dir_column}  ${styles.hola}`}>
-          <div className={`${global.t3} ${styles.default_nickname}`}>
+          <div className={`${global.t3} ${desc ? null : styles.default_nickname}`}>
             {nickname ? nickname : 'not-authorized'}
           </div>
           {desc ?

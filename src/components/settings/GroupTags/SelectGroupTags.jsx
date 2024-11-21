@@ -17,7 +17,28 @@ import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
 import Loading from '../../../pages/loading/Loading'
 import Button from "../../ui/buttons/button/Button";
 
-export default function SelectGroupTags ({ userChoice = false, first }) {
+/**
+ *
+ * @param userChoice
+ * @param first
+ * @param type
+ * @returns {Element}
+ * @constructor
+ * @code
+ * ```js
+ * switch (type) {
+ *       case 'user-first':
+ *         return navigate('/select/tags')
+ *       case 'user-edit':
+ *         return navigate('/select/edit/tags/')
+ *       case 'user-to-author':
+ *         return navigate('/select/author/tags/')
+ *       default:
+ *         return console.error('Unknown user type')
+ *     }
+ * ```
+ */
+export default function SelectGroupTags ({ userChoice = false, type= 'user-first' }) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -56,17 +77,41 @@ export default function SelectGroupTags ({ userChoice = false, first }) {
       }
     }
   }
+
+  const navigateByType = () => {
+    switch (type) {
+      case 'user-first':
+        return navigate('/select/tags')
+      case 'user-edit':
+        return navigate('/select/edit/tags/')
+      case 'user-to-author':
+        return navigate('/select/author/tags/')
+      default:
+        return console.error('Unknown user type')
+    }
+  }
+
+  const titleTextByType = () => {
+    switch (type) {
+      case 'user-first' || 'user-edit':
+        return 'Мои теги'
+      case 'user-to-author' || 'user-update-author':
+        return 'Расскажите На какую тематику будут посты?'
+      default:
+        return console.error('Unknown user type')
+    }
+  }
+
   const setTags = () => {
       addGroupTag(selectTag)
-      navigate(first ? '/select/tags' : '/tags')
+      navigateByType()
   }
 
   return (
-    <div>
+    <div className={styles.main}>
       <div className={styles.padding}>
 
-      <SettingsTitle bigTitle={userChoice ? 'Мои интересы' : 'Расскажите'}
-                     title={userChoice ? null : 'На какую тематику будут посты?'}
+      <SettingsTitle bigTitle={titleTextByType()}
                      description={'Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
       </div>
       <form onSubmit={setTags}>
@@ -80,7 +125,7 @@ export default function SelectGroupTags ({ userChoice = false, first }) {
               : <Loading/>
           }
           <div className={styles.saveButton}>
-            <Button type={'submit'} variant={'outlet'} className={`${global.f_center} ${global.w100}`}>
+            <Button type={'submit'} variant={type === 'user-to-author' || type === 'user-update-author' ? 'color' : 'outlet'} className={`${global.f_center} ${global.w100}`}>
               Сохранить
             </Button>
           </div>

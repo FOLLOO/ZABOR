@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import styles from './tab.module.css'
 import {useLocation, useNavigate} from 'react-router-dom'
-import Button from "../buttons/button/Button";
 
 /**
  *
@@ -24,6 +23,10 @@ function Tab({items = []}) {
 
     useEffect(() => {
         const path = pathname.split('/')
+
+        if(path.includes('playlist')){
+            setActive('./playlists')
+        }
         if (path.length === 4) {
             setActive(`./${path.at(-1)}`)
         }
@@ -31,6 +34,8 @@ function Tab({items = []}) {
             setActive('.');
         }
     }, [pathname])
+
+
 
     return (
         <div className={styles.tab}>

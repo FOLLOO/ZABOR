@@ -65,6 +65,13 @@ function Post() {
         return isOpen ? dialog.close()  : dialog.showModal()
     }
 
+    const handleDialogClick = (event) => {
+        // Проверяем, если клик произошел на backdrop
+        if (event.target.tagName === 'DIALOG') {
+            toggleOverlay();
+        }
+    };
+
 
     useEffect(() => {
         if (OnePost.status === 'loaded' && OnePost.items.id === id) return;
@@ -215,7 +222,7 @@ function Post() {
                 </div>
             </div>
 
-            <dialog id={'support'} className={dialog.dialog} >
+            <dialog id={'support'} className={dialog.dialog} onClick={handleDialogClick}>
                 <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
                     {/*<div className={dialog.support}>*/}
                         <h1 className={global.xl3}>О чем желаете сообщить?</h1>

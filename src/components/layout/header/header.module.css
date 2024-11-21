@@ -38,7 +38,11 @@
     composes: ac;
     justify-content: space-between;
 }
-
+.headerChild{
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
 .auth_buttons{
     composes: ac;
     display: flex;
@@ -86,7 +90,9 @@
 .desctopButtons{
     display: flex;
 }
-
+.openMenu{
+    display: none;
+}
 @media (max-width: 1080px) {
     .search{
         width: 100%;
@@ -95,6 +101,9 @@
 }
 
 @media (max-width: 425px) {
+    .openMenu{
+        display: block;
+    }
     .header{
         padding-left: 5vw;
         display: flex;

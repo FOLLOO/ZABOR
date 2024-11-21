@@ -41,7 +41,8 @@ function UserPosts({data = []}) {
 
     const dispatch = useDispatch()
 
-    const [tags, setTags] = useState([])
+    const [tags, setTags] = useState(false)
+    const [serverTags, setServerTags] = useState([])
     const [playlist, setPlaylist] = useState([])
 
     const [sortData, setSortData] = useState([]) // сортировка
@@ -84,6 +85,8 @@ function UserPosts({data = []}) {
         window.location.hash = ''
         Over()
     }
+
+    //может нормально как userFolders сделать?
     const getTags = () => {
         dispatch(fetchTags())
             .then((res) => {
@@ -91,7 +94,7 @@ function UserPosts({data = []}) {
                     console.log(res.error.message)
                 }
                 if (res.error === undefined) {
-                    setTags(res.payload)
+                    setServerTags(res.payload)
                 }
             })
     }
@@ -103,6 +106,7 @@ function UserPosts({data = []}) {
         }
     }
     useEffect(() => {
+        if(serverTags.length > 0) return
         getTags()
     }, [])
 
@@ -111,44 +115,54 @@ function UserPosts({data = []}) {
         getUserFolders()
     }, [overlay]);
 
+
+
     useEffect(() => {
         if (data.length > 0) {
+            let checkboxes = document.getElementsByName("publications_tags");
+            let selectedCboxes = Array.prototype.slice.call(checkboxes)
+                .filter(ch => ch.checked == true)
+                .map(ch => Number(ch.id));
+
+            const newFilteredData = data.filter(publication => {
+                // Проверим, есть ли у публикации связанные теги
+                const publicationTagIds = publication.publication_tags.map(tag => tag.creativeTagId);
+                return selectedCboxes.length === 0 || selectedCboxes.some(id => publicationTagIds.includes(id));
+            });
+            // Сортировка данных
             if (sort) {
-                setSortData([...(data || [])].sort((a, b) => a.id - b.id))
+                setSortData([...newFilteredData].sort((a, b) => a.id - b.id));
             } else {
-                setSortData([...(data || [])].sort((a, b) => b.id - a.id))
+                setSortData([...newFilteredData].sort((a, b) => b.id - a.id));
             }
         }
 
-    }, [sort, data])
+    }, [sort, data, tags])
     const isMe = () => { return user?.id === Number(id) }
 
     const UserPosts = () => {
         return (
             <>
                 <div className={styles.title}>
-                    <header className={`${global.flex} ${global.f_a_center} ${styles.some}`}>
+                    <header className={`${global.flex} ${global.f_a_center} `}>
                         <h3 className={styles.header}>Публикации</h3>
                         {sortData.length > 0 ?
                         <Button img={filter} img_size={'h-6'} click={() => setSort(!sort)}></Button>
                             : null }
                     </header>
                 </div>
-                <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
-                    {tags.length > 0 && sortData.length > 0 ?
-                    <div className={styles.checkbox}>
-                        <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
-                    </div> : null
-                    }
-                    {tags.length > 0 && sortData.length > 0 ?
-                        tags.map(item => (
-                            <div>
-                                <LittleTag text={item.name}/>
-                            </div>
-                        ))
-                        : null
-                    }
-                </div>
+                    {serverTags.length > 0  ?
+                        <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
+                                <div className={styles.checkbox}>
+                                    <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
+                                </div>
+                            {serverTags.map(item => (
+                                <div>
+                                    <LittleTag text={item.name} name={'publications_tags'} id={item.id} onChange={() => setTags(!tags)} />
+                                </div>
+                            ))}
+                        </div>
+                        : null}
                 <div className={styles.margin}>
                     {sortData.length > 0 ?
                         <div className={styles.grid}>
@@ -175,7 +189,7 @@ function UserPosts({data = []}) {
                         <NothingYet
                             isMe={isMe()}
                             isAuthor={user?.roleId === 1}
-                            onButtonClick={() => navigate('/group')}
+                            onButtonClick={() => navigate('/select/author/group_tags')}
                             buttonText="Создать публикацию"
                         />
                     }

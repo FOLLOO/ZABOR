@@ -1,3 +1,6 @@
+.main{
+    margin-bottom: 30vh;
+}
 .grid{
     /*display: grid;*/
     /*grid-template-columns: repeat(6, 1fr);*/
@@ -17,7 +20,7 @@
 
 .saveButton{
     position: fixed;
-    z-index: 99;
+    z-index: 999;
     width: 300px;
     right: 1rem;
     bottom: 1rem;
@@ -29,4 +32,13 @@
     /*--b-otlet-color: black;*/
     /*background: white;*/
     /*border: 1px solid var(--input-border-color);*/
+}
+
+@media (max-width: 425px) {
+    .saveButton{
+        width: auto;
+        /*width: 100%;*/
+        left: 1rem;
+        right: 1rem;
+    }
 }

@@ -197,9 +197,10 @@ export function ProfileLayout() {
         }
 
     useEffect(() => {
-        if (userData.status === 'loaded') return
+        if (userData.items.id === Number(id)) return;
+        // if (userData.status === 'loaded')return;
         getUser()
-    }, [userData.status])
+    }, [])
 
         //todo: overlay don't work on publication page
         //Данные для /Tabs

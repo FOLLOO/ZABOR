@@ -4,12 +4,10 @@ import React from 'react'
 import SelectGroupTags from '../../../../../components/settings/GroupTags/SelectGroupTags'
 
 
-export default function SetUserInteresting() {
+export default function BecomeAuthorGroup() {
 
   return (
-    <div>
-      <SelectGroupTags type={'user-first'} />
-    </div>
+      <SelectGroupTags type={'user-to-author'} />
   )
 }
 

@@ -3,29 +3,26 @@ import React, { useState } from 'react'
 import styles from './playlists-content.module.css'
 import global from '../../../../global.module.css'
 
-import settings_b from '../../../../asserts/icons/Settings.svg'
-import trash from '../../../../asserts/icons/contextMenu/trash red.svg'
-import remover from '../../../../asserts/icons/remove-some.svg'
-import edit from '../../../../asserts/icons/edit.svg'
+
+import folder_trash from '../../../../asserts/icons/update/folder-minus.svg'
+import folder_settings from '../../../../asserts/icons/update/folder-cog.svg'
+import folder_edit from '../../../../asserts/icons/update/folder-edit.svg'
+import folder_output from '../../../../asserts/icons/update/folder-output.svg'
+
+
 
 import PlaylistsPost from '../../post-cards/card-for-playlist/PlaylistsPost'
-import GlassCard from '../../../glasses/glasses-card/GlassCard'
-import InputDporDown from '../../../ui/input/input-dropdown/InputDporDown'
-import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
 import { useDispatch } from 'react-redux'
 import { deleteFolder } from '../../../../redux/slices/folder'
 import { useNavigate } from 'react-router-dom'
+import Button from "../../../ui/buttons/button/Button";
  /** Это контент плейлиста его описание и его видео*/
-function PlaylistsContent ({title, description, data, folder}) {
-  // console.log(folder)
-  // console.log(data)
+function PlaylistsContent ({ data, folder}) {
    const [settingsContext, setSettingsContext] = useState(false)
    const navigate = useNavigate()
    const dispatch = useDispatch()
-  // console.log(data)
-  console.log(folder)
 
    const clickDeleteFolder = () => {
      const id = folder.id;
@@ -40,83 +37,74 @@ function PlaylistsContent ({title, description, data, folder}) {
    }
 
   return (
-    <div className={`${styles.main} ${global.flex}`}>
-      <div className={`${styles.about} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`}>
-          {/*<h2>{title ? title : 'Загрузка...'}</h2>*/}
-        {folder.title ?
-          <h2>{folder.title}</h2>
-          :
-          // eslint-disable-next-line jsx-a11y/heading-has-content
-          <h2 className={global.skeleton} style={{maxHeight: "60px"}}>.</h2>
-        }
-
-        <GlassCard height>
-          <div className={`${styles.glassContetn} ${global.flex} ${global.f_dir_column} ${global.f_ji_center}`}>
-          <h3>Описание</h3>
-            {folder.description ?
-          <div className={global.d2}>
-            {folder.description}
-          </div>
-            :
-              <div className={`${global.d2} ${global.skeleton}`}>
-                тут нет информации
-                тут нет информации
-                тут нет информации
-
-                тут нет информации
-                тут нет информации
-                тут нет информации
-
-                тут нет информации
-                тут нет информации
-                тут нет информации
+      <div className={`${styles.main} ${global.flex}`}>
+          <div className={`${styles.about}`}>
+              <div className={styles.title}>
+                  {folder.name ? <h3 className={global.bold}>{folder.name}</h3> :
+                      <h3 className={global.skeleton}>Nothing</h3>}
               </div>
-              // <h2 className={global.skeleton}>alksdjfajsdlkfaskldjflkasdlkf </h2>
-            }
+              <div className={`${global.d2} `}>
+                  {folder.description ?
+                      folder.description
+                      :
+                      <div className={`${global.skeleton}`}>
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                          тут нет информации
+                      </div>}
+              </div>
           </div>
-        </GlassCard>
+          <div className={styles.content}>
+              <div className={styles.actions}>
+                  <Button img={folder_settings} click={() => setSettingsContext(!settingsContext)}>
+                      Редактировать
+                  </Button>
+                  {settingsContext ?
+                      <div className={styles.settingsContext}>
+                          <ContextDrop>
+                              <ContextGroup>
+                                  <Button img={folder_edit}>
+                                      Изменить
+                                  </Button>
+                              </ContextGroup>
+                              <ContextGroup noafter>
+                                  <div className={`${global.flex} ${global.f_dir_column}`}>
+                                      <Button img={folder_output}>Убрать из плейлиста</Button>
+                                      <Button img={folder_trash}
+                                              variant={'red-text'}
+                                              click={() => clickDeleteFolder()}>Удалить плейлист</Button>
+                                  </div>
+                              </ContextGroup>
+                          </ContextDrop>
+                      </div>
+                      : null}
+              </div>
+
+              <div className={`${styles.video} `}>
+                  <div className={`${global.flex} ${global.f_dir_column} ${styles.videoOl}`}>
+                      {data.length > 0 ?
+                          data.map((item) => (
+                              // <li className={styles.li}>
+                              <PlaylistsPost image={item.coverUrl}
+                                             title={item.title}
+                                             description={item.description.replace(/<[^>]*>?/gm, '')}
+                                             views={item.views_count + 1}
+                                             cost={item.price}
+                              />
+                              // </li>
+                          )) :
+                          <li><PlaylistsPost/></li>
+                      }
+                  </div>
+              </div>
+          </div>
       </div>
-      <div className={styles.content}>
-        <div className={`${styles.actions} ${global.flex} ${global.f_s_between}`}>
-          <div className={styles.input}>
-          <InputDporDown/>
-          </div>
-          <div className={styles.settings}>
-            <TransprantButton img={settings_b} nonePad click={() => setSettingsContext(!settingsContext)}/>
-          </div>
-        </div>
-        {settingsContext ?
-          <div className={`${global.flex} ${global.f_end}`}>
-        <div className={styles.settingsContext}>
-          <ContextDrop>
-            <ContextGroup>
-              <TransprantButton text={'Изменить'} img={edit} left click={() => navigate('/create/playlist')}/>
-            </ContextGroup>
-            <ContextGroup noafter>
-              <TransprantButton text={'Убрать из плейлиста'} img={remover} left/>
-              <TransprantButton text={'Удалить плейлист'} img={trash} red left click={() => clickDeleteFolder()}/>
-            </ContextGroup>
-          </ContextDrop>
-        </div> </div> : null }
-        <div className={`${styles.video} `}>
-          <div className={`${global.flex} ${global.f_dir_column} ${styles.videoOl}`}>
-            {data.items.length > 0 ?
-            data.items.map((item) => (
-              // <li className={styles.li}>
-                <PlaylistsPost image={item.coverUrl}
-                                 title={item.title}
-                                 description={item.description.replace(/<[^>]*>?/gm, '')}
-                                 views={item.views_count + 1 }
-                                 cost={item.price}
-              />
-              // </li>
-            )) :
-              <li><PlaylistsPost/></li>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
   )
 }
 

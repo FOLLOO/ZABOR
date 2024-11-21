@@ -74,9 +74,6 @@ export default function Publications () {
       }
       <SettingsTitle bigTitle={'Публикации'}/>
         <div className={open ? `${styles.tags}` : `${styles.tags_hidden}`}>
-            <div className={`${styles.b_width} ${styles.openMenu}`}>
-                <LittleTag text={'Меню'} id={'leftMenu'} />
-            </div>
             <div className={styles.b_width}>
                 <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
             </div>
@@ -106,7 +103,7 @@ export default function Publications () {
               img={posts.coverUrl}
               title={posts.title}
               price={posts.price}
-              user_id={posts.userId}
+              userID={posts.userId}
               time={posts.createdAt}
               views={posts.views_count + 1}
             />

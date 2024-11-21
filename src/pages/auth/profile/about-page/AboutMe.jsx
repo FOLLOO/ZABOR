@@ -14,7 +14,7 @@ import link from '../../../../asserts/icons/update/link-2.svg'
 
 import {useNavigate, useParams} from 'react-router-dom'
 import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {useAuth} from "../../../../provider/AuthProvider";
 import Loading from "../../../loading/Loading";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
@@ -61,7 +61,7 @@ function AboutMe() {
         isMe && userData?.items?.user?.aboutMe ?
             <div className={styles.main}>
                 <section className={styles.descriptionBlock}>
-                    <h1 className={global.t5}> {isMe ? 'Обо мне' : 'Oб авторе'}</h1>
+                    <h3 className={global.bold}> {isMe ? 'Обо мне' : 'Oб авторе'}</h3>
                     <p className={`${styles.description} ${global.t2}`}>
                         {userData?.items?.user?.aboutMe}
                     </p>

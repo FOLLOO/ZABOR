@@ -11,7 +11,6 @@ import ProfileCircle from '../../../profile/profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart } from '../../../../redux/slices/bascet'
-// import { OverlayContext } from '../../../../context/OverlayContext'
 import {IMAGE_URL, toggleOverlay} from '../../../../utils'
 function CardLittle ({
   image = false,
@@ -20,7 +19,7 @@ function CardLittle ({
   avatar,
   views,
   price,
-  user_id,
+  userID,
   time ,
   data,
   editable,
@@ -47,7 +46,7 @@ function CardLittle ({
       {/*<div className={image ? styles.temp : null}>*/}
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
-            <Link to={`/profile/${user_id}`}>
+            <Link to={`/profile/${userID}`}>
                 <ProfileCircle size={30} img={avatar ? `${IMAGE_URL}${avatar}` : null} />
             </Link>
           </div>

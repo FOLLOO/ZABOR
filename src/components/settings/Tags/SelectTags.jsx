@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 
 //css
-import styles from './select-tags.module.css'
 import global from "../../../global.module.css";
 import component from '../GroupTags/select-group-tags.module.css'
 
@@ -15,11 +14,10 @@ import { useTags } from '../../../context/TagsContext'
 
 //components
 import SettingsTitle from '../../toolbar/settings-title/SettingsTitle'
-import SettingsBlock from '../../toolbar/settings-block/SettingsBlock'
 import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
 import Button from "../../ui/buttons/button/Button";
 
-function SelectTags ({ userChoice = false, first }) {
+function SelectTags ({  type = 'user-first' }) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -60,14 +58,13 @@ function SelectTags ({ userChoice = false, first }) {
   }
   const postAuthorTags = () => {
     addCreativeTag(tags)
-    navigate('/create/post')
+    navigate('/publications/create')
   }
 
-  const postNewUserTags = (e) => {
-    e.preventDefault()
+  const postNewUserTags = async () => {
     try{
       const transformedData = tags.map(tag => ({ id: tag }));
-      dispatch(createUserInterests(transformedData)).then((response) => {
+      await dispatch(createUserInterests(transformedData)).then((response) => {
         if(response){
           navigate('/publications')
         }
@@ -77,18 +74,49 @@ function SelectTags ({ userChoice = false, first }) {
     }
   }
 
+  const submitByType = (event) => {
+    event.preventDefault();
+    switch (type) {
+      case 'user-first':
+        return postNewUserTags()
+      case 'user-edit':
+        return console.log('Пока что не готово')
+      case 'user-to-author':
+        return postAuthorTags()
+      case 'user-update-author':
+        return console.log('Пока что не готово')
+      default:
+        return console.error('Unknown user type')
+    }
+  }
+
+  const titleTextByType = () => {
+    switch (type) {
+      case 'user-first':
+        return 'Определите интересующие вас теги'
+      case 'user-edit':
+        return 'Изменение интересующих тегов'
+      case 'user-to-author' || 'user-update-author':
+        return 'На какую тематику будут посты?'
+      default:
+        return console.error('Unknown user type')
+    }
+  }
+
+
+
   useEffect(() => {
     getTags()
   }, [])
 
   return (
-      <div>
+      <div className={component.main}>
         <div className={component.padding}>
 
-          <SettingsTitle bigTitle={userChoice ? 'Определите интересующие вас теги' : 'Определите теги'}
+          <SettingsTitle bigTitle={titleTextByType()}
                          description={'Это необходимо для рекомендации. Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
         </div>
-        <form onSubmit={first ? postNewUserTags : postAuthorTags}>
+        <form onSubmit={submitByType}>
             <div className={component.grid}>
               {
                 creative_tags?.items?.length > 0 ? creative_tags?.items?.map((item) => (
@@ -100,7 +128,7 @@ function SelectTags ({ userChoice = false, first }) {
               }
             </div>
           <div className={component.saveButton}>
-            <Button type={'submit'} variant={'outlet'} className={`${global.f_center} ${global.w100}`}>
+            <Button type={'submit'} variant={type === 'user-to-author' || type === 'user-update-author' ? 'color' : 'outlet'} className={`${global.f_center} ${global.w100}`}>
               Сохранить
             </Button>
           </div>

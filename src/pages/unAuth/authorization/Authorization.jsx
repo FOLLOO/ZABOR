@@ -56,6 +56,7 @@ function Authorization () {
               <form className={styles.signIn} onSubmit={handleSubmit}>
                 <InputText
                   value={email ? email : null}
+                  // value={'new@mail.ru'}
                   onChange={e => setEmail(e.target.value)}
                   place={'Введите Email'} type={'email'} />
                 <InputText

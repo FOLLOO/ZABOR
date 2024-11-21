@@ -19,7 +19,7 @@ export default function NothingYet({isMe, isAuthor, onButtonClick, buttonText}) 
                         variant={'outlet'}
                         click={onButtonClick}
                         className={`${global.f_center} ${global.w100}`}>
-                        {isAuthor ? 'Стать автором' : buttonText}
+                        {isAuthor ? 'Создать свой первый пост' : buttonText}
                     </Button>
                 </div>
             )}

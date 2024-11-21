@@ -33,6 +33,10 @@
     max-width: 300px;
 }
 
+.openMenu{
+    display: none;
+}
+
 @media (max-width: 1600px) {
     .grid{
         grid-template-columns: repeat(4, 1fr);
@@ -48,6 +52,9 @@
 }
 
 @media (max-width: 1024px) {
+    .openMenu{
+        display: block;
+    }
     .grid{
         grid-template-columns: repeat(2, 1fr);
         column-gap: normal;

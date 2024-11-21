@@ -2,22 +2,17 @@
     gap: 1rem;
     /*flex-direction: column;*/
 }
+.title{
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
 
 .about{
-    max-width: 500px;
-    max-height: 500px;
     width: 100%;
-    text-align: center;
-    gap: 20px;
-
-    position: sticky;
-    top: 60px;
+    max-width: 700px;
 }
 
-.glassContetn{
-    padding: 10px;
-    gap: 20px;
-}
 
 .input{
     width: 400px;
@@ -28,25 +23,23 @@
 }
 
 .actions{
-    margin-bottom: 3%;
+    position: relative;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: end;
 }
 .videoOl{
     gap: 20px;
     list-style: none;
 }
 
-.li{
-    /*font-family: 'Lato', sans-serif;*/
-    /*font-size: 64px;*/
-    /*font-weight: lighter;*/
-    /*align-items: center;*/
-}
 
 .settingsContext{
-    width: 290px;
-    display: inline-block;
+    /*width: 290px;*/
     position: absolute;
     z-index: 10;
+    right: 1rem;
+    top: 2rem;
     /*right: 15vw;*/
 }
 

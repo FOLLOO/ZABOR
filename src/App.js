@@ -22,12 +22,15 @@ import Market from './pages/auth/market/Market'
 import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
 import Post from './pages/auth/post/Post'
 import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
-import Playlists from "./pages/auth/profile/playlist-page/Playlists";
-import AboutMe from "./pages/auth/profile/about/AboutMe";
+import Playlists from "./pages/auth/profile/playlists-page/Playlists";
+import AboutMe from "./pages/auth/profile/about-page/AboutMe";
 import {ProfileLayout} from "./pages/auth/profile/Layout/ProfileLayout";
 import ClientError from "./pages/404/ClientError";
 import SetUserInteresting from "./pages/unAuth/registration/userIntretings/group/SetUserInteresting";
 import FinalChoices from "./pages/unAuth/registration/userIntretings/tags/FinalChoices";
+import BecomeAuthorGroup from "./pages/auth/profile/become-author/group/BecomeAuthorGroup";
+import BecomeAuthorCreativeTags from "./pages/auth/profile/become-author/tags/BecomeAuthorCreativeTags";
+import PlaylistPage from "./pages/auth/profile/playlists-page/playlist/Playlist";
 // import axios from "axios";
 
 
@@ -120,6 +123,12 @@ function App () {
               child: []
             },
             {
+              title: 'playlistID',
+              url: '/playlist/:playlistID',
+              component: <PlaylistPage/>,
+              child: [],
+            },
+            {
               title: 'about',
               url: '/about',
               component: <AboutMe/>,
@@ -156,6 +165,26 @@ function App () {
           url: '/basket',
           component: <Market/>,
           child: [],
+        },
+
+            {title: 'author',
+              url: '/select/author',
+              component: null,
+              child: [
+                {
+                  title: 'group_tags',
+                  url: '/group_tags',
+                  component: <BecomeAuthorGroup/>,
+                  child: []
+                },
+                {
+                  title: 'tags',
+                  url: '/tags',
+                  component: <BecomeAuthorCreativeTags/>,
+                  child: []
+                }
+              ]
+
         },
       ]
     },

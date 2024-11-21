@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-
+import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
 import {useAuth} from "../../../provider/AuthProvider";
@@ -8,6 +8,7 @@ import {IMAGE_URL} from "../../../utils";
 //Components
 import Button from "../../ui/buttons/button/Button";
 import Search from "../search/Search";
+import LittleTag from "../../ui/input/little-tag/LittleTag";
 import ProfileNickname from "../../profile/profile-nickname/ProfileNickname";
 import ContextDrop from "../../context-drop/ContextDrop";
 import ContextGroup from "../../context-drop/context-group/ContextGroup";
@@ -25,7 +26,7 @@ import settings from '../../../asserts/icons/update/settings.svg'
 import logout  from '../../../asserts/icons/update/log-out.svg'
 import creative from '../../../asserts/icons/update/youtube.svg'
 import create from '../../../asserts/icons/update/plus.svg'
-import {useSelector} from "react-redux";
+import menu_i from "../../../asserts/icons/update/menu.svg";
 
 
 export default function Header ({type = 'unauthorized'}) {
@@ -177,9 +178,14 @@ export default function Header ({type = 'unauthorized'}) {
 
     return (
         <nav className={`${global.flex} ${styles.header}`}>
+            <div className={`${global.flex} ${styles.headerChild}`}>
+            <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
+                <img src={menu_i}/>
+            </label>
             <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
                 <h1 className={global.xl2}>zabor.inc</h1>
             </Link>
+            </div>
             {renderSwitch(type)}
         </nav>
     )

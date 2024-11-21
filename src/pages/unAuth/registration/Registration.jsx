@@ -81,11 +81,13 @@ function Registration() {
                             <form className={styles.signIn} onSubmit={handleSubmit}>
                                 <InputText
                                     place={'Введите Email'} type={'email'} required autocomplete={"new-email"}
-                                    value={email ? email : null}
+                                    // value={email ? email : null}
+                                    value={'new@mail.ru'}
                                     onChange={e => setEmail(e.target.value)}
                                 />
                                 <InputText place={'Введите Nickname'} type={'text'} autocomplete={"newNickname"}
-                                           value={nickname ? nickname : null}
+                                           // value={nickname ? nickname : null}
+                                           value={'newNew'}
                                            required
                                            onChange={e => setNickname(e.target.value)}
                                 />

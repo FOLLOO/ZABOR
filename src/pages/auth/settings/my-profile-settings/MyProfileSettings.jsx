@@ -146,6 +146,7 @@ function MyProfileSettings() {
         }
         try {
             updateUser(data)
+            alert('Мы обновили ваши параметры')
         } catch (err) {
             console.log(err)
         }
