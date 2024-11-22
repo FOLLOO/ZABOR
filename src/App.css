@@ -89,7 +89,9 @@ h5{
   /*font-family: var(--tf-LATO);*/
 }
 
-
+.App{
+ /*background-color: var(--black);*/
+}
 
 .caca{
   border: 1px solid rgba(0, 0, 0, 0.1);

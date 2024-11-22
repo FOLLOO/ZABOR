@@ -177,13 +177,13 @@ export default function Header ({type = 'unauthorized'}) {
     }
 
     return (
-        <nav className={`${global.flex} ${styles.header}`}>
+        <nav className={`${global.flex} ${type === 'unauthorized' ? styles.headerPadding : styles.header}`}>
             <div className={`${global.flex} ${styles.headerChild}`}>
-            <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
-                <img src={menu_i}/>
-            </label>
+                <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
+                    <img src={menu_i}/>
+                </label>
             <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
-                <h1 className={global.xl2}>zabor.inc</h1>
+                <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
             </Link>
             </div>
             {renderSwitch(type)}

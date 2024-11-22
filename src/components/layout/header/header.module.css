@@ -38,6 +38,12 @@
     composes: ac;
     justify-content: space-between;
 }
+
+.headerPadding{
+    composes: header;
+    padding: 0 3rem ;
+}
+
 .headerChild{
     align-items: center;
     gap: 1rem;
