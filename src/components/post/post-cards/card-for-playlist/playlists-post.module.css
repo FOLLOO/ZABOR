@@ -2,6 +2,7 @@
     max-width: 900px;
     max-height: 200px;
     overflow: hidden;
+    width: 100%;
     min-height: 150px;
     min-width: 300px;
     border-radius: 5px;
@@ -34,6 +35,7 @@
     overflow: hidden;           /* Скрывает текст, выходящий за пределы контейнера */
     text-overflow: ellipsis;
     height: 100%;
+    width: 100%;
 }
 
 .img{
@@ -46,8 +48,9 @@
 
 .image{
     overflow: hidden;
+    max-width: 300px;
     width: 100%;
-    max-width: 386px;
+    /*width: fit-content;*/
     position: relative;
     display: inline-block;
 }

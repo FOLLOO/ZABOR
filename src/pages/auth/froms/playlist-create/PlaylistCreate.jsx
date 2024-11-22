@@ -8,7 +8,7 @@ import InputText from '../../../../components/ui/input/input-text/InputText'
 import Textarea from '../../../../components/ui/input/textarea/Textarea'
 import { useAuth } from '../../../../provider/AuthProvider'
 import { useDispatch, useSelector } from 'react-redux'
-import { createFolder, putPostToFolder } from '../../../../redux/slices/folder'
+import { createFolder, putPublicationToFolder } from '../../../../redux/slices/folder'
 import {useNavigate, useParams} from 'react-router-dom'
 import Loading from '../../../loading/Loading'
 import SelectPost from '../../../../components/post/post-playlist/select-postORplaylist/SelectPost'
@@ -19,6 +19,8 @@ import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 function PlaylistCreate () {
 
   const { user } = useAuth()
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -57,7 +59,7 @@ function PlaylistCreate () {
                 publicationId: posts[i],
                 folderOfPublicationId: folderId
               }
-              dispatch(putPostToFolder(data))
+              dispatch(putPublicationToFolder(data))
             }
             catch (e){
               console.log(e)
@@ -70,7 +72,6 @@ function PlaylistCreate () {
       console.log(err)
     }
   }
-
   const addPosts = (value, isChecked) => {
     if (isChecked) {
       if (!posts.includes(value)) {

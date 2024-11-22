@@ -71,11 +71,20 @@
     margin-top: 2vh;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1rem;
     height: 600px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.addPostsCarda::-webkit-scrollbar { width: 8px; height: 3px;}
+.addPostsCarda::-webkit-scrollbar-button {  background-color: black; }
+.addPostsCarda::-webkit-scrollbar-track {  background-color: #646464;}
+.addPostsCarda::-webkit-scrollbar-track-piece { background-color: #000;}
+.addPostsCarda::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+.addPostsCarda::-webkit-scrollbar-corner { background-color: #646464;}
+.addPostsCarda::-webkit-resizer { background-color: #666;}
+
 .gap{
     gap: 10px;
 }

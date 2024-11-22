@@ -19,7 +19,7 @@ import filter from '../../../../asserts/icons/update/sort-desc.svg'
 import {useAuth} from '../../../../provider/AuthProvider'
 import {fetchTags} from '../../../../redux/slices/tag'
 import {OverlayContext} from "../../../../context/OverlayContext";
-import {getUserFolder, putPostToFolder} from "../../../../redux/slices/folder";
+import {getUserFolder, putPublicationToFolder} from "../../../../redux/slices/folder";
 
 /** Посты пользователя */
 
@@ -77,7 +77,7 @@ function UserPosts({data = []}) {
                     publicationId: HASH,
                     folderOfPublicationId: playlist[i]
                 }
-                dispatch(putPostToFolder(data))
+                dispatch(putPublicationToFolder(data))
             } catch (e) {
                 console.log(e)
             }

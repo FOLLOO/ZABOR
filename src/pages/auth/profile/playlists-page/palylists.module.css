@@ -1,7 +1,8 @@
 /*margin потому что там ток один атрибут*/
 
 .margin {
-    margin-top: 2%;
+    /*margin-top: 2%;*/
+    margin-bottom: 20rem;
 }
 
 .main {
@@ -19,10 +20,7 @@
 }
 
 .title {
-    /*background: rgba(255, 255, 255, 0.8);*/
-    /*backdrop-filter: blur(15px);*/
-    /*top: 70px;*/
-    /*position: sticky;*/
+    margin: 1rem 0;
 }
 
 .grid {

@@ -6,6 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 //css
 import styles from "../profile-page/profile.module.css";
 import global from "../../../../global.module.css";
+import dialog from '../../../auth/profile/profile-page/profile.module.css'
+
+
 
 
 //components
@@ -21,15 +24,18 @@ import {getUserData, postUserAvatar, postUserCover} from "../../../../redux/slic
 //img
 import edit from "../../../../asserts/icons/edit.svg";
 import {postSubscribe} from "../../../../redux/slices/sub";
+import SelectPost from "../../../../components/post/post-playlist/select-postORplaylist/SelectPost";
+import { putPublicationToFolder} from "../../../../redux/slices/folder";
 
 
 export function ProfileLayout() {
 
-    const {id} = useParams()
+    const {id, playlistID} = useParams()
     const {user} = useAuth()
 
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
+    const [publications, setPublications] = useState([])
 
 
     const dispatch = useDispatch()
@@ -37,17 +43,59 @@ export function ProfileLayout() {
 
     const formData = new FormData()
 
+    function isOpen(param){
+        return param.open
+    }
+
     /**
      * Меняет состояние overlay
      * @constructor
      *
      */
-     const over = () => {
+     const setImageOver = () => {
          const dialog = document.getElementById('setImage_dialog')
-         const isOpen = dialog.open;
-         isOpen ?  dialog.close() : dialog.showModal()
+         isOpen(dialog) ?  dialog.close() : dialog.showModal()
      }
 
+     const setPublicationsOver = () => {
+         const dialog = document.getElementById('add-publication-to-playlist')
+         isOpen(dialog) ?  dialog.close() : dialog.showModal()
+     }
+
+    const addPublicationToState = (value, isChecked) => {
+        // console.log(value, isChecked)
+        if (isChecked) {
+            if (!publications.includes(value)) {
+                setPublications(prevPlaylist => [...prevPlaylist, value])
+                // console.log('Added to playlist:', value)
+            }
+        } else {
+            setPublications(prevPlaylist => prevPlaylist.filter(item => item !== value))
+        }
+    }
+
+    const addToPlaylistPblication = () => {
+        if(!playlistID){
+            alert('Ошибка исполнения. Попробуйте позже')
+            console.log('Нет playlistID', playlistID)
+        }
+        if (publications.length <= 0) {
+            alert('Выберете плейлист')
+        }
+        for (let i = 0; i < publications.length; i++) {
+            try {
+                const data = {
+                    publicationId: Number(publications[i]),
+                    folderOfPublicationId: playlistID
+                }
+                dispatch(putPublicationToFolder(data))
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        setPublicationsOver()
+        window.location.reload()
+    }
 
     /**
      * Этот код предназначен для сохранения изображения в БД!
@@ -61,7 +109,7 @@ export function ProfileLayout() {
             formData.append('avatar', file)
             try {
                 dispatch(postUserAvatar(formData))
-                over()
+                setImageOver()
             } catch (err) {
                 console.log(err)
             }
@@ -70,7 +118,7 @@ export function ProfileLayout() {
             formData.append('cover', file)
             try {
                 dispatch(postUserCover(formData))
-                over()
+                setImageOver()
             } catch (err) {
                 console.log(err)
             }
@@ -164,30 +212,6 @@ export function ProfileLayout() {
         }
     }
 
-    // function some(digits){
-    //     if(digits.length <= 0){
-    //         return []
-    //     }
-    //
-    //     digits.split('')
-    //     const arr = [null, 'abc', 'def', 'ghi' ,'jkl' ,'mno' ,'pqrs','tuv' ,'wxyz'];
-    //
-    //     const result = []
-    //     const first = []
-    //     const other = []
-    //
-    //     first.push(arr[digits[0] - 1].split(''))
-    //     for(let i = 1; i < digits.length; i++){
-    //         other.push(arr[digits[i] - 1].split(''))
-    //     }
-    //     for(let p = 0; p < first[0].length; p++){
-    //         for (let k = 0; k < other[0].length; k++){
-    //             result.push(first[0][p] + other[0][k])
-    //         }
-    //     }
-    //     return result
-    // }
-
     const getUser = () => {
             try {
                 dispatch(getUserData(id))
@@ -197,12 +221,11 @@ export function ProfileLayout() {
         }
 
     useEffect(() => {
-        if (userData.items.id === Number(id)) return;
-        // if (userData.status === 'loaded')return;
+        // if (userData.items.id === Number(id)) return;
+        if (userData.items.id === Number(id) || userData.status === 'loaded')return;
         getUser()
     }, [])
 
-        //todo: overlay don't work on publication page
         //Данные для /Tabs
     const tabContent = [
             { title: 'Публикации', url: '.'},
@@ -220,7 +243,7 @@ export function ProfileLayout() {
                 }
             </div>
 
-            <dialog  id={'setImage_dialog'} className={styles.dialog} onClick={() => over()}>
+            <dialog  id={'setImage_dialog'} className={styles.dialog} onClick={() => setImageOver()}>
                 <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`} 
                         title={'Форма добавления изображение для ava'}>
                     <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
@@ -258,7 +281,7 @@ export function ProfileLayout() {
                                            size={150}
                                            edit={user?.id === Number(id) ? true : null}
                                            click={() => {
-                                               over()
+                                               setImageOver()
                                                localStorage.setItem('type', 'avatar')
                                            }}/>
                             <div className={styles.subes}>
@@ -282,7 +305,7 @@ export function ProfileLayout() {
                             <div className={styles.edit}>
                                 <Button img={edit} img_size={'h-5'} variant={'ghost'}
                                         click={() => {
-                                            over()
+                                            setImageOver()
                                             localStorage.setItem('type', 'cover')
                                 }}> Изменить обложку </Button>
                             </div>
@@ -298,6 +321,33 @@ export function ProfileLayout() {
                 <Outlet/>
                 </div>
             </div>
+
+            <dialog id={'add-publication-to-playlist'} className={dialog.dialog}>
+                <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
+                    <h3 className={global.bold}>Выберете публикацию</h3>
+                    <div className={dialog.addPostsCarda}>
+                        {userData?.items?.publications?.map((item) => (
+                            <SelectPost title={item?.title}
+                                        onChange={(event) => addPublicationToState(item?.id, event.target.checked)}
+                                        id={item?.id}
+                                        img={item?.coverUrl}
+                                        description={item?.description}/>
+                        ))}
+                    </div>
+                    <div className={`${global.flex} ${dialog.gap}`}>
+                        <Button variant={'outlet'}
+                                className={`${global.w100} ${global.f_center}`}
+                                click={() => setPublicationsOver()}>
+                            Отмена
+                        </Button>
+                        <Button variant={'color'}
+                                className={`${global.w100} ${global.f_center}`}
+                                click={() => addToPlaylistPblication()}>
+                            Сохранить
+                        </Button>
+                    </div>
+                    </div>
+            </dialog>
         </div>
-    );
+);
 }

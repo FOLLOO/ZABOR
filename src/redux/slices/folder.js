@@ -24,18 +24,42 @@ export const getUserFolder = createAsyncThunk('publication/getUserFolders', asyn
   }
 });
 
-export const putPostToFolder = createAsyncThunk('publication/putPublicationInFolder', async (data) => {
+export const putFolder = createAsyncThunk('publication/editFolder',
+    async (data) => {
   try {
-    const response = await axios.post('/publication/putPublicationInFolder',  data);
+    const response = await axios.put('/publication/editFolder',  data);
     return response.data; // Возвращаем данные из ответа
   } catch (error) {
     throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
   }
 });
 
-export const deleteFolder = createAsyncThunk('publication/deleteFolder', async (id) => {
+export const putPublicationToFolder = createAsyncThunk('publication/putPublicationInFolder',
+    async (data) => {
+      try {
+        const response = await axios.post('/publication/putPublicationInFolder',  data);
+        return response.data; // Возвращаем данные из ответа
+      } catch (error) {
+        throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+      }
+    });
+
+export const deletePublicationFromFolder = createAsyncThunk(
+    'publication/deletePublicationInFolder',
+    async (data) => {
+      try {
+        const response = await axios.delete(`/publication/deletePublicationInFolder`, { data });
+        return response.data; // Возвращаем данные из ответа
+      } catch (error) {
+        throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+      }
+    }
+);
+export const deleteFolder = createAsyncThunk(
+    'publication/deleteFolder',
+    async (data) => {
   try {
-    const response = await axios.delete(`/publication/deleteFolder/`, {data: id});
+    const response = await axios.delete(`/publication/deleteFolder/`, {data});
     return response.data; // Возвращаем данные из ответа
   } catch (error) {
     throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux

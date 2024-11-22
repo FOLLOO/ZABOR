@@ -15,7 +15,7 @@ function SelectPost ({ title, img, description, onChange, id }) {
 
   return (
     <label htmlFor={id} className={`${styles.main} ${checked ? styles.checked : styles.unchecked}`}   >
-      <div  >
+      <div>
         <div className={`${styles.content}`}>
           <div className={`${styles.image}`}>
             {img ?
@@ -26,10 +26,10 @@ function SelectPost ({ title, img, description, onChange, id }) {
               </div> }
           </div>
           <div className={`${styles.text_content}`}>
-            <div className={`${styles.title} ${global.t1}`}>
+            <div className={`${styles.title} ${global.t3}`}>
               {title ? title : null}
             </div>
-            <div className={`${styles.description} ${global.d2}`}>
+            <div className={`${styles.description} ${global.d3}`}>
               {description ? description : null}
             </div>
           </div>
