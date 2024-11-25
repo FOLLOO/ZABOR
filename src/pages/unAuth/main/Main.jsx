@@ -1,5 +1,5 @@
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 
 // css
 import styles from './main.module.css'
@@ -8,6 +8,8 @@ import global from '../../../global.module.css'
 // media
 import videoo from '../../../asserts/video/infinty.mp4'
 
+import temp from '../../../asserts/temp/people-doing-outdoor-training.jpg'
+import temp2 from '../../../asserts/temp/beautiful-mountain-lake-background-remix.jpg'
 //components
 import GlassBox from '../../../components/glasses/glasses-box/GlassBox'
 import Button from "../../../components/ui/buttons/button/Button";
@@ -41,60 +43,102 @@ const getStart = [
         title: 'Зарегистрируйся',
         description: ' Если вы не пройдете регистрацию ' +
             'в ближайшие 30 секунд, мы будем вынуждены применить' +
-            ' крайние меры!😇 Иначе весь отдел разработки будет плакать 😖'
+            ' крайние меры'
     },
     {
         title: 'Заполни свою страницу',
-        description: ' Нет-нет, дорогие мои!😇 ' +
-            'Регистрация - это лишь первый шаг. Теперь вам' +
+        description: 'Регистрация - это лишь первый шаг. Теперь вам' +
             ' необходимо заполнить ваши профили на ZABOR до ' +
-            'последней запятой! Иначе что скажут ваши подписчики? 😯'
+            'последней запятой!'
     },
     {
         title: 'Выложи свой первый пост',
         description: 'Просто я искренне желаю, чтобы ваше творчество нашло отклик в ' +
-            'сердцах читателей.🤗 А для этого вам необходимо начать делиться ' +
-            'своими идеями, мыслями и вдохновением на страницах HOLA! Вы уже стали ' +
-            'ценным пользователем для нашего отдела 💞️'
+            'сердцах читателей.'
     },
     {
-        title: 'Зарегистрируйся',
-        description: 'Поделитесь с миром этой замечательной новостью! Пусть ' +
-            'ваши друзья и подписчики знают,' +
-            ' что вы стали частью уникального сообщества авторов и блогеров. 🙌'
+        title: 'Расскажи об этом',
+        description: 'Пусть ваши друзья и подписчики знают, что вы стали частью уникального сообщества '
     },
+]
+const images = [
+    temp,
+    temp2,
+    temp,
+    temp2,
 ]
 function Main() {
 
     const navigate = useNavigate()
+    const [image, setImage] = useState(0)
+
+    function handleChangeImage(param) {
+        if(param === 'dec'){
+            setImage(image - 1)
+        }else{
+            setImage(image + 1)
+        }
+    }
 
     return (
         <div className={styles.back}>
-            <div className={styles.title}>
-                <h2>ZABOR</h2>
-            </div>
             <video className={styles.video} loop autoPlay muted>
                 <source src={videoo} type="video/mp4"/>
             </video>
             <div className={styles.content}>
                 <div className={styles.title}>
-                    <h1>Чем мы занимаемся?</h1>
-                    <p className={global.xl}>На нашем сайте мы, безусловно,<br/> помогаем авторам раскрыть свой
-                        потенциал</p>
+                    <h3>ZABOR</h3>
+                </div>
+                <div className={styles.title}>
+                    <h1>Привет, это zabor</h1>
+                    <p className={global.xl}>
+                        Раскройте ваш творческий потенциал и поделитесь <br/> уникальными историями с миром!
+                    </p>
                 </div>
 
                 <div className={`${global.flex} ${global.f_center} ${styles.navigation}`}>
-                    <Button variant={'color'}>
-                        Начать
-                    </Button>
-                    <Button variant={'outlet'} onClick={navigate}>
-                        Подробнее
-                    </Button>
+                    <a href={'#start'}>
+                        <Button variant={'color'}>
+                            Начать
+                        </Button>
+                    </a>
+
+                    <a href={'#about'}>
+                        <Button variant={'outlet'}>
+                            Подробнее
+                        </Button>
+                    </a>
                 </div>
+
+                <div className={`${global.flex}  ${styles.about}`} id={'about'}>
+                    <div className={styles.leftTitle}>
+                        <h1>Подробнее о нас</h1>
+                        <p className={global.base}>На нашем сайте мы, безусловно,<br/> помогаем авторам раскрыть свой
+                            потенциал</p>
+                    </div>
+
+                    <div className={styles.slider}>
+                        <div className={styles.slider_content}>
+                            <div className={styles.image}>
+                                <img id={styles.sliter_image} src={images[image]} alt="Slide Image"/>
+                            </div>
+                        </div>
+                        <div className={`${global.flex} ${styles.buttons}`}>
+                            <Button variant={'outlet'}
+                                    click={() => handleChangeImage('dec')} disabled={image === 0}>
+                                &#10094;
+                            </Button>
+                            <Button variant={'outlet'} click={() => handleChangeImage('inc')} disabled={image === images.length - 1}>
+                                &#10095;
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div className={`${global.flex}  ${styles.about}`}>
                     <div className={styles.leftTitle}>
-                        <h2>Возможности  сайта</h2>
+                        <h2>Возможности сайта</h2>
                         <p className={global.base}>На нашем сайте мы, безусловно,<br/> помогаем авторам раскрыть свой
                             потенциал</p>
                     </div>
@@ -103,7 +147,7 @@ function Main() {
                         {opportunities.map((opport) => (
                             <GlassBox>
                                 <div className={styles.actions}>
-                                    <h1 className={`${global.medium} ${styles.header}`}>{opport.number}</h1>
+                                    <h1 className={`${global.medium} ${styles.header}`}>+</h1>
                                     <p className={`${global.medium} ${styles.littleHeader}`}>
                                         {opport.title}
                                     </p>
@@ -116,26 +160,28 @@ function Main() {
                     </div>
                 </div>
 
-                <div className={styles.centerLittle}>
+                <div className={styles.centerLittle} id={'start'}>
                     <h2>Как начать?</h2>
                     <p className={global.base}>Главное ведь начать, а дальше положитесь на нас!</p>
                 </div>
 
-                <div className={`${styles.grid} ${styles.container}`}>
+                <div className={`${styles.flex} ${styles.container}`}>
                     {getStart.map((start, i) => (
-                            <div className={styles.form}>
-                                <div className={`${styles.round}`}>
-                                    {i + 1}
-                                </div>
-                                <h2 className={`${global.xl3} ${global.medium}`} >{start.title}</h2>
-                                <p className={styles.littleHeader}>
+                        <GlassBox>
+                            <div className={styles.actions}>
+                                <h1 className={`${global.medium} ${styles.header}`}>{i + 1}.</h1>
+                                <p className={`${global.medium} ${styles.littleHeader}`}>
+                                    {start.title}
+                                </p>
+                                <p className={styles.description}>
                                     {start.description}
                                 </p>
                             </div>
-                        ))}
+                        </GlassBox>
+                    ))}
                 </div>
 
-                <Button variant={'outlet'} onClick={navigate} size={'xl2'}>
+                <Button variant={'color'} click={() => navigate('/login')} size={'xl2'}>
                     Пройти регистрацию
                 </Button>
             </div>

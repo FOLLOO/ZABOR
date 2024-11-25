@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import parse from 'html-react-parser';
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, useNavigate, useParams} from 'react-router-dom'
@@ -62,7 +62,7 @@ function Post() {
         const dialog = document.getElementById('support')
         const isOpen = dialog.open;
         console.log(isOpen)
-        return isOpen ? dialog.close()  : dialog.showModal()
+        return isOpen ? dialog.close() : dialog.showModal()
     }
 
     const handleDialogClick = (event) => {
@@ -76,10 +76,10 @@ function Post() {
     useEffect(() => {
         if (OnePost.status === 'loaded' && OnePost.items.id === id) return;
         pageGetPost()
-        }, [])
+    }, [])
 
     useEffect(() => {
-        if(SamePosts.status === 'loaded' && OnePost.items.id === id) return;
+        if (SamePosts.status === 'loaded' && OnePost.items.id === id) return;
         pageGetSamePost() // присылать похожие посты вместе с постом?
     }, []);
 
@@ -117,8 +117,9 @@ function Post() {
                     </div>
 
                     <div className={`${styles.profile} ${styles.text}`}>
-                        <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname} img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`}
-                        id={OnePost?.items.user?.id}
+                        <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname}
+                                         img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`}
+                                         id={OnePost?.items.user?.id}
                         />
                         <Button variant={'color'} className={global.f_center}>
                             Подписаться
@@ -170,27 +171,29 @@ function Post() {
                         ) : null}
                     </div>
                     <div className={styles.mainAfterPost}>
-                    <h1 className={`${global.xl2} ${global.bold}`}>Похожее</h1>
-                    <div className={styles.afterpost}>
-                        {shuffledPosts?.length > 0 ?
-                            shuffledPosts?.slice(0, 6).map((posts) => (
-                                <Link to={`/publication/${posts.id}`}>
-                                    <CardLittle
-                                        key={posts.id}
-                                        data={posts}
-                                        // avatar={posts.user.files[0].url}
-                                        blur
-                                        img={posts.coverUrl}
-                                        title={posts.title}
-                                        price={posts.price}
-                                        user_id={posts.userId}
-                                        time={posts.createdAt}
-                                        views={posts.views_count + 1}
-                                    />
-                                </Link>
-                            ))
-                            : null }
-                    </div>
+                        <h1 className={`${global.xl2} ${global.bold}`}>Похожее</h1>
+                        <div className={styles.afterpost}>
+                            {shuffledPosts && shuffledPosts.length > 0 ? (
+                                <div className={styles.postContainer}>
+                                    {shuffledPosts.slice(0, 6).map((post) => (
+                                        <div className={styles.post} key={post.id}> {/* Переносим ключ сюда */}
+                                            <Link to={`/publication/${post.id}`}>
+                                                <CardLittle
+                                                    data={post}
+                                                    blur
+                                                    img={post.coverUrl}
+                                                    title={post.title}
+                                                    price={post.price}
+                                                    user_id={post.userId}
+                                                    time={post.createdAt}
+                                                    views={post.views_count + 1}
+                                                />
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : null}
+                        </div>
                     </div>
                     <div className={styles.text} id={"comments"}>
                         <CommnetForm/>
@@ -225,10 +228,10 @@ function Post() {
             <dialog id={'support'} className={dialog.dialog} onClick={handleDialogClick}>
                 <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
                     {/*<div className={dialog.support}>*/}
-                        <h1 className={global.xl3}>О чем желаете сообщить?</h1>
-                        <p className={global.d3}>Мы обязательно рассмотрим ваше обращение</p>
+                    <h1 className={global.xl3}>О чем желаете сообщить?</h1>
+                    <p className={global.d3}>Мы обязательно рассмотрим ваше обращение</p>
                     {/*</div>*/}
-                    <InputDporDown data={[{id: 1, title: 'Куда', value: 'м'}, {id: 2,title: 'Сюда',value: 'ж'},]}/>
+                    <InputDporDown data={[{id: 1, title: 'Куда', value: 'м'}, {id: 2, title: 'Сюда', value: 'ж'},]}/>
                     <Textarea rows={5} place={'В чем проблема?'}/>
                     <div className={`${global.flex} ${global.f_dir_column}`} style={{gap: '1rem'}}>
                         <Button variant={'outlet'} click={() => toggleOverlay()}

@@ -10,7 +10,6 @@
 
     /*display: flex;*/
     /*margin:auto;*/
-
     transition: all 1s ease-in-out;
 
     overflow: hidden;
@@ -260,7 +259,9 @@
     }
     .grid{
         display: flex;
-        padding: 7vw;
+        padding: 0 7vw;
+        /*margin: 7%;*/
+        margin: auto;
     }
     .mainAfterPost{
         display: flex;
@@ -268,16 +269,25 @@
         gap: 1rem;
         width: 100%;
     }
-    .afterpost{
-        display: flex;
-        gap: 1rem;
-        overflow: auto;
-        max-width: 70vw;
-        margin-bottom: 2rem;
+
+    .afterpost {
+        overflow-x: auto; /* Горизонтальная прокрутка */
+        overflow-y: hidden; /* Скрытие вертикальной прокрутки */
+        width: 100%; /* 100% ширины родителя */
+        max-width: 800px; /* Максимальная ширина 100% viewport */
+        display: flex; /* Flexbox для выравнивания содержимого */
     }
-    .afterpost::-webkit-scrollbar {
-        display: none;
+
+    .postContainer {
+        display: flex; /* Внутренний контейнер для детей - горизонтальный слайдер */
+        flex-wrap: nowrap; /* Не переносить дочерние элементы на новую строку */
+        gap: 1rem; /* Отступы между элементами */
     }
+
+    .post {
+        flex: 0 0 auto; /* Чтобы фиксировать ширину для каждого элемента */
+    }
+
     .recomends{
         display: none;
     }

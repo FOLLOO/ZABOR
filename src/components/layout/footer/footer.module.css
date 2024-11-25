@@ -4,12 +4,14 @@
     overflow: hidden;
     z-index: 100;
 
-    background: #0C0C0C;
+    /*background: #0C0C0C;*/
+    background: #000;
+
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    padding: 10% 0;
+    padding: 10rem 0;
     flex-direction: column;
     /*height: 100%;*/
 }
