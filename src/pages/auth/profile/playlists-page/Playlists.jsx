@@ -22,8 +22,6 @@ function Playlists() {
 
     const navigate = useNavigate()
 
-    // const [folder, setFolder] = useState({})
-    // const [open, setOpen] = useState(false)
 
     const getFolders = () => {
         try {
@@ -44,7 +42,7 @@ function Playlists() {
 
     return (
         <div className={styles.margin}>
-            {userFolder?.items !== 'У пользователя нет плейлистов' && userFolder?.items.length > 0 ? (
+            {userFolder?.items !== 'У пользователя нет плейлистов' ? (
                     <>
                         <div className={`${styles.title}`}>
                             <h1 className={`${global.xl3} ${global.bold}`}>Плейлисты</h1>
@@ -52,7 +50,7 @@ function Playlists() {
                         <div className={styles.margin}>
                             <div className={styles.grid}>
                                 <Playlist add/>
-                                {userFolder?.items.length > 0 ? userFolder?.items.map((item =>
+                                { userFolder?.items.map((item =>
                                             <Link to={`/profile/${item?.userId}/playlist/${item.id}`}>
                                             <Playlist
                                                 title={item.name}
@@ -61,18 +59,25 @@ function Playlists() {
                                                 description={item.description}/>
                                             </Link>
                                     ))
-                                    :
-                                    <>
-                                        {/*<Playlist add/>*/}
-                                    </>
+
                                 }
                             </div>
                         </div>
                     </>
-                ) :
+                ) : user?.roleId === 2
+                ?
+                <>
+                <div className={`${styles.title}`}>
+                    <h1 className={`${global.xl3} ${global.bold}`}>Плейлисты</h1>
+                </div>
+
+                <Playlist add/>
+                </>
+                :
                 <NothingYet
                     isMe={isMe()}
                     isAuthor={user?.roleId === 1}
+                    buttonText={'Стать автором'}
                     onButtonClick={() => navigate('/select/author/group_tags')}
                 />
             }

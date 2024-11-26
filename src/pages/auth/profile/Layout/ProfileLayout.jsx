@@ -222,7 +222,7 @@ export function ProfileLayout() {
 
     useEffect(() => {
         // if (userData.items.id === Number(id)) return;
-        if (userData.items.id === Number(id) || userData.status === 'loaded')return;
+        if (userData.status === 'loaded' && user.id === id)return;
         getUser()
     }, [])
 

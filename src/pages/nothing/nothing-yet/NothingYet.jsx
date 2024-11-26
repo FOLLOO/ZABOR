@@ -13,7 +13,7 @@ export default function NothingYet({isMe, isAuthor, onButtonClick, buttonText}) 
             <div className={global.d2}>
                 Мы ничего не смогли найти
             </div>
-            {isMe && (
+            {isMe &&  (
                 <div className={styles.addButton}>
                     <Button
                         variant={'outlet'}

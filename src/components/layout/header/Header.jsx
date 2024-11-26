@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
 import {useAuth} from "../../../provider/AuthProvider";
@@ -31,13 +31,30 @@ import menu_i from "../../../asserts/icons/update/menu.svg";
 
 export default function Header ({type = 'unauthorized'}) {
 
-    const navigate = useNavigate()
     const {isAuth, user, logOut} = useAuth()
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [notification, setNotification] = React.useState(false)
     const [profile, setProfile] = React.useState(false)
+
     const profileRef = React.useRef(null);
 
+    // const cartItems = useSelector((state) => state.cart.items)
+
     const cartItems = useSelector((state) => state.cart.items)
+
+
+
+    const getBasket = async () => {
+        try{
+            dispatch(getBasket())
+        }catch (e) {
+
+        }
+    }
+    
     function handleClickOutside(event){
         if (profileRef.current && !profileRef.current.contains(event.target)) {
             setNotification(false);

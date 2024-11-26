@@ -111,7 +111,7 @@ function UserPosts({data = []}) {
     }, [])
 
     useEffect(() => {
-        if (userFolder.status === 'loaded') return
+        if (userFolder.status === 'loaded' && user.id === id) return
         getUserFolders()
     }, [overlay]);
 

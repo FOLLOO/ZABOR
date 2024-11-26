@@ -40,6 +40,7 @@
 }
 .button{
     width: 55px;
+    height: fit-content;
     padding: 5px;
     background: white;
     border-radius: var(--rounded-md);

@@ -137,7 +137,12 @@
     width: 100px;
     height: 36px;
     cursor: pointer;
+}
 
+@media (max-width: 1080px) {
+    .main{
+        margin-right: 0;
+    }
 }
 
 @media (max-width: 425px) {
