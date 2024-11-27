@@ -12,23 +12,27 @@ import PlaylistsPost from '../../../components/post/post-cards/card-for-playlist
 import Button from "../../../components/ui/buttons/button/Button";
 
 //img
+import del from '../../../asserts/icons/update/close.svg'
 import fire from '../../../asserts/emoji/Fire.svg'
-import close from '../../../asserts/icons/plus_white.svg'
 
 //utils
-import { deleteItemFromCart } from '../../../redux/slices/bascet'
 import NothingYet from "../../nothing/nothing-yet/NothingYet";
+import {deleteItemFromBasket} from "../../../redux/slices/basketAPI";
 
 
 function Market () {
 
-  const cartItems = useSelector((state) => state.cart.items)
+  const cartItems = useSelector((state) => state.cart.basket)
   const dispatch = useDispatch()
 
-  const handleClick = (data) => {
+  const deleteItem = (e,ID) => {
+    e.preventDefault()
+    const data = {
+      basketId: ID
+    }
     try{
-      dispatch(deleteItemFromCart(data));
-      window.location.reload()
+      dispatch(deleteItemFromBasket(data));
+      // window.location.reload()
     }catch (e) {
       console.log(e)
     }
@@ -36,8 +40,8 @@ function Market () {
 
   // const count = cartItems.length;
   // подсчет итога
-  const totalPrice = cartItems.reduce((acc, currentValue) => {
-    return acc + currentValue.price
+  const totalPrice = cartItems.items.reduce((acc, currentValue) => {
+    return acc + currentValue.publication?.price
   }, 0)
 
   return (
@@ -47,23 +51,20 @@ function Market () {
                        description={`В корзине ${cartItems.length} поста`}/>
         <div className={`${global.flex} ${styles.check}`}>
           <div className={styles.posts}>
-            {cartItems.length > 0 ?
-                cartItems.map((item) => (
-                    <>
+            {cartItems.items.length > 0 ?
+                cartItems.items.map((item) => {
+                   const publication = item.publication;
+                   return(
+                    <div className={styles.data}>
+                      <Button img={del} variant={'ghost'} className={styles.buttonReplace} click={(e) => deleteItem(e,publication.id)}></Button>
                       <PlaylistsPost blur
-                                     title={item.title}
-                                     image={item.coverUrl}
-                                     cost={item.price}
-                                     views={item.views_count}
-                                     description={item.description}/>
-                      <div className={styles.close}>
-                        <button className={styles.deleteButton}>
-                          <img src={close} alt={'close'} title={'Удалить'} className={styles.image}
-                               onClick={() => handleClick(item)}/>
-                        </button>
-                      </div>
-                    </>
-                ))
+                                     title={publication?.title}
+                                     image={publication?.coverUrl}
+                                     cost={publication?.price}
+                                     views={publication?.views_count}
+                                     description={publication?.description}/>
+                    </div>)
+                })
                 :
                 <div className={styles.beMaxSize}>
                   <NothingYet/>
@@ -87,7 +88,7 @@ function Market () {
                       Постов:
                     </div>
                     <div className={global.t3}>
-                      {cartItems.length} шт
+                      {cartItems.items.length} шт
                     </div>
                   </div>
                 </div>

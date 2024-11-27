@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { axiosClassic as axios } from '../../r-axios/axios'
-import { fetchCreativeTags, fetchTags } from './tag'
 
 export const getNotifications = createAsyncThunk('user/getNotifications', async () => {
   try {

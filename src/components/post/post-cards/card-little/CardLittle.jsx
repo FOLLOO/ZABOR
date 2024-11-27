@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import styles from './card-little.module.css'
 import global from '../../../../global.module.css'
@@ -6,12 +6,15 @@ import global from '../../../../global.module.css'
 import basket from '../../../../asserts/icons/basket.svg'
 import lock from '../../../../asserts/icons/Lock.svg'
 import plus from '../../../../asserts/icons/plus.svg'
+import added from '../../../../asserts/icons/update/chevron-down.svg'
 
 import ProfileCircle from '../../../profile/profile-circle/ProfileCircle'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart } from '../../../../redux/slices/bascet'
+import { useDispatch } from 'react-redux'
 import {IMAGE_URL, toggleOverlay} from '../../../../utils'
+import {addPostToBasket} from "../../../../redux/slices/basketAPI";
+
+//todo: уменьшить колличесво парметров компонента
 function CardLittle ({
   image = false,
   title,
@@ -20,30 +23,31 @@ function CardLittle ({
   views,
   price,
   userID,
-  time ,
+  time,
   data,
   editable,
   blur = false
 }) {
 
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+  const [inBasket, setInBasket] = useState(null);
 
-  // const {overlay, setOverlay} = useContext(OverlayContext)
-
-  const handleAddToCart = (e) => {
-    e.preventDefault()
-      toggleOverlay('addToBasket')
-    // setOverlay(!overlay);
-    // Добавляем товар в корзину
-    if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){
-      dispatch(addItemToCart(data));
-    }
-  };
+  const addToBasket = (e, id) => {
+      e.preventDefault()
+      if(!id){
+          console.log('where is ID')
+      }
+      try{
+          dispatch(addPostToBasket(id));
+          toggleOverlay('addToBasket')
+          setInBasket(!inBasket)
+      }catch (e) {
+          console.log('something wrong',  e)
+      }
+  }
 
   return (
     <div className={`${styles.main}`}>
-      {/*<div className={image ? styles.temp : null}>*/}
       <div className={`${styles.actions} ${global.flex} ${global.f_dir_column}`} >
           <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
             <Link to={`/profile/${userID}`}>
@@ -61,10 +65,12 @@ function CardLittle ({
 
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
               {editable ? null :
-              <button className={styles.button} onClick={handleAddToCart}>
+              <button className={inBasket ? styles.green : styles.button}
+                      disabled={inBasket}
+                      onClick={(e) => addToBasket(e, data?.id)}>
               <div  className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
-                  <img src={basket} alt={'img'}/>
-                  <img src={plus} alt={'img'}/>
+                  {inBasket ? null :  <img src={basket} alt={'img'}/>}
+                  <img src={inBasket ? added : plus} alt={'img'}/>
               </div>
             </button>}
           </div>

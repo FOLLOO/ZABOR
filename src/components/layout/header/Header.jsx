@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 
 import {useAuth} from "../../../provider/AuthProvider";
 import {IMAGE_URL} from "../../../utils";
+import {getBasket} from "../../../redux/slices/basketAPI";
 
 //Components
 import Button from "../../ui/buttons/button/Button";
@@ -43,16 +44,18 @@ export default function Header ({type = 'unauthorized'}) {
 
     // const cartItems = useSelector((state) => state.cart.items)
 
-    const cartItems = useSelector((state) => state.cart.items)
+    const cartItems = useSelector((state) => state.cart.basket)
 
 
 
-    const getBasket = async () => {
+    const functionGetBasket = () => {
+
         try{
             dispatch(getBasket())
         }catch (e) {
-
+            console.log(e)
         }
+
     }
     
     function handleClickOutside(event){
@@ -66,6 +69,7 @@ export default function Header ({type = 'unauthorized'}) {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
+
     function clickLogOut(){
         try{
             logOut()
@@ -75,6 +79,9 @@ export default function Header ({type = 'unauthorized'}) {
         }
     }
 
+    useEffect(() => {
+        functionGetBasket()
+    }, []);
   const Unauthorized = () => {
     return (
         <div className={`${global.flex} ${styles.buttons}`}>
@@ -98,15 +105,15 @@ export default function Header ({type = 'unauthorized'}) {
                     <div className={styles.desctopButtons}>
                         <div className={styles.button_abs}>
                             <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}/>
-                            {cartItems.length === 0 ? null :
-                                <span className={styles.basketCount}>{cartItems.length}</span>
+                            {cartItems.items.length === 0 ? null :
+                                <span className={styles.basketCount}>{cartItems.items.length}</span>
                             }
                         </div>
                         <div className={styles.button_abs}>
                             <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}/>
-                            {cartItems.length === 0 ? null :
-                                <span className={styles.basketCount}>{cartItems.length}</span>
-                            }
+                            {/*{cartItems.length === 0 ? null :*/}
+                            {/*    <span className={styles.basketCount}>{cartItems.length}</span>*/}
+                            {/*}*/}
                         </div>
                     </div>
 

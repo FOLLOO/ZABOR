@@ -125,18 +125,26 @@
 }
 
 .close{
-    position: relative;
+    /*position: relative;*/
     display: flex;
-    justify-content: end;
+    /*justify-content: end;*/
     bottom: 210px;
     /*left: 85%;*/left: 44vw;
     z-index: 1;
     border-radius: 5px;
     overflow: hidden;
     background: #9747FF;
-    width: 100px;
+    width: fit-content;
     height: 36px;
     cursor: pointer;
+}
+
+.buttonReplace{
+    border-radius: var(--rounded-md) 0 0 var(--rounded-md);
+}
+
+.data{
+    display: flex;
 }
 
 @media (max-width: 1080px) {

@@ -10,6 +10,7 @@ function Textarea ({place, rows, value, onChange, req = false}) {
         value={value}
         lang={'ru'}
         maxLength={3000}
+        spellCheck
         className={styles.input}
         rows={rows}
         required={req}

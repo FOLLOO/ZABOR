@@ -48,6 +48,10 @@
 .buttonCon{
     gap: 5px
 }
+.green{
+    composes: button;
+    background-color: #4DDC52;
+}
 
 .cardImage{
     /*background: linear-gradient(0deg, rgba(16, 17, 18, 0.92) 25.68%, rgba(27, 28, 32, 0) 72.2%);*/

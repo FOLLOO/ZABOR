@@ -24,6 +24,8 @@ function CommnetForm ({ click }) {
       };
       try {
         dispatch(createComment(data));
+        alert('Комментарий опубликован')
+        setValue('')
       } catch (e) {
         console.error('Error:', e);
       }
@@ -41,7 +43,7 @@ function CommnetForm ({ click }) {
       <div className={styles.input}>
         <Textarea type={'text'}
                   place={'Оставить комментарий'}
-                  rows={1}
+                  // rows={1}
                   req
                   onChange={(e) => setValue(e.target.value)}
                   back={false}/>

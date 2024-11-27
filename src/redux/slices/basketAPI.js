@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { axiosClassic as axios } from '../../r-axios/axios'
+
 
 export const getBasket = createAsyncThunk(
     'publication/getBasket',
@@ -14,9 +15,11 @@ export const getBasket = createAsyncThunk(
 );
 
 export const addPostToBasket = createAsyncThunk('publication/putPublicationInBasket',
-    async (data) => {
+    async (id) => {
         try {
-            const response = await axios.post('/publication/putPublicationInBasket',  data);
+            const response = await axios.post('/publication/putPublicationInBasket', {
+                publicationId: id,
+            });
             return response.data; // Возвращаем данные из ответа
         } catch (error) {
             throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
@@ -33,37 +36,41 @@ export const deleteItemFromBasket = createAsyncThunk('publication/deleteBasketIt
         }
     });
 
+const initialState = {
+    basket:{
+        items: [],
+        status: 'loading',
+    },
+}
 
 const basketAPISlice = createSlice({
     name: 'cart',
-    initialState: {
-        items: [],
-        status: 'loading',
-        error: null,
-    },
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getBasket.pending, (state) => {
-                state.cart.items = []; // Устанавливаем массив пустым при загрузке
-                state.cart.status = 'loading';
+                state.basket.items = []; // Устанавливаем массив пустым при загрузке
+                state.basket.status = 'loading';
             })
             .addCase(getBasket.fulfilled, (state, action) => {
-                state.cart.items = action.payload; // Заполняем корзину полученными данными
-                state.cart.status = 'loaded';
+                state.basket.items = action.payload; // Заполняем корзину полученными данными
+                state.basket.status = 'loaded';
             })
-            .addCase(getBasket.rejected, (state, action) => {
-                state.cart.error = action.error.message;
-                state.cart.status = 'error';
+            .addCase(getBasket.rejected, (state) => {
+                state.basket.items = [];
+                state.basket.status = 'error';
             })
             .addCase(addPostToBasket.fulfilled, (state, action) => {
-                state.cart.items.push(action.payload);
-            })
+                if(typeof action.payload !== "string") {
+                    state.basket.items.push(action.payload);
+                }
+                })
             .addCase(deleteItemFromBasket.fulfilled, (state, action) => {
-                state.cart.items = state.items.filter(item => item.id !== action.payload.id);
+                state.basket.items = state.basket.items.filter(item => item.publication.id !== action.payload.id);
             });
     },
 });
 
-export default basketAPISlice.reducer;
+export  const basketAPIReducer = basketAPISlice.reducer;
 

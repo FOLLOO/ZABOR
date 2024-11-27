@@ -9,6 +9,13 @@
     font-size: var(--text-base );
     border: 1px solid var(--accent-foreground);
     transition: all 0.2s ease-in-out;
+    max-width: 1200px;
+
+    /*Не поддерживается на некоторых версиях*/
+    /*https://caniuse.com/?search=field-sizing*/
+    field-sizing: content;
+
+    white-space: revert;
 }
 
 .input:focus-visible{
@@ -20,5 +27,11 @@
 }
 .input::placeholder{
     color: #BEBEBE;
+}
+
+@media (max-width: 1080px) {
+    .input{
+        max-width: 800px;
+    }
 }
 

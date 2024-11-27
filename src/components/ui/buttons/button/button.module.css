@@ -39,8 +39,10 @@
     outline-offset: 2px;
 }
 
+
 .ghost:hover{
     color: var(--accent); /* text-accent-foreground */
+    background: var(--b-ghostHover-color);
 }
 
 
