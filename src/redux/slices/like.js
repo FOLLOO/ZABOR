@@ -10,6 +10,24 @@ export const getNotifications = createAsyncThunk('user/getNotifications', async 
     }
 });
 
+export const postLikePublication = createAsyncThunk('publication/likePublication', async (data) => {
+    try {
+        const response = await axios.post('/publication/likePublication', data);
+        return response.data; // Возвращаем данные из ответа
+    } catch (error) {
+        throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+    }
+});
+
+export const postToFavorite = createAsyncThunk('publication/addToFavorites', async (data) => {
+    try {
+        const response = await axios.post('/publication/addToFavorites', data);
+        return response.data; // Возвращаем данные из ответа
+    } catch (error) {
+        throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+    }
+})
+
 
 export const toggleNoti = createAsyncThunk('user/toggleNotifications', async (data) => {
     try {

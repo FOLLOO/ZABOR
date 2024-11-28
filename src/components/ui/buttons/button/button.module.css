@@ -20,6 +20,10 @@
     cursor: pointer;
     user-select: none;
 }
+.text{
+    display: block;
+    width: fit-content;
+}
 .button:disabled{
     cursor: not-allowed;
 }

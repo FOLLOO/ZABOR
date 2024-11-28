@@ -31,6 +31,7 @@ import {getPost, getSamePost} from '../../../redux/slices/post'
 import {IMAGE_URL} from '../../../utils'
 import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
 import Textarea from "../../../components/ui/input/textarea/Textarea";
+import {postLikePublication, postToFavorite} from "../../../redux/slices/like";
 
 function Post() {
     // const {user} = useAuth()
@@ -38,6 +39,9 @@ function Post() {
     const {OnePost, SamePosts} = useSelector(state => state.posts)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [liked, setLiked] = useState(false)
+    const [favorite, setFavorite] = useState(false)
 
     const [sharee, setSharee] = useState(false)
 
@@ -72,6 +76,31 @@ function Post() {
         }
     };
 
+    const likePublication = () => {
+        const data= {
+            publicationId: id,
+        }
+        try{
+            dispatch(postLikePublication(data))
+            setLiked(!liked)
+        }catch (e) {
+            console.log(e)
+        }
+    }
+
+    const addToFavorite = () => {
+        const data= {
+            publicationId: id,
+        }
+        try{
+            dispatch(postToFavorite(data))
+            setFavorite(!favorite)
+        }catch (e) {
+            console.log(e)
+        }
+    }
+
+
 
     useEffect(() => {
         if (OnePost.status === 'loaded' && OnePost.items.id === id) return;
@@ -90,41 +119,61 @@ function Post() {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]];
     }
+
     return (
         <div>
             <div className={styles.grid}>
                 <div className={styles.content}>
+                    <div className={styles.text}>
+                        <h2 className={`${global.xl3} ${global.bold}`}>{OnePost?.items.title || `Пост ${id}`}</h2>
+                    </div>
+
                     <div className={`${styles.text} ${global.flex} ${global.f_a_center}`}>
                         <img src={`${IMAGE_URL}${OnePost?.items.coverUrl}`} className={styles.image} alt={'temp'}/>
                     </div>
 
+                    <div className={`${styles.actionButtons} ${global.flex}`}>
+                            {/*<TransprantButton img={like} title={'Нравится'} click={() => likePublication()}/>*/}
+                            <Button img={like} variant={'ghost'} onClick={() => likePublication()}>
+                                Лайк
+                            </Button>
+                            <Button img={bookmark} variant={'ghost'} click={() => addToFavorite()}>
+                                Избранное
+                            </Button>
 
-                    <div className={styles.text}>
-                        <div className={`${styles.actionButtons} ${global.flex}`}>
-                            <div className={`${global.flex} ${global.f_a_center}`}>
-                                <TransprantButton img={like} title={'Нравится'}/>
-                                <TransprantButton img={bookmark} title={'Избранное'}/>
-                                <a href={'#comments'} className={`${global.w100} ${global.flex} ${global.f_center}`}>
-                                    <TransprantButton img={comment} title={'Комментарии'}/>
-                                </a>
-                            </div>
-                            <div className={global.flex}>
-                                <TransprantButton img={report} click={(e) => toggleOverlay(e)}
-                                                  title={'Обратиться в поддержку'}/>
-                                <TransprantButton img={share} click={() => setSharee(!sharee)} title={'Поделиться'}/>
-                            </div>
+                            {/*<TransprantButton img={bookmark} title={'Избранное'} click={() => addToFavorite()}/>*/}
+                            <a href={'#comments'} className={`${global.flex} ${global.f_center}`}>
+                                {/*<TransprantButton img={comment} title={'Комментарии'}/>*/}
+                                <Button img={comment} variant={'ghost'}>
+                                    Комментарии
+                                </Button>
+                            </a>
+                        <div className={global.flex}>
+                            <Button img={report} variant={'ghost'} click={(e) => toggleOverlay(e)}>
+                                Пожаловаться
+                            </Button>
+                            <Button img={share} variant={'ghost'} click={() => setSharee(!sharee)}>
+                                Поделиться
+                            </Button>
+                            {/*<TransprantButton img={report} click={(e) => toggleOverlay(e)}*/}
+                            {/*                  title={'Обратиться в поддержку'}/>*/}
+                            {/*<TransprantButton img={share} click={() => setSharee(!sharee)} title={'Поделиться'}/>*/}
                         </div>
                     </div>
 
-                    <div className={`${styles.profile} ${styles.text}`}>
-                        <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname}
-                                         img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`}
-                                         id={OnePost?.items.user?.id}
-                        />
-                        <Button variant={'color'} className={global.f_center}>
-                            Подписаться
-                        </Button>
+                    <div className={styles.text}>
+                        <div className={`${styles.profile} ${styles.text}`}>
+                            <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname}
+                                             img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`}
+                                             id={OnePost?.items.user?.id}
+                            />
+                            <Button variant={'color'} className={global.f_center}>
+                                Подписаться
+                            </Button>
+                        </div>
+
                     </div>
+
 
                     <div className={`${styles.text} ${styles.mb}`}>
                         <input type="checkbox" className={styles.input} id='desi'/>
@@ -135,7 +184,6 @@ function Post() {
                     </div>
 
                     <div className={styles.text}>
-                        <h2 className={`${global.xl3} ${global.bold}`}>{OnePost?.items.title || `Пост ${id}`}</h2>
                         {sharee ?
                             <div className={styles.sharee}>
                                 <ContextDrop>
@@ -174,24 +222,20 @@ function Post() {
                         <h1 className={`${global.xl2} ${global.bold}`}>Похожее</h1>
                         <div className={styles.afterpost}>
                             {shuffledPosts && shuffledPosts.length > 0 ? (
-                                <div className={styles.postContainer}>
-                                    {shuffledPosts.slice(0, 6).map((post) => (
-                                        <div className={styles.post} key={post.id}> {/* Переносим ключ сюда */}
-                                            <Link to={`/publication/${post.id}`}>
-                                                <CardLittle
-                                                    data={post}
-                                                    blur
-                                                    img={post.coverUrl}
-                                                    title={post.title}
-                                                    price={post.price}
-                                                    user_id={post.userId}
-                                                    time={post.createdAt}
-                                                    views={post.views_count + 1}
-                                                />
-                                            </Link>
-                                        </div>
-                                    ))}
-                                </div>
+                                shuffledPosts.slice(0, 6).map((post) => (
+                                    <Link to={`/publication/${post.id}`}>
+                                        <CardLittle
+                                            data={post}
+                                            blur
+                                            img={post.coverUrl}
+                                            title={post.title}
+                                            price={post.price}
+                                            user_id={post.userId}
+                                            time={post.createdAt}
+                                            views={post.views_count + 1}
+                                        />
+                                    </Link>
+                                ))
                             ) : null}
                         </div>
                     </div>

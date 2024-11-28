@@ -4,7 +4,7 @@
     /*font-size: 13pt;*/
     box-sizing: border-box;
     /*background: #FFFFFF;*/
-    border: 1px solid var(--t-c-description);
+    border: 1px solid var(--accent-foreground);
     border-radius: 30px;
     padding: 0.2rem 1rem;
 }

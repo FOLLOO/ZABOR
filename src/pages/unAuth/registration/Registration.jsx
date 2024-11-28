@@ -82,12 +82,12 @@ function Registration() {
                                 <InputText
                                     place={'Введите Email'} type={'email'} required autocomplete={"new-email"}
                                     // value={email ? email : null}
-                                    value={'new@mail.ru'}
+                                    value={email ? email : null}
                                     onChange={e => setEmail(e.target.value)}
                                 />
                                 <InputText place={'Введите Nickname'} type={'text'} autocomplete={"newNickname"}
                                            // value={nickname ? nickname : null}
-                                           value={'newNew'}
+                                           value={nickname ? nickname : null}
                                            required
                                            onChange={e => setNickname(e.target.value)}
                                 />

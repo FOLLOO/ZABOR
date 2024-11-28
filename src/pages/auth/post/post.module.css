@@ -55,12 +55,13 @@
 }
 
 .content{
+    padding-top: 3rem;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
 }
-
+/*   */
 .profile{
     display: flex;
     justify-content: space-between;
@@ -120,6 +121,7 @@
 .text{
     max-width: 1200px;
     width: 100%;
+
 }
 
 
@@ -168,7 +170,9 @@
     /*z-index: 99*/
 }
 .actionButtons{
+    width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .spanImage{
     /*height: 520px;*/
@@ -257,6 +261,9 @@
     .text{
         /*width: 100%;*/
     }
+    .textContent{
+        font-size: var(--text-lg);
+    }
     .grid{
         display: flex;
         padding: 0 7vw;
@@ -271,21 +278,9 @@
     }
 
     .afterpost {
-        overflow-x: auto; /* Горизонтальная прокрутка */
-        overflow-y: hidden; /* Скрытие вертикальной прокрутки */
-        width: 100%; /* 100% ширины родителя */
-        max-width: 800px; /* Максимальная ширина 100% viewport */
-        display: flex; /* Flexbox для выравнивания содержимого */
-    }
-
-    .postContainer {
-        display: flex; /* Внутренний контейнер для детей - горизонтальный слайдер */
-        flex-wrap: nowrap; /* Не переносить дочерние элементы на новую строку */
-        gap: 1rem; /* Отступы между элементами */
-    }
-
-    .post {
-        flex: 0 0 auto; /* Чтобы фиксировать ширину для каждого элемента */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
     }
 
     .recomends{
