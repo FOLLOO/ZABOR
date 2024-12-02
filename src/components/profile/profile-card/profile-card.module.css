@@ -58,9 +58,8 @@
     transition: all 250ms ease;
 }
 
-img:hover{
+.userPreview img:hover{
     transform: scale(1.1);
-
 }
 
 .content{

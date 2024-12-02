@@ -1,15 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Link, useNavigate, useParams} from 'react-router-dom'
+import { useNavigate, useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 //styles
 import styles from './userPosts.module.css'
 import global from '../../../../global.module.css'
 //coponents
-import GreenButton from '../../../ui/buttons/green-button/GreenButton'
 import LittleTag from '../../../ui/input/little-tag/LittleTag'
-import AfterBlock from "../../../after-overlay-block/AfterBlock";
-import SelectPost from "../../../post/post-playlist/select-postORplaylist/SelectPost";
-import WhiteButton from "../../../ui/buttons/white-button/WhiteButton";
 import Button from "../../../ui/buttons/button/Button";
 import CardLittle from "../../../post/post-cards/card-little/CardLittle";
 import NothingYet from "../../../../pages/nothing/nothing-yet/NothingYet";
@@ -55,36 +51,7 @@ function UserPosts({data = []}) {
         setOverlay(!overlay)
     }
 
-    const addPlaylist = (value, isChecked) => {
-        // console.log(value, isChecked)
-        if (isChecked) {
-            if (!playlist.includes(value)) {
-                setPlaylist(prevPlaylist => [...prevPlaylist, value])
-                // console.log('Added to playlist:', value)
-            }
-        } else {
-            setPlaylist(prevPlaylist => prevPlaylist.filter(item => item !== value))
-        }
-    }
-    const addToPlaylistVideo = () => {
-        if (playlist.length <= 0) {
-            alert('Выберете плейлист')
-        }
-        const HASH = window.location.hash.replace('#', '')
-        for (let i = 0; i < playlist.length; i++) {
-            try {
-                const data = {
-                    publicationId: HASH,
-                    folderOfPublicationId: playlist[i]
-                }
-                dispatch(putPublicationToFolder(data))
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        window.location.hash = ''
-        Over()
-    }
+
 
     //может нормально как userFolders сделать?
     const getTags = () => {
@@ -167,7 +134,6 @@ function UserPosts({data = []}) {
                     {sortData.length > 0 ?
                         <div className={styles.grid}>
                             {sortData.map((message =>
-                                    <Link to={`/publication/${message.id}`}>
                                         <CardLittle
                                             data={message}
                                             id={message?.id}
@@ -182,7 +148,6 @@ function UserPosts({data = []}) {
                                             description={message?.description.replace(/<[^>]*>?/gm, '')}
                                             price={message?.price ? message?.price : 'Бесплатно'}
                                             image/>
-                                    </Link>
                             ))}
                         </div>
                         :
@@ -200,27 +165,6 @@ function UserPosts({data = []}) {
 
     return (
         <div className={styles.margin}>
-            {plstOpen ?
-                <div className={styles.addToPalylist}>
-                    <AfterBlock>
-                        <h2>Выберете плейлист</h2>
-                        <div className={styles.addPostsCarda}>
-                            {userFolder?.items.map((item) => (
-                                <SelectPost title={item?.name}
-                                            onChange={(event) => addPlaylist(item?.id, event.target.checked)}
-                                            id={item?.id}
-                                            img={item?.coverUrl}
-                                    // img={temp}
-                                            description={item?.description}/>
-                            ))}
-                        </div>
-                        <div className={`${global.flex} ${styles.gap}`}>
-                            <WhiteButton text={'Отмена'} click={() => Over()}/>
-                            <GreenButton text={'Сохранить'} click={() => addToPlaylistVideo()}/>
-                        </div>
-                    </AfterBlock>
-                </div>
-                : null}
             {data ? UserPosts() : NothingYet() }
         </div>
     )

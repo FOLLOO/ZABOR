@@ -4,14 +4,12 @@ import styles from './select-post.module.css'
 import global from '../../../../global.module.css'
 import { IMAGE_URL } from '../../../../utils'
 
-function SelectPost ({ title, img, description, onChange, id }) {
-  const [checked, setChecked] = useState(false)
+function SelectPost ({ title, img, description, onChange, check = false, id }) {
+  const [checked, setChecked] = useState(check)
 
   const handleToggle = () => {
     setChecked(!checked);
-    // console.log(checked, id)
   };
-  // console.log(checked, id)
 
   return (
     <label htmlFor={id} className={`${styles.main} ${checked ? styles.checked : styles.unchecked}`}   >

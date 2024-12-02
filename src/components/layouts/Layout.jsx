@@ -26,7 +26,7 @@ import Header from "../layout/header/Header";
 import Footer from "../layout/footer/Footer";
 import Button from "../ui/buttons/button/Button";
 import global from "../../global.module.css";
-import {toggleOverlay} from "../../utils";
+import {handleDialogClick, toggleOverlay} from "../../utils";
 
 
 /**
@@ -40,6 +40,7 @@ const Layout = ({type}) => {
     //todo: исправить overlay
     const {overlay, setOverlay} = useContext(OverlayContext)
     const navigate = useNavigate()
+
 
 
     /**
@@ -228,14 +229,14 @@ const Layout = ({type}) => {
     return (
         <div>
             {renderSwitch(type)}
-            <dialog id={'addToBasket'} className={styles.dialog} onClick={() => toggleOverlay('addToBasket')}>
+            <dialog id={'addToBasket'} className={styles.dialog} onClick={(e) => handleDialogClick(e, 'addToBasket')} >
                 <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}>
                     <div className={styles.support}>
                         <h1 className={global.xl3}>Добавлено в корзину!</h1>
                         <p className={global.d3}>Удалить пост можно будет в корзине</p>
                     </div>
                     <div className={`${global.flex} ${global.f_dir_column}`} style={{gap: '1rem'}}>
-                        <Button variant={'outlet'}
+                        <Button variant={'outlet'} click={() => toggleOverlay('addToBasket')}
                                 className={`${global.w100} ${global.f_center}`}>
                             Продолжить покупки
                         </Button>

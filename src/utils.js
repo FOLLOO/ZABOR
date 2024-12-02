@@ -2,14 +2,17 @@
 // export const IMAGE_URL = 'http://localhost:5000'
 
 // export const IMAGE_URL = 'http://192.168.0.101:5000'
-export const IMAGE_URL = 'http://192.168.0.106:5000'
+export const IMAGE_URL = 'http://192.168.0.109:5000'
 
 export const toggleOverlay = (id) => {
     const dialog = document.getElementById(id)
-    if(!dialog){
-        console.log('Error with dialog id ', id)
-    }else{
-        const isOpen = dialog.open;
-        isOpen ?  dialog.close() : dialog.showModal()
-    }
+    const isOpen = dialog.open;
+    return isOpen ? dialog.close() : dialog.showModal()
 }
+
+export const handleDialogClick = (event, id) => {
+    // Проверяем, если клик произошел на backdrop
+    if (event.target.tagName === 'DIALOG') {
+        toggleOverlay(id);
+    }
+};

@@ -1,3 +1,6 @@
+.card{
+    position: relative;
+}
 .main{
     width: 100%;
     max-width: 19rem;
@@ -51,6 +54,16 @@
 .green{
     composes: button;
     background-color: #4DDC52;
+}
+
+.editableButton{
+    transform: rotate(-90deg);
+}
+.editContext{
+    position: absolute;
+    right: 0;
+    z-index: 3;
+    width: fit-content;
 }
 
 .cardImage{

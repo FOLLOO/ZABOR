@@ -1,14 +1,12 @@
 //library
-import React, { useEffect, useState} from "react";
-import {Outlet, useParams} from 'react-router-dom';
+import React, {useEffect, useState} from "react";
+import {Outlet, useNavigate, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 
 //css
 import styles from "../profile-page/profile.module.css";
 import global from "../../../../global.module.css";
 import dialog from '../../../auth/profile/profile-page/profile.module.css'
-
-
 
 
 //components
@@ -18,14 +16,15 @@ import Tab from "../../../../components/ui/tab/Tab";
 
 //project functions
 import {useAuth} from "../../../../provider/AuthProvider";
-import {IMAGE_URL} from "../../../../utils";
+import {handleDialogClick, IMAGE_URL, toggleOverlay} from "../../../../utils";
 import {getUserData, postUserAvatar, postUserCover} from "../../../../redux/slices/user";
 
 //img
 import edit from "../../../../asserts/icons/edit.svg";
 import {postSubscribe} from "../../../../redux/slices/sub";
 import SelectPost from "../../../../components/post/post-playlist/select-postORplaylist/SelectPost";
-import { putPublicationToFolder} from "../../../../redux/slices/folder";
+import {putPublicationToFolder} from "../../../../redux/slices/folder";
+import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 
 
 export function ProfileLayout() {
@@ -37,13 +36,14 @@ export function ProfileLayout() {
     const [fileURL, setFileURL] = useState(null)
     const [publications, setPublications] = useState([])
 
-
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
+    const {userFolder} = useSelector(state => state.folder)
 
     const formData = new FormData()
 
-    function isOpen(param){
+    function isOpen(param) {
         return param.open
     }
 
@@ -52,15 +52,15 @@ export function ProfileLayout() {
      * @constructor
      *
      */
-     const setImageOver = () => {
-         const dialog = document.getElementById('setImage_dialog')
-         isOpen(dialog) ?  dialog.close() : dialog.showModal()
-     }
+    const setImageOver = () => {
+        const dialog = document.getElementById('setImage_dialog')
+        isOpen(dialog) ? dialog.close() : dialog.showModal()
+    }
 
-     const setPublicationsOver = () => {
-         const dialog = document.getElementById('add-publication-to-playlist')
-         isOpen(dialog) ?  dialog.close() : dialog.showModal()
-     }
+    const setPublicationsOver = () => {
+        const dialog = document.getElementById('add-publication-to-playlist')
+        isOpen(dialog) ? dialog.close() : dialog.showModal()
+    }
 
     const addPublicationToState = (value, isChecked) => {
         // console.log(value, isChecked)
@@ -75,7 +75,7 @@ export function ProfileLayout() {
     }
 
     const addToPlaylistPblication = () => {
-        if(!playlistID){
+        if (!playlistID) {
             alert('Ошибка исполнения. Попробуйте позже')
             console.log('Нет playlistID', playlistID)
         }
@@ -185,8 +185,6 @@ export function ProfileLayout() {
         }
     }
 
-
-
     /**
      * Этот код предназначен для подписки!
      * @constructor
@@ -213,28 +211,29 @@ export function ProfileLayout() {
     }
 
     const getUser = () => {
-            try {
-                dispatch(getUserData(id))
-            } catch (err) {
-                console.log(err)
-            }
+        try {
+            dispatch(getUserData(id))
+        } catch (err) {
+            console.log(err)
         }
+    }
 
     useEffect(() => {
         // if (userData.items.id === Number(id)) return;
-        if (userData.status === 'loaded' && user.id === id)return;
+        if (userData.status === 'loaded' && user.id === id) return;
         getUser()
     }, [])
 
-        //Данные для /Tabs
+    //Данные для /Tabs
     const tabContent = [
-            { title: 'Публикации', url: '.'},
-            { title: 'Плейлисты',  url: './playlists'},
-            { title: 'Автор',  url: './about'},
-        ]
+        {title: 'Публикации', url: '.'},
+        {title: 'Плейлисты', url: './playlists'},
+        {title: 'Автор', url: './about'},
+    ]
 
     return (
         <div className={styles.main}>
+
             <div className={styles.prewieImage}>
                 {userData?.items.coverUrl ?
                     <img src={`${IMAGE_URL}${userData?.items.coverUrl}`} alt={'some'} title={'Превью пользователя'}/>
@@ -243,32 +242,32 @@ export function ProfileLayout() {
                 }
             </div>
 
-            <dialog  id={'setImage_dialog'} className={styles.dialog} onClick={() => setImageOver()}>
-                <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`} 
-                        title={'Форма добавления изображение для ava'}>
+            <dialog id={'setImage_dialog'} className={styles.dialog} onClick={() => setImageOver()}>
+                <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}
+                     title={'Форма добавления изображение для ava'}>
                     <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
                         <input type={'file'} id={'input_file'} style={{display: 'none'}} onChange={fileChange}/>
                         <label htmlFor={'input_file'}>
-                          <div className={styles.support}>
-                              <h1 className={global.t3}>{fileURL ? 'Изменить изображение' : 'Импортировать новый файл'}</h1>
-                              <p className={global.d3}>Допустимые форматы: .jpeg .jpg .png</p>
-                          </div>
+                            <div className={styles.support}>
+                                <h1 className={global.t3}>{fileURL ? 'Изменить изображение' : 'Импортировать новый файл'}</h1>
+                                <p className={global.d3}>Допустимые форматы: .jpeg .jpg .png</p>
+                            </div>
                         </label>
                     </form>
                     {fileURL ?
                         <img src={fileURL} alt={''} className={styles.editImage}/> : null}
                     <div className={`${global.flex}`} style={{gap: '1rem'}}>
                         <Button variant={'outlet'}
-                                className={`${global.w100} ${global.f_center}`} >
+                                className={`${global.w100} ${global.f_center}`}>
                             Отмена
                         </Button>
-                         <Button variant={'color'} type={'submit'}
-                                 className={`${global.w100} ${global.f_center}`}
-                                 form={'uploadImage'}
-                                 disabled={!fileURL}
-                                 onClick={() =>saveImage()}>
-                             Сохранить
-                         </Button>
+                        <Button variant={'color'} type={'submit'}
+                                className={`${global.w100} ${global.f_center}`}
+                                form={'uploadImage'}
+                                disabled={!fileURL}
+                                onClick={() => saveImage()}>
+                            Сохранить
+                        </Button>
                     </div>
                 </div>
             </dialog>
@@ -277,16 +276,18 @@ export function ProfileLayout() {
                 <div className={styles.content}>
                     <div className={styles.profile}>
                         <div className={styles.nickname}>
-                            <ProfileCircle img={userData.items?.avatarUrl ? `${IMAGE_URL}${userData?.items.avatarUrl}` : null}
-                                           size={150}
-                                           edit={user?.id === Number(id) ? true : null}
-                                           click={() => {
-                                               setImageOver()
-                                               localStorage.setItem('type', 'avatar')
-                                           }}/>
+                            <ProfileCircle
+                                img={userData.items?.avatarUrl ? `${IMAGE_URL}${userData?.items.avatarUrl}` : null}
+                                size={150}
+                                edit={user?.id === Number(id) ? true : null}
+                                click={() => {
+                                    setImageOver()
+                                    localStorage.setItem('type', 'avatar')
+                                }}/>
                             <div className={styles.subes}>
                                 {userData?.items?.user?.nickname ?
-                                    <h1 className={`${global.xl4} ${global.bold}`} title={'Псевдоним пользователя'}>{userData?.items?.user?.nickname}</h1>
+                                    <h1 className={`${global.xl4} ${global.bold}`}
+                                        title={'Псевдоним пользователя'}>{userData?.items?.user?.nickname}</h1>
                                     :
                                     <h2 className={global.skeleton}>NICKNAME</h2>
                                 }
@@ -307,7 +308,7 @@ export function ProfileLayout() {
                                         click={() => {
                                             setImageOver()
                                             localStorage.setItem('type', 'cover')
-                                }}> Изменить обложку </Button>
+                                        }}> Изменить обложку </Button>
                             </div>
                             :
                             <div className={styles.follow}>
@@ -317,14 +318,14 @@ export function ProfileLayout() {
                                 </Button>
                             </div>}
                     </div>
-                <Tab items={tabContent}/>
-                <Outlet/>
+                    <Tab items={tabContent}/>
+                    <Outlet/>
                 </div>
             </div>
-
-            <dialog id={'add-publication-to-playlist'} className={dialog.dialog}>
+            {/*todo: нужно сделать проверку на уже наличие в плейлисте поста  */}
+            <dialog id={'add-publication-to-playlist'} className={dialog.dialog} onClick={(e) => handleDialogClick(e, 'add-publication-to-playlist')}>
                 <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
-                    <h3 className={global.bold}>Выберете публикацию</h3>
+                    <h3 className={global.bold}> Выберете публикацию</h3>
                     <div className={dialog.addPostsCarda}>
                         {userData?.items?.publications?.map((item) => (
                             <SelectPost title={item?.title}
@@ -337,7 +338,8 @@ export function ProfileLayout() {
                     <div className={`${global.flex} ${dialog.gap}`}>
                         <Button variant={'outlet'}
                                 className={`${global.w100} ${global.f_center}`}
-                                click={() => setPublicationsOver()}>
+                                // click={() => setPublicationsOver()}>
+                                click={() => toggleOverlay('add-publication-to-playlist')}>
                             Отмена
                         </Button>
                         <Button variant={'color'}
@@ -346,8 +348,42 @@ export function ProfileLayout() {
                             Сохранить
                         </Button>
                     </div>
-                    </div>
+                </div>
+            </dialog>
+
+
+            <dialog id={'add-this-to-playlist'} className={dialog.dialog}
+                    onClick={(e) => handleDialogClick(e, 'add-this-to-playlist')}>
+                <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
+                    <h3 className={global.bold}>Выберете плейлист</h3>
+                    {userFolder?.items.length !== 0 ?
+                        <>
+                            <div className={dialog.addPostsCarda}>
+                                {userFolder?.items?.map((item) => (
+                                    <SelectPost title={item?.name}
+                                                onChange={(event) => addPublicationToState(item?.id, event.target.checked)}
+                                                id={item?.id}
+                                                img={item?.latest_publication[0].publication.coverUrl}
+                                                description={item?.description}/>
+                                ))}
+                            </div>
+                            <div className={`${global.flex} ${dialog.gap}`}>
+                                <Button variant={'outlet'}
+                                        className={`${global.w100} ${global.f_center}`}
+                                        click={() => toggleOverlay('add-this-to-playlist')}>
+                                    Отмена
+                                </Button>
+                                <Button variant={'color'}
+                                        className={`${global.w100} ${global.f_center}`}
+                                        click={() => addToPlaylistPblication()}>
+                                    Сохранить
+                                </Button>
+                            </div>
+                        </>
+                        : <NothingYet isMe={true} buttonText={'Создать плейлист'}
+                                      onButtonClick={() => navigate('./playlists/create')}/>}
+                </div>
             </dialog>
         </div>
-);
+    );
 }

@@ -68,7 +68,7 @@ function AboutMe() {
                     <div className={styles.userSocialLinks}>
                         {userData?.items?.socialMedia?.map((item) => (
                             item.text === '' ? null :
-                                <RoundButton text={item.socialMedium.name}
+                                <RoundButton text={item.socialMedium.name} link={item.text}
                                              img={setImageToButton(item.socialMedium.name)} variant={'black'}/>
                         ))}
                     </div>

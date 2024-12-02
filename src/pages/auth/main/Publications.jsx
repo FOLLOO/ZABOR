@@ -6,7 +6,7 @@ import CardLittle from '../../../components/post/post-cards/card-little/CardLitt
 import {useDispatch} from 'react-redux'
 import {fetchPosts} from '../../../redux/slices/post'
 import {fetchTags} from '../../../redux/slices/tag'
-import {Link, useParams} from 'react-router-dom'
+import { useParams} from 'react-router-dom'
 import LittleTag from '../../../components/ui/input/little-tag/LittleTag'
 import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {useAuth} from "../../../provider/AuthProvider";
@@ -87,7 +87,6 @@ export default function Publications() {
             {data.length > 0 ?
                 <div className={styles.grid}>
                     {data.map(posts => (
-                        <Link to={`/publication/${posts.id}`}>
                             <CardLittle
                                 data={posts}
                                 avatar={posts.user?.files[0]?.url}
@@ -101,7 +100,6 @@ export default function Publications() {
                                 time={posts.createdAt}
                                 views={posts.views_count + 1}
                             />
-                        </Link>
                     ))}
                 </div>
                 :

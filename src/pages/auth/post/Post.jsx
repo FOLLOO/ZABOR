@@ -21,14 +21,13 @@ import ProfileNickname from '../../../components/profile/profile-nickname/Profil
 import CardLittle from '../../../components/post/post-cards/card-little/CardLittle'
 import Comment from '../../../components/comments/comment/Comment'
 import CommnetForm from '../../../components/comments/comments-form/CommnetForm'
-import TransprantButton from '../../../components/ui/buttons/transprant-button/TransprantButton'
 import ContextDrop from '../../../components/context-drop/ContextDrop'
 import Button from "../../../components/ui/buttons/button/Button";
 
 //utils
 // import {useAuth} from '../../../provider/AuthProvider'
 import {getPost, getSamePost} from '../../../redux/slices/post'
-import {IMAGE_URL} from '../../../utils'
+import {handleDialogClick, IMAGE_URL, toggleOverlay} from '../../../utils'
 import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
 import Textarea from "../../../components/ui/input/textarea/Textarea";
 import {postLikePublication, postToFavorite} from "../../../redux/slices/like";
@@ -62,21 +61,8 @@ function Post() {
         }
     }
 
-    const toggleOverlay = () => {
-        const dialog = document.getElementById('support')
-        const isOpen = dialog.open;
-        console.log(isOpen)
-        return isOpen ? dialog.close() : dialog.showModal()
-    }
-
-    const handleDialogClick = (event) => {
-        // Проверяем, если клик произошел на backdrop
-        if (event.target.tagName === 'DIALOG') {
-            toggleOverlay();
-        }
-    };
-
-    const likePublication = () => {
+    const likePublication = (e) => {
+        e.preventDefault();
         const data= {
             publicationId: id,
         }
@@ -134,7 +120,7 @@ function Post() {
 
                     <div className={`${styles.actionButtons} ${global.flex}`}>
                             {/*<TransprantButton img={like} title={'Нравится'} click={() => likePublication()}/>*/}
-                            <Button img={like} variant={'ghost'} onClick={() => likePublication()}>
+                            <Button img={like} variant={'ghost'} click={(e) => likePublication(e)}>
                                 Лайк
                             </Button>
                             <Button img={bookmark} variant={'ghost'} click={() => addToFavorite()}>
@@ -149,7 +135,7 @@ function Post() {
                                 </Button>
                             </a>
                         <div className={global.flex}>
-                            <Button img={report} variant={'ghost'} click={(e) => toggleOverlay(e)}>
+                            <Button img={report} variant={'ghost'} click={() => toggleOverlay('support')}>
                                 Пожаловаться
                             </Button>
                             <Button img={share} variant={'ghost'} click={() => setSharee(!sharee)}>
@@ -223,7 +209,7 @@ function Post() {
                         <div className={styles.afterpost}>
                             {shuffledPosts && shuffledPosts.length > 0 ? (
                                 shuffledPosts.slice(0, 6).map((post) => (
-                                    <Link to={`/publication/${post.id}`}>
+                                    // <Link to={`/publication/${post.id}`}>
                                         <CardLittle
                                             data={post}
                                             blur
@@ -234,7 +220,7 @@ function Post() {
                                             time={post.createdAt}
                                             views={post.views_count + 1}
                                         />
-                                    </Link>
+                                    // </Link>
                                 ))
                             ) : null}
                         </div>
@@ -269,7 +255,7 @@ function Post() {
                 </div>
             </div>
 
-            <dialog id={'support'} className={dialog.dialog} onClick={handleDialogClick}>
+            <dialog id={'support'} className={dialog.dialog} onClick={(e) => handleDialogClick(e, 'support')}>
                 <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
                     {/*<div className={dialog.support}>*/}
                     <h1 className={global.xl3}>О чем желаете сообщить?</h1>
@@ -278,7 +264,7 @@ function Post() {
                     <InputDporDown data={[{id: 1, title: 'Куда', value: 'м'}, {id: 2, title: 'Сюда', value: 'ж'},]}/>
                     <Textarea rows={5} place={'В чем проблема?'}/>
                     <div className={`${global.flex} ${global.f_dir_column}`} style={{gap: '1rem'}}>
-                        <Button variant={'outlet'} click={() => toggleOverlay()}
+                        <Button variant={'outlet'} click={() => toggleOverlay('support')}
                                 className={`${global.w100} ${global.f_center}`}>
                             Отменить
                         </Button>
