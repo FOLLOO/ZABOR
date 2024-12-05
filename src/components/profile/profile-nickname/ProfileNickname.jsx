@@ -45,7 +45,7 @@ function ProfileNickname ({id, nickname, date, view, type, desc = false, img,  s
           {nickname ? nickname : 'Anonymos'}
         </Link>
         <div className={global.d3}>
-          {date ? date : 'Вчера '} | {view ? view : ' 10К'} просмотров
+          {date ? new Date(date).toLocaleString('ru-RU',{weekday: 'long', day: 'numeric', month: 'numeric', year: 'numeric'}) : 'Вчера '} | {view ? view : ' 10К'} пр осмотров
         </div>
       </div>
     )

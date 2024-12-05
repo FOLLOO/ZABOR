@@ -34,7 +34,9 @@ export function ProfileLayout() {
 
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
+
     const [publications, setPublications] = useState([])
+
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -43,27 +45,7 @@ export function ProfileLayout() {
 
     const formData = new FormData()
 
-    function isOpen(param) {
-        return param.open
-    }
-
-    /**
-     * Меняет состояние overlay
-     * @constructor
-     *
-     */
-    const setImageOver = () => {
-        const dialog = document.getElementById('setImage_dialog')
-        isOpen(dialog) ? dialog.close() : dialog.showModal()
-    }
-
-    const setPublicationsOver = () => {
-        const dialog = document.getElementById('add-publication-to-playlist')
-        isOpen(dialog) ? dialog.close() : dialog.showModal()
-    }
-
     const addPublicationToState = (value, isChecked) => {
-        // console.log(value, isChecked)
         if (isChecked) {
             if (!publications.includes(value)) {
                 setPublications(prevPlaylist => [...prevPlaylist, value])
@@ -74,7 +56,7 @@ export function ProfileLayout() {
         }
     }
 
-    const addToPlaylistPblication = () => {
+    const addPublicationsToPlaylist = () => {
         if (!playlistID) {
             alert('Ошибка исполнения. Попробуйте позже')
             console.log('Нет playlistID', playlistID)
@@ -93,8 +75,35 @@ export function ProfileLayout() {
                 console.log(e)
             }
         }
-        setPublicationsOver()
+        toggleOverlay('add-publication-to-playlist')
+        // setPublicationsOver()
         window.location.reload()
+    }
+
+    const addPublicationOnPlaylist = () => {
+        let id = window.localStorage.getItem('publictionToAddOn')
+
+        if(!id){
+            alert('Ошибка исполнения. Попробуйте позже')
+            console.log('Нет publicationID', id)
+        }
+        if (publications.length <= 0) {
+            alert('Выберете посты')
+        }
+        for (let i = 0; i < publications.length; i++) {
+            try {
+                const data = {
+                    publicationId: id,
+                    folderOfPublicationId: Number(publications[i])
+                }
+                dispatch(putPublicationToFolder(data))
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        toggleOverlay('add-this-to-playlist')
+        window.location.reload()
+
     }
 
     /**
@@ -109,7 +118,7 @@ export function ProfileLayout() {
             formData.append('avatar', file)
             try {
                 dispatch(postUserAvatar(formData))
-                setImageOver()
+                toggleOverlay('setImage_dialog')
             } catch (err) {
                 console.log(err)
             }
@@ -118,7 +127,7 @@ export function ProfileLayout() {
             formData.append('cover', file)
             try {
                 dispatch(postUserCover(formData))
-                setImageOver()
+                toggleOverlay('setImage_dialog')
             } catch (err) {
                 console.log(err)
             }
@@ -242,7 +251,7 @@ export function ProfileLayout() {
                 }
             </div>
 
-            <dialog id={'setImage_dialog'} className={styles.dialog} onClick={() => setImageOver()}>
+            <dialog id={'setImage_dialog'} className={styles.dialog} onClick={() => toggleOverlay('setImage_dialog')}>
                 <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}
                      title={'Форма добавления изображение для ava'}>
                     <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
@@ -281,7 +290,7 @@ export function ProfileLayout() {
                                 size={150}
                                 edit={user?.id === Number(id) ? true : null}
                                 click={() => {
-                                    setImageOver()
+                                    toggleOverlay('setImage_dialog')
                                     localStorage.setItem('type', 'avatar')
                                 }}/>
                             <div className={styles.subes}>
@@ -306,7 +315,7 @@ export function ProfileLayout() {
                             <div className={styles.edit}>
                                 <Button img={edit} img_size={'h-5'} variant={'ghost'}
                                         click={() => {
-                                            setImageOver()
+                                            toggleOverlay('setImage_dialog')
                                             localStorage.setItem('type', 'cover')
                                         }}> Изменить обложку </Button>
                             </div>
@@ -344,7 +353,7 @@ export function ProfileLayout() {
                         </Button>
                         <Button variant={'color'}
                                 className={`${global.w100} ${global.f_center}`}
-                                click={() => addToPlaylistPblication()}>
+                                click={() => addPublicationsToPlaylist()}>
                             Сохранить
                         </Button>
                     </div>
@@ -363,7 +372,7 @@ export function ProfileLayout() {
                                     <SelectPost title={item?.name}
                                                 onChange={(event) => addPublicationToState(item?.id, event.target.checked)}
                                                 id={item?.id}
-                                                img={item?.latest_publication[0].publication.coverUrl}
+                                                img={item?.latest_publication[0]?.publication?.coverUrl}
                                                 description={item?.description}/>
                                 ))}
                             </div>
@@ -375,7 +384,7 @@ export function ProfileLayout() {
                                 </Button>
                                 <Button variant={'color'}
                                         className={`${global.w100} ${global.f_center}`}
-                                        click={() => addToPlaylistPblication()}>
+                                        click={() => addPublicationOnPlaylist()}>
                                     Сохранить
                                 </Button>
                             </div>

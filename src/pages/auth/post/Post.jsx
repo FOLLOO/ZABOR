@@ -150,8 +150,8 @@ function Post() {
                     <div className={styles.text}>
                         <div className={`${styles.profile} ${styles.text}`}>
                             <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname}
-                                             img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`}
-                                             id={OnePost?.items.user?.id}
+                                             img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`} date={OnePost?.items.createdAt}
+                                             id={OnePost?.items.user?.id} view={OnePost?.items.views_count}
                             />
                             <Button variant={'color'} className={global.f_center}>
                                 Подписаться

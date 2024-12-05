@@ -27,6 +27,7 @@ import ContextGroup from "../../../context-drop/context-group/ContextGroup";
 import {deltePost} from "../../../../redux/slices/post";
 
 
+
 //todo: уменьшить количество парметров компонента
 function CardLittle({
 
@@ -71,6 +72,11 @@ function CardLittle({
                 alert('Ошибка исполнения, попробуйте позже');
             }
         }
+    }
+
+    const addEvent = () => {
+        window.localStorage.setItem('publictionToAddOn', data.id);
+        toggleOverlay('add-this-to-playlist')
     }
 
     return (
@@ -168,7 +174,7 @@ function CardLittle({
                         <ContextGroup noafter>
                             <div className={`${global.flex} ${global.f_dir_column}`}>
                                 <Button variant={'ghost'} img={playlist}
-                                        click={() => toggleOverlay('add-this-to-playlist')}>
+                                        click={() => addEvent(data.id)}>
                                     Добавить в плейлист
                                 </Button>
                                 <Button variant={'red-text'} img={deleteThis} img_size={'h-6'} className={global.w100}
