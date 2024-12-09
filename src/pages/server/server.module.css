@@ -1,0 +1,22 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 1rem;
+}
+.image{
+    border-radius: 100%;
+    overflow: hidden;
+    height: 300px;
+}
+.title{
+    font-weight: var(--tw-700);
+}
+.description{
+    font-size: var(--text-sm);
+    color: var(--t-c-description);
+    width: 50%;
+    text-align: center;
+}

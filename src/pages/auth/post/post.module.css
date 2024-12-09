@@ -241,6 +241,10 @@
 .mb{
     margin-bottom: 1rem;
 }
+.comments{
+    align-self: start;
+    margin-bottom: 10vh;
+}
 
 .input:checked + .description{
          height: 100%;
@@ -260,6 +264,9 @@
 @media (max-width: 1080px) {
     .text{
         /*width: 100%;*/
+    }
+    .comments{
+        max-width: 800px;
     }
     .textContent{
         font-size: var(--text-lg);

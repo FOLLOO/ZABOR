@@ -1,0 +1,5 @@
+.like:hover path{
+    fill: var(--red);
+    stroke: var(--red);
+    transition: all .2s ease-in-out;
+}

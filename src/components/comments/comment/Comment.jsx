@@ -3,20 +3,45 @@ import React, { useEffect, useRef, useState } from 'react'
 import styles from './comment.module.css'
 import global from '../../../global.module.css'
 import ProfileNickname from '../../profile/profile-nickname/ProfileNickname'
-import grayLike from '../../../asserts/icons/GrayLike.svg'
 import arrow_down from '../../../asserts/icons/arowMenu.svg'
 import trash from '../../../asserts/icons/contextMenu/trash red.svg'
-import TransprantButton from '../../ui/buttons/transprant-button/TransprantButton'
 import CommnetForm from '../comments-form/CommnetForm'
 import ContextDrop from '../../context-drop/ContextDrop'
+import Button from "../../ui/buttons/button/Button";
+import Like from "../../svgs/Like";
+import report from "../../../asserts/icons/update/alert-triangle.svg";
+import {toggleOverlay} from "../../../utils";
+import edit from "../../../asserts/icons/edit.svg";
+import {useDispatch} from "react-redux";
+import {deleteComment, likeComment} from "../../../redux/slices/comments";
+import {useAuth} from "../../../provider/AuthProvider";
 function Comment({ comment=[], replies=[] }) {
 
+    const {user} = useAuth()
   const [answ, setAnsw] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
   const [menu, setMenu] = useState(false)
+    const [liked, setLiked] = useState(false)
 
+    const dispatch = useDispatch()
   const ref = useRef(null);
 
+
+  const handleLikedComment = (id) => {
+      try{
+        dispatch(likeComment(id))
+      }catch(e){
+          console.log(e)
+      }
+  }
+
+  const handleDeleteComment = (id) => {
+      try{
+          dispatch(deleteComment(id))
+      }catch (e) {
+          console.log(e)
+      }
+  }
 
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target))
@@ -28,14 +53,13 @@ function Comment({ comment=[], replies=[] }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+
   return (
-    <>
-    { comment.length > 0 ?
     <div className={styles.pad}>
       <div className={`${styles.sender_information} ${global.flex}`}>
-        <ProfileNickname size={50} type={'default'} nickname={comment?.nickname} />
+        <ProfileNickname size={50} type={'default'} nickname={comment?.user?.nickname} />
         <div className={`${styles.time} ${global.d3}`}>
-          {comment?.time}
+          {comment?.createdAt}
         </div>
         <button onClick={() => setMenu(!menu)}>
           <div className={`${global.t4} ${styles.edit} `}>...</div>
@@ -44,9 +68,20 @@ function Comment({ comment=[], replies=[] }) {
       {menu ?
       <div className={styles.inlinemenu} ref={ref}>
         <ContextDrop>
-            <TransprantButton left text={'Пожаловаться'}/>
-            <TransprantButton left text={'Редактировать'}/>
-            <TransprantButton left text={'Удалить'} red img={trash}/>
+            <Button img={report} variant={'ghost'} click={() => toggleOverlay('support')}>
+                Пожаловаться
+            </Button>
+            {comment?.userId === user.id ?
+                <>
+                    <Button img={edit} img_size={'h-5'} variant={'ghost'}>
+                        Редактировать
+                    </Button>
+                    <Button img={trash} img_size={'h-5'} variant={'red-text'}
+                    click={() => handleDeleteComment(comment.id)}>
+                        Удалить
+                    </Button>
+                </>
+                : null }
         </ContextDrop>
       </div> : null }
 
@@ -56,25 +91,22 @@ function Comment({ comment=[], replies=[] }) {
         </div>
       </div>
       <div className={styles.action}>
-        <button className={styles.likes}>
+        <button className={styles.likes} onClick={() => handleLikedComment(comment.id)}>
           <div className={`${global.flex} ${global.d2} ${styles.flex}`}>
-            <img src={grayLike} alt={'like'} />
-            {comment?.likes}
+              <Like/>
+              {comment?.likes}
           </div>
         </button>
-        {answ ? null : <TransprantButton text={'Ответить'} click={() => setAnsw(!answ)} />}
+        {answ ? null : <Button variant={'ghost'}  click={() => setAnsw(!answ)} >Ответить</Button>  }
       </div>
       <div className={styles.answ}>
-        {answ ? <CommnetForm click={() => setAnsw(!answ)} /> : null}
+        {answ ? <CommnetForm click={() => setAnsw(!answ)} parrentID={comment.id} /> : null}
       </div>
       <div className={styles.openAnswers}>
         {replies && replies.length > 0 && (
-          <button className={styles.answ_btn} onClick={() => setShowReplies(!showReplies)}>
-            <div className={`${global.flex} ${global.text} ${styles.flex}`}>
-              <img src={arrow_down} alt={'like'} width={17} />
-              {showReplies ? 'Скрыть ответы' : 'Еще ответы'}
-            </div>
-          </button>
+            <Button img={arrow_down} click={() => setShowReplies(!showReplies)}>
+                {showReplies ? 'Скрыть ответы' : 'Еще ответы'}
+            </Button>
         )}
       </div>
 
@@ -86,8 +118,6 @@ function Comment({ comment=[], replies=[] }) {
         </div>
       )}
     </div>
-        : null}
-    </>
   );
 }
 

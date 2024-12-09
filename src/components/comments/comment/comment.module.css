@@ -7,7 +7,7 @@
 }
 
 .sender_information{
-    max-width: 500px;
+    /*max-width: 500px;*/
     gap: 60px;
     align-items: center;
     /*justify-content: space-between;*/
@@ -26,8 +26,12 @@
     /*text-indent: 0.5em;*/
 }
 .action{
+
     display: flex;
-    max-width: 500px;
+    /*justify-content: space-between;*/
+    gap: 20rem;
+    /*gap: 15rem;*/
+    /*max-width: 500px;*/
 }
 
 .flex{
@@ -42,21 +46,31 @@
 }
 
 .pad{
+    position: relative;
     width: 100%;
     box-sizing: border-box;
-    padding: 10px 20px ;
+    margin: 1rem 0;
+}
+.answ{
+    margin: .5rem 0;
+}
+.time{
+    min-width: 10rem;
 }
 
 .childAnswer{
-    margin-left: 7px;
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    margin-left: .5rem;
+    padding: .5rem;
+    /*border-left: 1px solid rgba(0, 0, 0, 0.2);*/
 
     background: rgba(0, 0, 0, 0.01);
 }
 
 .inlinemenu{
     z-index: 20;
-    left: 25%;
+    /*left: 25%;*/
+    top: 2rem;
+    right: 45%;
     display: inline-block;
     position: absolute;
     max-width: fit-content;

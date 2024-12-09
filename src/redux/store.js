@@ -7,6 +7,7 @@ import { userReducer } from './slices/user'
 import { notificationReducer } from './slices/notifications'
 import { subscribeReducer } from './slices/sub'
 import {basketAPIReducer} from "./slices/basketAPI";
+import {commentsReducer} from "./slices/comments";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     noti: notificationReducer,
     subscribes: subscribeReducer,
     cart: basketAPIReducer,
+    comments: commentsReducer,
   }
 });
 

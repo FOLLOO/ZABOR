@@ -105,8 +105,13 @@ function CardLittle({
                                     onClick={(e) => addToBasket(e, data?.id)}>
                                 <div
                                     className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
-                                    {inBasket ? null : <img src={basket} alt={'img'}/>}
-                                    <img src={inBasket ? added : plus} alt={'img'}/>
+                                    {inBasket ?
+                                        <img src={added} alt={'img'}/>
+                                        :
+                                        <>
+                                            <img src={basket} alt={'img'}/>
+                                            <img src={plus} alt={'img'}/>
+                                        </>}
                                 </div>
                             </button>}
                     </div>

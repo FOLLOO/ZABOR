@@ -12,6 +12,8 @@ import global from '../../../../global.module.css'
  * @param id
  * @param text_id
  * @param name
+ * @param disabled
+ * @param componentImage
  * @param form
  * @param className
  * @param title
@@ -25,7 +27,7 @@ import global from '../../../../global.module.css'
  * @constructor
  */
 export default function Button({
-                                   children, click, img, id, text_id, name,disabled,
+                                   children, click, img, id, text_id, name, disabled, componentImage,
                                    form, className, title, dataIndex, key,
                                    type, size = 'base', img_size = 'base', variant= 'default'
                                }) {
@@ -38,7 +40,8 @@ export default function Button({
                data-index={dataIndex}
                key={key}
                type={type} form={form} onClick={click}>
-           {img ? <img src={img} alt={'.'} className={`${global[img_size]}`}/> : null}
+           {img && componentImage ? img : img ?
+               <img src={img} alt={'.'} className={`${global[img_size]}`}/> : null}
            <span id={text_id} className={`${global[size]} ${global.medium} ${styles.text}`}
            > {children} </span>
        </button>

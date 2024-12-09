@@ -19,16 +19,25 @@
     gap: 10px;
 }
 
-/*@media (max-width: 1600px) {*/
-/*    .main{*/
-/*        width: 100%;*/
-/*        !*font-family: 'Lato', sans-serif;*!*/
-/*        !*font-size: 13pt;*!*/
-/*        box-sizing: border-box;*/
-/*        background: #FFFFFF;*/
-/*        border: 1px solid #838383;*/
-/*        border-radius: 30px;*/
-/*        padding: 3px 15px;*/
+.content{
+    position: absolute;
+}
 
-/*    }*/
-/*}*/
+.open{
+    display: block;
+    composes: content;
+    animation: sine 1s;
+}
+.close{
+    display: none;
+    animation: sine 1s;
+}
+
+@keyframes shine {
+    0% {
+        background-position: left -40px top 0;
+    }
+    100% {
+        background-position: right -40px top 0;
+    }
+}

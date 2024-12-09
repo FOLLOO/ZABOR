@@ -9,23 +9,38 @@ import { useDispatch } from 'react-redux'
 import { createComment } from '../../../redux/slices/comments'
 import Button from "../../ui/buttons/button/Button";
 
-function CommnetForm ({ click }) {
+function CommnetForm ({ click, main = false, parrentID }) {
 
   const { id } = useParams()
   const [value, setValue] = useState('')
+  const [err, setError] = useState('')
   const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log('Form submitted');
     if (id) {
-      const data = {
-        text: value,
-        publicationId: id,
-      };
+      const isEmpty = value.trim().length === 0;
+      if (isEmpty) return setError('Комментарий не может быть пустым');
+
+      let data;
+
+      if(parrentID){
+        data = {
+          text: value,
+          publicationId: id,
+          commentId: parrentID,
+        };
+      }else{
+        data = {
+          text: value,
+          publicationId: id,
+        };
+      }
+
       try {
         dispatch(createComment(data));
-        alert('Комментарий опубликован')
-        setValue('')
+        setValue(null)
+        // window.location.reload()
       } catch (e) {
         console.error('Error:', e);
       }
@@ -34,27 +49,30 @@ function CommnetForm ({ click }) {
 
   useEffect(() => {
     // console.log(value)
-  },[value])
+  },[value, err])
 
   return (
     <>
-    <form id={'HORVA'}
+    <form id={parrentID ? parrentID : 'main'}
       className={`${global.flex} ${global.f_dir_column} ${styles.hell}`} onSubmit={handleSubmit}>
       <div className={styles.input}>
         <Textarea type={'text'}
                   place={'Оставить комментарий'}
                   // rows={1}
+                  value={value}
                   req
                   onChange={(e) => setValue(e.target.value)}
                   back={false}/>
       </div>
+      <p className={styles.error}>{err}</p>
       <div className={styles.flex}>
+        {main ? null :
         <div className={styles.button}>
           <Button click={click}>Отмена</Button>
-        </div>
+        </div> }
         <div className={styles.button}>
           {/*<button type="submit" form={'HORVA'}>Отправить</button>*/}
-          <Button variant={'color'} type={'submit'} form={'HORVA'}>Отправить</Button>
+          <Button variant={'color'} type={'submit'} form={parrentID ? parrentID : 'main'}>Отправить</Button>
         </div>
       </div>
     </form>

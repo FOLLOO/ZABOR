@@ -9,12 +9,13 @@ import dialog from '../../auth/profile/profile-page/profile.module.css'
 import global from '../../../global.module.css'
 
 //img
-import bookmark from '../../../asserts/icons/update/bookmark.svg'
-import like from '../../../asserts/icons/update/heart.svg'
 import report from '../../../asserts/icons/update/alert-triangle.svg'
 import comment from '../../../asserts/icons/update/message-circle.svg'
 import share from '../../../asserts/icons/update/share-2.svg'
 // import video from '../../../asserts/icons/contextMenu/Видео.png'
+
+//img comp
+import Like from '../../../components/svgs/Like'
 
 //components
 import ProfileNickname from '../../../components/profile/profile-nickname/ProfileNickname'
@@ -31,11 +32,16 @@ import {handleDialogClick, IMAGE_URL, toggleOverlay} from '../../../utils'
 import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
 import Textarea from "../../../components/ui/input/textarea/Textarea";
 import {postLikePublication, postToFavorite} from "../../../redux/slices/like";
+import Bookmark from "../../../components/svgs/Bookmark";
+import {getComments} from "../../../redux/slices/comments";
+import ServerError from "../../server/ServerError";
 
 function Post() {
     // const {user} = useAuth()
     const {id} = useParams()
     const {OnePost, SamePosts} = useSelector(state => state.posts)
+    const {items, status} = useSelector(state => state.comments.publicationComment)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -57,6 +63,13 @@ function Post() {
         try {
             dispatch(getSamePost(id))
         } catch (e) {
+            console.log(e)
+        }
+    }
+    const pagetGetComments = () => {
+        try{
+            dispatch(getComments(id))
+        }catch (e) {
             console.log(e)
         }
     }
@@ -94,6 +107,25 @@ function Post() {
     }, [])
 
     useEffect(() => {
+        if (status === 'updated' || status === 'loading'){
+            pagetGetComments()
+        }else {
+            return;
+        }
+    }, [status === 'loading'|| status === 'updated'])
+
+
+
+    useEffect(() => {
+        // Если данные поступили и все необходимые свойства доступны
+        if (OnePost.status === 'loaded') {
+            setLiked(OnePost.items?.user?.isLiked || false);
+            setFavorite(OnePost.items?.user?.isFavorite || false);
+        }
+    }, [OnePost]); // Зависимость от OnePost
+
+
+    useEffect(() => {
         if (SamePosts.status === 'loaded' && OnePost.items.id === id) return;
         pageGetSamePost() // присылать похожие посты вместе с постом?
     }, []);
@@ -104,6 +136,11 @@ function Post() {
     for (let i = shuffledPosts.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]];
+    }
+
+    // Обработка ошибок
+    if (status === 'error') {
+        return <ServerError/>;
     }
 
     return (
@@ -120,10 +157,12 @@ function Post() {
 
                     <div className={`${styles.actionButtons} ${global.flex}`}>
                             {/*<TransprantButton img={like} title={'Нравится'} click={() => likePublication()}/>*/}
-                            <Button img={like} variant={'ghost'} click={(e) => likePublication(e)}>
-                                Лайк
+                            <Button img={<Like stroke={liked ? 'transparent' : 'var(--black)'} fill={liked ? 'var(--red)' : 'transparent'}/>} componentImage variant={'ghost'} click={(e) => likePublication(e)}>
+                                Нравится
                             </Button>
-                            <Button img={bookmark} variant={'ghost'} click={() => addToFavorite()}>
+                            <Button variant={'ghost'} click={() => addToFavorite()}
+                                    img={<Bookmark stroke={favorite ? 'transparent' : 'var(--black)'} fill={favorite ? 'var(--accent)' : 'transparent'}/>} componentImage
+                            >
                                 Избранное
                             </Button>
 
@@ -141,9 +180,6 @@ function Post() {
                             <Button img={share} variant={'ghost'} click={() => setSharee(!sharee)}>
                                 Поделиться
                             </Button>
-                            {/*<TransprantButton img={report} click={(e) => toggleOverlay(e)}*/}
-                            {/*                  title={'Обратиться в поддержку'}/>*/}
-                            {/*<TransprantButton img={share} click={() => setSharee(!sharee)} title={'Поделиться'}/>*/}
                         </div>
                     </div>
 
@@ -225,9 +261,11 @@ function Post() {
                             ) : null}
                         </div>
                     </div>
-                    <div className={styles.text} id={"comments"}>
-                        <CommnetForm/>
-                        <Comment/>
+                    <div className={`${styles.text} ${styles.comments}`} id={"comments"}>
+                        <CommnetForm main />
+                        {items?.length > 0 ? items?.map((item, i) => (
+                        <Comment comment={item} replies={item?.replies}/>
+                            )) : null }
                     </div>
                 </div>
                 {/*</form>*/}

@@ -5,6 +5,11 @@
     align-items: end;
 }
 
+.error{
+    font-size: var(--text-sm);
+    color: var(--red);
+}
+
 
 .input .hell{
     width: 100%;
