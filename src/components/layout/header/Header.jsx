@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState, useRef, useCallback} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -24,57 +24,54 @@ import arrow from '../../../asserts/icons/update/chevron-down.svg'
 import market from '../../../asserts/icons/update/shopping-cart.svg'
 import bell from '../../../asserts/icons/update/bell.svg'
 import settings from '../../../asserts/icons/update/settings.svg'
-import logout  from '../../../asserts/icons/update/log-out.svg'
+import logout from '../../../asserts/icons/update/log-out.svg'
 import creative from '../../../asserts/icons/update/youtube.svg'
 import create from '../../../asserts/icons/update/plus.svg'
 import menu_i from "../../../asserts/icons/update/menu.svg";
 
 
-export default function Header ({type = 'unauthorized'}) {
+export default function Header({type = 'unauthorized'}) {
 
     const {isAuth, user, logOut} = useAuth()
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [notification, setNotification] = React.useState(false)
-    const [profile, setProfile] = React.useState(false)
+    const [notification, setNotification] = useState(false)
+    const [profile, setProfile] = useState(false)
 
-    const profileRef = React.useRef(null);
+    const profileRef = useRef(null);
 
     // const cartItems = useSelector((state) => state.cart.items)
 
     const cartItems = useSelector((state) => state.cart.basket)
 
-
-
     const functionGetBasket = () => {
-
-        try{
+        try {
             dispatch(getBasket())
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
-
     }
-    
-    function handleClickOutside(event){
+
+    function handleClickOutside(event) {
         if (profileRef.current && !profileRef.current.contains(event.target)) {
             setNotification(false);
             setProfile(false);
         }
     }
+
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
 
-    function clickLogOut(){
-        try{
+    function clickLogOut() {
+        try {
             logOut()
             navigate('/login')
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
     }
@@ -82,24 +79,25 @@ export default function Header ({type = 'unauthorized'}) {
     useEffect(() => {
         functionGetBasket()
     }, []);
-  const Unauthorized = () => {
-    return (
-        <div className={`${global.flex} ${styles.buttons}`}>
-          <Button variant={'default'} size={'base'} click={() => navigate('/registration')}>
-            Регистрация
-          </Button>
-          <Button variant={'default'} size={'base'} click={() => navigate('/login')}>
-            Войти
-          </Button>
-        </div>
-    )
-  }
+
+    const Unauthorized = () => {
+        return (
+            <div className={`${global.flex} ${styles.buttons}`}>
+                <Button variant={'default'} size={'base'} click={() => navigate('/registration')}>
+                    Регистрация
+                </Button>
+                <Button variant={'default'} size={'base'} click={() => navigate('/login')}>
+                    Войти
+                </Button>
+            </div>
+        )
+    }
 //todo: UserInterestes RUD -> app.js and authorInterestes
     const Authorized = () => {
         return (
             <div className={`${global.flex} ${styles.auth_buttons}`}>
                 <div className={styles.search}>
-                    <Search/>
+                    <Search main />
                 </div>
                 <div className={`${global.flex} ${styles.buttons}`}>
                     <div className={styles.desctopButtons}>
@@ -111,13 +109,11 @@ export default function Header ({type = 'unauthorized'}) {
                         </div>
                         <div className={styles.button_abs}>
                             <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}/>
-                            {/*{cartItems.length === 0 ? null :*/}
-                            {/*    <span className={styles.basketCount}>{cartItems.length}</span>*/}
-                            {/*}*/}
                         </div>
                     </div>
 
-                    <div className={notification ? `${styles.active} ${styles.dropdown_menu}` : `${styles.dropdown_menu} ${styles.default}`}>
+                    <div
+                        className={notification ? `${styles.active} ${styles.dropdown_menu}` : `${styles.dropdown_menu} ${styles.default}`}>
                         <ContextDrop title={'Уведомления'}>
                             <ContextGroup>
                                 <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
@@ -128,11 +124,12 @@ export default function Header ({type = 'unauthorized'}) {
                         <ProfileNickname img={user?.avatar ? `${IMAGE_URL}${user.avatar}` : null} type={'default'}
                                          nickname={user?.nickname ? user.nickname : null}/>
                     </Link>
-                    <div ref={profileRef} className={profile ? `${styles.active} ${styles.menu}` : `${styles.menu} ${styles.default}`}>
+                    <div ref={profileRef}
+                         className={profile ? `${styles.active} ${styles.menu}` : `${styles.menu} ${styles.default}`}>
                         <ContextDrop>
                             <ContextGroup>
                                 <Link to={`/profile/${user?.id}`}>
-                                    <div  className={styles.profile}>
+                                    <div className={styles.profile}>
                                         <ProfileNickname img={user?.avatar ? `${IMAGE_URL}${user.avatar}` : null}
                                                          nickname={user?.nickname ? user?.nickname : null}
                                                          type={'default'}
@@ -141,12 +138,12 @@ export default function Header ({type = 'unauthorized'}) {
                                 </Link>
                             </ContextGroup>
                             <ContextGroup>
-                                <div className={`${global.flex} ${global.f_dir_column }`}>
+                                <div className={`${global.flex} ${global.f_dir_column}`}>
 
-                                <Button img_size={'h-5'} img={creative}  click={() => navigate('/settings')}>
-                                    Творческая студия
-                                </Button>
-                                { user?.roleId === 1 ?
+                                    <Button img_size={'h-5'} img={creative} click={() => navigate('/settings')}>
+                                        Творческая студия
+                                    </Button>
+                                    {user?.roleId === 1 ?
                                         <Button img_size={'h-5'} img={create} click={() => navigate('/group')}>
                                             Создать публикацию
                                         </Button>
@@ -155,32 +152,34 @@ export default function Header ({type = 'unauthorized'}) {
                                                 click={() => navigate('/publications/create')}>
                                             Создать пост
                                         </Button>
-                                    // <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
+                                        // <GreenButton text={'Создать публикацию'} unique click={() => navigate('/create/post')}/>
                                     }
                                 </div>
                             </ContextGroup>
                             <div className={styles.mobileButtons}>
-                            <ContextGroup >
-                                <div className={`${global.f_dir_column} ${global.flex}`}>
-                                    <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}
-                                            className={global.f_start}>
-                                        Корзина
-                                    </Button>
-                                    <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}>
-                                        Уведомления
-                                    </Button>
-                                </div>
-                            </ContextGroup>
+                                <ContextGroup>
+                                    <div className={`${global.f_dir_column} ${global.flex}`}>
+                                        <Button img_size={'h-5'} img={market} click={() => navigate('/basket')}
+                                                className={global.f_start}>
+                                            Корзина
+                                        </Button>
+                                        <Button img_size={'h-5'} img={bell} name={'noti'}
+                                                click={() => setNotification(true)}>
+                                            Уведомления
+                                        </Button>
+                                    </div>
+                                </ContextGroup>
                             </div>
                             <ContextGroup noafter>
                                 <div className={`${global.f_dir_column} ${global.flex}`}>
-                                <Button img_size={'h-5'} img={settings} click={() => navigate('/settings/config')} className={global.f_start}>
-                                    Настройки
-                                </Button>
-                                <Button img_size={'h-5'} img={logout} variant={'red-text'}
-                                        click={clickLogOut}>
-                                    Выйти
-                                </Button>
+                                    <Button img_size={'h-5'} img={settings} click={() => navigate('/settings/config')}
+                                            className={global.f_start}>
+                                        Настройки
+                                    </Button>
+                                    <Button img_size={'h-5'} img={logout} variant={'red-text'}
+                                            click={clickLogOut}>
+                                        Выйти
+                                    </Button>
                                 </div>
                             </ContextGroup>
                         </ContextDrop>
@@ -200,15 +199,16 @@ export default function Header ({type = 'unauthorized'}) {
         }
     }
 
+
     return (
         <nav className={`${global.flex} ${type === 'unauthorized' ? styles.headerPadding : styles.header}`}>
             <div className={`${global.flex} ${styles.headerChild}`}>
                 <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
                     <img src={menu_i}/>
                 </label>
-            <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
-                <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
-            </Link>
+                <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
+                    <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
+                </Link>
             </div>
             {renderSwitch(type)}
         </nav>

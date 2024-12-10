@@ -7,12 +7,13 @@ import {Link, useNavigate} from 'react-router-dom'
 import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
 import {axiosClassic} from "../../../r-axios/axios";
 import Button from "../../../components/ui/buttons/button/Button";
+import {useAuth} from "../../../provider/AuthProvider";
 
 function Registration() {
 
     const navigate = useNavigate()
     // const dispatch = useDispatch()
-
+    const {registerAction} = useAuth()
     const [nickname, setNickname] = useState('')
     const [email, setEmail] = useState('')
     const [sex, setSex] = useState('')
@@ -48,15 +49,15 @@ function Registration() {
             date_of_birth: DR,
         }
         try {
-            return await axiosClassic.post(`/auth/registration`, data)
-                .then(res => res.data ?
-                    navigate('/select/group_tags')
-                    : setErrMes('Пользователь с таким email или nickname уже существует!'))
-                .catch(error => {
-                    throw error.response.data
-                })
-        } catch (e) {
-            throw Error(e)
+            await registerAction(data).then((response) => {
+                if(!response.success){
+                    setErrMes(response.message)
+                }else{
+                    navigate('/select/group_tags');
+                }
+            });
+        } catch (error) {
+            setErrMes(error.response?.data || 'Произошла ошибка при регистрации');
         }
     }
     useEffect(() => {
@@ -82,33 +83,33 @@ function Registration() {
                                 <InputText
                                     place={'Введите Email'} type={'email'} required autocomplete={"new-email"}
                                     // value={email ? email : null}
-                                    value={email ? email : null}
+                                    value={email}
                                     onChange={e => setEmail(e.target.value)}
                                 />
                                 <InputText place={'Введите Nickname'} type={'text'} autocomplete={"newNickname"}
                                            // value={nickname ? nickname : null}
-                                           value={nickname ? nickname : null}
+                                           value={nickname}
                                            required
                                            onChange={e => setNickname(e.target.value)}
                                 />
                                 <InputDporDown data={items} required
-                                               value={sex ? sex : null}
+                                               value={sex}
                                                onChange={e => setSex(e.target.value)}
                                 />
                                 <h3 className={global.d3}>Дата рождения</h3>
                                 <InputText type={'date'} utocomplete={"off"} autocomplete={"off"}
-                                           value={DR ? DR : null}
+                                           value={DR}
                                            required
                                            onChange={e => setDR(e.target.value)}
 
                                 />
                                 <InputText place={'Введите Пароль'} type={'password'} autocomplete={"new-password"}
-                                           value={password ? password : null}
+                                           value={password}
                                            required
                                            onChange={e => setPassword(e.target.value)}
                                 />
                                 <InputText place={'Повторите Пароль'} type={'password'} autocomplete={"new-password"}
-                                           value={password1 ? password1 : null}
+                                           value={password1}
                                            required
                                            onChange={e => setPassword1(e.target.value)}
                                 />

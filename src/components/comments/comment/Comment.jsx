@@ -73,9 +73,6 @@ function Comment({ comment=[], replies=[] }) {
             </Button>
             {comment?.userId === user.id ?
                 <>
-                    <Button img={edit} img_size={'h-5'} variant={'ghost'}>
-                        Редактировать
-                    </Button>
                     <Button img={trash} img_size={'h-5'} variant={'red-text'}
                     click={() => handleDeleteComment(comment.id)}>
                         Удалить

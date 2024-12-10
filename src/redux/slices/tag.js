@@ -30,6 +30,14 @@ export const createUserInterests = createAsyncThunk('user/createUserInterests', 
   }
 });
 
+export const userInterests = createAsyncThunk('user/getUserInterests', async (data) => {
+  try {
+    const response = await axios.get('/user/getUserInterests');
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+})
 
 
 const initialState = {
@@ -39,6 +47,13 @@ const initialState = {
   },
   creative_tags:{
     items: [],
+    status: 'loading',
+  },
+  userTags:{
+    items: {
+      groupsIds: [],
+      tags: [],
+    },
     status: 'loading',
   }
 }
@@ -73,6 +88,18 @@ const tagSlince = createSlice({
         state.creative_tags.items = [];
         state.creative_tags.status = 'error';
       })
+        .addCase(userInterests.pending, (state) => {
+          state.userTags.items = [];
+          state.userTags.status = 'loading';
+        })
+        .addCase(userInterests.fulfilled, (state, action) => {
+          state.userTags.items = action.payload;
+          state.userTags.status = 'loaded';
+        })
+        .addCase(userInterests.rejected, (state) => {
+          state.userTags.items = [];
+          state.userTags.status = 'error';
+        })
   }
 });
 

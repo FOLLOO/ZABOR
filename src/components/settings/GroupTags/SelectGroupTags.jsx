@@ -38,7 +38,7 @@ import Button from "../../ui/buttons/button/Button";
  *     }
  * ```
  */
-export default function SelectGroupTags ({ userChoice = false, type= 'user-first' }) {
+export default function SelectGroupTags ({data, userChoice = false, type= 'user-first' }) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -62,6 +62,13 @@ export default function SelectGroupTags ({ userChoice = false, type= 'user-first
     }
   }
 
+  useEffect(() => {
+    if(data?.length > 0){
+      data.map((tag) => (  addTag(tag.id)))
+    }
+  }, [data]);
+console.log(data)
+// console.log(data)
   useEffect(() => {
     getTags()
   }, [loading]);
@@ -106,7 +113,6 @@ export default function SelectGroupTags ({ userChoice = false, type= 'user-first
       addGroupTag(selectTag)
       navigateByType()
   }
-
   return (
     <div className={styles.main}>
       <div className={styles.padding}>
@@ -118,7 +124,7 @@ export default function SelectGroupTags ({ userChoice = false, type= 'user-first
           {tags?.items?.length > 0 ?
           <div className={userChoice ? styles.grid5 : styles.grid}>
             {tags?.items.map((item) => (
-                <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} />
+                <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} checked={data?.includes(item.id)}  />
                 // <TagCheckBox text={item.name} key={item.id} id={item.id}  />
               ))}
           </div>

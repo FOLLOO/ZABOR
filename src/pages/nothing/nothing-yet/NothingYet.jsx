@@ -7,11 +7,11 @@ import global from "../../../global.module.css";
 //components
 import Button from "../../../components/ui/buttons/button/Button";
 
-export default function NothingYet({isMe, isAuthor, onButtonClick, buttonText}) {
+export default function NothingYet({isMe, isAuthor, onButtonClick, buttonText, text = 'Мы ничего не смогли найти'}) {
     return (
         <div className={`${styles.main}`}>
             <div className={global.d2}>
-                Мы ничего не смогли найти
+                {text}
             </div>
             {isMe &&  (
                 <div className={styles.addButton}>

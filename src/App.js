@@ -31,6 +31,7 @@ import FinalChoices from "./pages/unAuth/registration/userIntretings/tags/FinalC
 import BecomeAuthorGroup from "./pages/auth/profile/become-author/group/BecomeAuthorGroup";
 import BecomeAuthorCreativeTags from "./pages/auth/profile/become-author/tags/BecomeAuthorCreativeTags";
 import PlaylistPage from "./pages/auth/profile/playlists-page/playlist/Playlist";
+import MyGroupTags from "./pages/auth/settings/my-tags/group/MyGroupTags";
 // import axios from "axios";
 
 
@@ -217,6 +218,18 @@ function App () {
           component: <MySubscribeSettings/>,
           child: [],
         },
+            {
+              title: 'group',
+              url: '/group',
+              component: <MyGroupTags/>,
+              child: []
+            },
+            {
+              title: 'tags',
+              url: '/tags',
+              component: <FinalChoices/>,
+              child: []
+        }
       ]
     }
   ]

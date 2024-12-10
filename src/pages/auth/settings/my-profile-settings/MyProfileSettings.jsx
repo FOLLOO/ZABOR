@@ -109,9 +109,7 @@ function MyProfileSettings() {
     }
 
     useEffect(() => {
-        if (user === undefined) {
-            getUser()
-        }
+        getUser()
         setNick(user?.nickname)
         setAboutMe(user?.aboutMe)
         setBirthDay(user?.date_of_birth)
@@ -137,6 +135,7 @@ function MyProfileSettings() {
 
     function saveUser(e) {
         e.preventDefault()
+        alert(nick)
         const data = {
             nickname: nick,
             sex: sex,
@@ -146,6 +145,13 @@ function MyProfileSettings() {
         }
         try {
             updateUser(data)
+            let prev = {...user}
+                prev.nickname = nick
+                prev.sex = sex
+                prev.date_of_birth = birthDay
+                prev.aboutMe = aboutMe
+                prev.userSocialMedia = socialMedia
+            localStorage.updateItem('user', JSON.stringify(prev))
             alert('Мы обновили ваши параметры')
         } catch (err) {
             console.log(err)

@@ -144,7 +144,6 @@ export function ProfileLayout() {
         let WIDTH = 1250
         // const AVATAR_WIDTH = 200;
         const type = localStorage.getItem('type')
-
         switch (type) {
             case 'cover' :
                 WIDTH = 1920
@@ -222,6 +221,7 @@ export function ProfileLayout() {
     const getUser = () => {
         try {
             dispatch(getUserData(id))
+
         } catch (err) {
             console.log(err)
         }
@@ -229,7 +229,9 @@ export function ProfileLayout() {
 
     useEffect(() => {
         // if (userData.items.id === Number(id)) return;
-        if (userData.status === 'loaded' && user.id === id) return;
+        if (userData.status === 'loaded' && user.id === id){
+            return;
+        }
         getUser()
     }, [])
 
@@ -365,7 +367,7 @@ export function ProfileLayout() {
                     onClick={(e) => handleDialogClick(e, 'add-this-to-playlist')}>
                 <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
                     <h3 className={global.bold}>Выберете плейлист</h3>
-                    {userFolder?.items.length !== 0 ?
+                    {userFolder?.items !== 'У пользователя нет плейлистов' && userFolder?.items.length > 0 ?
                         <>
                             <div className={dialog.addPostsCarda}>
                                 {userFolder?.items?.map((item) => (

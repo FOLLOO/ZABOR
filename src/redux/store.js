@@ -8,6 +8,7 @@ import { notificationReducer } from './slices/notifications'
 import { subscribeReducer } from './slices/sub'
 import {basketAPIReducer} from "./slices/basketAPI";
 import {commentsReducer} from "./slices/comments";
+import {searchReducer} from "./slices/search";
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     subscribes: subscribeReducer,
     cart: basketAPIReducer,
     comments: commentsReducer,
+    search: searchReducer,
   }
 });
 

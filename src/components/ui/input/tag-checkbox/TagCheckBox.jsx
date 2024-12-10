@@ -12,7 +12,7 @@ import t6 from '../../../../asserts/background/abstract resin.png'
 import t7 from '../../../../asserts/background/abstract resin blur.png'
 import t8 from '../../../../asserts/background/purple blue zabor.png'
 
-function TagCheckBox ({image, text, click, img, id}) {
+function TagCheckBox ({image, text, click, img, id, checked}) {
 
   // const [checked, setChecked] = useState(false)
 
@@ -25,7 +25,7 @@ function TagCheckBox ({image, text, click, img, id}) {
 
     return (
     <div className={styles.checkbox_container} >
-      <input type="checkbox" className={styles.checkbox} id={id} />
+      <input type="checkbox" className={styles.checkbox} id={id} checked={checked} />
       <label  className={styles.checkbox_label} onClick={click} htmlFor={id}>
         <img src={images[random()]} alt="Description" className={styles.checkbox_image}/>
         <span className={`${styles.checkbox_text} ${global.t3}`}>{text ? text : null}</span>
