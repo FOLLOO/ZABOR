@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
 
-  const [token, setToken] = useState(localStorage.getItem("site") || "");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
 
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
     setUser(JSON.parse(localStorage.getItem('user')))
     setToken(localStorage.getItem('token'));
     setCookie('token', localStorage.getItem('token'), { path: '/' })
-    setIsAuth(true) //временное решение
+    token ? setIsAuth(true) : setIsAuth(false) //временное решение
   }, [])
 
   const loginAction = async (email, password) => {
@@ -35,10 +35,9 @@ const AuthProvider = ({ children }) => {
       if (response.token) {
         setUser(response.profile);
         localStorage.setItem('user', JSON.stringify(response.profile))
-        // setToken(response.token);
-        // console.log(token)
+        setToken(response.token)
         // setCookie('token', response.token, { path: '/' })
-        setIsAuth(true)
+        token ? setIsAuth(true) : setIsAuth(false)
         return {path: lastPath ? lastPath : "/", token: response.token};
       } else {
         throw {error: response.response.data.message};
@@ -54,7 +53,8 @@ const AuthProvider = ({ children }) => {
       if (res.data) {
         const { token, profile } = res.data;
         setUser(profile);
-        setIsAuth(true)
+        setToken(token)
+        token ? setIsAuth(true) : setIsAuth(false)
         localStorage.setItem('user', JSON.stringify(profile))
         localStorage.setItem('token', token);
         return ({message: 'Пользователь успешно зарегестировани', success: true});

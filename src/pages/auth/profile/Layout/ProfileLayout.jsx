@@ -345,8 +345,8 @@ export function ProfileLayout() {
                 <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
                     <h3 className={global.bold}> Выберете публикацию</h3>
                     <div className={dialog.addPostsCarda}>
-                        {userData?.items?.publications?.map((item) => (
-                            <SelectPost title={item?.title}
+                        {userData?.items?.publications?.map((item, i) => (
+                            <SelectPost title={item?.title} key={i}
                                         onChange={(event) => addPublicationToState(item?.id, event.target.checked)}
                                         id={item?.id}
                                         img={item?.coverUrl}
@@ -378,7 +378,7 @@ export function ProfileLayout() {
                         <>
                             <div className={dialog.addPostsCarda}>
                                 {userFolder?.items?.map((item) => (
-                                    <SelectPost title={item?.name}
+                                    <SelectPost title={item?.name} key={item.id}
                                                 onChange={(event) => addPublicationToState(item?.id, event.target.checked)}
                                                 id={item?.id}
                                                 img={item?.latest_publication[0]?.publication?.coverUrl}

@@ -201,6 +201,12 @@
 /*}*/
 
 @media (max-width: 425px) {
+    .subes h1{
+        font-size: var(--text-3xl);
+        text-wrap: normal;
+        word-break: break-all;
+    }
+
     .profile{
         top: -2rem;
         flex-direction: column;

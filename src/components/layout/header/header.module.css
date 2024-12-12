@@ -10,6 +10,15 @@
     height: fit-content;
     text-align: center;
 }
+.logoImage{
+    width: 2rem;
+}
+.logo{
+    user-select: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
 
 .buttons{
     width: fit-content;
@@ -99,10 +108,26 @@
 .openMenu{
     display: none;
 }
+
+.b_width img{
+    user-select: none;
+}
 @media (max-width: 1080px) {
     .search{
         width: 100%;
         max-width: 350px;
+    }
+}
+
+@media (max-width: 800px) {
+    .search{
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+    .search{
+        max-width: 200px;
     }
 }
 

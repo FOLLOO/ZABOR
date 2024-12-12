@@ -188,7 +188,17 @@
 }
 /*Overlay*/
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
+    .navbar {
+        margin: 0.3vh 1vw 0.3vh 0;
+        min-width: 60px;
+        width: 60px;
+    }
+
+    .navbar button, .menu{
+        margin: 5px 10px;
+    }
+
     .sidebar_input:checked + .navbar, #span {
         color: black;
         width: 35vw;

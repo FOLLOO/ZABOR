@@ -7,6 +7,7 @@ import global from '../../../global.module.css'
 
 // media
 import videoo from '../../../asserts/video/infinty.mp4'
+import logo from '../../../logo.svg'
 
 import temp from '../../../asserts/temp/people-doing-outdoor-training.jpg'
 import temp2 from '../../../asserts/temp/beautiful-mountain-lake-background-remix.jpg'
@@ -95,7 +96,8 @@ function Main() {
                 <source src={videoo} type="video/mp4"/>
             </video>
             <div className={styles.content}>
-                <div className={styles.title}>
+                <div className={`${styles.logoBlock} `}>
+                    <img src={logo} alt="" className={styles.logo}/>
                     <h3>ZABOR</h3>
                 </div>
                 <div className={styles.title}>
@@ -190,7 +192,7 @@ function Main() {
                     ))}
                 </div>
 
-                <Button variant={'color'} click={() => navigate('/login')} size={'xl2'}>
+                <Button variant={'color'} click={() => navigate('/login')} >
                     Пройти регистрацию
                 </Button>
             </div>

@@ -17,9 +17,19 @@
     gap: 10px
 }
 
+@media (max-width: 800px) {
+    .main{
+        gap: .5rem;
+    }
+    .default_nickname{
+        display: none;
+    }
+
+}
+
 @media (max-width: 425px) {
     .main{
-        gap: 0;
+        gap: .5rem;
     }
     .default_nickname{
         display: none;

@@ -14,7 +14,7 @@ import MySubscribeSettings from './pages/auth/settings/my-subscribe-settings/MyS
 import PlaylistCreate from './pages/auth/froms/playlist-create/PlaylistCreate'
 
 import Publications from './pages/auth/main/Publications'
-import AuthProvider from './provider/AuthProvider'
+import AuthProvider  from './provider/AuthProvider'
 import Market from './pages/auth/market/Market'
 import MyNotificationsSettings from './pages/auth/settings/my-notifications/MyNotificationsSettings'
 import Post from './pages/auth/post/Post'
@@ -43,11 +43,10 @@ import AuthorTags from "./pages/auth/settings/author-tags/tags/AuthorTags";
 
 function App() {
     // const { overlay } = useContext(OverlayContext) // overlay находится в layouts
-
     const routingConfig = [
         {
             status: 'not-auth',
-            layout: <Layout/>,
+            layout: <Layout />,
             navigations: [
                 {
                     title: 'main',

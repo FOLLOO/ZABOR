@@ -230,7 +230,7 @@ function Post() {
                                              img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`} date={OnePost?.items.createdAt}
                                              id={OnePost?.items.user?.id} view={OnePost?.items.views_count}
                             />
-                            <Button variant={'color'} className={global.f_center}>
+                            <Button variant={'outlet'} className={global.f_center}>
                                 Подписаться
                             </Button>
                         </div>

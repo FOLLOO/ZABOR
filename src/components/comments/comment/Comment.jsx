@@ -20,7 +20,7 @@ function Comment({ comment=[], replies=[] }) {
   const [answ, setAnsw] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
   const [menu, setMenu] = useState(false)
-    // const [liked, setLiked] = useState(false)
+    const [liked, setLiked] = useState(comment?.isLiked || false)
 
     const dispatch = useDispatch()
   const ref = useRef(null);
@@ -29,6 +29,7 @@ function Comment({ comment=[], replies=[] }) {
   const handleLikedComment = (id) => {
       try{
         dispatch(likeComment(id))
+          setLiked(!liked)
       }catch(e){
           console.log(e)
       }
@@ -58,10 +59,12 @@ function Comment({ comment=[], replies=[] }) {
   }, [])
 
 
+
+
   return (
     <div className={styles.pad}>
       <div className={`${styles.sender_information} ${global.flex}`}>
-        <ProfileNickname size={50} type={'default'} nickname={comment?.user?.nickname} />
+        <ProfileNickname comment size={50} type={'default'}  nickname={comment?.user?.nickname} />
         <div className={`${styles.time} ${global.d3}`}>
           {comment?.createdAt}
         </div>
@@ -94,8 +97,8 @@ function Comment({ comment=[], replies=[] }) {
       <div className={styles.action}>
         <button className={styles.likes} onClick={() => handleLikedComment(comment.id)}>
           <div className={`${global.flex} ${global.d2} ${styles.flex}`}>
-              <Like/>
-              {comment?.likes}
+              {liked ?  <Like stroke={'transparent'} fill={'var(--red)'}/> : <Like/> }
+              {comment?.likeCount !== 0 ? comment?.likeCount : null }
           </div>
         </button>
         {answ ? null : <Button variant={'ghost'}  click={() => setAnsw(!answ)} >Ответить</Button>  }

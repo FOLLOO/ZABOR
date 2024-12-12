@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 
 // import styles from './my-group-tags.module.css'
-import global from '../../../../../global.module.css'
+// import global from '../../../../../global.module.css'
 import BackCreate from '../../../../../components/toolbar/backCreate-toolbar/BackCreate'
 import SelectGroupTags from '../../../../../components/settings/GroupTags/SelectGroupTags'
 import {useDispatch, useSelector} from "react-redux";
@@ -24,7 +24,7 @@ function AuthorGroupTags () {
     }, []);
 
   return (
-    <div className={global.padLeft}>
+    <div>
       <BackCreate />
       <SelectGroupTags type={'user-update-author'} data={groupIds} />
     </div>

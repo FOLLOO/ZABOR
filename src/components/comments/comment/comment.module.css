@@ -75,7 +75,16 @@
     position: absolute;
     max-width: fit-content;
 }
-
+@media (max-width: 800px) {
+    .sender_information{
+        width: 100%;
+        gap: 1rem;
+        /*max-width: 80vw;*/
+        /*max-width: 500px;*/
+        align-items: center;
+        justify-content: space-between;
+    }
+}
 @media (max-width: 425px) {
     .action{
         gap: normal;

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { useNavigate, useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 //styles
@@ -14,7 +14,6 @@ import filter from '../../../../asserts/icons/update/sort-desc.svg'
 //utils
 import {useAuth} from '../../../../provider/AuthProvider'
 import {fetchTags} from '../../../../redux/slices/tag'
-import {OverlayContext} from "../../../../context/OverlayContext";
 import {getUserFolder} from "../../../../redux/slices/folder";
 import {Helmet} from "react-helmet";
 
@@ -29,29 +28,21 @@ function UserPosts({data = []}) {
     const {userFolder} = useSelector(state => state.folder)
     const {userData} = useSelector(state => state.userR)
 
-    const {overlay, setOverlay} = useContext(OverlayContext)
 
     const [sort, setSort] = useState(false) // сортировка
     const [open, setOpen] = useState(false) // теги
-    const [plstOpen, setPlstOpen] = useState(false) // плейлист
+    // const [plstOpen, setPlstOpen] = useState(false) // плейлист
 
 
     const dispatch = useDispatch()
 
     const [tags, setTags] = useState(false)
     const [serverTags, setServerTags] = useState([])
-    const [playlist, setPlaylist] = useState([])
+    // const [playlist, setPlaylist] = useState([])
 
     const [sortData, setSortData] = useState([]) // сортировка
 
     const navigate = useNavigate()
-
-
-    function Over() {
-        setPlstOpen(!plstOpen)
-        setOverlay(!overlay)
-    }
-
 
 
     //может нормально как userFolders сделать?
@@ -81,7 +72,7 @@ function UserPosts({data = []}) {
     useEffect(() => {
         if (userFolder.status === 'loaded' && user.id === id) return
         getUserFolders()
-    }, [overlay]);
+    }, []);
 
 
 
@@ -108,13 +99,14 @@ function UserPosts({data = []}) {
     }, [sort, data, tags])
     const isMe = () => { return user?.id === Number(id) }
 
+
     const UserPosts = () => {
         return (
             <>
                 <Helmet>
                     <meta charSet="utf-8"/>
-                    <title>ZABOR | Публикации | {user.nickname}</title>
-                    <meta name="description" content={'Публикации пользователя' + user.nickname}/>
+                    <title>ZABOR | Публикации | {user?.nickname || 'Лучший среди всех'}</title>
+                    <meta name="description" content={'Публикации пользователя ' + user?.nickname || 'Публикации пользователя'}/>
                     <meta name="keywords" content="HTML, CSS, JavaScript"/>
                     <meta name="author" content="Sairommef"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

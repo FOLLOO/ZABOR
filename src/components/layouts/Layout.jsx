@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet,  useLocation, useNavigate} from "react-router-dom";
 
 
 import styles from './layouts.module.css'
@@ -27,6 +27,7 @@ import Button from "../ui/buttons/button/Button";
 import global from "../../global.module.css";
 import {handleDialogClick, toggleOverlay} from "../../utils";
 import {Helmet} from "react-helmet";
+import {useAuth} from "../../provider/AuthProvider";
 
 
 /**
@@ -36,9 +37,23 @@ import {Helmet} from "react-helmet";
  * @constructor
  */
 const Layout = ({type}) => {
-
-    //todo: исправить overlay
+    const { isAuth } = useAuth();
     const navigate = useNavigate()
+    const { pathname } = useLocation()
+
+    useEffect(() => {
+        // Сохраняем идентификатор таймера
+        const timeoutId = setTimeout(() => {
+            if (!isAuth && !(pathname !== '/' || pathname !== '/login' || pathname !== '/register')) {
+                navigate('/login');
+            }
+        }, 5000);
+
+        // Очищаем таймер при изменении isAuth или при размонтировании компонента
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [isAuth]);
 
     const menu = [
         {
@@ -46,31 +61,37 @@ const Layout = ({type}) => {
             navigation: [
                 {
                     title: 'Главная',
+                    disabled: false,
                     ico: home_i,
                     function: () => navigate('/publications'),
                 },
                 {
                     title: 'Популярное',
+                    disabled: false,
                     ico: star_i,
                     function: () => navigate(`/publications/popular`),
                 },
                 {
                     title: 'Подписки',
+                    disabled: false,
                     ico: subs_i,
                     function: () => navigate(`/publications/subscriptions`),
                 },
                 {
                     title: 'Понравилось',
+                    disabled: false,
                     ico: heart_i,
                     function: () => navigate(`/publications/likes`),
                 },
                 {
                     title: 'Обсуждаемое',
+                    disabled: false,
                     ico: message_i,
                     function: () => navigate('/publications/discussed'),
                 },
                 {
                     title: 'Купленное',
+                    disabled: false,
                     ico: ruble_i,
                     function: () => navigate('/publications/available'),
                 },
@@ -81,36 +102,43 @@ const Layout = ({type}) => {
             navigation: [
                 {
                     title: 'Главная',
+                    disabled: false,
                     ico: home_i,
-                    function: () => navigate('/settings'),
+                    function: () => navigate('/settings/config'),
                 },
                 {
                     title: 'Мои интересы',
+                    disabled: false,
                     ico: tags_i,
                     function: () => navigate('/settings/group'),
                 },
                 {
                     title: 'Рекомендации автора',
+                    disabled: false,
                     ico: tags_i,
                     function: () => navigate('/settings/author/group'),
                 },
                 {
                     title: 'Подписки',
+                    disabled: false,
                     ico: subs_i,
                     function: () => navigate('/settings/subscribes'),
                 },
                 {
                     title: 'Уведомления',
+                    disabled: false,
                     ico: bell_i,
                     function: () => navigate('/settings/notifications'),
                 },
                 {
                     title: 'Аналитика',
+                    disabled: true,
                     ico: stat_i,
                     function: () => navigate('/settings'),
                 },
                 {
                     title: 'Личный кабинет',
+                    disabled: false,
                     ico: user_cog_i,
                     function: () => navigate('/settings/config'),
                 },
@@ -135,7 +163,7 @@ const Layout = ({type}) => {
                     {menu
                         .find(item => item.title === type)
                         ?.navigation.map((item, i) => (
-                            <Button img={item.ico} key={'LeftMenuButton' + i} img_size={'h-5'}  variant={'default'} text_id={'span'} className={styles.flex}
+                            <Button img={item.ico} key={'LeftMenuButton' + i} img_size={'h-5'} disabled={item.disabled} variant={'default'} text_id={'span'} className={styles.flex}
                                     click={item.function}>{item.title}</Button>
                         )) || null
                     }
@@ -221,7 +249,10 @@ const Layout = ({type}) => {
                         </Button>
                         <Button variant={'color'} type={'submit'}
                                 className={`${global.w100} ${global.f_center}`}
-                                onClick={() => navigate('/basket')}>
+                                click={() => {
+                                    navigate('/basket')
+                                    toggleOverlay('addToBasket')
+                                }}>
                             Перейти в корзину
                         </Button>
                     </div>

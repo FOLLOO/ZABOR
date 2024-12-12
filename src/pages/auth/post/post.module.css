@@ -302,7 +302,21 @@
         display: none;
     }
 }
+@media (max-width: 800px) {
+    .profile{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: space-between;
+    }
 
+    .afterpost {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+    }
+
+}
 @media (max-width: 425px) {
     .grid{
         padding: 1rem;

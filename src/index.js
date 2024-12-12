@@ -22,11 +22,11 @@ root.render(
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Helmet>
       <OverlayContextProvider>
-          <Provider store={store}>
-              <TagsProvider>
-                  <App/>
-              </TagsProvider>
-          </Provider>
+              <Provider store={store}>
+                  <TagsProvider>
+                      <App/>
+                  </TagsProvider>
+              </Provider>
       </OverlayContextProvider>
   </React.StrictMode>
 );

@@ -152,12 +152,20 @@
         margin-right: 0;
     }
 }
-
-@media (max-width: 425px) {
+@media (max-width: 800px) {
+    .posts{
+        position: relative;
+        margin-bottom: 2vh;
+    }
     .check{
         display: flex;
         flex-direction: column;
     }
+    .form{
+        margin: 0;
+    }
+}
+@media (max-width: 425px) {
     .posts{
         width: 90vw;
         order: 1

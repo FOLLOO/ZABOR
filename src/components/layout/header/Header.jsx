@@ -20,6 +20,7 @@ import styles from './header.module.css'
 import global from '../../../global.module.css'
 
 //img
+import logo from '../../../logo.svg'
 import arrow from '../../../asserts/icons/update/chevron-down.svg'
 import market from '../../../asserts/icons/update/shopping-cart.svg'
 import bell from '../../../asserts/icons/update/bell.svg'
@@ -77,7 +78,8 @@ export default function Header({type = 'unauthorized'}) {
     }
 
     useEffect(() => {
-        functionGetBasket()
+        if(!isAuth) return
+        functionGetBasket();
     }, []);
 
     const Unauthorized = () => {
@@ -112,8 +114,9 @@ export default function Header({type = 'unauthorized'}) {
                         </div>
                     </div>
 
-                    <div
-                        className={notification ? `${styles.active} ${styles.dropdown_menu}` : `${styles.dropdown_menu} ${styles.default}`}>
+                    <div className={notification ?
+                        `${styles.active} ${styles.dropdown_menu}` :
+                        `${styles.dropdown_menu} ${styles.default}`}>
                         <ContextDrop title={'Уведомления'}>
                             <ContextGroup>
                                 <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
@@ -140,7 +143,7 @@ export default function Header({type = 'unauthorized'}) {
                             <ContextGroup>
                                 <div className={`${global.flex} ${global.f_dir_column}`}>
 
-                                    <Button img_size={'h-5'} img={creative} click={() => navigate('/settings')}>
+                                    <Button img_size={'h-5'} img={creative} click={() => navigate('/settings')} disabled>
                                         Творческая студия
                                     </Button>
                                     {user?.roleId === 1 ?
@@ -206,9 +209,14 @@ export default function Header({type = 'unauthorized'}) {
                 <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
                     <img src={menu_i}/>
                 </label>
-                <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
-                    <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
+                <div className={styles.logo}>
+                <Link to={ '/' } >
+                    <img src={logo} alt={''} className={styles.logoImage}/>
                 </Link>
+                    <Link to={type === 'unauthorized' ? '/' : '/publications'}>
+                    <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
+                    </Link>
+                </div>
             </div>
             {renderSwitch(type)}
         </nav>

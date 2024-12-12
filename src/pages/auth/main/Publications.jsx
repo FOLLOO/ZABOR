@@ -11,6 +11,7 @@ import LittleTag from '../../../components/ui/input/little-tag/LittleTag'
 import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {useAuth} from "../../../provider/AuthProvider";
 import {Helmet} from "react-helmet";
+import ServerError from "../../server/ServerError";
 
 export default function Publications() {
     let {group, creative_tags} = useParams();
@@ -63,6 +64,9 @@ export default function Publications() {
         getTags()
     }, [loading])
 
+    if(errMes){
+        return <ServerError />
+    }
 
     return (
         <div className={`${styles.main}`}>
