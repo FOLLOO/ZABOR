@@ -7,11 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {searchData} from "../../../redux/slices/search";
 import NothingYet from "../../../pages/nothing/nothing-yet/NothingYet";
 import RenderType from "../../notifications/renderType/RenderType";
-import ContextDrop from "../../context-drop/ContextDrop";
 function Search ({placeholder = 'Найти...', value, onChange, ref, main = false}) {
 
     const [open, setOpen] = useState(false)
-    const {items, status} = useSelector(state => state.search.searchData)
+    const {items} = useSelector(state => state.search.searchData)
     const [inputValue, setInputValue] = useState('');
     const [serverSend, setServerSend] = useState('');
     const dispatch = useDispatch();
@@ -68,8 +67,9 @@ function Search ({placeholder = 'Найти...', value, onChange, ref, main = fa
                         {items.publications.length > 0 ?
                             <div className={styles.item}>
                                 <h5>Публикации </h5>
-                                {items.publications.map((item) => (
+                                {items.publications.map((item, i) => (
                                     <RenderType
+                                        key={i}
                                         link={'/publication/' + item.id}
                                         text={item.title}
                                         postImage={`${item.coverUrl}`}
@@ -81,8 +81,9 @@ function Search ({placeholder = 'Найти...', value, onChange, ref, main = fa
                         {items.folders.length > 0 ?
                             <div className={styles.item}>
                                 <h5>Плейлисты </h5>
-                                {items.folders.map((item) => (
+                                {items.folders.map((item, i) => (
                                     <RenderType
+                                        key={i}
                                         link={'profile/' + item.userId + '/playlist/' + item.id}
                                         text={item.name}
                                         date={new Date(item.createdAt).toLocaleDateString('ru-RU')}
@@ -93,8 +94,9 @@ function Search ({placeholder = 'Найти...', value, onChange, ref, main = fa
                         {items.users.length > 0 ?
                             <div className={styles.item}>
                                 <h5>Пользователи </h5>
-                                {items.users.map((item) => (
+                                {items.users.map((item, i) => (
                                     <RenderType
+                                        key={i}
                                         link={'/profile/' + item.id}
                                         avatar={item.files[0]?.url}
                                         text={item.nickname}

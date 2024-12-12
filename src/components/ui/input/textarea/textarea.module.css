@@ -10,7 +10,7 @@
     border: 1px solid var(--accent-foreground);
     transition: all 0.2s ease-in-out;
     max-width: 1200px;
-
+    color: var(--input-text-color);
     /*Не поддерживается на некоторых версиях*/
     /*https://caniuse.com/?search=field-sizing*/
     field-sizing: content;

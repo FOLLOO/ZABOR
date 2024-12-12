@@ -11,7 +11,6 @@ import Button from "../../ui/buttons/button/Button";
 import Like from "../../svgs/Like";
 import report from "../../../asserts/icons/update/alert-triangle.svg";
 import {toggleOverlay} from "../../../utils";
-import edit from "../../../asserts/icons/edit.svg";
 import {useDispatch} from "react-redux";
 import {deleteComment, likeComment} from "../../../redux/slices/comments";
 import {useAuth} from "../../../provider/AuthProvider";
@@ -21,7 +20,7 @@ function Comment({ comment=[], replies=[] }) {
   const [answ, setAnsw] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
   const [menu, setMenu] = useState(false)
-    const [liked, setLiked] = useState(false)
+    // const [liked, setLiked] = useState(false)
 
     const dispatch = useDispatch()
   const ref = useRef(null);
@@ -48,6 +47,11 @@ function Comment({ comment=[], replies=[] }) {
       setMenu(false)
   }
 
+  const supportComment = (commentID) => {
+      localStorage.setItem('commentID', JSON.stringify(commentID));
+      toggleOverlay('support')
+  }
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -68,7 +72,7 @@ function Comment({ comment=[], replies=[] }) {
       {menu ?
       <div className={styles.inlinemenu} ref={ref}>
         <ContextDrop>
-            <Button img={report} variant={'ghost'} click={() => toggleOverlay('support')}>
+            <Button img={report} variant={'ghost'} click={() => supportComment(comment?.id)}>
                 Пожаловаться
             </Button>
             {comment?.userId === user.id ?

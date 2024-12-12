@@ -10,6 +10,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom'
 import {useAuth} from "../../../../provider/AuthProvider";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 import {getUserFolder} from "../../../../redux/slices/folder";
+import {Helmet} from "react-helmet";
 
 
 function Playlists() {
@@ -42,6 +43,15 @@ function Playlists() {
 
     return (
         <div className={styles.margin}>
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>ZABOR | Плейлисты | {user.nickname}</title>
+                <meta name="description" content={'Плейлисты пользователя' + user.nickname}/>
+                <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                <meta name="author" content="Sairommef"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </Helmet>
+
             {userFolder?.items !== 'У пользователя нет плейлистов' ? (
                     <>
                         <div className={`${styles.title}`}>

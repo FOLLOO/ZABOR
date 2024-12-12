@@ -9,13 +9,14 @@ export const TagsProvider = ({ children }) => {
   const [creativeTags, setCreativeTags] = useState([]);
 
   const addGroupTag = (tag) => {
-    setGroupTags([...groupTags, tag]);
+      setGroupTags((prevGroupTags) => {
+        return [...prevGroupTags, tag];
+      });
   };
 
   const addCreativeTag = (tag) => {
     setCreativeTags([...creativeTags, tag]);
   };
-
   // Можно добавить другие методы для удаления тегов, очистки и т.д.
 
   return (

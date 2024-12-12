@@ -82,8 +82,8 @@ function CreativeStudio () {
 
             {userData?.items.publications?.length > 0 ?
               userData?.items.publications.slice(0, 5)
-                .map((message) => (
-                <div >
+                .map((message, i) => (
+                <div key={i}>
                  <Notification postName={message.title} nickname={user.nickname} />
                 </div>
               )) : <Nothing/>}

@@ -93,7 +93,11 @@
     gap: 10px;
 }
 
-
+.textarea{
+    max-height: 20vh;
+    height: fit-content;
+    overflow-y: scroll;
+}
 .message{
     background: black;
     color: white;

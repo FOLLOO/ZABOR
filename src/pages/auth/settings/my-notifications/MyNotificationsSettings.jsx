@@ -76,7 +76,7 @@ function MyNotificationsSettings () {
 
         <div className={styles.avtor_list}>
           {sub?.items.length > 0 ? sub?.items.map((item, index) => (
-            <label htmlFor={index} className={`${styles.avtor} ${global.flex}`}>
+            <label htmlFor={index} className={`${styles.avtor} ${global.flex}`} key={index}>
               <ProfileNickname type={'subs'} id={item?.id}
                                subs={item?.subs}
                                img={`${IMAGE_URL}${item?.coverUrl}`} nickname={item.nickname}/>
@@ -84,7 +84,7 @@ function MyNotificationsSettings () {
                 <div  className={global.t3}>
                   Уведомление
                 </div>
-              <InputToggle id={index} change={() => console.log(sub)}/>
+              <InputToggle id={index} change={() => postwToggleNoti(item.id)}/>
               </div>
             </label>
           )) : <Nothing/>}

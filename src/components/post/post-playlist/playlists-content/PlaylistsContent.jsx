@@ -23,6 +23,7 @@ import {IMAGE_URL} from "../../../../utils";
 import {useAuth} from "../../../../provider/AuthProvider";
 import InputText from "../../../ui/input/input-text/InputText";
 import Textarea from "../../../ui/input/textarea/Textarea";
+import {Helmet} from "react-helmet";
  /** Это контент плейлиста его описание и его видео*/
 function PlaylistsContent ({ data, folder}) {
 
@@ -101,6 +102,15 @@ function PlaylistsContent ({ data, folder}) {
 
   return (
       <div className={`${styles.main} ${global.flex}`}>
+          <Helmet>
+              <meta charSet="utf-8"/>
+              <title>ZABOR | {folder?.name}</title>
+              <meta name="description" content={folder?.description}/>
+              <meta name="keywords" content="HTML, CSS, JavaScript"/>
+              <meta name="author" content="Sairommef"/>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          </Helmet>
+
           <div className={`${global.flex} ${styles.informationBlock}`}>
               <div className={`${styles.image}`}>
                   <img src={`${IMAGE_URL}${data[0]?.coverUrl}`} alt="about"/>
@@ -164,8 +174,8 @@ function PlaylistsContent ({ data, folder}) {
               <div className={`${styles.video} `}>
                   <div className={`${global.flex} ${global.f_dir_column} ${styles.videoOl}`}>
                       {data.length > 0 ?
-                          data.map((item) => (
-                              <div className={`${global.flex} `}>
+                          data.map((item, i) => (
+                              <div className={`${global.flex} `} key={i}>
                               <PlaylistsPost image={item.coverUrl}
                                              title={item.title}
                                              description={item.description.replace(/<[^>]*>?/gm, '')}

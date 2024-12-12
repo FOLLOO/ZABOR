@@ -27,14 +27,15 @@ import Button from "../../../components/ui/buttons/button/Button";
 
 //utils
 // import {useAuth} from '../../../provider/AuthProvider'
-import {getPost, getSamePost} from '../../../redux/slices/post'
+import {getPost, getSamePost, reportPublication} from '../../../redux/slices/post'
 import {handleDialogClick, IMAGE_URL, toggleOverlay} from '../../../utils'
 import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
 import Textarea from "../../../components/ui/input/textarea/Textarea";
 import {postLikePublication, postToFavorite} from "../../../redux/slices/like";
 import Bookmark from "../../../components/svgs/Bookmark";
-import {getComments} from "../../../redux/slices/comments";
+import {getComments, reportComment} from "../../../redux/slices/comments";
 import ServerError from "../../server/ServerError";
+import {Helmet} from "react-helmet";
 
 function Post() {
     // const {user} = useAuth()
@@ -44,6 +45,8 @@ function Post() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [reported, setReported] = useState({})
 
     const [liked, setLiked] = useState(false)
     const [favorite, setFavorite] = useState(false)
@@ -99,6 +102,36 @@ function Post() {
         }
     }
 
+    const handleSupport = (e) => {
+        e.preventDefault()
+        let data = {}
+        let commentID = localStorage.getItem('commentID')
+        if (!commentID) {
+            data.publicationId = id;
+            data.reasonForComplaintId = reported ? reported : null;
+            try{
+                dispatch(reportPublication(data))
+                toggleOverlay('support')
+                alert('Жалоба отправлена')
+            }catch (e) {
+                console.log(e)
+            }
+        }else{
+            data.reasonForComplaintId = reported ? reported : null;
+            data.commentId = commentID;
+            try{
+                dispatch(reportComment(data))
+                toggleOverlay('support')
+                alert('Жалоба отправлена')
+
+                localStorage.removeItem('commentID')
+            }catch (e) {
+                console.log(e)
+            }
+        }
+
+    }
+
 
 
     useEffect(() => {
@@ -145,13 +178,21 @@ function Post() {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>ZABOR | {OnePost?.items?.title || 'Публикация'}</title>
+                <meta name="description" content={'Описание:' + OnePost?.items.description}/>
+                <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                <meta name="author" content="Sairommef"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </Helmet>
             <div className={styles.grid}>
                 <div className={styles.content}>
                     <div className={styles.text}>
                         <h2 className={`${global.xl3} ${global.bold}`}>{OnePost?.items.title || `Пост ${id}`}</h2>
                     </div>
 
-                    <div className={`${styles.text} ${global.flex} ${global.f_a_center}`}>
+                    <div className={`${styles.text} ${styles.imageBlock} ${global.flex} ${global.f_a_center}`}>
                         <img src={`${IMAGE_URL}${OnePost?.items.coverUrl}`} className={styles.image} alt={'temp'}/>
                     </div>
 
@@ -227,7 +268,7 @@ function Post() {
                                             </video>
                                         ) : (
                                             // <div key={index}>Image: {item.file.name}</div>
-                                            <div>
+                                            <div className={styles.imageBlock}>
                                                 <img className={styles.fileUploadImage}
                                                      src={`${IMAGE_URL}/static/${item.file.name}`} alt="image"/>
                                             </div>
@@ -244,10 +285,11 @@ function Post() {
                         <h1 className={`${global.xl2} ${global.bold}`}>Похожее</h1>
                         <div className={styles.afterpost}>
                             {shuffledPosts && shuffledPosts.length > 0 ? (
-                                shuffledPosts.slice(0, 6).map((post) => (
+                                shuffledPosts.slice(0, 6).map((post, i) => (
                                     // <Link to={`/publication/${post.id}`}>
                                         <CardLittle
                                             data={post}
+                                            key={i}
                                             blur
                                             img={post.coverUrl}
                                             title={post.title}
@@ -264,7 +306,7 @@ function Post() {
                     <div className={`${styles.text} ${styles.comments}`} id={"comments"}>
                         <CommnetForm main />
                         {items?.length > 0 ? items?.map((item, i) => (
-                        <Comment comment={item} replies={item?.replies}/>
+                        <Comment comment={item} replies={item?.replies} key={i}/>
                             )) : null }
                     </div>
                 </div>
@@ -294,25 +336,27 @@ function Post() {
             </div>
 
             <dialog id={'support'} className={dialog.dialog} onClick={(e) => handleDialogClick(e, 'support')}>
-                <div className={`${dialog.message} ${global.flex} ${global.f_dir_column}`}>
+                <form className={`${dialog.message} ${global.flex} ${global.f_dir_column}`} onSubmit={handleSupport} id={'supportForm'}>
                     {/*<div className={dialog.support}>*/}
                     <h1 className={global.xl3}>О чем желаете сообщить?</h1>
                     <p className={global.d3}>Мы обязательно рассмотрим ваше обращение</p>
                     {/*</div>*/}
-                    <InputDporDown data={[{id: 1, title: 'Куда', value: 'м'}, {id: 2, title: 'Сюда', value: 'ж'},]}/>
+                    <InputDporDown text={'Причина жалобы'} data={[{id: 1, title: 'Насилие', value: 1}, {id: 2, title: 'Оскорбление', value: 2},]} required value={reported} onChange={(e) => setReported(e.target.value)} />
+                    <div className={`${dialog.textarea} ${dialog.addPostsCarda}`}>
                     <Textarea rows={5} place={'В чем проблема?'}/>
+                    </div>
                     <div className={`${global.flex} ${global.f_dir_column}`} style={{gap: '1rem'}}>
                         <Button variant={'outlet'} click={() => toggleOverlay('support')}
                                 className={`${global.w100} ${global.f_center}`}>
                             Отменить
                         </Button>
-                        <Button variant={'color'} type={'submit'}
+                        <Button variant={'color'} type={'submit'} form={'supportForm'}
                                 className={`${global.w100} ${global.f_center}`}
                                 onClick={() => navigate('/basket')}>
                             Отправить
                         </Button>
                     </div>
-                </div>
+                </form>
             </dialog>
 
         </div>

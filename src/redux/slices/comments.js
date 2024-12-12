@@ -19,6 +19,16 @@ export const getComments = createAsyncThunk('comment/getComments', async (id) =>
   }
 });
 
+export const reportComment = createAsyncThunk('comment/reportComment', async (data) => {
+  try {
+    const response = await axios.post('/comment/reportComment', data );
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+})
+
+
 export const likeComment = createAsyncThunk('comment/commentLike', async (id) => {
   try {
     const response = await axios.post('/comment/commentLike', {

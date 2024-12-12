@@ -31,6 +31,7 @@ import {useAuth} from '../../../../provider/AuthProvider'
 import {useTags} from '../../../../context/TagsContext'
 import {createPost} from '../../../../redux/slices/post'
 import {fetchCreativeTags} from "../../../../redux/slices/tag";
+import {Helmet} from "react-helmet";
 
 
 
@@ -224,6 +225,14 @@ function CreatePost() {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>ZABOR | Создание публикации</title>
+                <meta name="description" content={"Создать публикацию"}/>
+                <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                <meta name="author" content="Sairommef"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </Helmet>
             <div className={styles.grid}>
                 <div className={styles.main}>
                     <BackCreate greenText={'Сохранить'} click={() => setSave(!save)} button
@@ -300,8 +309,8 @@ function CreatePost() {
                                 <div className={styles.tags}>
                                 {creative_tags.items.length !== 0 ?
                                     creative_tags.items.map((item, i) => (
-                                        <div className={styles.tagsWidth}>
-                                            <LittleTag id={item.id} text={item.name} key={i} name={'checkbox'}/>
+                                        <div className={styles.tagsWidth} key={i}>
+                                            <LittleTag id={item.id} text={item.name}  name={'checkbox'}/>
                                         </div>
                                     ))
                                 : null}

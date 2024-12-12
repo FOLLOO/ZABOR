@@ -233,6 +233,13 @@ export function ProfileLayout() {
             return;
         }
         getUser()
+
+        //todo: нет идей как это реализовать при изменении пользователя не обновляется localStorage()
+        // if(!user.avatarUrl || user.avatarUrl !== userData.items.avatarUrl && user.id === id){
+        //     let updateData = {...user};
+        //     updateData.avatar = userData.items.avatarUrl
+        //     localStorage.setItem('user', JSON.stringify(updateData))
+        // }
     }, [])
 
     //Данные для /Tabs

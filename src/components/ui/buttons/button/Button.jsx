@@ -28,7 +28,7 @@ import global from '../../../../global.module.css'
  */
 export default function Button({
                                    children, click, img, id, text_id, name, disabled, componentImage,
-                                   form, className, title, dataIndex, key,
+                                   form, className, title, dataIndex,
                                    type, size = 'base', img_size = 'base', variant= 'default'
                                }) {
     return (
@@ -38,7 +38,6 @@ export default function Button({
                name={name}
                id={id}
                data-index={dataIndex}
-               key={key}
                type={type} form={form} onClick={click}>
            {img && componentImage ? img : img ?
                <img src={img} alt={'.'} className={`${global[img_size]}`}/> : null}

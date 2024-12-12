@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import global from "../../../global.module.css";
 import component from '../GroupTags/select-group-tags.module.css'
 
-import {createUserInterests, fetchCreativeTags} from '../../../redux/slices/tag'
+import {createUserInterests, fetchCreativeTags, updateAuthorInterests} from '../../../redux/slices/tag'
 
 //utils
 import { useTags } from '../../../context/TagsContext'
@@ -61,12 +61,25 @@ function SelectTags ({  type = 'user-first' }) {
     navigate('/publications/create')
   }
 
+  const updatingAuthor = async () => {
+    try{
+      const transformedData = tags.map(tag => ({ id: tag }));
+      await dispatch(updateAuthorInterests(transformedData)).then((response) => {
+        if(response){
+          navigate('/settings')
+        }
+      })
+    }catch (err){
+      console.log(err)
+    }
+  }
+
   const postNewUserTags = async () => {
     try{
       const transformedData = tags.map(tag => ({ id: tag }));
       await dispatch(createUserInterests(transformedData)).then((response) => {
         if(response){
-          navigate('/publications')
+          navigate('/settings')
         }
       })
     }catch (err){
@@ -80,11 +93,11 @@ function SelectTags ({  type = 'user-first' }) {
       case 'user-first':
         return postNewUserTags()
       case 'user-edit':
-        return console.log('Пока что не готово')
+        return postNewUserTags()
       case 'user-to-author':
         return postAuthorTags()
       case 'user-update-author':
-        return console.log('Пока что не готово')
+        return updatingAuthor()
       default:
         return console.error('Unknown user type')
     }
@@ -96,7 +109,9 @@ function SelectTags ({  type = 'user-first' }) {
         return 'Определите интересующие вас теги'
       case 'user-edit':
         return 'Изменение интересующих тегов'
-      case 'user-to-author' || 'user-update-author':
+      case 'user-to-author':
+        return 'На какую тематику будут посты?'
+      case 'user-update-author':
         return 'На какую тематику будут посты?'
       default:
         return console.error('Unknown user type')

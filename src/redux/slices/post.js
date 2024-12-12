@@ -27,6 +27,15 @@ export const createPost = createAsyncThunk('publication/createPublication', asyn
   }
 });
 
+export const reportPublication = createAsyncThunk('publication/reportPublication', async (data) => {
+  try {
+    const response = await axios.post('/publication/reportPublication', data );
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+})
+
 export const getUserPost = createAsyncThunk('publication/getUserPublications', async (id) => {
   try {
     const response = await axios.get('/publication/getUserPublications', {

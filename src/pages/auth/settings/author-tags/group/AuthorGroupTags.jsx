@@ -7,7 +7,7 @@ import SelectGroupTags from '../../../../../components/settings/GroupTags/Select
 import {useDispatch, useSelector} from "react-redux";
 import {userInterests} from "../../../../../redux/slices/tag";
 
-function MyGroupTags () {
+function AuthorGroupTags () {
     const dispatch = useDispatch()
     const {groupIds} = useSelector(state=> state.allTags.userTags.items)
     const getUserInterstes = () => {
@@ -26,9 +26,9 @@ function MyGroupTags () {
   return (
     <div className={global.padLeft}>
       <BackCreate />
-      <SelectGroupTags type={'user-edit'} data={groupIds} />
+      <SelectGroupTags type={'user-update-author'} data={groupIds} />
     </div>
   )
 }
 
-export default MyGroupTags
+export default AuthorGroupTags

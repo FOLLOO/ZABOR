@@ -43,11 +43,18 @@
     }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1440px) {
     .grid{
         grid-template-columns: repeat(3, 1fr);
-        column-gap: .5rem;
-        row-gap: .5rem;
+
+    }
+}
+
+@media (max-width: 1080px) {
+    .grid{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
     }
 }
 

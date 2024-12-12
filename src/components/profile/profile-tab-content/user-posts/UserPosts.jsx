@@ -15,7 +15,8 @@ import filter from '../../../../asserts/icons/update/sort-desc.svg'
 import {useAuth} from '../../../../provider/AuthProvider'
 import {fetchTags} from '../../../../redux/slices/tag'
 import {OverlayContext} from "../../../../context/OverlayContext";
-import {getUserFolder, putPublicationToFolder} from "../../../../redux/slices/folder";
+import {getUserFolder} from "../../../../redux/slices/folder";
+import {Helmet} from "react-helmet";
 
 /** Посты пользователя */
 
@@ -110,6 +111,14 @@ function UserPosts({data = []}) {
     const UserPosts = () => {
         return (
             <>
+                <Helmet>
+                    <meta charSet="utf-8"/>
+                    <title>ZABOR | Публикации | {user.nickname}</title>
+                    <meta name="description" content={'Публикации пользователя' + user.nickname}/>
+                    <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                    <meta name="author" content="Sairommef"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                </Helmet>
                 <div className={styles.title}>
                     <header className={`${global.flex} ${global.f_a_center} `}>
                         <h3 className={styles.header}>Публикации</h3>
@@ -123,8 +132,8 @@ function UserPosts({data = []}) {
                                 <div className={styles.checkbox}>
                                     <LittleTag text={open ? `Закрыть` : `Еще...`} click={() => setOpen(!open)}/>
                                 </div>
-                            {serverTags.map(item => (
-                                <div>
+                            {serverTags.map((item, index) => (
+                                <div key={index}>
                                     <LittleTag text={item.name} name={'publications_tags'} id={item.id} onChange={() => setTags(!tags)} />
                                 </div>
                             ))}
@@ -133,9 +142,10 @@ function UserPosts({data = []}) {
                 <div className={styles.margin}>
                     {sortData.length > 0 ?
                         <div className={styles.grid}>
-                            {sortData.map((message =>
+                            {sortData.map(((message, index) =>
                                         <CardLittle
                                             data={message}
+                                            key={index}
                                             id={message?.id}
                                             userID={message?.userId}
                                             avatar={`${userData.items.avatarUrl}`}

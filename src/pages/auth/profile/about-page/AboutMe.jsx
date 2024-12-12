@@ -18,6 +18,7 @@ import { useSelector} from "react-redux";
 import {useAuth} from "../../../../provider/AuthProvider";
 import Loading from "../../../loading/Loading";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
+import {Helmet} from "react-helmet";
 
 function AboutMe() {
     const {id} = useParams()
@@ -60,6 +61,15 @@ function AboutMe() {
         // margin потому что там ток один атрибут
         isMe && userData?.items?.user?.aboutMe ?
             <div className={styles.main}>
+                <Helmet>
+                    <meta charSet="utf-8"/>
+                    <title>ZABOR | {userData?.items?.user?.nickname}</title>
+                    <meta name="description" content={userData?.items?.user?.aboutMe}/>
+                    <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                    <meta name="author" content="Sairommef"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                </Helmet>
+
                 <section className={styles.descriptionBlock}>
                     <h3 className={global.bold}> {isMe ? 'Обо мне' : 'Oб авторе'}</h3>
                     <p className={`${styles.description} ${global.t2}`}>

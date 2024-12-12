@@ -75,3 +75,9 @@
     position: absolute;
     max-width: fit-content;
 }
+
+@media (max-width: 425px) {
+    .action{
+        gap: normal;
+    }
+}

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect  } from 'react'
 
 import styles from './my-subscribe-settings.module.css'
 
-import temp from '../../../../asserts/temp/2.jpg'
 
 import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCreate'
 import SettingsTitle from '../../../../components/toolbar/settings-title/SettingsTitle'
@@ -52,7 +51,7 @@ function MySubscribeSettings () {
           </div>
           <div className={styles.grid}>
             { sub.items.map((item) => (
-             <ProfileCard  nickname={item.nickname} image={item.coverUrl} description={item.aboutMe} id={item.id}/>
+             <ProfileCard  nickname={item.nickname} image={item.coverUrl} key={item.id} description={item.aboutMe} id={item.id}/>
             ))}
           </div>
           </div>

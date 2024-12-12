@@ -18,6 +18,7 @@ import fire from '../../../asserts/emoji/Fire.svg'
 //utils
 import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {deleteItemFromBasket} from "../../../redux/slices/basketAPI";
+import {Helmet} from "react-helmet";
 
 
 function Market () {
@@ -46,6 +47,14 @@ function Market () {
 
   return (
     <div className={`${global.flex} ${styles.main}`}>
+      <Helmet>
+        <meta charSet="utf-8"/>
+        <title>ZABOR | Корзина</title>
+        <meta name="description" content="Корзина"/>
+        <meta name="keywords" content="HTML, CSS, JavaScript"/>
+        <meta name="author" content="Sairommef"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      </Helmet>
       <div className={`${global.w100}`}>
         <SettingsTitle bigTitle={'Корзина'}
                        description={`В корзине ${cartItems.length} поста`}/>

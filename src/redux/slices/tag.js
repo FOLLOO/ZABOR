@@ -30,6 +30,17 @@ export const createUserInterests = createAsyncThunk('user/createUserInterests', 
   }
 });
 
+export const updateAuthorInterests = createAsyncThunk('user/updateAuthorInterests', async (data) => {
+  try {
+    const response = await axios.post('/user/updateAuthorInterests', {
+      tags: data
+    });
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+})
+
 export const userInterests = createAsyncThunk('user/getUserInterests', async (data) => {
   try {
     const response = await axios.get('/user/getUserInterests');

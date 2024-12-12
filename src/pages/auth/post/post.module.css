@@ -39,6 +39,7 @@
 .fileUploadImage{
     width: 100%;
     margin: 2vh 0;
+    object-fit: cover;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -46,7 +47,7 @@
 .textContent{
     font-size: var(--text-base);
     /*background: rgba(0, 0, 0, 0.06);*/
-    padding: .5rem 0;
+    margin: 2vh 0;
 }
 
 .input{
@@ -105,6 +106,14 @@
     /*width: 70%;*/
     object-fit: cover;
 }
+.imageBlock{
+    height: 400px;
+    width: 100%;
+    max-width: 1200px;
+}
+.imageBlock img{
+    width: 100%;
+}
 
 .inputDescription{
     width: 100%;
@@ -121,7 +130,6 @@
 .text{
     max-width: 1200px;
     width: 100%;
-
 }
 
 

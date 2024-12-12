@@ -15,6 +15,7 @@ import SelectPost from '../../../../components/post/post-playlist/select-postORp
 import { getUserPost } from '../../../../redux/slices/post'
 import Button from "../../../../components/ui/buttons/button/Button";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
+import {Helmet} from "react-helmet";
 
 function PlaylistCreate () {
 
@@ -119,6 +120,14 @@ function PlaylistCreate () {
 
   return (
     <div className={styles.main}>
+      <Helmet>
+        <meta charSet="utf-8"/>
+        <title>ZABOR | Создание плейлиста</title>
+        <meta name="description" content="Создание плейлиста на сайте ZSBOR"/>
+        <meta name="keywords" content="HTML, CSS, JavaScript"/>
+        <meta name="author" content="Sairommef"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      </Helmet>
       <SettingsTitle bigTitle={'Создать плейлист'} />
       <div className={styles.settings}>
           <form id={'save_playlist'} onSubmit={submitForm}>
@@ -143,8 +152,9 @@ function PlaylistCreate () {
               <NothingYet />
               :
               search ?
-                  filtredData.map((item) => (
+                  filtredData.map((item, i) => (
                       <SelectPost
+                          key={i}
                           title={item?.title}
                           id={item?.id}
                           img={`${item?.coverUrl}`}
@@ -156,6 +166,7 @@ function PlaylistCreate () {
                 <SelectPost
                   title={item?.title}
                   id={item?.id}
+                  key={item?.id}
                   img={`${item?.coverUrl}`}
                   onChange={(event) => addPosts(item?.id, event.target.checked)}
                   description={item.description}

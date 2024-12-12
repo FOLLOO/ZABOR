@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 // css
 import styles from './main.module.css'
@@ -14,6 +14,7 @@ import temp2 from '../../../asserts/temp/beautiful-mountain-lake-background-remi
 import GlassBox from '../../../components/glasses/glasses-box/GlassBox'
 import Button from "../../../components/ui/buttons/button/Button";
 import Footer from "../../../components/layout/footer/Footer";
+import {Helmet} from "react-helmet";
 
 //DATA_CONST
 const opportunities = [
@@ -82,6 +83,14 @@ function Main() {
 
     return (
         <div className={styles.back}>
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>ZABOR</title>
+                <meta name="description" content="Раскройте ваш творческий потенциал и поделитесь уникальными историями с миром! На нашем сайте мы, безусловно, помогаем авторам раскрыть свой потенциал"/>
+                <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                <meta name="author" content="Sairommef"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </Helmet>
             <video className={styles.video} loop autoPlay muted>
                 <source src={videoo} type="video/mp4"/>
             </video>
@@ -144,8 +153,8 @@ function Main() {
                     </div>
 
                     <div className={styles.grid}>
-                        {opportunities.map((opport) => (
-                            <GlassBox>
+                        {opportunities.map((opport, index) => (
+                            <GlassBox key={index}>
                                 <div className={styles.actions}>
                                     <h1 className={`${global.medium} ${styles.header}`}>+</h1>
                                     <p className={`${global.medium} ${styles.littleHeader}`}>
@@ -167,7 +176,7 @@ function Main() {
 
                 <div className={`${styles.flex} ${styles.container}`}>
                     {getStart.map((start, i) => (
-                        <GlassBox>
+                        <GlassBox key={i}>
                             <div className={styles.actions}>
                                 <h1 className={`${global.medium} ${styles.header}`}>{i + 1}.</h1>
                                 <p className={`${global.medium} ${styles.littleHeader}`}>

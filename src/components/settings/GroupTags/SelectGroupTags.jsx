@@ -43,7 +43,7 @@ export default function SelectGroupTags ({data, userChoice = false, type= 'user-
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { addGroupTag } = useTags()
+  const { addGroupTag, groupTags } = useTags()
   const { tags } = useSelector(state => state.allTags)
 
   const [selectTag , setSelectTag] = useState([])
@@ -62,25 +62,31 @@ export default function SelectGroupTags ({data, userChoice = false, type= 'user-
     }
   }
 
+  // console.log(groupTags)
+
   useEffect(() => {
-    if(data?.length > 0){
-      data.map((tag) => (  addTag(tag.id)))
+    if(groupTags.length > 0){
+      groupTags?.map(tag => addTag(tag))
+      data?.map(tag => addTag(tag))
+    }else if(data?.length > 0){
+      data.map((tag) => addTag(tag))
     }
-  }, [data]);
-console.log(data)
-// console.log(data)
+  }, [data, groupTags]);
+
   useEffect(() => {
     getTags()
   }, [loading]);
 
   const addTag = (id) => {
-    if (!selectTag.includes(id)){
-      setSelectTag([...selectTag, id])
-    }
-    else{
-      const index = selectTag.indexOf(id);
-      if (index > -1) { // only splice array when item is found
-        selectTag.splice(index, 1); // 2nd parameter means remove one item only
+    if(id !== undefined){
+      if (!selectTag.includes(id)){
+        setSelectTag([...selectTag, id])
+      }
+      else{
+        const index = selectTag.indexOf(id);
+        if (index > -1) { // only splice array when item is found
+          selectTag.splice(index, 1); // 2nd parameter means remove one item only
+        }
       }
     }
   }
@@ -90,9 +96,11 @@ console.log(data)
       case 'user-first':
         return navigate('/select/tags')
       case 'user-edit':
-        return navigate('/select/edit/tags/')
+        return navigate('/settings/tags/')
       case 'user-to-author':
         return navigate('/select/author/tags/')
+      case 'user-update-author':
+        return navigate('/settings/author/tags')
       default:
         return console.error('Unknown user type')
     }
@@ -100,9 +108,13 @@ console.log(data)
 
   const titleTextByType = () => {
     switch (type) {
-      case 'user-first' || 'user-edit':
+      case 'user-first':
         return 'Мои теги'
-      case 'user-to-author' || 'user-update-author':
+      case 'user-edit':
+        return 'Мои теги'
+      case 'user-to-author':
+        return 'Расскажите На какую тематику будут посты?'
+      case 'user-update-author':
         return 'Расскажите На какую тематику будут посты?'
       default:
         return console.error('Unknown user type')
@@ -110,9 +122,28 @@ console.log(data)
   }
 
   const setTags = () => {
-      addGroupTag(selectTag)
+      for(let i = 0; i < selectTag.length; i++){
+        if(!groupTags.includes(selectTag[i])){
+          addGroupTag(selectTag[i])
+        }
+      }
       navigateByType()
   }
+
+  const checkedContext = (id) => {
+    if(groupTags.length > 0){
+      return groupTags.includes(id) || selectTag.includes(id)
+    } else if(selectTag.length > 0 ){
+      return selectTag?.includes(id)
+    } else if(data?.length > 0){
+      return data?.includes(id)
+    }else{
+      return false;
+    }
+  }
+
+  // console.log('selectTag', selectTag, 'data', data)
+
   return (
     <div className={styles.main}>
       <div className={styles.padding}>
@@ -124,7 +155,7 @@ console.log(data)
           {tags?.items?.length > 0 ?
           <div className={userChoice ? styles.grid5 : styles.grid}>
             {tags?.items.map((item) => (
-                <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} checked={data?.includes(item.id)}  />
+                <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} checked={checkedContext(item.id)}  />
                 // <TagCheckBox text={item.name} key={item.id} id={item.id}  />
               ))}
           </div>

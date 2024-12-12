@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import {Outlet, useNavigate} from "react-router-dom";
 
@@ -21,12 +21,12 @@ import user_cog_i from '../../asserts/icons/update/user-cog.svg';
 import tags_i from '../../asserts/icons/update/tags.svg';
 
 //my components
-import {OverlayContext} from "../../context/OverlayContext";
 import Header from "../layout/header/Header";
 import Footer from "../layout/footer/Footer";
 import Button from "../ui/buttons/button/Button";
 import global from "../../global.module.css";
 import {handleDialogClick, toggleOverlay} from "../../utils";
+import {Helmet} from "react-helmet";
 
 
 /**
@@ -38,35 +38,8 @@ import {handleDialogClick, toggleOverlay} from "../../utils";
 const Layout = ({type}) => {
 
     //todo: исправить overlay
-    const {overlay, setOverlay} = useContext(OverlayContext)
     const navigate = useNavigate()
 
-
-
-    /**
-     *
-     * @example
-     * const menu = {
-     *             title: 'base',
-     *             navigation: [
-     *                 {
-     *                     title: 'Главная',
-     *                     ico: home_i,
-     *                     function: () => navigate('/'),
-     *                 },
-     *            ]
-     * },
-     * {
-     *             title: 'settings',
-     *             navigation: [
-     *                 {
-     *                     title: 'Главная',
-     *                     ico: home_i,
-     *                     function: () => navigate('/'),
-     *                 },
-     *            ]
-     * },
-     */
     const menu = [
         {
             title: 'base',
@@ -112,15 +85,18 @@ const Layout = ({type}) => {
                     function: () => navigate('/settings'),
                 },
                 {
-                    title: 'Теги',
+                    title: 'Мои интересы',
                     ico: tags_i,
-                    //todo: изменить роутинг в group
                     function: () => navigate('/settings/group'),
+                },
+                {
+                    title: 'Рекомендации автора',
+                    ico: tags_i,
+                    function: () => navigate('/settings/author/group'),
                 },
                 {
                     title: 'Подписки',
                     ico: subs_i,
-                    //todo: изменить роутинг в subs
                     function: () => navigate('/settings/subscribes'),
                 },
                 {
@@ -138,11 +114,6 @@ const Layout = ({type}) => {
                     ico: user_cog_i,
                     function: () => navigate('/settings/config'),
                 },
-                {
-                    title: 'overlay',
-                    ico: null,
-                    function:() => setOverlay(!overlay),
-                }
             ]
         }
     ]
@@ -163,8 +134,8 @@ const Layout = ({type}) => {
                     </label>
                     {menu
                         .find(item => item.title === type)
-                        ?.navigation.map((item) => (
-                            <Button img={item.ico} img_size={'h-5'}  variant={'default'} text_id={'span'} className={styles.flex}
+                        ?.navigation.map((item, i) => (
+                            <Button img={item.ico} key={'LeftMenuButton' + i} img_size={'h-5'}  variant={'default'} text_id={'span'} className={styles.flex}
                                     click={item.function}>{item.title}</Button>
                         )) || null
                     }
@@ -228,6 +199,14 @@ const Layout = ({type}) => {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>ZABOR | Настройки</title>
+                <meta name="description" content="Натсрйки"/>
+                <meta name="keywords" content="HTML, CSS, JavaScript"/>
+                <meta name="author" content="Sairommef"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </Helmet>
             {renderSwitch(type)}
             <dialog id={'addToBasket'} className={styles.dialog} onClick={(e) => handleDialogClick(e, 'addToBasket')} >
                 <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}>

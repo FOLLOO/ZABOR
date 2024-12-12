@@ -2,13 +2,13 @@ import React from 'react'
 import './input-dropdown.css'
 
 
-function InputDporDown ({data = [], required, value, onChange}) {
+function InputDporDown ({data = [], required, value, onChange, text = 'Ваш пол'}) {
   return (
     <div>
       <label className="select" htmlFor="slct">
         <select id="slct" required={required} value={value} onChange={onChange}>
           {/*<option value="" disabled="" selected="" className="pol">Ваш пол</option>*/}
-          <option value="" hidden>Ваш пол</option>
+          <option value="" hidden>{text}</option>
           {data.length > 0 ?  data.map((item =>
             <option value={item.value} key={item.value} defaultChecked={value === item.title}>{item.title}</option>
           )) : null }
