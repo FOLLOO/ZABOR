@@ -102,7 +102,7 @@ function MyProfileSettings() {
 
     const getUser = () => {
         try {
-            dispatch(getUserData(user.id))
+            dispatch(getUserData(user?.id))
         } catch (e) {
             console.log(e)
         }
@@ -146,13 +146,6 @@ function MyProfileSettings() {
         }
         try {
             updateUser(data)
-            let prev = {...user}
-                prev.nickname = nick
-                prev.sex = sex
-                prev.date_of_birth = birthDay
-                prev.aboutMe = aboutMe
-                prev.userSocialMedia = socialMedia
-            localStorage.updateItem('user', JSON.stringify(prev))
             alert('Мы обновили ваши параметры')
         } catch (err) {
             // alert('Возникла ошибка')

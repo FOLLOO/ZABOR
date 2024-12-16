@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {axiosClassic as axios} from '../../r-axios/axios'
+import axios from '../../r-axios/axios'
 
 export const searchData = createAsyncThunk('search', async (text) => {
     try {

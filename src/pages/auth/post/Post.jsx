@@ -36,6 +36,7 @@ import Bookmark from "../../../components/svgs/Bookmark";
 import {getComments, reportComment} from "../../../redux/slices/comments";
 import ServerError from "../../server/ServerError";
 import {Helmet} from "react-helmet";
+import {postSubscribe} from "../../../redux/slices/sub";
 
 function Post() {
     // const {user} = useAuth()
@@ -50,7 +51,7 @@ function Post() {
 
     const [liked, setLiked] = useState(false)
     const [favorite, setFavorite] = useState(false)
-
+    const [sub, setSub] = useState(false)
     const [sharee, setSharee] = useState(false)
 
     const parser = new DOMParser()
@@ -132,11 +133,26 @@ function Post() {
 
     }
 
+    const subscribe = () => {
+        const data = {
+            authorId: OnePost?.items?.user?.id || 0,
+        }
+        try {
+            if(data.authorId !== 0){
+                dispatch(postSubscribe(data))
+                setSub(!sub)
+            }else alert('Ошибка исполнения попробуйте позже')
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 
 
     useEffect(() => {
         if (OnePost.status === 'loaded' && OnePost.items.id === id) return;
         pageGetPost()
+        setSub(OnePost?.items?.user?.isSub || false)
     }, [])
 
     useEffect(() => {
@@ -227,12 +243,17 @@ function Post() {
                     <div className={styles.text}>
                         <div className={`${styles.profile} ${styles.text}`}>
                             <ProfileNickname type={'post'} nickname={OnePost.items.user?.nickname}
-                                             img={`${IMAGE_URL}${OnePost.items.user?.avatarUrl}`} date={OnePost?.items.createdAt}
+                                             img={OnePost.items.user?.avatarUrl ? `${IMAGE_URL}${OnePost.items.user?.avatarUrl}`: null} date={OnePost?.items.createdAt}
                                              id={OnePost?.items.user?.id} view={OnePost?.items.views_count}
                             />
-                            <Button variant={'outlet'} className={global.f_center}>
-                                Подписаться
+                            <div>
+
+                            <Button variant={sub ? 'color' : 'outlet'}
+                                    click={() => subscribe()}
+                                    className={global.f_center}>
+                                {sub ? 'Вы подписаны'  : 'Подписаться'}
                             </Button>
+                            </div>
                         </div>
 
                     </div>
@@ -241,7 +262,16 @@ function Post() {
                     <div className={`${styles.text} ${styles.mb}`}>
                         <input type="checkbox" className={styles.input} id='desi'/>
                         <div className={`${global.d2} ${styles.description}`}>
-                            {description ? parse(description) : 'Автор не добавил описания'}
+                            {description ? (
+                                description.split('\n').map((line, index) => (
+                                    <React.Fragment key={index}>
+                                        {line}
+                                        <br/>
+                                    </React.Fragment>
+                                ))
+                            ) : (
+                                'Автор не добавил описания'
+                            )}
                         </div>
                         <label htmlFor='desi' className={global.d3}> Развернуть </label>
                     </div>
@@ -250,7 +280,7 @@ function Post() {
                         {sharee ?
                             <div className={styles.sharee}>
                                 <ContextDrop>
-                                    jasdlfalsdkjf
+                                jasdlfalsdkjf
                                 </ContextDrop>
                             </div>
                             : null}

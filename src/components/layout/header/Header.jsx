@@ -30,6 +30,8 @@ import creative from '../../../asserts/icons/update/youtube.svg'
 import create from '../../../asserts/icons/update/plus.svg'
 import menu_i from "../../../asserts/icons/update/menu.svg";
 import searching from '../../../asserts/icons/update/search_black.svg'
+import {getNotifications} from "../../../redux/slices/like";
+import NothingYet from "../../../pages/nothing/nothing-yet/NothingYet";
 
 
 export default function Header({type = 'unauthorized'}) {
@@ -47,11 +49,18 @@ export default function Header({type = 'unauthorized'}) {
     // const cartItems = useSelector((state) => state.cart.items)
 
     const cartItems = useSelector((state) => state.cart.basket)
-
+    const notificationsItems = useSelector((state) => state.noti.notification)
     const functionGetBasket = () => {
         try {
             dispatch(getBasket())
         } catch (e) {
+            console.log(e)
+        }
+    }
+    const functionGetNotifications = () => {
+        try {
+            dispatch(getNotifications())
+        }catch (e) {
             console.log(e)
         }
     }
@@ -79,8 +88,11 @@ export default function Header({type = 'unauthorized'}) {
     }
 
     useEffect(() => {
-        if(!isAuth) return
+        if(!isAuth) return;
+        else{
         functionGetBasket();
+        functionGetNotifications();
+        }
     }, []);
 
     const Unauthorized = () => {
@@ -120,6 +132,9 @@ export default function Header({type = 'unauthorized'}) {
                             <Button img_size={'h-5'} img={bell} name={'noti'} click={() => {
                                 setNotification(true)
                             }}/>
+                            {notificationsItems.items.length === 0 ? null :
+                                <span className={styles.basketCount}>{notificationsItems.items.length}</span>
+                            }
                         </div>
                     </div>
 
@@ -127,8 +142,12 @@ export default function Header({type = 'unauthorized'}) {
                         `${styles.active} ${styles.dropdown_menu}` :
                         `${styles.dropdown_menu} ${styles.default}`}>
                         <ContextDrop title={'Уведомления'}>
-                            <ContextGroup>
-                                <Notification type={'new-post'} nickname={'Hrel'} postName={'Патрики на кол'}/>
+                            <ContextGroup noafter>
+                                {notificationsItems.items.length > 0 ?
+                                    notificationsItems.items.map(noti => (
+                                        <Notification type={'new-post'} postName={noti.notification_text} date={noti.createdAt}/>
+                                    ))
+                                : <NothingYet text={'Уведомлений нет'}/> }
                             </ContextGroup>
                         </ContextDrop>
                     </div>

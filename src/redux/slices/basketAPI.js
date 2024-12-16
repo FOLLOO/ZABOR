@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { axiosClassic as axios } from '../../r-axios/axios'
+import axios from '../../r-axios/axios'
 
 
 export const getBasket = createAsyncThunk(

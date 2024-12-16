@@ -75,7 +75,6 @@ function UserPosts({data = []}) {
     }, []);
 
 
-
     useEffect(() => {
         if (data.length > 0) {
             let checkboxes = document.getElementsByName("publications_tags");
@@ -140,7 +139,7 @@ function UserPosts({data = []}) {
                                             key={index}
                                             id={message?.id}
                                             userID={message?.userId}
-                                            avatar={`${userData.items.avatarUrl}`}
+                                            avatar={userData.items.avatarUrl ? `${userData.items.avatarUrl}` : null}
                                             img={message?.coverUrl}
                                             blur={!!message?.price}
                                             views={message?.views_count + 1}

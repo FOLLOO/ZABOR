@@ -1,109 +1,104 @@
-import {useContext, createContext, useState, useEffect} from "react";
-import {useNavigate } from "react-router-dom";
+import { useContext, createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import userService from "../services/UserService";
-import {useCookies} from "react-cookie";
-import {axiosClassic} from "../r-axios/axios";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
-  const [isAuth, setIsAuth] = useState(false)
-
+  const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState(null);
-
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-
   const navigate = useNavigate();
-
-  const lastPath = localStorage.getItem('lastPath') || null
-
-  const [cookie, setCookie] = useCookies()
-
-
+  const lastPath = localStorage.getItem("lastPath") || null;
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
-    setToken(localStorage.getItem('token'));
-    setCookie('token', localStorage.getItem('token'), { path: '/' })
-    token ? setIsAuth(true) : setIsAuth(false) //временное решение
-  }, [])
+    const savedUser = localStorage.getItem('user');
+    const savedToken = localStorage.getItem('token');
+
+    if (savedToken) {
+      setToken(savedToken);
+      setIsAuth(true);
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
+      }
+    } else {
+      setIsAuth(false);
+      setUser(null);
+    }
+  }, []);
 
   const loginAction = async (email, password) => {
     try {
-      const response = await userService.login(email, password).then(res => res)
+      const response = await userService.login(email, password);
       if (response.token) {
-        setUser(response.profile);
-        localStorage.setItem('user', JSON.stringify(response.profile))
-        setToken(response.token)
-        // setCookie('token', response.token, { path: '/' })
-        token ? setIsAuth(true) : setIsAuth(false)
-        return {path: lastPath ? lastPath : "/", token: response.token};
+        const { token, profile } = response;
+        setToken(token);
+        setUser(profile);
+        setIsAuth(true);
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(profile));
+        return { path: lastPath || "/", token };
       } else {
-        throw {error: response.response.data.message};
+        throw new Error(response.message || "Ошибка авторизации");
       }
-    } catch (e) {
-      return e;
+    } catch (error) {
+      console.error("Login error:", error);
+      return { error: error.message || "Ошибка авторизации" };
     }
   };
 
   const registerAction = async (data) => {
     try {
-      const res = await axiosClassic.post('/auth/registration', data);
-      if (res.data) {
-        const { token, profile } = res.data;
-        setCookie('token', token, { path: '/' })
-        localStorage.setItem('user', JSON.stringify(profile))
-        setToken(token)
+      const response = await userService.register(data);
+      if (response.token) {
+        const { token, profile } = response;
+        setToken(token);
         setUser(profile);
-        token ? setIsAuth(true) : setIsAuth(false)
+        setIsAuth(true);
         localStorage.setItem('token', token);
-        return ({message: 'Пользователь успешно зарегестировани', success: true});
+        localStorage.setItem('user', JSON.stringify(profile));
+        return { message: "Пользователь успешно зарегистрирован", success: true };
       } else {
-        return ({message: 'Пользователь с таким email или nickname уже существует!', success: false});
+        return { message: response.message || "Ошибка регистрации", success: false };
       }
     } catch (error) {
-      return ({message: 'Произошла ошибка при регистрации', success: false});
+      console.error("Registration error:", error);
+      return { message: "Ошибка регистрации", success: false };
     }
-  }
-
+  };
 
   const logOut = async () => {
     const response = await userService.logout()
     if (response.status === 200) {
-      setUser(null);
-      setIsAuth(false)
       setToken("");
+      setUser(null);
+      setIsAuth(false);
+      localStorage.clear();
       navigate("/login");
     }
   };
 
-  const updateUser = async(data) => {
-    try{
-      const response = await userService.updateUser(data)
-        if (response) {
-          setUser(response);
-          localStorage.setItem('user', JSON.stringify(response))
-        }
-        throw new Error(response.message);
+  const updateUser = async (data) => {
+    try {
+      const response = await userService.updateUser(data);
+      if (response) {
+        localStorage.setItem("user", JSON.stringify(response));
+        setUser(response);
+      }
+      return { success: true, response };
+    } catch (error) {
+      console.error("Update user error:", error);
+      return { success: false, error: error.message || "Ошибка обновления данных" };
     }
-    catch (e) {
-      return e;
-    }
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{ token, user, isAuth, loginAction, logOut, updateUser, registerAction }} >
-      {/*<Provider store={store}>*/}
-      {children}
-      {/*</Provider>*/}
-    </AuthContext.Provider>
+      <AuthContext.Provider value={{ token, user, isAuth, loginAction, logOut, updateUser, registerAction }}>
+        {children}
+      </AuthContext.Provider>
   );
-
 };
 
 export default AuthProvider;
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

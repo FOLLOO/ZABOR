@@ -43,6 +43,7 @@ export function ProfileLayout() {
     const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
     const {userFolder} = useSelector(state => state.folder)
 
+    const [sub, setSub] = useState(userData.items?.user?.isSub)
     const formData = new FormData()
 
     const addPublicationToState = (value, isChecked) => {
@@ -213,6 +214,7 @@ export function ProfileLayout() {
         }
         try {
             dispatch(postSubscribe(data))
+            setSub(!sub)
         } catch (e) {
             console.log(e)
         }
@@ -221,26 +223,17 @@ export function ProfileLayout() {
     const getUser = () => {
         try {
             dispatch(getUserData(id))
-
         } catch (err) {
             console.log(err)
         }
     }
 
     useEffect(() => {
-        // if (userData.items.id === Number(id)) return;
-        if (userData.status === 'loaded' && user.id === id){
-            return;
-        }
+        console.log('hellTEK')
         getUser()
-
+        setSub(userData.items?.user?.isSub)
         //todo: нет идей как это реализовать при изменении пользователя не обновляется localStorage()
-        // if(!user.avatarUrl || user.avatarUrl !== userData.items.avatarUrl && user.id === id){
-        //     let updateData = {...user};
-        //     updateData.avatar = userData.items.avatarUrl
-        //     localStorage.setItem('user', JSON.stringify(updateData))
-        // }
-    }, [])
+    }, [id])
 
     //Данные для /Tabs
     const tabContent = [
@@ -248,7 +241,6 @@ export function ProfileLayout() {
         {title: 'Плейлисты', url: './playlists'},
         {title: 'Автор', url: './about'},
     ]
-
     return (
         <div className={styles.main}>
 
@@ -330,9 +322,9 @@ export function ProfileLayout() {
                             </div>
                             :
                             <div className={styles.follow}>
-                                <Button variant={'outlet'}
+                                <Button variant={sub ? 'ghost' :  'outlet'}
                                         click={() => subscribe()}>
-                                    Подписаться
+                                    {sub ? 'Отписаться' : 'Подписаться'}
                                 </Button>
                             </div>}
                     </div>

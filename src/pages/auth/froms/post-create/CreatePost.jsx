@@ -87,6 +87,7 @@ function CreatePost() {
             return;
         }
 
+
         const filterObj = childBlocks.map((obj) => {
             const {
                 name,
@@ -94,6 +95,14 @@ function CreatePost() {
             } = obj
             return {...rest}
         })
+
+        let USS = localStorage.getItem('user');
+        if(USS){
+            USS = JSON.parse(USS)
+            USS.roleId = 2;
+            localStorage.setItem('user', JSON.stringify(USS));
+        }
+
 
         formData.append('file', file)
         formData.append('title', title)
@@ -113,20 +122,7 @@ function CreatePost() {
             }
         }
 
-        // const data = {
-        //   file: null, // todo: Допилить добавление файлов
-        //   title: title,
-        //   description: description,
-        //   ageLimitId: 1, // todo: Допилить
-        //   tags: [4], //
-        //   price: 0, //
-        //   groupTags: groupTags[0],
-        //   creativeTags: creativeTags[0],
-        //   blocks: [{ type: "text", content: content  }],
-        //   cover: null,
-        // }
         try {
-            console.log('FormData:', formData);
             dispatch(createPost(formData))
             navigate(`/profile/${user?.id}`)
         } catch (err) {

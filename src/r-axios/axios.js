@@ -1,73 +1,36 @@
-// import axios from "axios";
-// import { Cookies } from 'react-cookie'
-//
-// const token = window.localStorage.getItem("token");
-//
-// const instance = axios.create({
-//   baseURL: 'http://192.168.1.121:5000/api/',
-//   // baseURL: 'https://official-joke-api.appspot.com'
-//   headers: {
-//     Authorization: `Bearer ${token}` // Устанавливаем заголовок Authorization с токеном
-//   }
-// });
-//
-//
-//
-//
-// export default instance;
-
-
-import axios from "axios" ;
-import {getAccessToken, removeFromStorage} from "../services/AuthServices";
-import userService from "../services/UserService";
-import {IMAGE_URL} from "../utils";
+import axios from "axios";
+import { removeFromStorage } from "../services/AuthServices";
+import { IMAGE_URL } from "../utils";
 
 const token = localStorage.getItem("token");
 
-// console.log(token)
-const options = {
-  // baseURL: 'http://192.168.1.121:5000/api',
+const axiosInstance = axios.create({
   baseURL: `${IMAGE_URL}/api`,
   headers: {
-    Authorization: `Bearer ${token}`, // Устанавливаем заголовок Authorization с токеном
-    'Content-Type': 'application/json'
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   },
-  withCredentials: true
-}
+  withCredentials: true,
+});
 
-const axiosClassic = axios.create(options)
-const axiosWithAuth = axios.create(options)
-
-axiosWithAuth.interceptors.request.use(config => {
-  const accessToken = getAccessToken()
-  if (config?.headers && accessToken)
-    config.headers.Authorization = `Bearer ${accessToken}`
-  return config
-})
-
-const errorCatch = (error) => {
-  const message = error?.response?.data?.message
-  return message
-    ? typeof error.response.data.message === 'object'
-      ? message[0]
-      : message
-    : error.message
-}
-
-axiosWithAuth.interceptors.response.use(config => config, async error => {
-  const originalRequest = error.config;
-  console.log(errorCatch(error))
-  if((error?.response?.status === 401 || errorCatch(error) === 'jwt expired' || errorCatch(error) === 'jwt must be provided') && error.config && !error.config._isRetry){
-    originalRequest._isRetry = true
-    try {
-      await userService.getNewTokens()
-      return axiosWithAuth.request(originalRequest)
-    }
-    catch (error) {
-      if (errorCatch(error) === 'jwt expired') removeFromStorage();
-    }
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token && config?.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  throw error
-})
+  return config;
+});
 
-export {axiosClassic, axiosWithAuth}
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      if (error.response?.status === 401) {
+        console.error("Unauthorized. Logging out...");
+        removeFromStorage();
+        window.location.href = "/login"; // Перенаправление на страницу логина
+      }
+      return Promise.reject(error);
+    }
+);
+
+export default axiosInstance;

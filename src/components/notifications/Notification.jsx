@@ -12,14 +12,14 @@ function Notification ({type, nickname, postName, postImage, views, date}) {
     switch (params){
       case 'new-post' :
         return <RenderType
-          text={`На странице ${nickname} новый пост "${postName}"`}
-          postImage={temp}
-          avatar={temp}
-          date={'2 часа назад'}
+          text={postName}
+          postImage={null}
+          avatar={null}
+          date={new Date(date).toLocaleDateString('ru-RU')}
         />;
       case 'liked-post' :
         return <RenderType
-          text={`${nickname} понравлися ваш пост`}
+          text={`${nickname} понравился ваш пост`}
           postImage={temp}
           avatar={temp}
           date={'2 часа назад'}

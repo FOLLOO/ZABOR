@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 // import axios from "axios";
-import { axiosClassic as axios } from '../../r-axios/axios'
+import axios from '../../r-axios/axios'
 
 export const fetchPosts = createAsyncThunk('publication/getMainPublications', async (params) => {
   try {

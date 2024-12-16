@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { axiosClassic as axios } from '../../r-axios/axios'
+import axios from '../../r-axios/axios'
 // import { deltePost, getUserPost } from './post'
 
 export const createFolder = createAsyncThunk('publication/createFolder', async (data) => {
