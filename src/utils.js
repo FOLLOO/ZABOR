@@ -3,6 +3,7 @@
 
 // export const IMAGE_URL = 'http://192.168.0.101:5000'
 export const IMAGE_URL = 'http://192.168.0.109:5000'
+export const TITLE = 'ZABOR'
 
 export const toggleOverlay = (id) => {
     const dialog = document.getElementById(id)

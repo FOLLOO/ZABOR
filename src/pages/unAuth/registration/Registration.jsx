@@ -5,7 +5,7 @@ import global from '../../../global.module.css'
 import InputText from '../../../components/ui/input/input-text/InputText'
 import {Link, useNavigate} from 'react-router-dom'
 import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
-import {axiosClassic} from "../../../r-axios/axios";
+// import {axiosClassic} from "../../../r-axios/axios";
 import Button from "../../../components/ui/buttons/button/Button";
 import {useAuth} from "../../../provider/AuthProvider";
 

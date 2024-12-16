@@ -19,6 +19,7 @@ import fire from '../../../asserts/emoji/Fire.svg'
 import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {deleteItemFromBasket} from "../../../redux/slices/basketAPI";
 import {Helmet} from "react-helmet";
+import {TITLE} from "../../../utils";
 
 
 function Market () {
@@ -116,8 +117,8 @@ function Market () {
                 <hr/>
 
                 <p className={`${global.d3} ${styles.descript}`}>
-                  Нажимая «Оплатить», вы соглашаетесь с <Link to={'/documentation/pay'}> условиями использования </Link>сервиса
-                  zabor.inc
+                  Нажимая «Оплатить», вы соглашаетесь с <Link to={'/documentation/pay'} style={{color: "var(--accent)"}}> условиями использования </Link>сервиса
+                  {" " + TITLE}
                 </p>
 
               </div>

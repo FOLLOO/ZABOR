@@ -2,9 +2,7 @@
     border-top: 1px solid var(--accent-foreground);
 }
 
-.main{
-    padding: 0 35px;
-}
+
 .main .transprent{
     border-top: 1px solid transparent;
 }
@@ -37,11 +35,12 @@
 }
 
 .settings{
+    padding: 0 1rem;
     margin-bottom: 5%;
 }
 
 @media (max-width: 1600px) {
     .main{
-        padding-left: 20px;
+        /*padding-left: 20px;*/
     }
 }

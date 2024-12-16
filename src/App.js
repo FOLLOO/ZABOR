@@ -32,6 +32,7 @@ import MyGroupTags from "./pages/auth/settings/my-tags/group/MyGroupTags";
 import MyTags from "./pages/auth/settings/my-tags/tags/MyTags";
 import AuthorGroupTags from "./pages/auth/settings/author-tags/group/AuthorGroupTags";
 import AuthorTags from "./pages/auth/settings/author-tags/tags/AuthorTags";
+import MobileSearching from "./pages/auth/mobile-search/MobileSearching";
 // import axios from "axios";
 
 
@@ -165,7 +166,6 @@ function App() {
                     component: <Market/>,
                     child: [],
                 },
-
                 {
                     title: 'author',
                     url: '/select/author',
@@ -186,6 +186,12 @@ function App() {
                     ]
 
                 },
+                {
+                    title: 'search',
+                    url: '/search',
+                    component: <MobileSearching/>,
+                    child: [],
+                }
             ]
         },
         {

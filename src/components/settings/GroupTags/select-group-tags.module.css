@@ -34,7 +34,10 @@
     /*border: 1px solid var(--input-border-color);*/
 }
 
-@media (max-width: 425px) {
+@media (max-width: 430px) {
+    .padding{
+        padding: 0;
+    }
     .saveButton{
         width: auto;
         /*width: 100%;*/

@@ -165,9 +165,24 @@
         margin: 0;
     }
 }
-@media (max-width: 425px) {
+@media (max-width: 430px) {
+
+    .data{
+        flex-direction: column;
+    }
+
+    .data button{
+        border-radius: var(--rounded-md) var(--rounded-md) 0 0;
+    }
+
+    .check{
+        align-items: center;
+    }
+
     .posts{
         width: 90vw;
+        height: 50vh;
+
         order: 1
     }
     .bascket{

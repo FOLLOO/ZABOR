@@ -21,6 +21,7 @@ import axios from "axios" ;
 import {getAccessToken, removeFromStorage} from "../services/AuthServices";
 import userService from "../services/UserService";
 import {IMAGE_URL} from "../utils";
+
 const token = localStorage.getItem("token");
 
 // console.log(token)

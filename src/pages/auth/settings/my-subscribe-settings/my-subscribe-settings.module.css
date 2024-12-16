@@ -53,3 +53,12 @@
         margin-bottom: 20px;
     }
 }
+
+@media (max-width: 430px) {
+    .main{
+        padding: 0 1rem;
+    }
+    .grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

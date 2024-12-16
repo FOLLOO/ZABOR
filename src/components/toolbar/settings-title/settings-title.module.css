@@ -1,6 +1,6 @@
 .main{
     width: 100%;
-    margin: 1.5rem 0;
+    margin: 1.5rem 1rem;
 }
 
 .desc{
@@ -9,4 +9,10 @@
 
 .h{
     /*line-height: 2vh;*/
+}
+
+@media (max-width: 430px) {
+    .main{
+        max-width: 90vw;
+    }
 }

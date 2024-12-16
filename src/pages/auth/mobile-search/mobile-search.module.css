@@ -1,0 +1,10 @@
+.main{
+    height: 100vh;
+}
+
+
+@media (min-width: 431px) {
+    .main{
+         display: none;
+    }
+}

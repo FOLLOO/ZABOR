@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 import {Outlet,  useLocation, useNavigate} from "react-router-dom";
 
@@ -40,6 +40,20 @@ const Layout = ({type}) => {
     const { isAuth } = useAuth();
     const navigate = useNavigate()
     const { pathname } = useLocation()
+
+    const leftMenuRef = useRef(null);
+
+    function handleClickOutside(event){
+        if (leftMenuRef.current && !leftMenuRef.current.contains(event.target)) {
+            const leftMeny = document.getElementById('leftMenu');
+            leftMeny.checked = false;
+        }
+    }
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
 
     useEffect(() => {
         // Сохраняем идентификатор таймера
@@ -152,7 +166,7 @@ const Layout = ({type}) => {
      */
     const LeftMenu = () => {
         return (
-            <div className={styles.navbar}>
+            <div className={styles.navbar} ref={leftMenuRef}>
                 <div className={styles.menu_buttons}>
                     <label htmlFor="leftMenu"
                            className={styles.menu}>

@@ -79,7 +79,7 @@ function SelectTags ({  type = 'user-first' }) {
       const transformedData = tags.map(tag => ({ id: tag }));
       await dispatch(createUserInterests(transformedData)).then((response) => {
         if(response){
-          navigate('/settings')
+          navigate('/settings/config')
         }
       })
     }catch (err){

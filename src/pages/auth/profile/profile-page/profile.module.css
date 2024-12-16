@@ -200,11 +200,20 @@
 /*    }*/
 /*}*/
 
-@media (max-width: 425px) {
+@media (max-width: 430px) {
     .subes h1{
         font-size: var(--text-3xl);
         text-wrap: normal;
         word-break: break-all;
+    }
+    .edit, .follow{
+        margin-top: 1rem;
+        /*align-self: end;*/
+        width: 100%;
+    }
+    .edit button, .follow button{
+        width: 100%;
+        justify-content: center;
     }
 
     .profile{
@@ -214,6 +223,7 @@
     }
 
     .nickname{
+        margin-top: 1rem;
         align-items: center;
         gap: 1rem
     }

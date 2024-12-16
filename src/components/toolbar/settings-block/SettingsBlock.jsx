@@ -2,12 +2,11 @@ import React from 'react'
 
 import styles from './settings-block.module.css'
 import global from '../../../global.module.css'
-import GreenButton from '../../ui/buttons/green-button/GreenButton'
 
 function SettingsBlock ({ children,
   title,
   descripton,
-  red, button, b_text, b_type,
+  red,
   }) {
   return (
     <div className={`${styles.main} ${global.flex}`}>
@@ -15,7 +14,6 @@ function SettingsBlock ({ children,
         <div className={`${global.t3}`}>
           {title ? title : null}
         </div>
-        {button ? <GreenButton text={b_text} type={b_type}  /> : null }
         <div className={red ? `${global.d3} ${styles.red}` : global.d3}>
           {descripton ? descripton : null}
         </div>

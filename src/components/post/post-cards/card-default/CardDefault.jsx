@@ -6,18 +6,12 @@ import ProfileCircle from '../../../profile/profile-circle/ProfileCircle'
 import lock from '../../../../asserts/icons/Lock.svg'
 import basket from '../../../../asserts/icons/basket.svg'
 import plus from '../../../../asserts/icons/plus.svg'
-import temp from '../../../../asserts/temp/temp2.jpg'
-import axios from 'axios'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
-import TransprantButton from '../../../ui/buttons/transprant-button/TransprantButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { deltePost } from '../../../../redux/slices/post'
 
 
-import edit from '../../../../asserts/icons/edit.svg'
-import moveTo from '../../../../asserts/icons/folder-move.svg'
-import remover from '../../../../asserts/icons/contextMenu/trash red.svg'
 import { OverlayContext } from '../../../../context/OverlayContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { IMAGE_URL } from '../../../../utils'
@@ -204,11 +198,11 @@ function CardDefault ({
       <div className={styles.editContext} ref={ref}>
         <ContextDrop width={'17vw'} >
           <ContextGroup>
-            <TransprantButton left img={edit} text={'Изменить'}/>
+            {/*<TransprantButton left img={edit} text={'Изменить'}/>*/}
           </ContextGroup>
           <ContextGroup noafter>
-            <TransprantButton left img={moveTo} text={'Добавить в плейлист'} click={() => addToPlaylist()}/>
-            <TransprantButton left img={remover} text={'Удалить'} red click={() => hndleDeletePost(id)}/>
+            {/*<TransprantButton left img={moveTo} text={'Добавить в плейлист'} click={() => addToPlaylist()}/>*/}
+            {/*<TransprantButton left img={remover} text={'Удалить'} red click={() => hndleDeletePost(id)}/>*/}
           </ContextGroup>
         </ContextDrop>
       </div> : null}

@@ -60,7 +60,7 @@ function Search ({placeholder = 'Найти...', value, onChange, ref, main = fa
         let isEmpty = isEmptyFolders && isEmptyUsers && isEmptyPublications;
         return (
             <div className={styles.content} ref={searchRef}>
-                {serverSend ? <p className={styles.descript}>Поиск по запросу:<i style={{fontStyle: 'italic'}}> {serverSend} </i></p> : null }
+                {serverSend ? <p className={styles.descript}>Результаты поиска по запросу:<i style={{fontStyle: 'italic', color: 'var(--accent)'}} onClick={() => setInputValue(serverSend)}> {serverSend} </i></p> : null }
                 {isEmpty ? <NothingYet text={'Введите запрос'}/>
                     :
                     <>

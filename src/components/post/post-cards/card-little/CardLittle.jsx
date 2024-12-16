@@ -160,7 +160,7 @@ function CardLittle({
                     </div>
                 </div>
                 {img ?
-                    <img className={`${styles.cardImage}  ${blur ? null : null}`} src={`${IMAGE_URL}${img}`}
+                    <img className={`${styles.cardImage}  ${blur && !editable ? global.blur : null}`} src={`${IMAGE_URL}${img}`}
                          alt={'temp'}/>
                     :
                     <div className={`${global.skeleton} ${styles.noImage}`}>

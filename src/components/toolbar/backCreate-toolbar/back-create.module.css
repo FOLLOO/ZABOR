@@ -1,5 +1,6 @@
 .main{
     width: 100%;
+    padding: 0 1rem;
     /*background: ;*/
 }
 
@@ -19,3 +20,4 @@
 
     background: white;
 }
+

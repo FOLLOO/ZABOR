@@ -52,10 +52,11 @@ const AuthProvider = ({ children }) => {
       const res = await axiosClassic.post('/auth/registration', data);
       if (res.data) {
         const { token, profile } = res.data;
-        setUser(profile);
-        setToken(token)
-        token ? setIsAuth(true) : setIsAuth(false)
+        setCookie('token', token, { path: '/' })
         localStorage.setItem('user', JSON.stringify(profile))
+        setToken(token)
+        setUser(profile);
+        token ? setIsAuth(true) : setIsAuth(false)
         localStorage.setItem('token', token);
         return ({message: 'Пользователь успешно зарегестировани', success: true});
       } else {

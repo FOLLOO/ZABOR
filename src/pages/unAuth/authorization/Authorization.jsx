@@ -36,7 +36,10 @@ function Authorization () {
         const {token} = res
         localStorage.setItem('token', token)
         navigate('/publications')
+      }).catch((err) => {
+         return  setErrMes(err)
       })
+
   }
 
   return (
@@ -75,6 +78,7 @@ function Authorization () {
                       Войти
                     </Button>
                   </div>
+                  <p>{errMes}</p>
               </form>
             </div>
           </div>

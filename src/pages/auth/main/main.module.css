@@ -14,6 +14,7 @@
 }
 
 .tags {
+    padding: 0 1rem;
     height: auto; /* конечное состояние */
 }
 
@@ -75,7 +76,7 @@
 
 
 
-@media (max-width: 425px) {
+@media (max-width: 430px) {
     .grid{
         grid-template-columns: repeat(1, 1fr);
         justify-content: center;

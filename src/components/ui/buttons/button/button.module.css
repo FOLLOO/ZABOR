@@ -6,6 +6,11 @@
 .h-5{
     padding: 0 .75rem;
 }
+
+.paddingNULL{
+    padding: 0;
+}
+
 .button {
     composes: base;
     display: inline-flex;
@@ -137,3 +142,8 @@
     100% { background-position: 0 0; }
 }
 
+@media (max-width: 430px) {
+    .ghost{
+        background: var(--b-ghostHover-color);
+    }
+}

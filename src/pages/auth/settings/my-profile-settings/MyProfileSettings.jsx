@@ -115,12 +115,14 @@ function MyProfileSettings() {
         setBirthDay(user?.date_of_birth)
         setSex(user?.sex)
 
-        const result = initialSocialMediaData.map(baseObj => {
-            const userObject = user?.usersSocialMedia.find(item => item.socialMediumId === baseObj.socialMediumId)
-            return {...baseObj, text: userObject?.text ? userObject.text : ''
-            }
-        })
-        setSocialMedia(result)
+        if(user?.usersSocialMedia){
+            const result = initialSocialMediaData.map(baseObj => {
+                const userObject = user?.usersSocialMedia.find(item => item.socialMediumId === baseObj.socialMediumId)
+                return {...baseObj, text: userObject?.text ? userObject.text : ''
+                }
+            })
+            setSocialMedia(result)
+        }
     }, [user])
 
 
@@ -135,7 +137,6 @@ function MyProfileSettings() {
 
     function saveUser(e) {
         e.preventDefault()
-        alert(nick)
         const data = {
             nickname: nick,
             sex: sex,
@@ -154,6 +155,7 @@ function MyProfileSettings() {
             localStorage.updateItem('user', JSON.stringify(prev))
             alert('Мы обновили ваши параметры')
         } catch (err) {
+            // alert('Возникла ошибка')
             console.log(err)
         }
     }
@@ -202,7 +204,7 @@ function MyProfileSettings() {
                                        onChange={e => setNick(e.target.value)}
                                        value={nick ? nick : null}/>
                             {/*<InputText place={'Информация о себе'}/>*/}
-                            <Textarea place={'Информация о себе'} rows={10}
+                            <Textarea place={'Информация о себе'} rows={10} maxLength={255}
                                       value={aboutMe ? aboutMe : null}
                                       onChange={e => setAboutMe(e.target.value)}
                             />

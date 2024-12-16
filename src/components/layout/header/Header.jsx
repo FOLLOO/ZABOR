@@ -29,6 +29,7 @@ import logout from '../../../asserts/icons/update/log-out.svg'
 import creative from '../../../asserts/icons/update/youtube.svg'
 import create from '../../../asserts/icons/update/plus.svg'
 import menu_i from "../../../asserts/icons/update/menu.svg";
+import searching from '../../../asserts/icons/update/search_black.svg'
 
 
 export default function Header({type = 'unauthorized'}) {
@@ -101,6 +102,12 @@ export default function Header({type = 'unauthorized'}) {
                 <div className={styles.search}>
                     <Search main />
                 </div>
+                <div className={styles.search_mibil}>
+                    <Button img={searching} img_size={'paddingNULL'}
+                            click={() => navigate('/search')}>
+
+                    </Button>
+                </div>
                 <div className={`${global.flex} ${styles.buttons}`}>
                     <div className={styles.desctopButtons}>
                         <div className={styles.button_abs}>
@@ -110,7 +117,9 @@ export default function Header({type = 'unauthorized'}) {
                             }
                         </div>
                         <div className={styles.button_abs}>
-                            <Button img_size={'h-5'} img={bell} name={'noti'} click={() => setNotification(true)}/>
+                            <Button img_size={'h-5'} img={bell} name={'noti'} click={() => {
+                                setNotification(true)
+                            }}/>
                         </div>
                     </div>
 
@@ -167,7 +176,10 @@ export default function Header({type = 'unauthorized'}) {
                                             Корзина
                                         </Button>
                                         <Button img_size={'h-5'} img={bell} name={'noti'}
-                                                click={() => setNotification(true)}>
+                                                click={() => {
+                                                    setProfile(false)
+                                                    setNotification(true)
+                                                }}>
                                             Уведомления
                                         </Button>
                                     </div>
@@ -209,14 +221,10 @@ export default function Header({type = 'unauthorized'}) {
                 <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
                     <img src={menu_i}/>
                 </label>
-                <div className={styles.logo}>
-                <Link to={ '/' } >
+                <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
                     <img src={logo} alt={''} className={styles.logoImage}/>
-                </Link>
-                    <Link to={type === 'unauthorized' ? '/' : '/publications'}>
                     <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
-                    </Link>
-                </div>
+                </Link>
             </div>
             {renderSwitch(type)}
         </nav>

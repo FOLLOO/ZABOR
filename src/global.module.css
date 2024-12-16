@@ -73,7 +73,7 @@
 .w100{width: 100%;}
 
 .shadowBliz{ box-shadow: rgba(0, 0 , 0 , 0.24) 0 3px 8px 0; }
-.blur{ filter: blur(20px); }
+.blur{ filter: blur(5px); }
 
 
 .pad{ padding: 0 120px; }
