@@ -133,7 +133,7 @@ export default function Header({type = 'unauthorized'}) {
                                 setNotification(true)
                             }}/>
                             {notificationsItems.items.length === 0 ? null :
-                                <span className={styles.basketCount}>{notificationsItems.items.length}</span>
+                                <span className={styles.basketCount}>{notificationsItems.items.filter(id => id.read === false).length}</span>
                             }
                         </div>
                     </div>
@@ -143,11 +143,13 @@ export default function Header({type = 'unauthorized'}) {
                         `${styles.dropdown_menu} ${styles.default}`}>
                         <ContextDrop title={'Уведомления'}>
                             <ContextGroup noafter>
+                                <div className={styles.notificationsList}>
                                 {notificationsItems.items.length > 0 ?
-                                    notificationsItems.items.map(noti => (
-                                        <Notification type={'new-post'} postName={noti.notification_text} date={noti.createdAt}/>
+                                    notificationsItems.items.map((noti, i) => (
+                                        <Notification type={'new-post'} postName={noti.notification_text} date={noti.createdAt} key={'Not' + i + Math.floor(Math.random() * 10) +  i}/>
                                     ))
                                 : <NothingYet text={'Уведомлений нет'}/> }
+                                </div>
                             </ContextGroup>
                         </ContextDrop>
                     </div>

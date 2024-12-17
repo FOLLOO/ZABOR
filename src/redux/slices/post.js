@@ -27,6 +27,18 @@ export const createPost = createAsyncThunk('publication/createPublication', asyn
   }
 });
 
+export const updatePost = createAsyncThunk('publication/editPublication/', async ({id, formData}) => {
+  try {
+    const response = await axios.put(`/publication/editPublication/${id}`, formData, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      }});
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 export const reportPublication = createAsyncThunk('publication/reportPublication', async (data) => {
   try {
     const response = await axios.post('/publication/reportPublication', data );

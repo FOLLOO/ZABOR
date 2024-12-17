@@ -13,7 +13,7 @@ import {Link} from "react-router-dom";
 
 function RenderType ({ avatar, views, postImage, text, date, link }) {
   return (
-    <div  className={`${styles.main} ${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
+    <Link to={link}  className={`${styles.main} ${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
       {avatar ?
         <div className={styles.image}>
           <ProfileCircle size={40} img={`${IMAGE_URL}${avatar}`}/>
@@ -37,7 +37,7 @@ function RenderType ({ avatar, views, postImage, text, date, link }) {
         <img src={`${IMAGE_URL}${postImage}`} alt={'post'}/>
       </div>
         : null}
-    </div>
+    </Link>
   )
 }
 

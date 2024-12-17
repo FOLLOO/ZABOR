@@ -98,7 +98,7 @@ const ContentAddBlock = ({ id, blockType,  onUpdate }) => {
     return (
         <div className={`${global.flex} ${styles.contextAdd}`}>
           <RoundButton onClick={() => setType('text')} img={textIcon} text={'Текст'}/>
-          <RoundButton onClick={() => setType('file')} img={fileIcon} text={'Файла'}/>
+          {/*<RoundButton onClick={() => setType('file')} img={fileIcon} text={'Файла'}/>*/}
           <RoundButton onClick={() => setType('video')} img={videoIcon} text={'Видео'}/>
           <RoundButton onClick={() => setType('image')} img={photoIcon} text={'Фото'}/>
         </div>

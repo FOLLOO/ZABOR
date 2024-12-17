@@ -4,7 +4,7 @@ import styles from './little-tag.module.css'
 import global from '../../../../global.module.css'
 // import close from '../../../../asserts/icons/close.svg'
 import close from '../../../../asserts/icons/update/close-white.svg'
-function LittleTag ({text, click, onChange, name, id}) {
+function LittleTag ({text, click, onChange, name, id, disabled}) {
 
   const [checkedd, setCheckedd] = useState(false)
 

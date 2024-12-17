@@ -52,7 +52,6 @@ function MyNotificationsSettings () {
       <SettingsTitle
           bigTitle={'Мои уведомления'}
           description={'Изменения сохраняются автоматически'}/>
-      {/*<span style={{visibility: 'hidden', maxHeight: '1rem'}}>asdfas</span>*/}
       <hr/>
       <SettingsBlock title={'Уведомления в браузере'} titleWidth={500}>
         <div className={`${global.flex} ${styles.content}`}>
@@ -79,7 +78,7 @@ function MyNotificationsSettings () {
             <label htmlFor={index} className={`${styles.avtor} ${global.flex}`} key={index}>
               <ProfileNickname type={'subs'} id={item?.id}
                                subs={item?.subs}
-                               img={`${IMAGE_URL}${item?.coverUrl}`} nickname={item.nickname}/>
+                               img={item?.coverUrl ? `${IMAGE_URL}${item?.coverUrl}` : null} nickname={item.nickname}/>
                 <div className={`${global.flex} ${styles.gap}`} >
                 <div  className={global.t3}>
                   Уведомление

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 
 
@@ -46,7 +46,7 @@ function CardLittle({
     const dispatch = useDispatch();
     const [inBasket, setInBasket] = useState(null);
     const [open, setOpen] = useState(false);
-
+    const navigate = useNavigate()
     const addToBasket = (e, id) => {
         e.preventDefault()
         if (!id) {
@@ -172,7 +172,9 @@ function CardLittle({
                 <div className={styles.editContext}>
                     <ContextDrop>
                         <ContextGroup>
-                            <Button variant={'ghost'} img={edit} img_size={'h-6'} className={global.w100}>
+                            <Button variant={'ghost'} img={edit} img_size={'h-6'}
+                                    click={() => navigate(`/publications/create/${data.id}`)}
+                                    className={global.w100}>
                                 Редактировать
                             </Button>
                         </ContextGroup>

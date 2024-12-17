@@ -229,7 +229,6 @@ export function ProfileLayout() {
     }
 
     useEffect(() => {
-        console.log('hellTEK')
         getUser()
         setSub(userData.items?.user?.isSub)
         //todo: нет идей как это реализовать при изменении пользователя не обновляется localStorage()

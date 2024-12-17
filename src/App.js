@@ -158,7 +158,14 @@ function App() {
                     title: 'create',
                     url: '/publications/create',
                     component: <CreatePost/>,
-                    child: []
+                    child: [
+                        {
+                            title: 'update',
+                            url: '/:id',
+                            component: <CreatePost/>,
+                            child: [],
+                        },
+                    ]
                 },
                 {
                     title: 'basket',

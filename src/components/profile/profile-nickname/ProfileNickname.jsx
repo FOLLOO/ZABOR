@@ -21,6 +21,19 @@ import { useAuth } from '../../../provider/AuthProvider'
 function ProfileNickname ({id, nickname, date, view, type, desc = false, comment = false, img,  subs }) {
 
   const {user} = useAuth()
+    function hob(count){
+      let result;
+        if (count === 0) {
+            result = 'просмотров'
+        } else if (count === 1) {
+            result = 'просмотр'
+        } else if (count === 2) {
+            result = 'просмотра'
+        } else {
+            result = 'просмотров'
+        }
+        return result
+    }
   const Default = () => {
     return (
       <div>
@@ -45,11 +58,12 @@ function ProfileNickname ({id, nickname, date, view, type, desc = false, comment
           {nickname ? nickname : 'Anonymos'}
         </Link>
         <div className={global.d3}>
-          {date ? new Date(date).toLocaleString('ru-RU',{weekday: 'long', day: 'numeric', month: 'numeric', year: 'numeric'}) : 'Вчера '} | {view ? view : ' 10К'} просмотров
+          {date ? new Date(date).toLocaleString('ru-RU',{ day: 'numeric', month: 'numeric', year: 'numeric'}) : 'Вчера '} |  {view ? view + ' ' + hob(view) : '10К'}
         </div>
       </div>
     )
   }
+
 
   const SubesView = () => {
     return (

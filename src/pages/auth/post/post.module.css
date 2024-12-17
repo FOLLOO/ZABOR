@@ -87,9 +87,26 @@
 }
 
 .button{
-    gap: 20px;
-    width: 450px;
+    min-height: 2.5rem; /* h-10 */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    /*justify-content: center;*/
+    border-radius: var(--rounded-md); /* rounded-md */
+    /*font-size: var(--text-sm); !* text-sm *!*/
+    font-weight: 500; /* font-medium */
+    transition: all 0.2s ease-in-out ;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
 }
+
+.button:hover{
+    color: var(--accent); /* text-accent-foreground */
+    background: var(--b-ghostHover-color);
+}
+
 .topAction{
     max-width: 100%;
     min-width: 30%;
@@ -250,7 +267,6 @@
     margin-bottom: 1rem;
 }
 .comments{
-    align-self: start;
     margin-bottom: 10vh;
     margin-top: 5vh;
 }
@@ -270,6 +286,10 @@
     display: none;
 }
 
+@media (min-width: 1600px) {
+    
+}
+
 @media (max-width: 1080px) {
     .content {
         padding-top: 2rem;
@@ -278,6 +298,7 @@
         /*width: 100%;*/
     }
     .comments{
+        align-self: start;
         max-width: 800px;
     }
     .textContent{

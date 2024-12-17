@@ -46,8 +46,9 @@
 
 @media (max-width: 1440px) {
     .grid{
-        grid-template-columns: repeat(3, 1fr);
-
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
     }
 }
 

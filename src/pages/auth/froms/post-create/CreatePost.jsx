@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import global from '../../../../global.module.css'
 import styles from './create-post.module.css'
@@ -29,25 +29,31 @@ import send from '../../../../asserts/icons/update/send.svg'
 //utils
 import {useAuth} from '../../../../provider/AuthProvider'
 import {useTags} from '../../../../context/TagsContext'
-import {createPost} from '../../../../redux/slices/post'
+import {createPost, getPost, updatePost} from '../../../../redux/slices/post'
 import {fetchCreativeTags} from "../../../../redux/slices/tag";
 import {Helmet} from "react-helmet";
+import {IMAGE_URL} from "../../../../utils";
+import Loading from "../../../loading/Loading";
+import ServerError from "../../../server/ServerError";
+import postAudience from "../../analytics/post-analytics/post-audience/PostAudience";
 
 
 
 
 function CreatePost() {
+
     const formData = new FormData()
 
-    const [childBlocks, setChildBlocks] = useState([{id: 1, type: 'text', content: null, name: ''}]);
+    const { id} = useParams()
 
     const {groupTags, creativeTags} = useTags()
     const {user} = useAuth()
     const { creative_tags } = useSelector(state => state.allTags)
-
+    const {items, status} = useSelector(state => state.posts.OnePost)
 
     const navigate = useNavigate()
 
+    const [childBlocks, setChildBlocks] = useState([{id: 1, type: 'text', content: null, name: ''}]);
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
 
@@ -57,10 +63,8 @@ function CreatePost() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState()
 
-    const [searchTags, setSerchTags] = useState('')
+    // const [searchTags, setSerchTags] = useState('')
     const [loading, setLoading] = useState(true)
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -95,7 +99,7 @@ function CreatePost() {
             } = obj
             return {...rest}
         })
-
+        // меняем роль, если он не изменился еще
         let USS = localStorage.getItem('user');
         if(USS){
             USS = JSON.parse(USS)
@@ -129,9 +133,6 @@ function CreatePost() {
             console.log(err)
         }
     }
-
-
-
     const getTags = () => {
         try{
             dispatch(fetchCreativeTags()).then((response) => {
@@ -143,7 +144,6 @@ function CreatePost() {
             console.log(e)
         }
     }
-
     const handleChange = (event) => {
         const uploadedFile = event.target.files[0];
         const WIDTH = 1250;
@@ -189,19 +189,15 @@ function CreatePost() {
             }
         }
     }
-
-
     const addChildBlock = () => {
         setChildBlocks([
             ...childBlocks,
             {id: childBlocks.length + 1, type: 'text', content: ''},
         ]);
     };
-
     const deleteChildBlock = () => {
         setChildBlocks(prevBlocks => prevBlocks.slice(0, prevBlocks.length - 1));
     };
-
     const updateChildBlock = (childBlockId, updates) => {
         setChildBlocks(
             childBlocks.map((childBlock) =>
@@ -209,6 +205,78 @@ function CreatePost() {
             )
         );
     };
+
+    const editPublication = async (e) => {
+
+        e.preventDefault()
+        const errors = [];
+
+        const validations = [
+            { condition: !file, message: 'Загрузите фото или видео' },
+            { condition: !title, message: 'Добавьте заголовок к посту' },
+            { condition: !description, message: 'Добавьте описание' },
+        ];
+        validations.forEach(({ condition, message }) => {
+            if (condition) {
+                errors.push(message);
+            }
+        });
+        if (errors.length > 0) {
+            alert(errors.join('\n'));
+            return;
+        }
+
+        formData.append('title', title)
+        formData.append('description', description)
+        formData.append('ageLimitId', 1)
+        formData.append('price', price)
+        formData.append('cover', file)
+
+        try {
+            const resultAction = await dispatch(updatePost({id, formData}))
+            // console.log(resultAction)
+            // navigate(`/profile/${user?.id}`)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    const getPublication = () => {
+        try {
+            dispatch(getPost(id))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        if (!id) return;
+
+        const fetchData = async () => {
+            setLoading(true);
+            await getPublication();
+            setLoading(false);
+        };
+
+        fetchData();
+    }, [id]);
+
+// Обновление состояний после загрузки `items`
+    useEffect(() => {
+        if (id && status === 'loaded' && items) {
+            setTitle(items.title || '');
+            setDescription(items.description || '');
+            setPrice(items.price || '');
+            setFileURL(items.coverUrl || null);
+            setFile('costil'); // Заглушка, если это нужно
+        }else {
+            setTitle('');
+            setDescription( '');
+            setPrice(null);
+            setFileURL( null);
+            setFile(null); // Заглушка, если это нужно
+
+        }
+    }, [items, status]);
 
     useEffect(() => {
         // console.log(childBlocks)
@@ -218,6 +286,16 @@ function CreatePost() {
         if(creative_tags.status === 'loading')
             return getTags()
     }, []);
+
+// Проверка состояния загрузки
+    if (loading && id) {
+        return <Loading />;
+    }
+
+    if (status === 'error') {
+        return <ServerError />;
+    }
+
 
     return (
         <div>
@@ -273,14 +351,14 @@ function CreatePost() {
                     }
                 </div>
                 {/*todo: по клику плавное появление меню сохранения*/}
-                <form onSubmit={handleSubmit} id={'save_my_post'}>
+                <form onSubmit={id ? editPublication : handleSubmit} id={'save_my_post'}>
                     <div className={styles.content}>
                         <div className={styles.spanImage}>
                             {file === null || file === undefined ?
                                 <InputFile onChange={handleChange} value={fileURL} id={'mainImage'} />
                                 :
                                 <div className={styles.mainImage}>
-                                    <img src={fileURL} className={styles.image} width={1250} height={520} alt={'temp'}/>
+                                    <img src={fileURL.includes('/static') ? `${IMAGE_URL}${fileURL}` : fileURL} className={styles.image} width={1250} height={520} alt={'temp'}/>
                                     <div className={styles.delete}>
                                         <input type={'file'} id={'input_file'} style={{display: 'none'}}
                                                onChange={handleChange}/>
@@ -301,7 +379,7 @@ function CreatePost() {
                             <h2 className={`${global.t3} `}>Цена</h2>
                             <InputText place="Определите цену" type={'number'} value={price > 99999 ? 99999 : price} maxValue={99999} minValue={0}
                                        onChange={(e) => setPrice(e.target.value)}/>
-                            <SettingsBlock title={'Добавьте теги'} descripton={'Хоп-хей ла-ла лей'}>
+                            {id ? null : <SettingsBlock title={'Добавьте теги'} descripton={'Хоп-хей ла-ла лей'}>
                                 <div className={styles.tags}>
                                 {creative_tags.items.length !== 0 ?
                                     creative_tags.items.map((item, i) => (
@@ -311,27 +389,28 @@ function CreatePost() {
                                     ))
                                 : null}
                                 </div>
-                            </SettingsBlock>
+                            </SettingsBlock> }
                             <h2 className={`${global.t3} `}>Описание</h2>
                             <div className={global.d3}>
-                                <Textarea place={'Добавьте описание'} rows={10}
+                                <Textarea place={'Добавьте описание'} rows={10} value={description}
                                           onChange={(e) => setDescription(e.target.value)}/>
                             </div>
                         </div>
 
-                        {childBlocks.map((childBlock) => (
+                        {!id && childBlocks !== undefined && childBlocks.length > 0 ?
+                            childBlocks.map((childBlock) => (
                             <ContentAddBlock
                                 key={childBlock.id}
                                 id={childBlock.id}
-                                blockType={childBlock.blockType}
-                                content={childBlock.content}
+                                blockType={childBlock.blockType || childBlock.type}
+                                content={childBlock.content || childBlock.text}
                                 onUpdate={updateChildBlock}
                             />
-                        ))}
-                        <div className={styles.buttons}>
+                        )) : null}
+                        {!id ? <div className={styles.buttons}>
                             <RoundButton text={'Добавить блок'} img={plus} onClick={addChildBlock}/>
                             <RoundButton text={'Удалить  блок'} img={minus} onClick={deleteChildBlock}/>
-                        </div>
+                        </div> : <p className={`${global.d3} ${global.italic} `}>К сожалению нельзя изменить содержание поста</p>}
                     </div>
                 </form>
             </div>

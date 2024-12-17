@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import parse from 'html-react-parser';
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, useNavigate, useParams} from 'react-router-dom'
 
@@ -12,9 +11,8 @@ import global from '../../../global.module.css'
 import report from '../../../asserts/icons/update/alert-triangle.svg'
 import comment from '../../../asserts/icons/update/message-circle.svg'
 import share from '../../../asserts/icons/update/share-2.svg'
-// import video from '../../../asserts/icons/contextMenu/Видео.png'
 
-//img comp
+//img img comp
 import Like from '../../../components/svgs/Like'
 
 //components
@@ -24,23 +22,24 @@ import Comment from '../../../components/comments/comment/Comment'
 import CommnetForm from '../../../components/comments/comments-form/CommnetForm'
 import ContextDrop from '../../../components/context-drop/ContextDrop'
 import Button from "../../../components/ui/buttons/button/Button";
+import Textarea from "../../../components/ui/input/textarea/Textarea";
+import Bookmark from "../../../components/svgs/Bookmark";
+import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
+import ServerError from "../../server/ServerError";
 
 //utils
-// import {useAuth} from '../../../provider/AuthProvider'
 import {getPost, getSamePost, reportPublication} from '../../../redux/slices/post'
 import {handleDialogClick, IMAGE_URL, toggleOverlay} from '../../../utils'
-import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
-import Textarea from "../../../components/ui/input/textarea/Textarea";
 import {postLikePublication, postToFavorite} from "../../../redux/slices/like";
-import Bookmark from "../../../components/svgs/Bookmark";
 import {getComments, reportComment} from "../../../redux/slices/comments";
-import ServerError from "../../server/ServerError";
 import {Helmet} from "react-helmet";
 import {postSubscribe} from "../../../redux/slices/sub";
+import {useAuth} from "../../../provider/AuthProvider";
+import {RWebShare} from "react-web-share";
 
 function Post() {
-    // const {user} = useAuth()
     const {id} = useParams()
+    const {user} = useAuth()
     const {OnePost, SamePosts} = useSelector(state => state.posts)
     const {items, status} = useSelector(state => state.comments.publicationComment)
 
@@ -202,6 +201,8 @@ function Post() {
                 <meta name="author" content="Sairommef"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Helmet>
+
+
             <div className={styles.grid}>
                 <div className={styles.content}>
                     <div className={styles.text}>
@@ -212,7 +213,7 @@ function Post() {
                         <img src={`${IMAGE_URL}${OnePost?.items.coverUrl}`} className={styles.image} alt={'temp'}/>
                     </div>
 
-                    <div className={`${styles.actionButtons} ${global.flex}`}>
+                    <div className={`${styles.text} ${styles.actionButtons} ${global.flex}`}>
                             {/*<TransprantButton img={like} title={'Нравится'} click={() => likePublication()}/>*/}
                             <Button img={<Like stroke={liked ? 'transparent' : 'var(--black)'} fill={liked ? 'var(--red)' : 'transparent'}/>} componentImage variant={'ghost'} click={(e) => likePublication(e)}>
                                 Нравится
@@ -234,9 +235,21 @@ function Post() {
                             <Button img={report} variant={'ghost'} click={() => toggleOverlay('support')}>
                                 Пожаловаться
                             </Button>
-                            <Button img={share} variant={'ghost'} click={() => setSharee(!sharee)}>
+                            <RWebShare
+                                data={{
+                                    text: "ZABOR",
+                                    url: `http://localhost:3000/publication/${id}`,
+                                    title: "ZABOR",
+                                }}
+                                onClick={() =>
+                                    console.log("shared successfully!")
+                                }
+                            >
+                            <button className={styles.button} >
+                                <img src={share} alt={'share'} />
                                 Поделиться
-                            </Button>
+                            </button>
+                            </RWebShare>
                         </div>
                     </div>
 
@@ -247,12 +260,12 @@ function Post() {
                                              id={OnePost?.items.user?.id} view={OnePost?.items.views_count}
                             />
                             <div>
-
+                                {OnePost.items.user?.id === user?.id ? null :
                             <Button variant={sub ? 'color' : 'outlet'}
                                     click={() => subscribe()}
                                     className={global.f_center}>
                                 {sub ? 'Вы подписаны'  : 'Подписаться'}
-                            </Button>
+                            </Button> }
                             </div>
                         </div>
 
@@ -336,7 +349,7 @@ function Post() {
                     <div className={`${styles.text} ${styles.comments}`} id={"comments"}>
                         <CommnetForm main />
                         {items?.length > 0 ? items?.map((item, i) => (
-                        <Comment comment={item} replies={item?.replies} key={i}/>
+                        <Comment comment={item} replies={item?.replies} key={'COmment' + Math.floor(Math.random() * 10) +  i}/>
                             )) : null }
                     </div>
                 </div>
@@ -344,8 +357,8 @@ function Post() {
                 <div className={styles.recomends}>
                     <h1 className={`${global.t4} ${global.bold}`}>Похожее</h1>
                     {shuffledPosts?.length > 0 ?
-                        shuffledPosts?.map((posts) => (
-                            <Link to={`/publication/${posts.id}`}>
+                        shuffledPosts?.map((posts, i) => (
+                            <Link to={`/publication/${posts.id}`} key={'Post' + i + Math.floor(Math.random() * 10) +  i}>
                                 <CardLittle
                                     key={posts.id}
                                     data={posts}
