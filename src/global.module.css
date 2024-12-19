@@ -33,13 +33,35 @@
 .xl3 { font-size: var(--text-3xl); }
 .xl4 { font-size: var(--text-4xl); }
 /*.xl4 { font-size: 2rem; padding: 2rem 3.5rem; }*/
-.h-1, .h-1 img{height: var(--text-xs); width: var(--text-xs);}
-.h-2, .h-2 img{height: var(--text-sm); width: var(--text-sm);}
-.h-3, .h-3 img{height: var(--text-base); width: var(--text-base);}
-.h-4, .h-4 img{height: var(--text-lg); width: var(--text-lg);}
-.h-5{height: var(--text-xl); width: var(--text-xl);}
-.h-6{height: var(--text-2xl); width: var(--text-2xl);}
-.h-7{height: var(--text-3xl); width: var(--text-3xl);}
+.h-1, .h-1 img{
+    height: var(--text-xs);
+    width: var(--text-xs);
+}
+.h-2, .h-2 img{
+    height: var(--text-sm);
+    width: var(--text-sm);
+}
+.h-3, .h-3 img{
+    height: var(--text-base);
+    width: var(--text-base);
+}
+.h-4, .h-4 img{
+    height: var(--text-lg);
+    width: var(--text-lg);
+}
+.h-5{
+    height: var(--text-xl);
+    width: var(--text-xl);
+}
+.h-6{
+    height: var(--text-2xl);
+    font-size: var(--text-2xl);
+    width: var(--text-2xl);
+}
+.h-7{
+    height: var(--text-3xl);
+    width: var(--text-3xl);
+}
 
 .d1, .d2, .d3{ color: var(--t-c-description); }
 

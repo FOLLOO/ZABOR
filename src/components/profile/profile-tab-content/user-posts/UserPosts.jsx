@@ -16,6 +16,7 @@ import {useAuth} from '../../../../provider/AuthProvider'
 import {fetchTags} from '../../../../redux/slices/tag'
 import {getUserFolder} from "../../../../redux/slices/folder";
 import {Helmet} from "react-helmet";
+import {TITLE} from "../../../../utils";
 
 /** Посты пользователя */
 
@@ -104,7 +105,7 @@ function UserPosts({data = []}) {
             <>
                 <Helmet>
                     <meta charSet="utf-8"/>
-                    <title>ZABOR | Публикации | {user?.nickname || 'Лучший среди всех'}</title>
+                    <title>{TITLE} | Публикации | {user?.nickname || 'Лучший среди всех'}</title>
                     <meta name="description" content={'Публикации пользователя ' + user?.nickname || 'Публикации пользователя'}/>
                     <meta name="keywords" content="HTML, CSS, JavaScript"/>
                     <meta name="author" content="Sairommef"/>

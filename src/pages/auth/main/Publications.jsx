@@ -12,6 +12,7 @@ import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {useAuth} from "../../../provider/AuthProvider";
 import {Helmet} from "react-helmet";
 import ServerError from "../../server/ServerError";
+import {TITLE} from "../../../utils";
 
 export default function Publications() {
     let {group, creative_tags} = useParams();
@@ -72,7 +73,7 @@ export default function Publications() {
         <div className={`${styles.main}`}>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>ZABOR | Публикации</title>
+                <title>{TITLE} | Публикации</title>
                 <meta name="description" content="Раскройте ваш творческий потенциал и поделитесь уникальными историями с миром! На нашем сайте мы, безусловно, помогаем авторам раскрыть свой потенциал"/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>

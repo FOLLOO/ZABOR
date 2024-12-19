@@ -40,7 +40,7 @@ function CommnetForm ({ click, main = false, parrentID }) {
       try {
         dispatch(createComment(data));
         setValue(null)
-        // window.location.reload()
+        window.location.reload()
       } catch (e) {
         console.error('Error:', e);
       }
@@ -68,11 +68,11 @@ function CommnetForm ({ click, main = false, parrentID }) {
       <div className={styles.flex}>
         {main ? null :
         <div className={styles.button}>
-          <Button click={click}>Отмена</Button>
+          <Button size={'h-3'} img_size={'h-3'} className={global.sm} click={click}>Отмена</Button>
         </div> }
         <div className={styles.button}>
           {/*<button type="submit" form={'HORVA'}>Отправить</button>*/}
-          <Button variant={'color'} type={'submit'} form={parrentID ? parrentID : 'main'}>Отправить</Button>
+          <Button size={'h-3'} img_size={'h-3'} className={global.sm} variant={'color'} type={'submit'} form={parrentID ? parrentID : 'main'}>Отправить</Button>
         </div>
       </div>
     </form>

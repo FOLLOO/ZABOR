@@ -29,7 +29,7 @@ import ServerError from "../../server/ServerError";
 
 //utils
 import {getPost, getSamePost, reportPublication} from '../../../redux/slices/post'
-import {handleDialogClick, IMAGE_URL, toggleOverlay} from '../../../utils'
+import {handleDialogClick, IMAGE_URL, TITLE, toggleOverlay} from '../../../utils'
 import {postLikePublication, postToFavorite} from "../../../redux/slices/like";
 import {getComments, reportComment} from "../../../redux/slices/comments";
 import {Helmet} from "react-helmet";
@@ -195,7 +195,7 @@ function Post() {
         <div>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>ZABOR | {OnePost?.items?.title || 'Публикация'}</title>
+                <title>{TITLE} | {OnePost?.items?.title || 'Публикация'}</title>
                 <meta name="description" content={'Описание:' + OnePost?.items.description}/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>
@@ -203,7 +203,7 @@ function Post() {
             </Helmet>
 
 
-            <div className={styles.grid}>
+            <div className={`${styles.grid} ${styles.text}`}>
                 <div className={styles.content}>
                     <div className={styles.text}>
                         <h2 className={`${global.xl3} ${global.bold}`}>{OnePost?.items.title || `Пост ${id}`}</h2>
@@ -215,24 +215,25 @@ function Post() {
 
                     <div className={`${styles.text} ${styles.actionButtons} ${global.flex}`}>
                             {/*<TransprantButton img={like} title={'Нравится'} click={() => likePublication()}/>*/}
-                            <Button img={<Like stroke={liked ? 'transparent' : 'var(--black)'} fill={liked ? 'var(--red)' : 'transparent'}/>} componentImage variant={'ghost'} click={(e) => likePublication(e)}>
+                            <Button size={'h-3'} img_size={'h-3'} className={global.sm}
+                                    img={<Like stroke={liked ? 'transparent' : 'var(--black)'} fill={liked ? 'var(--red)' : 'transparent'}/>}
+                                    componentImage variant={'ghost'} click={(e) => likePublication(e)}>
                                 Нравится
                             </Button>
-                            <Button variant={'ghost'} click={() => addToFavorite()}
+                            <Button size={'h-3'} img_size={'h-3'} className={global.sm} variant={'ghost'} click={() => addToFavorite()}
                                     img={<Bookmark stroke={favorite ? 'transparent' : 'var(--black)'} fill={favorite ? 'var(--accent)' : 'transparent'}/>} componentImage
                             >
-                                Избранное
+                                Сохранить
                             </Button>
 
                             {/*<TransprantButton img={bookmark} title={'Избранное'} click={() => addToFavorite()}/>*/}
                             <a href={'#comments'} className={`${global.flex} ${global.f_center}`}>
                                 {/*<TransprantButton img={comment} title={'Комментарии'}/>*/}
-                                <Button img={comment} variant={'ghost'}>
+                                <Button size={'h-3'} className={global.sm} img={comment} variant={'ghost'}>
                                     Комментарии
                                 </Button>
                             </a>
-                        <div className={global.flex}>
-                            <Button img={report} variant={'ghost'} click={() => toggleOverlay('support')}>
+                            <Button size={'h-3'}  className={global.sm} img={report} variant={'ghost'} click={() => toggleOverlay('support')}>
                                 Пожаловаться
                             </Button>
                             <RWebShare
@@ -250,7 +251,6 @@ function Post() {
                                 Поделиться
                             </button>
                             </RWebShare>
-                        </div>
                     </div>
 
                     <div className={styles.text}>
@@ -355,7 +355,7 @@ function Post() {
                 </div>
                 {/*</form>*/}
                 <div className={styles.recomends}>
-                    <h1 className={`${global.t4} ${global.bold}`}>Похожее</h1>
+                    <h1 className={`${global.xl2} ${global.bold}`}>Похожее</h1>
                     {shuffledPosts?.length > 0 ?
                         shuffledPosts?.map((posts, i) => (
                             <Link to={`/publication/${posts.id}`} key={'Post' + i + Math.floor(Math.random() * 10) +  i}>

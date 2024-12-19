@@ -3,6 +3,7 @@
 }
 .buttonWidth button{
     width: 100%;
+    display: flex;
 }
 
 

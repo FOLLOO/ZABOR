@@ -4,7 +4,8 @@ import React from 'react';
 import styles from './file-input.module.css'
 import global from '../../../../global.module.css';
 import Button from "../../buttons/button/Button";
-export default function InputFile({onChange, value, id}) {
+export default function InputFile({onChange, value, id,
+}) {
 
     return (
         <div className={styles.fileUpload}>
@@ -25,13 +26,13 @@ export default function InputFile({onChange, value, id}) {
                     <div className={`${global.d1} ${styles.delete}`}>Или перетащите фото сюда</div>
                 ) : null}
             </div>
-            <div className={styles.fileUploadContent}>
                 {value ? (
-                    <div>
-                        <img className={styles.fileUploadImage} src={value} alt="image"/>
+                    <div className={styles.fileUploadContent}>
+                        <div>
+                            <img className={styles.fileUploadImage} src={value} alt="image"/>
+                        </div>
                     </div>
                 ) : null}
-            </div>
         </div>
     );
 };

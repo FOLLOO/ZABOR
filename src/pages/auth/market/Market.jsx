@@ -50,7 +50,7 @@ function Market () {
     <div className={`${global.flex} ${styles.main}`}>
       <Helmet>
         <meta charSet="utf-8"/>
-        <title>ZABOR | Корзина</title>
+        <title>{TITLE} | Корзина</title>
         <meta name="description" content="Корзина"/>
         <meta name="keywords" content="HTML, CSS, JavaScript"/>
         <meta name="author" content="Sairommef"/>

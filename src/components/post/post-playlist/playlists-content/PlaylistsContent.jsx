@@ -19,7 +19,7 @@ import { useDispatch } from 'react-redux'
 import {deleteFolder, deletePublicationFromFolder, putFolder} from '../../../../redux/slices/folder'
 import {useNavigate, useParams} from 'react-router-dom'
 import Button from "../../../ui/buttons/button/Button";
-import {IMAGE_URL} from "../../../../utils";
+import {IMAGE_URL, TITLE} from "../../../../utils";
 import {useAuth} from "../../../../provider/AuthProvider";
 import InputText from "../../../ui/input/input-text/InputText";
 import Textarea from "../../../ui/input/textarea/Textarea";
@@ -104,7 +104,7 @@ function PlaylistsContent ({ data, folder}) {
       <div className={`${styles.main} ${global.flex}`}>
           <Helmet>
               <meta charSet="utf-8"/>
-              <title>ZABOR | {folder?.name}</title>
+              <title>{TITLE} | {folder?.name}</title>
               <meta name="description" content={folder?.description}/>
               <meta name="keywords" content="HTML, CSS, JavaScript"/>
               <meta name="author" content="Sairommef"/>

@@ -32,10 +32,9 @@ import {useTags} from '../../../../context/TagsContext'
 import {createPost, getPost, updatePost} from '../../../../redux/slices/post'
 import {fetchCreativeTags} from "../../../../redux/slices/tag";
 import {Helmet} from "react-helmet";
-import {IMAGE_URL} from "../../../../utils";
+import {IMAGE_URL, TITLE} from "../../../../utils";
 import Loading from "../../../loading/Loading";
 import ServerError from "../../../server/ServerError";
-import postAudience from "../../analytics/post-analytics/post-audience/PostAudience";
 
 
 
@@ -48,7 +47,7 @@ function CreatePost() {
 
     const {groupTags, creativeTags} = useTags()
     const {user} = useAuth()
-    const { creative_tags } = useSelector(state => state.allTags)
+    const {creative_tags } = useSelector(state => state.allTags)
     const {items, status} = useSelector(state => state.posts.OnePost)
 
     const navigate = useNavigate()
@@ -192,7 +191,7 @@ function CreatePost() {
     const addChildBlock = () => {
         setChildBlocks([
             ...childBlocks,
-            {id: childBlocks.length + 1, type: 'text', content: ''},
+            {id: childBlocks.length + 1, content: ''},
         ]);
     };
     const deleteChildBlock = () => {
@@ -301,7 +300,7 @@ function CreatePost() {
         <div>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>ZABOR | Создание публикации</title>
+                <title>{TITLE} | Создание публикации</title>
                 <meta name="description" content={"Создать публикацию"}/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>
@@ -311,8 +310,7 @@ function CreatePost() {
                 <div className={styles.main}>
                     <BackCreate greenText={'Сохранить'} click={() => setSave(!save)} button
                                 description={'Как будет выглядеть ваш пост?'}/>
-                    {
-                        save ?
+                    {save ?
                             <div className={styles.save}>
                                 <ContextDrop>
                                     <ContextGroup>
@@ -347,15 +345,14 @@ function CreatePost() {
                                     </ContextGroup>
                                 </ContextDrop>
                             </div>
-                            : null
-                    }
+                            : null}
                 </div>
                 {/*todo: по клику плавное появление меню сохранения*/}
                 <form onSubmit={id ? editPublication : handleSubmit} id={'save_my_post'}>
                     <div className={styles.content}>
                         <div className={styles.spanImage}>
                             {file === null || file === undefined ?
-                                <InputFile onChange={handleChange} value={fileURL} id={'mainImage'} />
+                                <InputFile onChange={handleChange}  value={fileURL} id={'mainImage'} />
                                 :
                                 <div className={styles.mainImage}>
                                     <img src={fileURL.includes('/static') ? `${IMAGE_URL}${fileURL}` : fileURL} className={styles.image} width={1250} height={520} alt={'temp'}/>
@@ -397,7 +394,7 @@ function CreatePost() {
                             </div>
                         </div>
 
-                        {!id && childBlocks !== undefined && childBlocks.length > 0 ?
+                        {childBlocks !== undefined && childBlocks.length > 0 ?
                             childBlocks.map((childBlock) => (
                             <ContentAddBlock
                                 key={childBlock.id}

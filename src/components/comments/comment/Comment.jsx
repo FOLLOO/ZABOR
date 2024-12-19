@@ -101,17 +101,19 @@ function Comment({ comment=[], replies=[] }) {
               {comment?.likeCount !== 0 ? comment?.likeCount : null }
           </div>
         </button>
-        {answ ? null : <Button variant={'ghost'}  click={() => setAnsw(!answ)} >Ответить</Button>  }
+          {replies && replies.length > 0 && (
+              <Button size={'h-2'} img_size={'h-2'} className={global.sm} img={arrow_down} click={() => setShowReplies(!showReplies)}>
+                  {showReplies ? 'Скрыть ответы' : 'Еще ответы'}
+              </Button>
+          )}
+        {answ ? null : <Button size={'h-2'} img_size={'h-2'} className={global.sm} variant={'ghost'}  click={() => setAnsw(!answ)} >Ответить</Button>  }
+
       </div>
       <div className={styles.answ}>
         {answ ? <CommnetForm click={() => setAnsw(!answ)} parrentID={comment.id} /> : null}
       </div>
       <div className={styles.openAnswers}>
-        {replies && replies.length > 0 && (
-            <Button img={arrow_down} click={() => setShowReplies(!showReplies)}>
-                {showReplies ? 'Скрыть ответы' : 'Еще ответы'}
-            </Button>
-        )}
+
       </div>
 
       {showReplies && (

@@ -11,6 +11,7 @@ import {useAuth} from "../../../../provider/AuthProvider";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 import {getUserFolder} from "../../../../redux/slices/folder";
 import {Helmet} from "react-helmet";
+import { TITLE } from "../../../../utils";
 
 
 function Playlists() {
@@ -45,7 +46,7 @@ function Playlists() {
         <div className={styles.margin}>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>ZABOR | Плейлисты | {user.nickname}</title>
+                <title>{TITLE} | Плейлисты | {user.nickname}</title>
                 <meta name="description" content={'Плейлисты пользователя' + user.nickname}/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>

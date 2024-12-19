@@ -16,6 +16,7 @@ import { getUserPost } from '../../../../redux/slices/post'
 import Button from "../../../../components/ui/buttons/button/Button";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 import {Helmet} from "react-helmet";
+import {TITLE} from "../../../../utils";
 
 function PlaylistCreate () {
 
@@ -122,7 +123,7 @@ function PlaylistCreate () {
     <div className={styles.main}>
       <Helmet>
         <meta charSet="utf-8"/>
-        <title>ZABOR | Создание плейлиста</title>
+        <title>{TITLE} | Создание плейлиста</title>
         <meta name="description" content="Создание плейлиста на сайте ZSBOR"/>
         <meta name="keywords" content="HTML, CSS, JavaScript"/>
         <meta name="author" content="Sairommef"/>

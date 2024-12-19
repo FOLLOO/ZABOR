@@ -19,6 +19,7 @@ import {useAuth} from "../../../../provider/AuthProvider";
 import Loading from "../../../loading/Loading";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 import {Helmet} from "react-helmet";
+import {TITLE} from "../../../../utils";
 
 function AboutMe() {
     const {id} = useParams()
@@ -63,7 +64,7 @@ function AboutMe() {
             <div className={styles.main}>
                 <Helmet>
                     <meta charSet="utf-8"/>
-                    <title>ZABOR | {userData?.items?.user?.nickname}</title>
+                    <title>{TITLE} | {userData?.items?.user?.nickname}</title>
                     <meta name="description" content={userData?.items?.user?.aboutMe}/>
                     <meta name="keywords" content="HTML, CSS, JavaScript"/>
                     <meta name="author" content="Sairommef"/>

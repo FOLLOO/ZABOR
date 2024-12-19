@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
 import {useAuth} from "../../../provider/AuthProvider";
-import {IMAGE_URL} from "../../../utils";
+import {IMAGE_URL, TITLE} from "../../../utils";
 import {getBasket} from "../../../redux/slices/basketAPI";
 
 //Components
@@ -244,7 +244,7 @@ export default function Header({type = 'unauthorized'}) {
                 </label>
                 <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
                     <img src={logo} alt={''} className={styles.logoImage}/>
-                    <h1 className={`${global.xl} ${global.bold}`}>ZABOR</h1>
+                    <h1 className={`${global.xl} ${global.bold}`}>{TITLE}</h1>
                 </Link>
             </div>
             {renderSwitch(type)}

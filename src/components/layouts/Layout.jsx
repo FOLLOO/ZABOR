@@ -25,7 +25,7 @@ import Header from "../layout/header/Header";
 import Footer from "../layout/footer/Footer";
 import Button from "../ui/buttons/button/Button";
 import global from "../../global.module.css";
-import {handleDialogClick, toggleOverlay} from "../../utils";
+import {handleDialogClick, TITLE, toggleOverlay} from "../../utils";
 import {Helmet} from "react-helmet";
 import {useAuth} from "../../provider/AuthProvider";
 
@@ -243,7 +243,7 @@ const Layout = ({type}) => {
         <div>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>ZABOR | Настройки</title>
+                <title>{TITLE} | Настройки</title>
                 <meta name="description" content="Натсрйки"/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>

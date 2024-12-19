@@ -9,13 +9,14 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import { TagsProvider } from './context/TagsContext'
 import {Helmet} from "react-helmet";
+import {TITLE} from "./utils";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <Helmet>
           <meta charSet="utf-8"/>
-          <title>ZABOR</title>
+          <title>{TITLE}</title>
           <meta name="description" content="Раскройте ваш творческий потенциал и поделитесь уникальными историями с миром! На нашем сайте мы, безусловно, помогаем авторам раскрыть свой потенциал"/>
           <meta name="keywords" content="HTML, CSS, JavaScript"/>
           <meta name="author" content="Sairommef"/>

@@ -192,15 +192,12 @@ h5{
     border-radius: var(--rounded-md);
 }
 
-
-
-
-
 .actions{
     max-width: 400px;
     display: flex;
     flex-direction: column;
     gap: .75rem;
+    transition: all .5s ease-in-out;
 }
 
 .form{
@@ -218,9 +215,60 @@ h5{
     opacity: 0.7;
     font-size: var(--text-lg);
 }
-.description{
+
+.actions:after {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    position: absolute;
+    /*content: '⎛⎝ ≽ > ⩊ < ≼ ⎠⎞';*/
+    content: 'Подробнее';
+    font-size: var(--text-sm);
+
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 1rem;
+    margin: .1rem;
+
+    font-weight: var(--tw-700);
+
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,1) 100%);
+}
+
+
+.description {
+
+    display: -webkit-box;           /* Для использования flexbox */
+    -webkit-box-orient: vertical;   /* Устанавливает вертикальную ориентацию */
+    -webkit-line-clamp: 2;          /* Указывает количество строк */
+    overflow: hidden;               /* Скрывает переполнение */
+    text-overflow: ellipsis;
+
+    height: 50px;
+    /*overflow-y: hidden;*/
     font-size: var(--text-lg);
     opacity: 0.9;
+    position: relative;
+    transition: all .5s ease-in-out;
+    /*margin-bottom: 5rem;*/
+}
+
+/* Изменяем стиль .actions при изменении состояния чекбокса */
+input[type="checkbox"]:checked + .actions .description{
+    display: -webkit-box;           /* Для использования flexbox */
+    -webkit-box-orient: vertical;   /* Устанавливает вертикальную ориентацию */
+    -webkit-line-clamp: revert;          /* Указывает количество строк */
+    overflow: hidden;               /* Скрывает переполнение */
+    text-overflow: ellipsis;
+    height: 200px;
+    transition: all .5s ease-in-out;
+}
+
+input[type="checkbox"]:checked + .actions:after{
+    content: '';
+    display: none;
 }
 
 .about{
@@ -245,6 +293,23 @@ h5{
 }
 
 @media (max-width: 1080px) {
+
+    input[type="checkbox"]:checked + .actions .description{
+        display: -webkit-box;           /* Для использования flexbox */
+        -webkit-box-orient: vertical;   /* Устанавливает вертикальную ориентацию */
+        -webkit-line-clamp: revert;          /* Указывает количество строк */
+        overflow: hidden;               /* Скрывает переполнение */
+        text-overflow: ellipsis;
+        height: 100px;
+        transition: all .5s ease-in-out;
+    }
+
+    input[type="checkbox"]:checked + .actions:after{
+        content: '';
+        display: none;
+    }
+
+
     .slider{
         max-width: 600px;
         align-items: center;
@@ -264,11 +329,28 @@ h5{
        display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
 @media (max-width: 430px) {
-    .container{
+    .grid{
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .about{
         padding: 0 1rem;
+        margin: 1rem 0;
+    }
+    .leftTitle{
+        padding-top: 1rem;
+    }
+    .title h1{
+        font-size: 36px;
+    }
+    .container{
+        margin-top: 0;
+        padding: 0 2rem;
         display: flex;
         flex-wrap: wrap;
     }

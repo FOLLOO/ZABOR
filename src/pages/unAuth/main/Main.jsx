@@ -16,13 +16,14 @@ import GlassBox from '../../../components/glasses/glasses-box/GlassBox'
 import Button from "../../../components/ui/buttons/button/Button";
 import Footer from "../../../components/layout/footer/Footer";
 import {Helmet} from "react-helmet";
+import {TITLE} from "../../../utils";
 
 //DATA_CONST
 const opportunities = [
     {
         number: '1.',
         title: 'Публикуйте посты',
-        description: 'Зарабатывайте с каждой публикации'
+        description: 'Зарабатывайте с каждой публикации '
     },
     {
         number: '2.',
@@ -42,23 +43,27 @@ const opportunities = [
 ]
 const getStart = [
     {
+        id: 1001,
         title: 'Зарегистрируйся',
-        description: ' Если вы не пройдете регистрацию ' +
+        description: 'Если вы не пройдете регистрацию ' +
             'в ближайшие 30 секунд, мы будем вынуждены применить' +
             ' крайние меры'
     },
     {
+        id: 1002,
         title: 'Заполни свою страницу',
         description: 'Регистрация - это лишь первый шаг. Теперь вам' +
             ' необходимо заполнить ваши профили на ZABOR до ' +
             'последней запятой!'
     },
     {
+        id: 1003,
         title: 'Выложи свой первый пост',
         description: 'Просто я искренне желаю, чтобы ваше творчество нашло отклик в ' +
             'сердцах читателей.'
     },
     {
+        id: 1004,
         title: 'Расскажи об этом',
         description: 'Пусть ваши друзья и подписчики знают, что вы стали частью уникального сообщества '
     },
@@ -86,7 +91,7 @@ function Main() {
         <div className={styles.back}>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>ZABOR</title>
+                <title>{TITLE}</title>
                 <meta name="description" content="Раскройте ваш творческий потенциал и поделитесь уникальными историями с миром! На нашем сайте мы, безусловно, помогаем авторам раскрыть свой потенциал"/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>
@@ -98,7 +103,7 @@ function Main() {
             <div className={styles.content}>
                 <div className={`${styles.logoBlock} `}>
                     <img src={logo} alt="" className={styles.logo}/>
-                    <h3>ZABOR</h3>
+                    <h3>{TITLE}</h3>
                 </div>
                 <div className={styles.title}>
                     <h1>Привет, это zabor</h1>
@@ -157,7 +162,7 @@ function Main() {
                     <div className={styles.grid}>
                         {opportunities.map((opport, index) => (
                             <GlassBox key={index}>
-                                <div className={styles.actions}>
+                                <div className={styles.dep}>
                                     <h1 className={`${global.medium} ${styles.header}`}>+</h1>
                                     <p className={`${global.medium} ${styles.littleHeader}`}>
                                         {opport.title}
@@ -179,7 +184,10 @@ function Main() {
                 <div className={`${styles.flex} ${styles.container}`}>
                     {getStart.map((start, i) => (
                         <GlassBox key={i}>
-                            <div className={styles.actions}>
+                            {/*<img /> Илюстрируещее изображение */}
+                            <input type="checkbox" className={styles.checkbox} onChange={() => console.log('checked')}
+                                   id={start.id}/>
+                            <label className={styles.actions} htmlFor={start.id}>
                                 <h1 className={`${global.medium} ${styles.header}`}>{i + 1}.</h1>
                                 <p className={`${global.medium} ${styles.littleHeader}`}>
                                     {start.title}
@@ -187,12 +195,12 @@ function Main() {
                                 <p className={styles.description}>
                                     {start.description}
                                 </p>
-                            </div>
+                            </label>
                         </GlassBox>
                     ))}
                 </div>
 
-                <Button variant={'color'} click={() => navigate('/login')} >
+                <Button variant={'color'} click={() => navigate('/login')}>
                     Пройти регистрацию
                 </Button>
             </div>

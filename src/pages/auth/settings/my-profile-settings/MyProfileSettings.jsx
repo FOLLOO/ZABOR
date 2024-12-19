@@ -245,7 +245,7 @@ function MyProfileSettings() {
                 <hr className={styles.hr}/>
                 <form id={'user_login'} onSubmit={updatePassword}>
                     <SettingsBlock
-                        title={'Параметры входа'}
+                        title={'Сменить пароль'}
                         descripton={'Пароль должен иметь не менее 8 символов, содержать хотя бы одну заглавную букву,' +
                             ' \n' +
                             'и одну цифру'} red>
