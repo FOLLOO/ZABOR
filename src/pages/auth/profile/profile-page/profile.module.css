@@ -22,9 +22,8 @@
 }
 
 
-
-
 .editImage{
+    object-fit: contain;
     max-height: 450px;
 }
 

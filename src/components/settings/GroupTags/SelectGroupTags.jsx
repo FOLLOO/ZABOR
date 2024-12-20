@@ -38,137 +38,122 @@ import Button from "../../ui/buttons/button/Button";
  *     }
  * ```
  */
-export default function SelectGroupTags ({data, userChoice = false, type= 'user-first' }) {
+export default function SelectGroupTags({ data, userChoice = false, type = 'user-first' }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { addGroupTag, groupTags, setGroupTags } = useTags();
+  const { tags } = useSelector(state => state.allTags);
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const { addGroupTag, groupTags } = useTags()
-  const { tags } = useSelector(state => state.allTags)
-
-  const [selectTag , setSelectTag] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  const getTags = () => {
-    try{
-      dispatch(fetchTags()).then((response) => {
-        if(response){
-          setLoading(false)
-        }
-      })
-    }
-    catch(err){
-      console.log(err)
-    }
-  }
-
-  // console.log(groupTags)
+  const [selectTag, setSelectTag] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if(groupTags.length > 0){
-      groupTags?.map(tag => addTag(tag))
-      data?.map(tag => addTag(tag))
-    }else if(data?.length > 0){
-      data.map((tag) => addTag(tag))
-    }
-  }, [data, groupTags]);
+    dispatch(fetchTags()).then(() => {
+      setLoading(false);
+    }).catch(err => {
+      console.error('Error fetching tags:', err);
+      setLoading(false);
+    });
+  }, [dispatch]);
 
   useEffect(() => {
-    getTags()
-  }, [loading]);
+    // Initialize selected tags from groupTags and data
+    const initialSelectedTags = [];
+    if (groupTags.length > 0) {
+      initialSelectedTags.push(...groupTags);
+    }
+    if (data && data.length > 0) {
+      initialSelectedTags.push(...data);
+    }
+    setSelectTag(initialSelectedTags);
+  }, [groupTags, data]);
 
   const addTag = (id) => {
-    if(id !== undefined){
-      if (!selectTag.includes(id)){
-        setSelectTag([...selectTag, id])
-      }
-      else{
-        const index = selectTag.indexOf(id);
-        if (index > -1) { // only splice array when item is found
-          selectTag.splice(index, 1); // 2nd parameter means remove one item only
-        }
-      }
+    if (selectTag.includes(id)) {
+      // Remove tag if already selected
+      setSelectTag(selectTag.filter(tagId => tagId !== id));
+    } else {
+      // Add tag if not already selected
+      setSelectTag([...selectTag, id]);
     }
-  }
+  };
 
   const navigateByType = () => {
     switch (type) {
       case 'user-first':
-        return navigate('/select/tags')
+        return navigate('/select/tags');
       case 'user-edit':
-        return navigate('/settings/tags/')
+        return navigate('/settings/tags/');
       case 'user-to-author':
-        return navigate('/select/author/tags/')
+        return navigate('/select/author/tags/');
       case 'user-update-author':
-        return navigate('/settings/author/tags')
+        return navigate('/settings/author/tags');
       default:
-        return console.error('Unknown user type')
+        console.error('Unknown user type');
     }
-  }
+  };
 
   const titleTextByType = () => {
     switch (type) {
       case 'user-first':
-        return 'Мои теги'
       case 'user-edit':
-        return 'Мои теги'
+        return 'Мои теги';
       case 'user-to-author':
-        return 'Расскажите На какую тематику будут посты?'
       case 'user-update-author':
-        return 'Расскажите На какую тематику будут посты?'
+        return 'Расскажите на какую тематику будут посты?';
       default:
-        return console.error('Unknown user type')
+        console.error('Unknown user type');
     }
-  }
+  };
 
-  const setTags = () => {
-      for(let i = 0; i < selectTag.length; i++){
-        if(!groupTags.includes(selectTag[i])){
-          addGroupTag(selectTag[i])
-        }
+  const setTags = (event) => {
+    event.preventDefault();
+    setGroupTags([])
+    // Add selectTag to groupTags
+    selectTag.forEach(tagId => {
+      if (!groupTags.includes(tagId)) {
+        addGroupTag(tagId);
       }
-      navigateByType()
-  }
+    });
+    navigateByType();
+  };
 
   const checkedContext = (id) => {
-    if(groupTags.length > 0){
-      return groupTags.includes(id) || selectTag.includes(id)
-    } else if(selectTag.length > 0 ){
-      return selectTag?.includes(id)
-    } else if(data?.length > 0){
-      return data?.includes(id)
-    }else{
+    if(!selectTag.includes(id)) {
       return false;
     }
-  }
-
-  // console.log('selectTag', selectTag, 'data', data)
+    return groupTags.includes(id) || selectTag.includes(id) || (data && data.includes(id));
+  };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.padding}>
-
-      <SettingsTitle bigTitle={titleTextByType()}
-                     description={'Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках'}/>
-      </div>
-      <form onSubmit={setTags}>
-          {tags?.items?.length > 0 ?
-          <div className={userChoice ? styles.grid5 : styles.grid}>
-            {tags?.items.map((item) => (
-                <TagCheckBox text={item.name} key={item.id} id={item.id} click={() => addTag(item.id)} checked={checkedContext(item.id)}  />
-                // <TagCheckBox text={item.name} key={item.id} id={item.id}  />
-              ))}
-          </div>
-              : <Loading/>
-          }
+      <div className={styles.main}>
+        <div className={styles.padding}>
+          <SettingsTitle bigTitle={titleTextByType()} description="Больше мы это спрашивать не будем. Изменить выбор можно будет в настройках" />
+        </div>
+        <form onSubmit={setTags}>
+          {tags?.items?.length > 0 ? (
+              <div className={userChoice ? styles.grid5 : styles.grid}>
+                {tags.items.map(item => (
+                    <TagCheckBox
+                        key={item.id}
+                        id={item.id}
+                        text={item.name}
+                        img={item.file || null}
+                        click={() => addTag(item.id)}
+                        checked={checkedContext(item.id)}
+                    />
+                ))}
+              </div>
+          ) : (
+              <Loading />
+          )}
           <div className={styles.saveButton}>
-            <Button type={'submit'} variant={type === 'user-to-author' || type === 'user-update-author' ? 'color' : 'outlet'} className={`${global.f_center} ${global.w100}`}>
+            <Button type="submit" variant={type === 'user-to-author' || type === 'user-update-author' ? 'color' : 'outlet'} className={`${global.f_center} ${global.w100}`}>
               Сохранить
             </Button>
           </div>
-        {/*</SettingsBlock>*/}
-      </form>
-    </div>
-  )
+        </form>
+      </div>
+  );
 }
 

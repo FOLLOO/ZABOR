@@ -21,7 +21,7 @@ export const TagsProvider = ({ children }) => {
 
   return (
     <TagsContext.Provider
-      value={{ groupTags, creativeTags, addGroupTag, addCreativeTag }}>
+      value={{ groupTags, creativeTags, setGroupTags, addGroupTag, addCreativeTag }}>
       {children}
     </TagsContext.Provider>
   );

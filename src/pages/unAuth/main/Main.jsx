@@ -200,7 +200,7 @@ function Main() {
                     ))}
                 </div>
 
-                <Button variant={'color'} click={() => navigate('/login')}>
+                <Button variant={'color'} click={() => navigate('/registration')}>
                     Пройти регистрацию
                 </Button>
             </div>

@@ -1,5 +1,6 @@
 .main{
-    margin-bottom: 30vh;
+    /*margin-bottom: 30vh;*/
+    margin: 0 20% 30vh 20%;
 }
 .grid{
     /*display: grid;*/
@@ -33,7 +34,12 @@
     /*background: white;*/
     /*border: 1px solid var(--input-border-color);*/
 }
+@media (max-width: 1080px) {
+    .main{
+        margin: 0 0 30vh 0;
+    }
 
+}
 @media (max-width: 430px) {
     .padding{
         padding: 0;

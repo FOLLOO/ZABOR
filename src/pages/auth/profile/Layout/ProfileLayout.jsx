@@ -25,6 +25,8 @@ import {postSubscribe} from "../../../../redux/slices/sub";
 import SelectPost from "../../../../components/post/post-playlist/select-postORplaylist/SelectPost";
 import {putPublicationToFolder} from "../../../../redux/slices/folder";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
+import Cropper from "../../../../components/cropper/ImageEditor";
+import ImageEditor from "../../../../components/cropper/ImageEditor";
 
 
 export function ProfileLayout() {
@@ -263,6 +265,9 @@ export function ProfileLayout() {
                             </div>
                         </label>
                     </form>
+
+                    <ImageEditor/>
+
                     {fileURL ?
                         <img src={fileURL} alt={''} className={styles.editImage}/> : null}
                     <div className={`${global.flex}`} style={{gap: '1rem'}}>

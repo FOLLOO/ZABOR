@@ -79,7 +79,7 @@ function SelectTags ({  type = 'user-first' }) {
       const transformedData = tags.map(tag => ({ id: tag }));
       await dispatch(createUserInterests(transformedData)).then((response) => {
         if(response){
-          navigate('/settings/config')
+          navigate('/publications')
         }
       })
     }catch (err){
@@ -135,7 +135,7 @@ function SelectTags ({  type = 'user-first' }) {
             <div className={component.grid}>
               {
                 creative_tags?.items?.length > 0 ? creative_tags?.items?.map((item) => (
-                        <TagCheckBox id={item.id} key={item.id}
+                        <TagCheckBox img={item.file ? item.file : null} id={item.id} key={item.id}
                             text={item.name}
                             click={() => addTag(item.id)}/>
                     ))
