@@ -66,15 +66,20 @@ function Authorization () {
                   value={password ? password : null}
                   onChange={e => setPassword(e.target.value)}
                   place={'Введите Пароль'} type={'password'} />
-                <div className={`${styles.link}`}>
-                    <div className={global.d3}>
-                        <Link to={'/registration'}>
-                          Зарегистрироваться
-                        </Link>
-                    </div>
-                </div>
+                  <div className={`${styles.link}`}>
+                      <div className={global.d3}>
+                          <Link to={'/forgot'}>
+                              Забыли пароль?
+                          </Link>
+                      </div>
+                      <div className={global.d3}>
+                          <Link to={'/registration'}>
+                              Зарегистрироваться
+                          </Link>
+                      </div>
+                  </div>
                   <div className={styles.button}>
-                    <Button variant={'outlet'} className={`${global.f_center} ${styles.button}`} type={'submit'}>
+                      <Button variant={'outlet'} className={`${global.f_center} ${styles.button}`} type={'submit'}>
                       Войти
                     </Button>
                   </div>

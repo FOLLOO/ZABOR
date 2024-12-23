@@ -25,7 +25,6 @@ import {postSubscribe} from "../../../../redux/slices/sub";
 import SelectPost from "../../../../components/post/post-playlist/select-postORplaylist/SelectPost";
 import {putPublicationToFolder} from "../../../../redux/slices/folder";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
-import Cropper from "../../../../components/cropper/ImageEditor";
 import ImageEditor from "../../../../components/cropper/ImageEditor";
 
 
@@ -36,6 +35,7 @@ export function ProfileLayout() {
 
     const [file, setFile] = useState(null)
     const [fileURL, setFileURL] = useState(null)
+    const [cropper, setCropper] = useState(false)
 
     const [publications, setPublications] = useState([])
 
@@ -122,6 +122,8 @@ export function ProfileLayout() {
             try {
                 dispatch(postUserAvatar(formData))
                 toggleOverlay('setImage_dialog')
+                setFileURL(null)
+                setFile(null)
             } catch (err) {
                 console.log(err)
             }
@@ -190,6 +192,7 @@ export function ProfileLayout() {
                         // Создаем новый File объект из Blob
                         const newFile = new File([blob], uploadedFile.name, {type: 'image/jpeg'})
                         setFile(newFile) // Сохраняем File в состоянии
+                        setCropper(!cropper)
                     }, 'image/jpeg', 1)
                 }
             }
@@ -253,11 +256,11 @@ export function ProfileLayout() {
                 }
             </div>
 
-            <dialog id={'setImage_dialog'} className={styles.dialog} onClick={() => toggleOverlay('setImage_dialog')}>
+            <dialog id={'setImage_dialog'} className={styles.dialog} >
                 <div className={`${styles.message} ${global.flex} ${global.f_dir_column}`}
                      title={'Форма добавления изображение для ava'}>
-                    <form className={styles.delete} id={'uploadImage'} onSubmit={() => saveImage()}>
-                        <input type={'file'} id={'input_file'} style={{display: 'none'}} onChange={fileChange}/>
+                    <form className={styles.delete} id={'uploadImage'} onSubmit={saveImage}>
+                        <input type={'file'} id={'input_file'} style={{display: 'none'}} onChange={fileChange} />
                         <label htmlFor={'input_file'}>
                             <div className={styles.support}>
                                 <h1 className={global.t3}>{fileURL ? 'Изменить изображение' : 'Импортировать новый файл'}</h1>
@@ -266,22 +269,29 @@ export function ProfileLayout() {
                         </label>
                     </form>
 
-                    <ImageEditor/>
 
-                    {fileURL ?
-                        <img src={fileURL} alt={''} className={styles.editImage}/> : null}
+                    {cropper && fileURL ?
+                        <>
+                        <ImageEditor src={fileURL} setFile={setFile} setFileUrl={setFileURL} setCropper={setCropper} />
+                        {/*<img src={fileURL} alt={''} className={styles.editImage}/>*/}
+                        </>
+                        :
+                        <img src={fileURL} alt={''} className={styles.editImage}/>
+                    }
+
                     <div className={`${global.flex}`} style={{gap: '1rem'}}>
-                        <Button variant={'outlet'}
+                        <Button variant={'outlet'} click={() => toggleOverlay('setImage_dialog')}
                                 className={`${global.w100} ${global.f_center}`}>
                             Отмена
                         </Button>
+                        {!cropper ?
                         <Button variant={'color'} type={'submit'}
                                 className={`${global.w100} ${global.f_center}`}
                                 form={'uploadImage'}
                                 disabled={!fileURL}
                                 onClick={() => saveImage()}>
                             Сохранить
-                        </Button>
+                        </Button> : null}
                     </div>
                 </div>
             </dialog>

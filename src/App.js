@@ -33,6 +33,7 @@ import MyTags from "./pages/auth/settings/my-tags/tags/MyTags";
 import AuthorGroupTags from "./pages/auth/settings/author-tags/group/AuthorGroupTags";
 import AuthorTags from "./pages/auth/settings/author-tags/tags/AuthorTags";
 import MobileSearching from "./pages/auth/mobile-search/MobileSearching";
+import SendCode from "./pages/unAuth/reset_password/SendCode";
 // import axios from "axios";
 
 
@@ -65,6 +66,12 @@ function App() {
                     title: 'login',
                     component: <Authorization/>,
                     url: '/login', // 'login' ?
+                    child: [],
+                },
+                {
+                    title: 'forgot-password',
+                    component: <SendCode/>,
+                    url: '/forgot', // 'login' ?
                     child: [],
                 },
                 {
