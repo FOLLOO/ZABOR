@@ -1,0 +1,22 @@
+.documentation_main blockquote{
+    font-size: var(--text-sm);
+    line-height: var(--text-lg);
+}
+
+.documentation_main hr{
+    margin-top: 2rem;
+    border-bottom: 1px solid var(--accent-foreground)
+}
+
+.form{
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+.gap{
+    gap: 1rem;
+}
+.gap05{
+    gap: .5rem;
+}

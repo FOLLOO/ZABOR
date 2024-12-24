@@ -37,7 +37,7 @@ import {useAuth} from "../../provider/AuthProvider";
  * @constructor
  */
 const Layout = ({type}) => {
-    const { isAuth } = useAuth();
+    const { isAuth, user } = useAuth();
     const navigate = useNavigate()
     const { pathname } = useLocation()
 
@@ -155,6 +155,12 @@ const Layout = ({type}) => {
                     disabled: false,
                     ico: user_cog_i,
                     function: () => navigate('/settings/config'),
+                },
+                {
+                    title: 'Платежи',
+                    disabled: false,
+                    ico: ruble_i,
+                    function: () => navigate(user?.roleId === 3 ? '/settings/pay' : '/documentation/author/plus'),
                 },
             ]
         }

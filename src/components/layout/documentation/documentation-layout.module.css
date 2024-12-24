@@ -1,0 +1,22 @@
+.margin{
+    margin: 0 30rem;
+    min-height: 100vh;
+}
+
+@media (max-width: 1080px) {
+    .margin{
+        margin: 0 10rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .margin {
+        margin: 0 5rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .margin{
+        margin: 0 1rem;
+    }
+}

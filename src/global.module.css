@@ -22,6 +22,12 @@
 .medium { font-weight: var(--tw-500); }
 .italic { font-style: italic}
 
+.underline {
+    text-decoration: underline !important;
+    color: var(--accent);
+    user-select: none;
+}
+
 .red{ color: var(--red) }
 
 .xs { composes: t1 }
@@ -190,3 +196,4 @@
         padding-left: 40px;
     }
 }
+

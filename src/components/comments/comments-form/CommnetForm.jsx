@@ -40,7 +40,7 @@ function CommnetForm ({ click, main = false, parrentID }) {
       try {
         dispatch(createComment(data));
         setValue(null)
-        window.location.reload()
+        // window.location.reload()
       } catch (e) {
         console.error('Error:', e);
       }
@@ -53,31 +53,34 @@ function CommnetForm ({ click, main = false, parrentID }) {
 
   return (
     <>
-    <form id={parrentID ? parrentID : 'main'}
-      className={`${global.flex} ${global.f_dir_column} ${styles.hell}`} onSubmit={handleSubmit}>
-      <div className={styles.input}>
-        <Textarea type={'text'}
-                  place={'Оставить комментарий'}
-                  // rows={1}
-                  value={value}
-                  req
-                  onChange={(e) => setValue(e.target.value)}
-                  back={false}/>
-      </div>
-      <p className={styles.error}>{err}</p>
-      <div className={styles.flex}>
-        {main ? null :
-        <div className={styles.button}>
-          <Button size={'h-3'} img_size={'h-3'} className={global.sm} click={click}>Отмена</Button>
-        </div> }
-        <div className={styles.button}>
-          {/*<button type="submit" form={'HORVA'}>Отправить</button>*/}
-          <Button size={'h-3'} img_size={'h-3'} className={global.sm} variant={'color'} type={'submit'} form={parrentID ? parrentID : 'main'}>Отправить</Button>
+      <form id={parrentID ? parrentID : 'main'}
+            className={`${global.flex} ${global.f_dir_column} ${styles.hell}`} onSubmit={handleSubmit}>
+        <p className={global.d3}>{value ? value?.trim()?.length : 0} / 255</p>
+
+        <div className={styles.input}>
+          <Textarea type={'text'}
+                    place={'Оставить комментарий'}
+              // rows={1}
+                    value={value} maxLength={255}
+                    req
+                    onChange={(e) => setValue(e.target.value)}
+                    back={false}/>
         </div>
-      </div>
-    </form>
-</>
-)
+        <p className={styles.error}>{err}</p>
+        <div className={styles.flex}>
+          {main ? null :
+              <div className={styles.button}>
+                <Button size={'h-3'} img_size={'h-3'} className={global.sm} click={click}>Отмена</Button>
+              </div>}
+          <div className={styles.button}>
+            {/*<button type="submit" form={'HORVA'}>Отправить</button>*/}
+            <Button size={'h-3'} img_size={'h-3'} className={global.sm} variant={'color'} type={'submit'}
+                    form={parrentID ? parrentID : 'main'}>Отправить</Button>
+          </div>
+        </div>
+      </form>
+    </>
+  )
 }
 
 export default CommnetForm

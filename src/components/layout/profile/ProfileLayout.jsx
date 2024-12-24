@@ -4,28 +4,28 @@ import {Outlet, useNavigate, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 
 //css
-import styles from "../profile-page/profile.module.css";
-import global from "../../../../global.module.css";
-import dialog from '../../../auth/profile/profile-page/profile.module.css'
+import styles from "../../../pages/auth/profile/profile-page/profile.module.css";
+import global from "../../../global.module.css";
+import dialog from '../../../pages/auth/profile/profile-page/profile.module.css'
 
 
 //components
-import ProfileCircle from "../../../../components/profile/profile-circle/ProfileCircle";
-import Button from "../../../../components/ui/buttons/button/Button";
-import Tab from "../../../../components/ui/tab/Tab";
+import ProfileCircle from "../../profile/profile-circle/ProfileCircle";
+import Button from "../../ui/buttons/button/Button";
+import Tab from "../../ui/tab/Tab";
 
 //project functions
-import {useAuth} from "../../../../provider/AuthProvider";
-import {handleDialogClick, IMAGE_URL, toggleOverlay} from "../../../../utils";
-import {getUserData, postUserAvatar, postUserCover} from "../../../../redux/slices/user";
+import {useAuth} from "../../../provider/AuthProvider";
+import {handleDialogClick, IMAGE_URL, toggleOverlay} from "../../../utils";
+import {getUserData, postUserAvatar, postUserCover} from "../../../redux/slices/user";
 
 //img
-import edit from "../../../../asserts/icons/edit.svg";
-import {postSubscribe} from "../../../../redux/slices/sub";
-import SelectPost from "../../../../components/post/post-playlist/select-postORplaylist/SelectPost";
-import {putPublicationToFolder} from "../../../../redux/slices/folder";
-import NothingYet from "../../../nothing/nothing-yet/NothingYet";
-import ImageEditor from "../../../../components/cropper/ImageEditor";
+import edit from "../../../asserts/icons/edit.svg";
+import {postSubscribe} from "../../../redux/slices/sub";
+import SelectPost from "../../post/post-playlist/select-postORplaylist/SelectPost";
+import {putPublicationToFolder} from "../../../redux/slices/folder";
+import NothingYet from "../../../pages/nothing/nothing-yet/NothingYet";
+import ImageEditor from "../../cropper/ImageEditor";
 
 
 export function ProfileLayout() {

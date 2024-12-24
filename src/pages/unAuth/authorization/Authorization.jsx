@@ -9,6 +9,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../../provider/AuthProvider'
 import Button from "../../../components/ui/buttons/button/Button";
+import {useDispatch} from "react-redux";
+import {resetPassword} from "../../../redux/slices/user";
 
 /*** headers не содержит refreshToken -> он как бы есть, но его с axios не вытащить
  * https://github.com/axios/axios/issues/295
@@ -24,7 +26,7 @@ function Authorization () {
   const [errMes, setErrMes] = useState('')
 
   const navigate = useNavigate()
-
+    const dispatch = useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -39,7 +41,19 @@ function Authorization () {
       }).catch((err) => {
          return  setErrMes(err)
       })
+  }
 
+  const voidResetPassword = async () => {
+    if(!email) return;
+    localStorage.setItem('email', email);
+    const data= {
+        email: email
+    }
+    try{
+        await dispatch(resetPassword(data))
+    } catch (e) {
+        setErrMes('Ошибка при обработке запроса')
+    }
   }
 
   return (
@@ -68,7 +82,7 @@ function Authorization () {
                   place={'Введите Пароль'} type={'password'} />
                   <div className={`${styles.link}`}>
                       <div className={global.d3}>
-                          <Link to={'/forgot'}>
+                          <Link to={!email ? null : '/forgot'} className={!email ? styles.disabled : null} onClick={voidResetPassword}>
                               Забыли пароль?
                           </Link>
                       </div>
@@ -80,10 +94,10 @@ function Authorization () {
                   </div>
                   <div className={styles.button}>
                       <Button variant={'outlet'} className={`${global.f_center} ${styles.button}`} type={'submit'}>
-                      Войти
-                    </Button>
+                          Войти
+                      </Button>
                   </div>
-                  <p>{errMes}</p>
+                  <p className={`${styles.error} ${global.d3}`}>{errMes}</p>
               </form>
             </div>
           </div>

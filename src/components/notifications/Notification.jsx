@@ -76,7 +76,7 @@ function Notification ({type, nickname, postName, postImage, views, date}) {
   }
 
   return (
-    <div>
+    <div >
       {messageType(type)}
     </div>
   )

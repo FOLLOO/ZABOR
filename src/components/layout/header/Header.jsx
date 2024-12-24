@@ -97,6 +97,7 @@ export default function Header({type = 'unauthorized'}) {
 
     const Unauthorized = () => {
         return (
+            type === 'documentation' ? null :
             <div className={`${global.flex} ${styles.buttons}`}>
                 <Button variant={'default'} size={'base'} click={() => navigate('/registration')}>
                     Регистрация
@@ -132,7 +133,7 @@ export default function Header({type = 'unauthorized'}) {
                             <Button img_size={'h-5'} img={bell} name={'noti'} click={() => {
                                 setNotification(true)
                             }}/>
-                            {notificationsItems.items.length === 0 ? null :
+                            {notificationsItems.items.filter(id => id.read === false).length === 0  ? null :
                                 <span className={styles.basketCount}>{notificationsItems.items.filter(id => id.read === false).length}</span>
                             }
                         </div>
@@ -177,7 +178,7 @@ export default function Header({type = 'unauthorized'}) {
                                         Творческая студия
                                     </Button>
                                     {user?.roleId === 1 ?
-                                        <Button img_size={'h-5'} img={create} click={() => navigate('/group')}>
+                                        <Button img_size={'h-5'} img={create} click={() => navigate('/select/author/group_tags')}>
                                             Создать публикацию
                                         </Button>
                                         :

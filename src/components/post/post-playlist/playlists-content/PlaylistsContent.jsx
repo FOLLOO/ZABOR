@@ -17,13 +17,14 @@ import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
 import { useDispatch } from 'react-redux'
 import {deleteFolder, deletePublicationFromFolder, putFolder} from '../../../../redux/slices/folder'
-import {useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import Button from "../../../ui/buttons/button/Button";
 import {IMAGE_URL, TITLE} from "../../../../utils";
 import {useAuth} from "../../../../provider/AuthProvider";
 import InputText from "../../../ui/input/input-text/InputText";
 import Textarea from "../../../ui/input/textarea/Textarea";
 import {Helmet} from "react-helmet";
+import NothingYet from "../../../../pages/nothing/nothing-yet/NothingYet";
  /** Это контент плейлиста его описание и его видео*/
 function PlaylistsContent ({ data, folder}) {
 
@@ -68,6 +69,8 @@ function PlaylistsContent ({ data, folder}) {
        }
        try {
            dispatch(deletePublicationFromFolder(res))
+           alert('Публикация убрана')
+           window.location.reload()
        }
        catch (e){
            console.log(e)
@@ -113,7 +116,9 @@ function PlaylistsContent ({ data, folder}) {
 
           <div className={`${global.flex} ${styles.informationBlock}`}>
               <div className={`${styles.image}`}>
-                  <img src={`${IMAGE_URL}${data[0]?.coverUrl}`} alt="about"/>
+                  {data[0]?.coverUrl ?
+                      <img src={ `${IMAGE_URL}${data[0]?.coverUrl}`} alt="about"/>
+                      : <div className={`${global.skeleton}`}></div> }
               </div>
                   {editing ?
                       <form id={'edit-names'} className={styles.about} onSubmit={submitFolderEdits}>
@@ -176,18 +181,20 @@ function PlaylistsContent ({ data, folder}) {
                       {data.length > 0 ?
                           data.map((item, i) => (
                               <div className={`${global.flex} `} key={i}>
-                              <PlaylistsPost image={item.coverUrl}
-                                             title={item.title}
-                                             description={item.description.replace(/<[^>]*>?/gm, '')}
-                                             views={item.views_count + 1}
-                                             cost={item.price}
-                              />
+                                  <Link to={`/publication/${item.id}`} >
+                                      <PlaylistsPost image={item.coverUrl}
+                                                     title={item.title}
+                                                     description={item.description.replace(/<[^>]*>?/gm, '')}
+                                                     views={item.views_count + 1}
+                                                     cost={item.price}
+                                      />
+                                  </Link>
                                   {delet ? <Button img={trash}
                                   click={() => deletePostFromFolder(item?.id)}
                                   ></Button> : null}
                               </div>
                           )) :
-                          <li><PlaylistsPost/></li>
+                          <NothingYet/>
                       }
                   </div>
               </div>

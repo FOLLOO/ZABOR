@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 import global from '../../../../global.module.css'
 import styles from './create-post.module.css'
@@ -228,13 +228,14 @@ function CreatePost() {
         formData.append('title', title)
         formData.append('description', description)
         formData.append('ageLimitId', 1)
-        formData.append('price', price)
+        formData.append('price', user.roleId === 3 ? price : 0)
         formData.append('cover', file)
 
         try {
             const resultAction = await dispatch(updatePost({id, formData}))
             // console.log(resultAction)
-            // navigate(`/profile/${user?.id}`)
+            alert('Публикация обновлена')
+            navigate(`/profile/${user?.id}`)
         } catch (err) {
             console.log(err)
         }
@@ -373,9 +374,19 @@ function CreatePost() {
                             <h2 className={`${global.t3} `}>Заголовок поста</h2>
                             <InputText place="Добавьте заголовок" value={title}
                                        onChange={(e) => setTitle(e.target.value)}/>
-                            <h2 className={`${global.t3} `}>Цена</h2>
-                            <InputText place="Определите цену" type={'number'} value={price > 99999 ? 99999 : price} maxValue={99999} minValue={0}
+                            <h2 className={user?.roleId === 3 ? global.t3 : `${global.t3} ${global.d3}`}>Цена</h2>
+                            <InputText place="Определите цену" type={'number'}
+                                       value={price > 99999 ? 99999 : price}
+                                       maxValue={99999} minValue={0}
+                                       disabled={user?.roleId !== 3}
                                        onChange={(e) => setPrice(e.target.value)}/>
+                            {user?.roleId !== 3 ?
+                                <p className={global.d3}> Вы пока не можете указывать цену для публикаций.
+                                    <Link to={'/documentation/pay#КартаПартера'}
+                                          className={global.underline}>
+                                    Подробнее
+                                    </Link>
+                                </p> : null }
                             {id ? null : <SettingsBlock title={'Добавьте теги'} descripton={'Хоп-хей ла-ла лей'}>
                                 <div className={styles.tags}>
                                 {creative_tags.items.length !== 0 ?
@@ -394,7 +405,7 @@ function CreatePost() {
                             </div>
                         </div>
 
-                        {childBlocks !== undefined && childBlocks.length > 0 ?
+                        {!id && childBlocks !== undefined && childBlocks.length > 0 ?
                             childBlocks.map((childBlock) => (
                             <ContentAddBlock
                                 key={childBlock.id}

@@ -59,6 +59,10 @@
 .mainInputs h4{
     margin-bottom: 10px;
 }
+
+.mainInputs h2{
+    user-select:none;
+}
 .buttons{
     /*width: 500px;*/
     display: flex;

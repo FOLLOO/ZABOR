@@ -21,7 +21,7 @@ import Post from './pages/auth/post/Post'
 import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
 import Playlists from "./pages/auth/profile/playlists-page/Playlists";
 import AboutMe from "./pages/auth/profile/about-page/AboutMe";
-import {ProfileLayout} from "./pages/auth/profile/Layout/ProfileLayout";
+import {ProfileLayout} from "./components/layout/profile/ProfileLayout";
 import ClientError from "./pages/404/ClientError";
 import SetUserInteresting from "./pages/unAuth/registration/userIntretings/group/SetUserInteresting";
 import FinalChoices from "./pages/unAuth/registration/userIntretings/tags/FinalChoices";
@@ -33,7 +33,11 @@ import MyTags from "./pages/auth/settings/my-tags/tags/MyTags";
 import AuthorGroupTags from "./pages/auth/settings/author-tags/group/AuthorGroupTags";
 import AuthorTags from "./pages/auth/settings/author-tags/tags/AuthorTags";
 import MobileSearching from "./pages/auth/mobile-search/MobileSearching";
-import SendCode from "./pages/unAuth/reset_password/SendCode";
+import SendCode from "./pages/unAuth/reset-password/SendCode";
+import ResetPassword from "./pages/unAuth/reset-password/ResetPassword";
+import DocumentationLayout from "./components/layout/documentation/DocumentationLayout";
+import BecomeAuthorPlus from "./pages/documentation/price/becomeIP/BecomeAuthorPlus";
+import AuthorPlus from "./pages/documentation/price/author/plus/AuthorPlus";
 // import axios from "axios";
 
 
@@ -75,6 +79,12 @@ function App() {
                     child: [],
                 },
                 {
+                    title: 'reset-password',
+                    component: <ResetPassword/>,
+                    url: '/reset', // 'login' ?
+                    child: [],
+                },
+                {
                     title: 'registration',
                     url: '/registration',
                     component: <Registration/>,
@@ -98,6 +108,31 @@ function App() {
                             child: []
                         }
                     ]
+                }
+            ]
+        },
+        {
+            status: 'documentation',
+            layout: <DocumentationLayout />,
+            url: '/documentation',
+            navigations: [
+                {
+                    title: 'documentation-main',
+                    url: '',
+                    component: <Main/>,
+                    child: [],
+                },
+                {
+                    title: 'documentation-price',
+                    url: '/pay',
+                    component: <BecomeAuthorPlus/>,
+                    child: [],
+                },
+                {
+                    title: 'documentation-price',
+                    url: '/author/plus',
+                    component: <AuthorPlus/>,
+                    child: [],
                 }
             ]
         },

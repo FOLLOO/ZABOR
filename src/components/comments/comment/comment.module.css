@@ -14,15 +14,17 @@
 }
 
 .content{
+    max-width: 700px;
    padding: 10px 0;
 }
 
 .content_text{
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: var(--text-sm);
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 2;*/
+    /*-webkit-box-orient: vertical;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
     /*text-indent: 0.5em;*/
 }
 .action{

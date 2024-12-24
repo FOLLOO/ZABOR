@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 //css
 import styles from '../authorization/authorization.module.css';
@@ -8,21 +8,41 @@ import global from "../../../global.module.css";
 //components
 import GlassCard from "../../../components/glasses/glasses-card/GlassCard";
 import Button from "../../../components/ui/buttons/button/Button";
+import {checkCode} from "../../../redux/slices/user";
+import {useDispatch} from "react-redux";
 
 function SendCode() {
     const [errMsg, setErrMsg] = useState(null);
     const [code, setCode] = useState(Array(4).fill('')); // Initially, all inputs are empty
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleInputChange = (index, value) => {
         const newCode = [...code];
         newCode[index] = value;
         setCode(newCode);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const codeValue = code.join('');
-        console.log('Submitted Code:', codeValue);
+        const email = localStorage.getItem('email');
+        if(!email || !codeValue) setErrMsg('Ошибка при отправке email попробуйте еще раз')
+
+        const data = {
+            email: email,
+            code: codeValue,
+        }
+
+        try {
+            await dispatch(checkCode(data))
+            localStorage.setItem('code', codeValue);
+            navigate('/reset')
+        }catch(err) {
+            console.log(err);
+            console.log('Submitted Code:', codeValue);
+            setErrMsg('Ошибка исполнения')
+        }
+
     };
 
     const CodeInput = ({ index, totalInputs, onChange, value }) => {
@@ -77,7 +97,7 @@ function SendCode() {
                             </p>
                         </div>
                         <div className={`${styles.form}`}>
-                            <form className={styles.signIn}>
+                            <form className={styles.signIn} onSubmit={handleSubmit}>
                                 <div className={styles.code}>
                                     {code.map((value, index) => (
                                         <CodeInput
@@ -90,14 +110,13 @@ function SendCode() {
                                     ))}
                                 </div>
 
-
                                 <div className={styles.button}>
                                     <Button variant={'outlet'} className={`${global.f_center} ${styles.button}`}
                                             type={'submit'}>
                                         Подтвердить
                                     </Button>
                                 </div>
-                                <p>{errMsg}</p>
+                                <p className={`${styles.error} ${global.d3}`}>{errMsg}</p>
                                 <div className={`${styles.link}`}>
                                     <div className={global.d3}>
                                         <Link to={'/registration'}>

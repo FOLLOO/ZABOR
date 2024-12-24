@@ -11,7 +11,6 @@ function ImageEditor({src, setFile, setFileUrl, setCropper}) {
 
     const cropperRef = useRef(null);
 
-
     const onReset = () => {
         const cropper = cropperRef.current.cropper;
         cropper.reset();

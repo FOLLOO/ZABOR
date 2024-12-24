@@ -64,6 +64,14 @@
     margin-top: 1rem;
     max-width: 400px;
 }
+
+.disabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
 .logo{
     flex-direction: column;
     display: flex;

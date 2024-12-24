@@ -14,6 +14,33 @@ export const getUserData = createAsyncThunk('user/getUser', async (id) => {
   }
 });
 
+export const resetPassword = createAsyncThunk('/auth/reset', async (data) => {
+  try {
+    const response = await axios.post('/auth/reset', data);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+export const checkCode = createAsyncThunk('/auth/check', async (data) => {
+  try {
+    const response = await axios.post('/auth/check', data);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
+export const setNewPassword = createAsyncThunk('/auth/reset/newPassword', async (data) => {
+  try {
+    const response = await axios.post('/auth/reset/newPassword', data);
+    return response.data; // Возвращаем данные из ответа
+  } catch (error) {
+    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+  }
+});
+
 export const postUserPassword = createAsyncThunk('user/updatePassword', async (data) => {
   try{
     const response = await axios.put('/user/updatePassword', data);
