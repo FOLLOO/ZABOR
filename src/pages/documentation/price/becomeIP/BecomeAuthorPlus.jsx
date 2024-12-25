@@ -6,9 +6,11 @@ import global from '../../../../global.module.css'
 
 import SettingsTitle from "../../../../components/toolbar/settings-title/SettingsTitle";
 import SettingsBlock from "../../../../components/toolbar/settings-block/SettingsBlock";
+import {useAuth} from "../../../../provider/AuthProvider";
 
 export default function BecomeAuthorPlus() {
 
+    const {user} = useAuth()
     function setSelection(id) {
         let target = document.getElementById(id);
         let rng, sel;
@@ -65,7 +67,7 @@ export default function BecomeAuthorPlus() {
                           onClick={() => setSelection('КартаПартнера')}>
                         карту партнера
                     </Link>
-                    , перейдите в раздел «<Link className={global.underline} to={'/settings/pay'}>Платежные
+                    , перейдите в раздел «<Link className={global.underline} to={user ? user?.roleId === 3 ? '/settings/pay' : '/documentation/author/plus' : '/login'}>Платежные
                     настройки </Link>» в вашем профиле.
                     Введите данные карты, на которую должны поступать средства.
                     Убедитесь, что указаны все необходимые данные, включая номер карты, имя владельца и другие

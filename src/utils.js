@@ -4,6 +4,8 @@
 // export const IMAGE_URL = 'http://192.168.0.101:5000'
 export const IMAGE_URL = 'http://192.168.0.114:5000'
 export const TITLE = 'Zabor'
+export const ORG_EMAIL = 'aimany@mail.ru'
+
 
 export const toggleOverlay = (id) => {
     const dialog = document.getElementById(id)
@@ -17,3 +19,4 @@ export const handleDialogClick = (event, id) => {
         toggleOverlay(id);
     }
 };
+

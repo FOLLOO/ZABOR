@@ -71,7 +71,7 @@ function SendCode() {
         return (
             <input
                 ref={inputRef}
-                type="text"
+                type="number"
                 className={styles.code_input}
                 maxLength="1"
                 value={value}
