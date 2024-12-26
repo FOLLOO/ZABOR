@@ -11,8 +11,8 @@ import Search from '../../../../components/layout/search/Search'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSubscribe } from '../../../../redux/slices/sub'
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
-import Loading from "../../../loading/Loading";
-import ServerError from "../../../server/ServerError";
+import Loading from "../../../../components/STATUS/loading/Loading";
+import ServerError from "../../../../components/STATUS/server/ServerError";
 
 function MySubscribeSettings () {
 

@@ -22,7 +22,7 @@ import CreativeStudio from "./pages/auth/analytics/CreativeStudio";
 import Playlists from "./pages/auth/profile/playlists-page/Playlists";
 import AboutMe from "./pages/auth/profile/about-page/AboutMe";
 import {ProfileLayout} from "./components/layout/profile/ProfileLayout";
-import ClientError from "./pages/404/ClientError";
+import ClientError from "./components/STATUS/404/ClientError";
 import SetUserInteresting from "./pages/unAuth/registration/userIntretings/group/SetUserInteresting";
 import FinalChoices from "./pages/unAuth/registration/userIntretings/tags/FinalChoices";
 import BecomeAuthorGroup from "./pages/auth/profile/become-author/group/BecomeAuthorGroup";
@@ -38,6 +38,7 @@ import ResetPassword from "./pages/unAuth/reset-password/ResetPassword";
 import DocumentationLayout from "./components/layout/documentation/DocumentationLayout";
 import BecomeAuthorPlus from "./pages/documentation/price/becomeIP/BecomeAuthorPlus";
 import AuthorPlus from "./pages/documentation/price/author/plus/AuthorPlus";
+import SettingsPay from "./pages/auth/settings/author-plus/SettingsPay";
 // import axios from "axios";
 
 
@@ -253,6 +254,12 @@ function App() {
                     url: '/',
                     component: <CreativeStudio/>,
                     child: [],
+                },
+                {
+                  title: 'authorPlus',
+                  url: '/pay',
+                  component: <SettingsPay/>,
+                  child: []
                 },
                 {
                     title: 'config',

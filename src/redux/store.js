@@ -9,6 +9,7 @@ import { subscribeReducer } from './slices/sub'
 import {basketAPIReducer} from "./slices/basketAPI";
 import {commentsReducer} from "./slices/comments";
 import {searchReducer} from "./slices/search";
+import { partnerCardsReducer } from "./slices/partner";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     cart: basketAPIReducer,
     comments: commentsReducer,
     search: searchReducer,
+    partner: partnerCardsReducer,
   }
 });
 

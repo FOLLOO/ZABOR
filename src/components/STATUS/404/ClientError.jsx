@@ -1,10 +1,10 @@
 import React from 'react'
 
 import styles from './client-error.module.css'
-import global from '../../global.module.css'
-import notFound from '../../asserts/loading/404.svg'
+import global from '../../../global.module.css'
+import notFound from '../../../asserts/loading/404.svg'
 import { useNavigate } from 'react-router-dom'
-import Button from "../../components/ui/buttons/button/Button";
+import Button from "../../ui/buttons/button/Button";
 
 function ClientError () {
   const navigate = useNavigate()

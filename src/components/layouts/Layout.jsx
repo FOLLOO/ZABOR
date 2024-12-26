@@ -165,6 +165,8 @@ const Layout = ({type}) => {
             ]
         }
     ]
+
+    console.log(user?.roleId)
     /**
      * Возвращает шаблон SideBara необходимые условия для работы // type // menu //
      * @returns {Element}

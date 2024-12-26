@@ -11,7 +11,7 @@ import LittleTag from '../../../components/ui/input/little-tag/LittleTag'
 import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {useAuth} from "../../../provider/AuthProvider";
 import {Helmet} from "react-helmet";
-import ServerError from "../../server/ServerError";
+import ServerError from "../../../components/STATUS/server/ServerError";
 import {TITLE} from "../../../utils";
 
 export default function Publications() {

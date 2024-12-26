@@ -33,8 +33,8 @@ import {createPost, getPost, updatePost} from '../../../../redux/slices/post'
 import {fetchCreativeTags} from "../../../../redux/slices/tag";
 import {Helmet} from "react-helmet";
 import {IMAGE_URL, TITLE} from "../../../../utils";
-import Loading from "../../../loading/Loading";
-import ServerError from "../../../server/ServerError";
+import Loading from "../../../../components/STATUS/loading/Loading";
+import ServerError from "../../../../components/STATUS/server/ServerError";
 
 
 
@@ -100,7 +100,7 @@ function CreatePost() {
         })
         // меняем роль, если он не изменился еще
         let USS = localStorage.getItem('user');
-        if(USS){
+        if(USS && USS.roleId === 1){
             USS = JSON.parse(USS)
             USS.roleId = 2;
             localStorage.setItem('user', JSON.stringify(USS));

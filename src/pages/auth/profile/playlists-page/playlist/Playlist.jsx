@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 //utils
 import {getPublicationsInFolder} from "../../../../../redux/slices/folder";
 import PlaylistsContent from "../../../../../components/post/post-playlist/playlists-content/PlaylistsContent";
-import Loading from "../../../../loading/Loading";
+import Loading from "../../../../../components/STATUS/loading/Loading";
 export default  function PlaylistPage() {
 
     const {playlistID} = useParams();

@@ -11,7 +11,7 @@ import InputText from "../../../components/ui/input/input-text/InputText";
 import Button from "../../../components/ui/buttons/button/Button";
 import {useDispatch} from "react-redux";
 import {setNewPassword} from "../../../redux/slices/user";
-import ClientError from "../../404/ClientError";
+import ClientError from "../../../components/STATUS/404/ClientError";
 
 function ResetPassword() {
     const [password, setPassword] = React.useState('')

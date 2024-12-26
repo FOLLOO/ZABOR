@@ -1,11 +1,11 @@
 import React from 'react'
 
 import styles from './loading.module.css'
-import global from '../../global.module.css'
+import global from '../../../global.module.css'
 
-import loading from '../../asserts/loading/Loading.gif'
+import loading from '../../../asserts/loading/Loading.gif'
 
-function Loading (props) {
+function Loading () {
   return (
     <div className={styles.main}>
       <img src={loading} alt={'loading..'} className={styles.img}/>

@@ -14,7 +14,7 @@ import {fetchTags} from "../../../redux/slices/tag";
 //Components
 import SettingsTitle from '../../toolbar/settings-title/SettingsTitle'
 import TagCheckBox from '../../ui/input/tag-checkbox/TagCheckBox'
-import Loading from '../../../pages/loading/Loading'
+import Loading from '../../STATUS/loading/Loading'
 import Button from "../../ui/buttons/button/Button";
 
 /**

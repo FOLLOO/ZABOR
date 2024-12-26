@@ -25,7 +25,7 @@ import Button from "../../../components/ui/buttons/button/Button";
 import Textarea from "../../../components/ui/input/textarea/Textarea";
 import Bookmark from "../../../components/svgs/Bookmark";
 import InputDporDown from "../../../components/ui/input/input-dropdown/InputDporDown";
-import ServerError from "../../server/ServerError";
+import ServerError from "../../../components/STATUS/server/ServerError";
 
 //utils
 import {getPost, getSamePost, reportPublication} from '../../../redux/slices/post'

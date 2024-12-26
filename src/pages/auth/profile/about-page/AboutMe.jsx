@@ -16,7 +16,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
 import { useSelector} from "react-redux";
 import {useAuth} from "../../../../provider/AuthProvider";
-import Loading from "../../../loading/Loading";
+import Loading from "../../../../components/STATUS/loading/Loading";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 import {Helmet} from "react-helmet";
 import {TITLE} from "../../../../utils";

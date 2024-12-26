@@ -10,7 +10,7 @@ import { useAuth } from '../../../../provider/AuthProvider'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFolder, putPublicationToFolder } from '../../../../redux/slices/folder'
 import {useNavigate, useParams} from 'react-router-dom'
-import Loading from '../../../loading/Loading'
+import Loading from '../../../../components/STATUS/loading/Loading'
 import SelectPost from '../../../../components/post/post-playlist/select-postORplaylist/SelectPost'
 import { getUserPost } from '../../../../redux/slices/post'
 import Button from "../../../../components/ui/buttons/button/Button";

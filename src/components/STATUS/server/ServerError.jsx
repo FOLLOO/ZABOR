@@ -1,5 +1,5 @@
 import React from 'react';
-import server from '../../asserts/loading/serverError.jpg'
+import server from '../../../asserts/loading/serverError.jpg'
 import styles from './server.module.css';
 function ServerError() {
     return (
