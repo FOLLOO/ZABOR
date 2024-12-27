@@ -9,7 +9,7 @@ export default function RoundButton ({onClick, img, text, variant= 'base', link}
     return (
         <div className={`${global.flex} ${global.f_dir_column} ${styles.buttonsParent} ${global.f_a_center}`}>
             {link ?
-                <Link to={link} className={`${styles.button} ${styles[variant]}`}>
+                <Link to={link} target={"_blank"} className={`${styles.button} ${styles[variant]}`}>
                     <div className={`${global.flex} ${global.f_dir_column} ${global.f_a_center}`}>
                         <img className={global['h-5']} src={img} alt={link}/>
                     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -11,10 +11,10 @@ import DataSendLoading from "../STATUS/loading/DataSendLoading";
 import PartnerCardList from "./partner-card-list/PartnerCardList";
 
 import {ORG_EMAIL} from "../../utils";
-import {createPartner} from "../../redux/slices/partner";
+import {createPartner, updatePartner} from "../../redux/slices/partner";
 
-function PartnerCard({serverData}) {
-
+function PartnerCard({serverData, read, setRead}) {
+    // console.log(serverData)
     const [partnerCard, setPartnerCard] = React.useState(serverData || {
         fullName: null,
         shortName: null,
@@ -34,8 +34,10 @@ function PartnerCard({serverData}) {
         phone: null,
         site: null,
     })
+    // const [read, setRead] = React.useState(true);
+    const [value, setValue] = React.useState(serverData ? serverData?.kpp ? "OOO" : "IP" : null);
 
-    const [value, setValue] = React.useState(null);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -207,7 +209,7 @@ function PartnerCard({serverData}) {
     }
 
     const handleOnChange = event => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         setPartnerCard(prevData => ({
             ...prevData,   // Копируем все предыдущее состояние
             [name]: value  // Обновляем только нужное свойство
@@ -246,8 +248,10 @@ function PartnerCard({serverData}) {
                 site: null,
             })
 
+            // пока не ясно стоит ли это делать ?
+            // todo: убрать
             let USS = localStorage.getItem('user');
-            if(USS){
+            if (USS) {
                 USS = JSON.parse(USS)
                 USS.roleId = 3;
                 localStorage.setItem('user', JSON.stringify(USS));
@@ -257,17 +261,41 @@ function PartnerCard({serverData}) {
         }
     };
 
-    if(isLoading){
+    const updateData = async event => {
+        event.preventDefault();
+        // console.log(partnerCard);
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            await dispatch(updatePartner(partnerCard));
+        } catch (e) {
+            console.error('Error creating partner:', e);
+            setError('Ошибка при обновлении партнера. Пожалуйста, попробуйте еще раз.');
+        } finally {
+            setIsLoading(false);
+            // window.location.reload()
+        }
+    }
+
+    useEffect(() => {
+        if(!serverData) return;
+        setPartnerCard(serverData);
+        setValue(serverData ? serverData?.kpp ? "OOO" : "IP" : null);
+    }, [serverData]);
+
+    if (isLoading) {
         return <DataSendLoading/>;
     }
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={serverData ? updateData : handleSubmit}>
             <h4 className={styles.titleplus}>
                 Карта партера
             </h4>
+            {read ? null :
+            <>
             <div className={styles.grid}>
-
                 <InputDporDown text={'Тип'} data={selectOptionItems}
                                onChange={(e) => setValue(e.target.value)}/>
                 <></>
@@ -279,26 +307,30 @@ function PartnerCard({serverData}) {
                 Наша почта для обратной связи <Link className={global.underline}
                                                     to={`mailto:${ORG_EMAIL}`}> {ORG_EMAIL} </Link>
             </p>
-            {value ? <div className={styles.grid}>
-                <div>
-                    <PartnerCardList partnerCard={partnerCard} onChange={handleOnChange}
-                              data={value === 'IP'
-                                  ? {...defalut, items: [...defalut.items, ...ip]} // Копирование и добавление элементов
-                                  : {...defalut, items: [...defalut.items, ...ooo]}}
-                    />
+            </> }
+            {value || read ?
+                <div className={styles.grid}>
+                    <div>
+                        <PartnerCardList read={read} partnerCard={partnerCard} onChange={handleOnChange}
+                                         data={value === 'IP'
+                                             ? {...defalut, items: [...defalut.items, ...ip]} // Копирование и добавление элементов
+                                             : {...defalut, items: [...defalut.items, ...ooo]}}
+                        />
+                    </div>
+                    <div>
+                        <PartnerCardList read={read} data={bank} partnerCard={partnerCard} onChange={handleOnChange}/>
+                        <PartnerCardList read={read} data={contact} partnerCard={partnerCard} onChange={handleOnChange}/>
+                        {value === 'IP' ?
+                            null :
+                            <PartnerCardList read={read} data={additional} partnerCard={partnerCard} onChange={handleOnChange}/>}
+                    </div>
                 </div>
-                <div>
-                    <PartnerCardList data={bank} partnerCard={partnerCard} onChange={handleOnChange}/>
-                    <PartnerCardList data={contact} partnerCard={partnerCard} onChange={handleOnChange}/>
-                    {value === 'IP' ?
-                        null :
-                        <PartnerCardList data={additional} partnerCard={partnerCard} onChange={handleOnChange}/>}
-                </div>
-            </div> : null}
+                : null}
             <p className={`${global.red} ${global.d3}`}>{error}</p>
+            {read ? null :
             <Button type={'submit'} className={`${global.flex} ${global.f_center}`} variant={'outlet'}>
                 Отправить
-            </Button>
+            </Button> }
         </form>
     );
 }

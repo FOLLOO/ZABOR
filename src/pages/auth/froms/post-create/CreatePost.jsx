@@ -319,27 +319,27 @@ function CreatePost() {
                                             Опубликовать
                                         </Button>
                                     </ContextGroup>
-                                    <ContextGroup>
-                                        <div className={global.flex}>
-                                            <InputToggle/>
-                                            <div className={`${global.flex} ${global.f_dir_column} ${styles.dateLabel}`}>
-                                            <h3 className={`${global.t3} ${global.medium} `}>
-                                                Отложенная
-                                                публикация</h3>
-                                            <h3 className={`${global.d3} ${global.medium}  `}>
-                                                Выберете дату публикации
-                                            </h3>
-                                            </div>
-                                        </div>
-                                        <InputText place={'Отложенная публикация'} type={'date'}
-                                        />
-                                    </ContextGroup>
+                                    {/*<ContextGroup>*/}
+                                    {/*    <div className={global.flex}>*/}
+                                    {/*        <InputToggle/>*/}
+                                    {/*        <div className={`${global.flex} ${global.f_dir_column} ${styles.dateLabel}`}>*/}
+                                    {/*        <h3 className={`${global.t3} ${global.medium} `}>*/}
+                                    {/*            Отложенная*/}
+                                    {/*            публикация</h3>*/}
+                                    {/*        <h3 className={`${global.d3} ${global.medium}  `}>*/}
+                                    {/*            Выберете дату публикации*/}
+                                    {/*        </h3>*/}
+                                    {/*        </div>*/}
+                                    {/*    </div>*/}
+                                    {/*    <InputText place={'Отложенная публикация'} type={'date'}*/}
+                                    {/*    />*/}
+                                    {/*</ContextGroup>*/}
                                     <ContextGroup noafter>
                                         <div className={`${global.flex} ${global.f_dir_column}`}>
-                                            <Button type={'submit'} img={archive} img_size={'h-5'}>
+                                            <Button type={'submit'} img={archive} img_size={'h-5'} disabled={true}>
                                                 В черновик
                                             </Button>
-                                            <Button variant={'red-text'} img={trash} img_size={'h-5'}>
+                                            <Button variant={'red-text'} type={'button'} img={trash} img_size={'h-5'} click={() => navigate(-1)}>
                                                 Удалить
                                             </Button>
                                         </div>
@@ -349,7 +349,7 @@ function CreatePost() {
                             : null}
                 </div>
                 {/*todo: по клику плавное появление меню сохранения*/}
-                <form onSubmit={id ? editPublication : handleSubmit} id={'save_my_post'}>
+                <form onSubmit={id ? editPublication : handleSubmit} id={'save_my_post'} className={`${global.flex} ${global.f_center}`}>
                     <div className={styles.content}>
                         <div className={styles.spanImage}>
                             {file === null || file === undefined ?
@@ -382,7 +382,7 @@ function CreatePost() {
                                        onChange={(e) => setPrice(e.target.value)}/>
                             {user?.roleId !== 3 ?
                                 <p className={global.d3}> Вы пока не можете указывать цену для публикаций.
-                                    <Link to={'/documentation/pay#КартаПартера'}
+                                    <Link target={'_blank'} to={'/documentation/pay#КартаПартера'}
                                           className={global.underline}>
                                     Подробнее
                                     </Link>

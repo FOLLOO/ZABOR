@@ -11,6 +11,18 @@
     margin-top: 2rem;
     border-bottom: 1px solid var(--accent-foreground)
 }
+.data{
+    /*font-size: var(--text-xl);*/
+    max-width: 450px;
+}
+.data:after{
+    content: '';
+    display: block;
+    border-bottom: 1px solid var(--accent-foreground);
+    width: 100%;
+    margin-top: .75rem;
+    opacity: 40%;
+}
 
 .form{
     max-width: 900px;
@@ -38,6 +50,7 @@
     display: block;
     border-bottom: 1px solid var(--accent-foreground);
     margin: .5rem 0;
+    opacity: 250%;
 }
 
 .list{

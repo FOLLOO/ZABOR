@@ -31,7 +31,29 @@ function AboutMe() {
     const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
 
 
+    function createSocialLink(text, type) {
+        if (!text) return null;
+        if (text.startsWith('http://') || text.startsWith('https://')) {
+            return text;
+        }
 
+        switch (type) {
+            case 'youtube':
+                return `https://youtube.com/@${text}`;
+            case 'twitch':
+                return `https://twitch.tv/${text}`;
+            case 'telegram':
+                return `https://t.me/${text.replace('@', '')}`;
+            case 'vk':
+                return `https://vk.com/${text}`;
+            case 'tiktok':
+                return `https://tiktok.com/@${text}`;
+            case 'email':
+                return `mailto:${text}`;
+            default:
+                return text; // Возвращаем как есть, если тип не определен
+        }
+    }
     function setImageToButton(name) {
         switch (name) {
             case 'twitch':
@@ -77,11 +99,18 @@ function AboutMe() {
                         {userData?.items?.user?.aboutMe}
                     </p>
                     <div className={styles.userSocialLinks}>
-                        {userData?.items?.socialMedia?.map((item) => (
-                            item.text === '' ? null :
-                                <RoundButton text={item.socialMedium.name} link={item.text}
-                                             img={setImageToButton(item.socialMedium.name)} variant={'black'}/>
-                        ))}
+                        {userData?.items?.socialMedia?.map((item, index) => {
+                            const link = createSocialLink(item.text, item.socialMedium.name);
+                            return link ? (
+                                <RoundButton
+                                    key={index}
+                                    text={item.socialMedium.name}
+                                    link={link}
+                                    img={setImageToButton(item.socialMedium.name)}
+                                    variant={'black'}
+                                />
+                            ) : null;
+                        })}
                     </div>
                 </section>
                 <hr/>

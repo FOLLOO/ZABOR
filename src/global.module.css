@@ -6,7 +6,9 @@
 .p0{
     padding: 0 !important;
 }
-
+.gap{
+    gap: 1rem;
+}
 
 .t1, .t2, .t3, .t4, .t5, .text, .h4{ composes: family; }
 

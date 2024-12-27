@@ -20,6 +20,15 @@ export const createPartner = createAsyncThunk('partner/add', async (data) => {
     }
 });
 
+export const updatePartner = createAsyncThunk('partner/update', async (data) => {
+    try {
+        const response = await axios.put('partner/update', data );
+        return response.data; // Возвращаем данные из ответа
+    } catch (error) {
+        throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+    }
+});
+
 
 const initialState = {
     partnerCard:{
