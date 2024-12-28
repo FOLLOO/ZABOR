@@ -112,7 +112,7 @@ function CreatePost() {
         formData.append('description', description)
         formData.append('ageLimitId', 1)
         formData.append('tags', JSON.stringify(selectedCboxes))
-        formData.append('price', price)
+        formData.append('price', price || 0)
         formData.append('groupTags', JSON.stringify(user?.roleId === 1 ? groupTags[0] : null))
         formData.append('creativeTags', JSON.stringify(user?.roleId === 1 ? creativeTags[0] : null))
         formData.append('blocks', JSON.stringify(filterObj))

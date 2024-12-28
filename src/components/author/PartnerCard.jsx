@@ -256,7 +256,6 @@ function PartnerCard({serverData, read, setRead}) {
                 USS.roleId = 3;
                 localStorage.setItem('user', JSON.stringify(USS));
             }
-            window.location.reload()
             navigate('/publications')
         }
     };

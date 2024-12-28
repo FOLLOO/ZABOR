@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 //css
 import styles from './market.module.css'
@@ -20,13 +20,14 @@ import NothingYet from "../../nothing/nothing-yet/NothingYet";
 import {deleteItemFromBasket} from "../../../redux/slices/basketAPI";
 import {Helmet} from "react-helmet";
 import {TITLE} from "../../../utils";
+import axios from "../../../r-axios/axios";
 
 
 function Market () {
 
   const cartItems = useSelector((state) => state.cart.basket)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const deleteItem = (e,ID) => {
     e.preventDefault()
     const data = {
@@ -35,6 +36,24 @@ function Market () {
     try{
       dispatch(deleteItemFromBasket(data));
       // window.location.reload()
+    }catch (e) {
+      console.log(e)
+    }
+  }
+
+  async function Pay (){
+    let cot = [];
+    cartItems.items.map(item => cot.push(item.id))
+
+    const data = {
+      publicationIDs: cot,
+    }
+
+    try{
+        const response = await axios.post(`/pay/transaction`, data );
+        if(response){
+          window.open(response.data?.url)
+        } // Возвращаем данные из ответа
     }catch (e) {
       console.log(e)
     }
@@ -85,7 +104,7 @@ function Market () {
           <div className={`${styles.bascket} `}>
             <div className={styles.bascket_content}>
               <div className={styles.form}>
-                <Button img={fire} img_size={'h-5'}
+                <Button img={fire} img_size={'h-5'} click={() => Pay()}
                         variant={'outlet'} className={`${global.f_center} ${global.w100}`}>
                   Оплатить
                 </Button>
