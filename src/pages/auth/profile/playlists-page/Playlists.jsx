@@ -10,8 +10,8 @@ import {Link, useNavigate, useParams} from 'react-router-dom'
 import {useAuth} from "../../../../provider/AuthProvider";
 import NothingYet from "../../../nothing/nothing-yet/NothingYet";
 import {getUserFolder} from "../../../../redux/slices/folder";
-import {Helmet} from "react-helmet";
 import { TITLE } from "../../../../utils";
+import {Helmet} from "react-helmet";
 
 
 function Playlists() {
@@ -46,8 +46,8 @@ function Playlists() {
         <div className={styles.margin}>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>{TITLE} | Плейлисты | {user.nickname}</title>
-                <meta name="description" content={'Плейлисты пользователя' + user.nickname}/>
+                <title>{TITLE ? TITLE : 'ZABOR'} | Плейлисты | {user?.nickname}</title>
+                <meta name="description" content={'Плейлисты пользователя' + user?.nickname}/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -89,7 +89,8 @@ function Playlists() {
                     isMe={isMe()}
                     isAuthor={user?.roleId === 1}
                     buttonText={'Стать автором'}
-                    onButtonClick={() => navigate('/select/author/group_tags')}
+                    onButtonClick={() => navigate(user?.roleId === 1 ? '/select/author/group_tags' : './create')}
+
                 />
             }
         </div>

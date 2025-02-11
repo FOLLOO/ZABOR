@@ -1,9 +1,13 @@
 .group{
     width: 100%;
     gap: 5px;
+}
+.base{
     padding: 10px 0;
 }
-
+.sm{
+    padding: 0;
+}
 .group::after{
     content: '';
     display: block;

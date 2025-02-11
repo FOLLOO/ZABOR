@@ -105,7 +105,7 @@ export default function Publications() {
                                 key={index}
                                 data={posts}
                                 avatar={posts?.user?.files[0]?.url}
-                                blur
+                                blur={!posts?.isAvialable}
                                 editable={posts?.userId === user.id}
                                 img={posts?.coverUrl}
                                 title={posts?.title}

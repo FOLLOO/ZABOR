@@ -99,6 +99,9 @@ h5{
   width: 800px;
   height: 450px;
 }
+.ce-block__content{
+  margin: 1rem 0;
+}
 
 
 @media (max-width: 1600px) {

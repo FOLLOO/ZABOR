@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 
 import styles from './card-little.module.css'
@@ -30,7 +30,6 @@ import {deltePost} from "../../../../redux/slices/post";
 
 //todo: уменьшить количество парметров компонента
 function CardLittle({
-
                         title,
                         img,
                         avatar,
@@ -40,10 +39,13 @@ function CardLittle({
                         time,
                         data,
                         editable,
-                        blur = false
+                        blur = true
                     }) {
 
     const dispatch = useDispatch();
+
+    const {items, status} = useSelector((state) => state.cart.basket);
+
     const [inBasket, setInBasket] = useState(null);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate()
@@ -79,10 +81,19 @@ function CardLittle({
         toggleOverlay('add-this-to-playlist')
     }
 
+    useEffect(() => {
+        if(status === 'loaded'){
+            for(let el of items){
+                if(data?.id === el?.publication?.id) setInBasket(true)
+            }
+        }else return;
+    }, [status]);
+
+
     return (
         <div className={styles.card}>
             <div className={`${styles.main}`}>
-                <Link to={`/publication/${data?.id}`}
+                <Link to={blur && !editable ? `` : `/publication/${data?.id}`}
                       className={`${styles.actions} ${global.flex} ${global.f_dir_column}`}>
                     <div className={`${styles.profile} ${global.flex} ${global.f_end}`}>
                         <Link to={`/profile/${userID}`}>
@@ -99,12 +110,11 @@ function CardLittle({
                     </div>
 
                     <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
-                        {editable ? null :
+                        {editable || !blur ? null :
                             <button className={inBasket ? styles.green : styles.button}
                                     disabled={inBasket}
                                     onClick={(e) => addToBasket(e, data?.id)}>
-                                <div
-                                    className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
+                                <div className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                                     {inBasket ?
                                         <img src={added} alt={'img'}/>
                                         :
@@ -120,7 +130,7 @@ function CardLittle({
 
                 <div className={`${styles.content} ${global.flex} `}>
                     <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
-                        <Link to={`/publication/${data?.id}`} className={`${global.t3} ${styles.title}`}>
+                        <Link to={blur && !editable ? `` : `/publication/${data?.id}`} className={`${global.t3} ${styles.title}`}>
                             {title ? title :
                                 <div className={global.skeleton}>
                                     Пришла и оторвало голову нам сумасшедшая весна
@@ -128,7 +138,7 @@ function CardLittle({
                             }
                         </Link>
                         <div className={`${global.t3} ${styles.price}`}>
-                            {price > 0 ? new Intl.NumberFormat('ru-RU', {
+                            {!blur ? 'Куплено' : price > 0 ? new Intl.NumberFormat('ru-RU', {
                                     style: 'currency',
                                     currency: 'RUB'
                                 }).format(price) :
@@ -170,21 +180,22 @@ function CardLittle({
             </div>
             {editable && open ?
                 <div className={styles.editContext}>
-                    <ContextDrop>
-                        <ContextGroup>
-                            <Button variant={'ghost'} img={edit} img_size={'h-6'}
+                    <ContextDrop pad={'sm'}>
+                        <ContextGroup pad={'sm'}>
+                            <Button variant={'ghost'} img={edit} img_size={'h-4'} size={'sm'}
                                     click={() => navigate(`/publications/create/${data.id}`)}
                                     className={global.w100}>
                                 Редактировать
                             </Button>
                         </ContextGroup>
-                        <ContextGroup noafter>
+                        <ContextGroup noafter pad={'sm'}>
                             <div className={`${global.flex} ${global.f_dir_column}`}>
-                                <Button variant={'ghost'} img={playlist}
+                                <Button variant={'ghost'} img={playlist} size={'sm'} img_size={'h-4'}
                                         click={() => addEvent(data.id)}>
                                     Добавить в плейлист
                                 </Button>
-                                <Button variant={'red-text'} img={deleteThis} img_size={'h-6'} className={global.w100}
+                                <Button variant={'red-text'} img={deleteThis} size={'sm'}
+                                        img_size={'h-4'} className={global.w100}
                                         click={() => agreeToDelete(data?.id)}>
                                     Удалить
                                 </Button>

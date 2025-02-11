@@ -36,12 +36,15 @@ import {Helmet} from "react-helmet";
 import {postSubscribe} from "../../../redux/slices/sub";
 import {useAuth} from "../../../provider/AuthProvider";
 import {RWebShare} from "react-web-share";
+import NotAvaliblePost from "../../../components/STATUS/205/NotAvaliblePost";
+import {addPostToBasket} from "../../../redux/slices/basketAPI";
 
 function Post() {
     const {id} = useParams()
     const {user} = useAuth()
     const {OnePost, SamePosts} = useSelector(state => state.posts)
-    const {items, status} = useSelector(state => state.comments.publicationComment)
+    const {status} = useSelector(state => state.posts.OnePost)
+    const {items} = useSelector(state => state.comments.publicationComment)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -146,10 +149,8 @@ function Post() {
         }
     }
 
-
-
     useEffect(() => {
-        if (OnePost.status === 'loaded' && OnePost.items.id === id) return;
+        if (status === 'loaded' && OnePost.items.id === id) return;
         pageGetPost()
         setSub(OnePost?.items?.user?.isSub || false)
     }, [])
@@ -162,11 +163,9 @@ function Post() {
         }
     }, [status === 'loading'|| status === 'updated'])
 
-
-
     useEffect(() => {
         // Если данные поступили и все необходимые свойства доступны
-        if (OnePost.status === 'loaded') {
+        if (status === 'loaded') {
             setLiked(OnePost.items?.user?.isLiked || false);
             setFavorite(OnePost.items?.user?.isFavorite || false);
         }
@@ -184,6 +183,11 @@ function Post() {
     for (let i = shuffledPosts.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]];
+    }
+
+    // обработка доступа
+    if(status === 'unavailable'){
+        return <NotAvaliblePost/>
     }
 
     // Обработка ошибок
@@ -333,7 +337,7 @@ function Post() {
                                         <CardLittle
                                             data={post}
                                             key={i}
-                                            blur
+                                            blur={!post?.isAvialable}
                                             img={post.coverUrl}
                                             title={post.title}
                                             price={post.price}
@@ -363,7 +367,7 @@ function Post() {
                                     key={posts.id}
                                     data={posts}
                                     // avatar={posts.user.files[0].url}
-                                    blur
+                                    blur={!posts?.isAvialable}
                                     img={posts.coverUrl}
                                     title={posts.title}
                                     price={posts.price}

@@ -41,23 +41,37 @@ function Market () {
     }
   }
 
+  // async function Pay (){
+  //   let cot = [];
+  //   cartItems.items.map(item => cot.push(item.id))
+  //
+  //   const data = {
+  //     publicationIDs: cot,
+  //   }
+  //
+  //   try{
+  //       const response = await axios.post(`/pay/transaction`, data );
+  //       if(response){
+  //         localStorage.setItem('transaction', JSON.stringify(response.data?.transaction));
+  //         window.open(response.data?.url)
+  //       } // Возвращаем данные из ответа
+  //   }catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
   async function Pay (){
-    let cot = [];
-    cartItems.items.map(item => cot.push(item.id))
-
-    const data = {
-      publicationIDs: cot,
+      try{
+          const response = await axios.get(`/pay/transaction`);
+          if(response){
+            // localStorage.setItem('transaction', JSON.stringify(response.data?.transaction));
+            window.open(response.data)
+          } // Возвращаем данные из ответа
+      }catch (e) {
+        console.log(e)
+      }
     }
 
-    try{
-        const response = await axios.post(`/pay/transaction`, data );
-        if(response){
-          window.open(response.data?.url)
-        } // Возвращаем данные из ответа
-    }catch (e) {
-      console.log(e)
-    }
-  }
 
   // const count = cartItems.length;
   // подсчет итога
@@ -147,9 +161,6 @@ function Market () {
         </div>
       </div>
 
-
-      {/*<GreenButton text={'Перейти к оплате'}/>*/}
-      {/*</div>*/}
     </div>
   )
 }

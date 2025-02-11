@@ -17,6 +17,7 @@ import {fetchTags} from '../../../../redux/slices/tag'
 import {getUserFolder} from "../../../../redux/slices/folder";
 import {Helmet} from "react-helmet";
 import {TITLE} from "../../../../utils";
+import Loading from "../../../STATUS/loading/Loading";
 
 /** Посты пользователя */
 
@@ -27,7 +28,7 @@ function UserPosts({data = []}) {
     const {id} = useParams()
 
     const {userFolder} = useSelector(state => state.folder)
-    const {userData} = useSelector(state => state.userR)
+    const {userData, status} = useSelector(state => state.userR)
 
 
     const [sort, setSort] = useState(false) // сортировка
@@ -65,6 +66,7 @@ function UserPosts({data = []}) {
             console.log(err)
         }
     }
+
     useEffect(() => {
         if(serverTags.length > 0) return
         getTags()
@@ -97,6 +99,7 @@ function UserPosts({data = []}) {
         }
 
     }, [sort, data, tags])
+
     const isMe = () => { return user?.id === Number(id) }
 
 
@@ -142,7 +145,7 @@ function UserPosts({data = []}) {
                                             userID={message?.userId}
                                             avatar={userData.items.avatarUrl ? `${userData.items.avatarUrl}` : null}
                                             img={message?.coverUrl}
-                                            blur={!!message?.price}
+                                            blur={!message?.isAvialable}
                                             views={message?.views_count + 1}
                                             time={message?.createdAt}
                                             title={message?.title}
@@ -156,7 +159,7 @@ function UserPosts({data = []}) {
                         <NothingYet
                             isMe={isMe()}
                             isAuthor={user?.roleId === 1}
-                            onButtonClick={() => navigate('/select/author/group_tags')}
+                            onButtonClick={() => navigate(user?.roleId === 1 ? '/select/author/group_tags' : '/publications/create')}
                             buttonText="Создать публикацию"
                         />
                     }

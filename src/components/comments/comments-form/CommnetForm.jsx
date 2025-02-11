@@ -40,7 +40,7 @@ function CommnetForm ({ click, main = false, parrentID }) {
       try {
         dispatch(createComment(data));
         setValue(null)
-        // window.location.reload()
+        window.location.reload()
       } catch (e) {
         console.error('Error:', e);
       }

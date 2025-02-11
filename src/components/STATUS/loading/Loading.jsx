@@ -5,7 +5,7 @@ import global from '../../../global.module.css'
 
 import loading from '../../../asserts/loading/Loading.gif'
 
-function Loading () {
+function Loading (n) {
   return (
     <div className={styles.main}>
       <img src={loading} alt={'loading..'} className={styles.img}/>

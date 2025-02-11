@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import styles from '../authorization/authorization.module.css'
-import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
-import global from '../../../global.module.css'
-import InputText from '../../../components/ui/input/input-text/InputText'
 import {Link, useNavigate} from 'react-router-dom'
-import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
-// import {axiosClassic} from "../../../r-axios/axios";
-import Button from "../../../components/ui/buttons/button/Button";
-import {useAuth} from "../../../provider/AuthProvider";
 
+import styles from '../authorization/authorization.module.css'
+import global from '../../../global.module.css'
+
+import GlassCard from '../../../components/glasses/glasses-card/GlassCard'
+import InputText from '../../../components/ui/input/input-text/InputText'
+import InputDporDown from '../../../components/ui/input/input-dropdown/InputDporDown'
+import Button from "../../../components/ui/buttons/button/Button";
+
+import {useAuth} from "../../../provider/AuthProvider";
 function Registration() {
 
     const navigate = useNavigate()
@@ -64,6 +65,8 @@ function Registration() {
 
     }, [errMes])
 
+
+
     return (
         <div className={styles.back}>
             <div className={styles.state}>
@@ -98,7 +101,7 @@ function Registration() {
                                 />
                                 <h3 className={global.d3}>Дата рождения</h3>
                                 <InputText type={'date'} utocomplete={"off"} autocomplete={"off"}
-                                           value={DR}
+                                           value={DR > new Date().toISOString().split('T')[0] ? new Date().toISOString().split('T')[0] : DR} minValue="1925-01-01" maxValue={new Date().toISOString().split('T')[0]}
                                            required
                                            onChange={e => setDR(e.target.value)}
 

@@ -39,6 +39,7 @@ import DocumentationLayout from "./components/layout/documentation/Documentation
 import BecomeAuthorPlus from "./pages/documentation/price/becomeIP/BecomeAuthorPlus";
 import AuthorPlus from "./pages/documentation/price/author/plus/AuthorPlus";
 import SettingsPay from "./pages/auth/settings/author-plus/SettingsPay";
+import TempPay from "./pages/auth/market/TempPay";
 // import axios from "axios";
 
 
@@ -215,6 +216,13 @@ function App() {
                     url: '/basket',
                     component: <Market/>,
                     child: [],
+                },
+                {
+                    title: 'tempPay',
+                    url: '/tempPay',
+                    component: <TempPay/>,
+                    child: [],
+
                 },
                 {
                     title: 'author',

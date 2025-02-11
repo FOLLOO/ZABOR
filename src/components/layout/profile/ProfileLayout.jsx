@@ -26,6 +26,7 @@ import SelectPost from "../../post/post-playlist/select-postORplaylist/SelectPos
 import {putPublicationToFolder} from "../../../redux/slices/folder";
 import NothingYet from "../../../pages/nothing/nothing-yet/NothingYet";
 import ImageEditor from "../../cropper/ImageEditor";
+import Loading from "../../STATUS/loading/Loading";
 
 
 export function ProfileLayout() {
@@ -235,9 +236,16 @@ export function ProfileLayout() {
 
     useEffect(() => {
         getUser()
-        setSub(userData.items?.user?.isSub)
         //todo: нет идей как это реализовать при изменении пользователя не обновляется localStorage()
     }, [id])
+
+    useEffect(() => {
+        if (userData.status === 'loaded') {
+            setSub(userData?.items?.user?.isSub)
+        }
+    }, [userData.status]);
+
+    if(userData.status === 'loading') return <Loading/>
 
     //Данные для /Tabs
     const tabContent = [

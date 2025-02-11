@@ -135,7 +135,7 @@ const userPostsSlice = createSlice({
       })
       .addCase(getPost.fulfilled, (state, action) => {
         state.OnePost.items = action.payload;
-        state.OnePost.status = 'loaded';
+        state.OnePost.status = action.payload.isBought === false ? 'unavailable' : 'loaded';
       })
       .addCase(getPost.rejected, (state) => {
         state.OnePost.items = [];

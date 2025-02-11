@@ -6,9 +6,10 @@
 
 
 export const IMAGE_URL = 'http://192.168.0.114:5000'
-export const TITLE = 'Zabor'
+export const TITLE = `DSMe`
 export const ORG_EMAIL = 'aimany@mail.ru'
 
+export const SITE_URL = 'http://localhost:3000'
 
 export const toggleOverlay = (id) => {
     const dialog = document.getElementById(id)
