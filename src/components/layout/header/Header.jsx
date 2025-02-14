@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -9,7 +9,6 @@ import {getBasket} from "../../../redux/slices/basketAPI";
 //Components
 import Button from "../../ui/buttons/button/Button";
 import Search from "../search/Search";
-import LittleTag from "../../ui/input/little-tag/LittleTag";
 import ProfileNickname from "../../profile/profile-nickname/ProfileNickname";
 import ContextDrop from "../../context-drop/ContextDrop";
 import ContextGroup from "../../context-drop/context-group/ContextGroup";
@@ -254,15 +253,23 @@ export default function Header({type = 'unauthorized'}) {
 
     return (
         <nav className={`${global.flex} ${type === 'unauthorized' ? styles.headerPadding : styles.header}`}>
-            <div className={`${global.flex} ${styles.headerChild}`}>
-                <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
-                    <img alt={'menu'} src={menu_i}/>
-                </label>
-                <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
-                    <img src={logo} alt={''} className={styles.logoImage}/>
-                    <h1 className={`${global.xl} ${styles.logo_text} ${global.bold}`}>{TITLE}</h1>
-                </Link>
-            </div>
+            {type === 'unauthorized' ?
+                <div className={`${global.flex} ${styles.headerChild}`}>
+                    <Link to={'/'} className={styles.logo}>
+                        <img src={logo} alt={''} className={styles.logoImage}/>
+                    </Link>
+                </div>
+                :
+                <div className={`${global.flex} ${styles.headerChild}`}>
+                    <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
+                        <img alt={'menu'} src={menu_i}/>
+                    </label>
+                    <Link to={'/publications'} className={styles.logo}>
+                        <img src={logo} alt={''} className={styles.logoImage}/>
+                            <h1 className={`${global.xl} ${styles.logo_text} ${global.bold}`}>{TITLE}</h1>
+                    </Link>
+                </div>
+            }
             {renderSwitch(type)}
         </nav>
     )

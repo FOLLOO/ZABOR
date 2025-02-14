@@ -84,7 +84,7 @@ function Search ({placeholder = 'Найти...', value, onChange, ref, main = fa
                                 {items.folders.map((item, i) => (
                                     <RenderType
                                         key={i}
-                                        link={'profile/' + item.userId + '/playlist/' + item.id}
+                                        link={'/profile/' + item.userId + '/playlist/' + item.id}
                                         text={item.name}
                                         date={new Date(item.createdAt).toLocaleDateString('ru-RU')}
                                     />

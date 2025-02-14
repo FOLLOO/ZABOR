@@ -9,11 +9,9 @@ import plus from '../../../../asserts/icons/plus.svg'
 import ContextDrop from '../../../context-drop/ContextDrop'
 import ContextGroup from '../../../context-drop/context-group/ContextGroup'
 import { useDispatch, useSelector } from 'react-redux'
-import { deltePost } from '../../../../redux/slices/post'
 
 
-import { OverlayContext } from '../../../../context/OverlayContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { IMAGE_URL } from '../../../../utils'
 import { useAuth } from '../../../../provider/AuthProvider'
 import { addItemToCart } from '../../../../redux/slices/bascet'

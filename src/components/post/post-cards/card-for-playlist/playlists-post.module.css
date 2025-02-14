@@ -14,8 +14,6 @@
 }
 
 .main:hover{
-    /*box-shadow: 0 10px 36px 0 rgba(0 ,0 , 0, 0.16);*/
-    /*margin: 10px;*/
     opacity: 0.9;
     background-color: var(--end-foreground);
 }
@@ -83,7 +81,7 @@
 @media (max-width: 430px) {
     .main{
         flex-direction: column;
-        max-height: 300px;
+        max-height: 400px;
         z-index: auto;
     }
     .content{
@@ -92,9 +90,10 @@
     }
     .image{
         max-width: none;
+        min-height: 200px;
     }
     .lock{
-        bottom: 150px;
+        bottom: 200px;
     }
 
     .img{

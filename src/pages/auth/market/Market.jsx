@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 //css
 import styles from './market.module.css'
@@ -40,30 +40,10 @@ function Market () {
     }
   }
 
-  // async function Pay (){
-  //   let cot = [];
-  //   cartItems.items.map(item => cot.push(item.id))
-  //
-  //   const data = {
-  //     publicationIDs: cot,
-  //   }
-  //
-  //   try{
-  //       const response = await axios.post(`/pay/transaction`, data );
-  //       if(response){
-  //         localStorage.setItem('transaction', JSON.stringify(response.data?.transaction));
-  //         window.open(response.data?.url)
-  //       } // Возвращаем данные из ответа
-  //   }catch (e) {
-  //     console.log(e)
-  //   }
-  // }
-
   async function Pay (){
       try{
           const response = await axios.get(`/pay/transaction`);
           if(response){
-            // localStorage.setItem('transaction', JSON.stringify(response.data?.transaction));
             window.open(response.data)
           } // Возвращаем данные из ответа
       }catch (e) {
@@ -71,11 +51,6 @@ function Market () {
       }
     }
 
-  // setInterval(Pay, 10000)
-
-
-
-  // const count = cartItems.length;
   // подсчет итога
   const totalPrice = cartItems.items.reduce((acc, currentValue) => {
     return acc + currentValue.publication?.price
