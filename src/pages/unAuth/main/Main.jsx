@@ -10,7 +10,8 @@ import videoo from '../../../asserts/video/infinty.mp4'
 import logo from '../../../logo.svg'
 
 import temp from '../../../asserts/temp/people-doing-outdoor-training.jpg'
-import temp2 from '../../../asserts/temp/beautiful-mountain-lake-background-remix.jpg'
+import publications from '../../../asserts/main/publications.png'
+import user from '../../../asserts/main/user.png'
 //components
 import GlassBox from '../../../components/glasses/glasses-box/GlassBox'
 import Button from "../../../components/ui/buttons/button/Button";
@@ -70,9 +71,8 @@ const getStart = [
 ]
 const images = [
     temp,
-    temp2,
-    temp,
-    temp2,
+    publications,
+    user,
 ]
 function Main() {
 
