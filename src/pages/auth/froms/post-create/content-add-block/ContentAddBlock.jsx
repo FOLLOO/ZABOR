@@ -7,7 +7,6 @@ import global from '../../../../../global.module.css'
 
 //image
 import textIcon from '../../../../../asserts/icons/update/text.svg'
-import fileIcon from '../../../../../asserts/icons/update/file.svg'
 import videoIcon from '../../../../../asserts/icons/update/file-video-2.svg'
 import photoIcon from '../../../../../asserts/icons/update/file-image.svg'
 
@@ -138,7 +137,7 @@ const ContentAddBlock = ({ id, blockType,  onUpdate }) => {
           <div className={styles.fileUploadContent}>
             {fileURL ? (
                 <div>
-                  <img className={styles.fileUploadImage} src={fileURL} alt="image"/>
+                  <img className={styles.fileUploadImage} src={fileURL} alt="file photo"/>
                 </div>
             ) : null}
           </div>

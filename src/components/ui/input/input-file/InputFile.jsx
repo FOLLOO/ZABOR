@@ -3,6 +3,7 @@ import React from 'react';
 
 import styles from './file-input.module.css'
 import global from '../../../../global.module.css';
+import duble from '../../../../duble.module.css'
 import Button from "../../buttons/button/Button";
 export default function InputFile({onChange, value, id,
 }) {
@@ -23,7 +24,7 @@ export default function InputFile({onChange, value, id,
                     accept="image/*"
                 />
                 {!value ? (
-                    <div className={`${global.d1} ${styles.delete}`}>Или перетащите фото сюда</div>
+                    <div className={`${global.d1} ${duble.delete}`}>Или перетащите фото сюда</div>
                 ) : null}
             </div>
                 {value ? (

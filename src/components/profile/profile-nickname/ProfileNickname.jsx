@@ -15,6 +15,7 @@ import { useAuth } from '../../../provider/AuthProvider'
  * @param desc
  * @param img
  * @param subs
+ * @param comment
  * @returns {Element}
  * @constructor
  */

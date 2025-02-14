@@ -1,9 +1,6 @@
 // export const IMAGE_URL = 'http://192.168.1.121:5000'
 // export const IMAGE_URL = 'http://localhost:5000'
-
 // export const IMAGE_URL = 'http://192.168.0.101:5000'
-
-
 
 export const IMAGE_URL = 'http://192.168.0.114:5000'
 export const TITLE = `Dont Stop Me`
@@ -19,14 +16,13 @@ export const toggleOverlay = (id) => {
 }
 
 export const handleDialogClick = (event, id) => {
-    // Проверяем, если клик произошел на backdrop
     if (event.target.tagName === 'DIALOG') {
         toggleOverlay(id);
     }
 };
 
 let eventSource;
-export function start() { // когда нажата кнопка "Старт"
+export function start() {
     const isStarted = localStorage.getItem('notification')
     if (!isStarted) {
         localStorage.setItem('notification', 'true')
@@ -44,8 +40,7 @@ export function start() { // когда нажата кнопка "Старт"
         };
 
         eventSource.onerror = function (e) {
-            // log("Событие: error");
-            if (this.readyState == EventSource.CONNECTING) {
+            if (this.readyState === EventSource.CONNECTING) {
                 console.log(`Переподключение (readyState=${this.readyState})...`);
             } else {
                 console.log("Произошла ошибка.");

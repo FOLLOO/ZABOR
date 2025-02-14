@@ -86,7 +86,7 @@ function CardLittle({
             for(let el of items){
                 if(data?.id === el?.publication?.id) setInBasket(true)
             }
-        }else return;
+        }
     }, [status]);
 
 

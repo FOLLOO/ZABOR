@@ -6,7 +6,6 @@ import global from '../../../global.module.css'
 import ProfileCircle from '../../profile/profile-circle/ProfileCircle'
 import { IMAGE_URL } from '../../../utils'
 
-import temp from '../../../asserts/temp/beautiful-mountain-lake-background-remix.jpg'
 import {Link} from "react-router-dom";
 
 /** Компонент для рендеринга уведомлений */

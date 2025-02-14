@@ -1,13 +1,12 @@
 import React from 'react'
 
 import styles from './avtor-sells.module.css'
-import global from '../../../../../global.module.css'
 import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
 import SettingsTitle from '../../../../../components/toolbar/settings-title/SettingsTitle'
 import SettingsBlock from '../../../../../components/toolbar/settings-block/SettingsBlock'
 import InputDporDown from '../../../../../components/ui/input/input-dropdown/InputDporDown'
-function AvtorSells (props) {
+function AvtorSells () {
 
   const data = [
     {

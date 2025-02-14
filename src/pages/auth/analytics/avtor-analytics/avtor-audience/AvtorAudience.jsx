@@ -1,12 +1,11 @@
 import React from 'react'
 
 import styles from './avtor-audience.module.css'
-import global from '../../../../../global.module.css'
 import SettingsBlock from '../../../../../components/toolbar/settings-block/SettingsBlock'
 import { ResponsivePie } from '@nivo/pie'
 import { ResponsiveLine } from '@nivo/line'
 
-function AvtorAudience (props) {
+function AvtorAudience () {
   //todo: desk переделать
 
   const data = [

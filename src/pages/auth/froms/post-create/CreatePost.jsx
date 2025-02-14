@@ -14,7 +14,6 @@ import ContentAddBlock from './content-add-block/ContentAddBlock'
 import Button from "../../../../components/ui/buttons/button/Button";
 import InputText from "../../../../components/ui/input/input-text/InputText";
 import InputFile from "../../../../components/ui/input/input-file/InputFile";
-import InputToggle from "../../../../components/ui/input/input-toggle/InputCheckbox";
 import RoundButton from "../../../../components/ui/buttons/rounded-button/RoundedButton";
 import LittleTag from "../../../../components/ui/input/little-tag/LittleTag";
 import SettingsBlock from "../../../../components/toolbar/settings-block/SettingsBlock";
@@ -71,7 +70,7 @@ function CreatePost() {
 
         let checkboxes = document.getElementsByName("checkbox");
         let selectedCboxes = Array.prototype.slice.call(checkboxes)
-            .filter(ch => ch.checked == true)
+            .filter(ch => ch.checked === true)
             .map(ch => ch.id);
 
         const validations = [
@@ -232,8 +231,7 @@ function CreatePost() {
         formData.append('cover', file)
 
         try {
-            const resultAction = await dispatch(updatePost({id, formData}))
-            // console.log(resultAction)
+            await dispatch(updatePost({id, formData}))
             alert('Публикация обновлена')
             navigate(`/profile/${user?.id}`)
         } catch (err) {
@@ -257,7 +255,7 @@ function CreatePost() {
             setLoading(false);
         };
 
-        fetchData();
+        fetchData().then();
     }, [id]);
 
 // Обновление состояний после загрузки `items`

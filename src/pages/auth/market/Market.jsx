@@ -27,7 +27,6 @@ function Market () {
 
   const cartItems = useSelector((state) => state.cart.basket)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const deleteItem = (e,ID) => {
     e.preventDefault()
     const data = {

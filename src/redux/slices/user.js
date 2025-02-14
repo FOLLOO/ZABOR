@@ -77,18 +77,6 @@ export const postUserCover = createAsyncThunk('user/takeCover', async (data) => 
   }
 });
 
-
-export const getUserAvatar = createAsyncThunk('user/getAvatar', async () => {
-  try {
-    const response = await axios.get('/user/getAvatar');
-    return response.data; // Возвращаем данные из ответа
-  } catch (error) {
-    throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
-  }
-});
-
-
-
 const initialState = {
   userData:{
     items: [],

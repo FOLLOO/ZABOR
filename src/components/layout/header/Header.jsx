@@ -256,7 +256,7 @@ export default function Header({type = 'unauthorized'}) {
         <nav className={`${global.flex} ${type === 'unauthorized' ? styles.headerPadding : styles.header}`}>
             <div className={`${global.flex} ${styles.headerChild}`}>
                 <label className={`${styles.b_width} ${styles.openMenu}`} htmlFor={'leftMenu'}>
-                    <img src={menu_i}/>
+                    <img alt={'menu'} src={menu_i}/>
                 </label>
                 <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
                     <img src={logo} alt={''} className={styles.logoImage}/>

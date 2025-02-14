@@ -17,7 +17,6 @@ import {fetchTags} from '../../../../redux/slices/tag'
 import {getUserFolder} from "../../../../redux/slices/folder";
 import {Helmet} from "react-helmet";
 import {TITLE} from "../../../../utils";
-import Loading from "../../../STATUS/loading/Loading";
 
 /** Посты пользователя */
 
@@ -33,14 +32,12 @@ function UserPosts({data = []}) {
 
     const [sort, setSort] = useState(false) // сортировка
     const [open, setOpen] = useState(false) // теги
-    // const [plstOpen, setPlstOpen] = useState(false) // плейлист
 
 
     const dispatch = useDispatch()
 
     const [tags, setTags] = useState(false)
     const [serverTags, setServerTags] = useState([])
-    // const [playlist, setPlaylist] = useState([])
 
     const [sortData, setSortData] = useState([]) // сортировка
 
@@ -82,7 +79,7 @@ function UserPosts({data = []}) {
         if (data.length > 0) {
             let checkboxes = document.getElementsByName("publications_tags");
             let selectedCboxes = Array.prototype.slice.call(checkboxes)
-                .filter(ch => ch.checked == true)
+                .filter(ch => ch.checked === true)
                 .map(ch => Number(ch.id));
 
             const newFilteredData = data.filter(publication => {

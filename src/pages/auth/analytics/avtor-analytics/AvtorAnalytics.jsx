@@ -10,7 +10,7 @@ import AvtorReview from './avtor-review/AvtorReview'
 import AvtorSells from './avtor-sells/AvtorSells'
 import AvtorAudience from './avtor-audience/AvtorAudience'
 
-function AvtorAnalytics (props) {
+function AvtorAnalytics () {
   const {id} = useParams()
   const {pathname} = useLocation()
   const navigate = useNavigate()

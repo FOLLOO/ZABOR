@@ -20,7 +20,6 @@ import { addItemToCart } from '../../../../redux/slices/bascet'
 
 
 function CardDefault ({
-  image = false,
   img,
   avatar_img,
   title,
@@ -37,9 +36,7 @@ function CardDefault ({
 
   const [open, setOpen] = useState(false)
   const ref = useRef(null);
-  const {overlay, setOverlay,someOpen, setSomeOpen} = useContext(OverlayContext)
   const cartItems = useSelector((state) => state.cart.items);
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [disable, setDisable] = useState(false)
@@ -47,41 +44,12 @@ function CardDefault ({
   const { user } = useAuth()
 
 
-  const hndleDeletePost = (param) => {
-    try{
-      dispatch(deltePost(param))
-      setOpen(!open);
-    }
-    catch (err){
-      console.log(err)
-    }
-  }
-
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target))
       setOpen(false)
   }
 
-  const addToPlaylist = () => {
-    setOverlay(!overlay)
-    setSomeOpen(!someOpen)
-    // hash
-    navigate({
-      hash: `#${id}`
-    });
-  }
-  const Sceleton = () => {
-    return(
-      <div className={`${global.skeleton} ${styles.noImage}`}>
-
-      </div>
-    )
-  }
-  const handleAddToCart = (e) => {
-    // e.preventDefault()
-    // setOverlay(!overlay);
-    // Добавляем товар в корзину
-
+  const handleAddToCart = () => {
     if(cartItems.length < 0 || cartItems[0]?.id !== data?.id){ //решение проблемы: по id задать свойство кнопке disabled
       dispatch(addItemToCart(data));
       setDisable(true)
@@ -113,18 +81,15 @@ function CardDefault ({
           </div>
 
           <div className={`${styles.basket} ${global.flex} ${global.f_start}`}>
-            {/*<TransprantButton text={'+'} img={basket} stylee={{background: 'white', width: '55px', padding: 0}}/>*/}
 
             {user?.id === userID ? null : price !== 'Бесплатно' ?
-              <button className={styles.button} disabled={disable} onClick={(e) => handleAddToCart()}>
+              <button className={styles.button} disabled={disable} onClick={() => handleAddToCart()}>
                 <div className={`${global.flex} ${global.f_a_center} ${global.f_center} ${styles.buttonCon}`}>
                   <img src={basket} alt={'button img'}/>
                   <img src={plus} alt={'button img'}/>
                 </div>
               </button>
               : <span className={styles.bascet_span}></span> }
-               {/*<div className={global.skeleton}> /*/}
-               {/*</div>}*/}
           </div>
 
         </div>
@@ -132,8 +97,6 @@ function CardDefault ({
         <Link to={`/post/${id}`} className={`${global.flex} ${global.f_dir_column} ${styles.gap}`}>
           <div className={`${styles.epigraph} ${global.flex} ${global.f_s_between}`}>
             <div className={`${global.lg} ${global.bold} ${styles.title}`}>
-              {/*{title ? title : 'Пришла и оторвало голову нам сумасшедшая весна'}*/}
-              {/*Пришла и оторвало голову нам сумасшедшая весна*/}
               {title ? title :
                 <div className={global.skeleton}>
                   Пришла и оторвало голову нам сумасшедшая весна
@@ -198,11 +161,8 @@ function CardDefault ({
       <div className={styles.editContext} ref={ref}>
         <ContextDrop width={'17vw'} >
           <ContextGroup>
-            {/*<TransprantButton left img={edit} text={'Изменить'}/>*/}
           </ContextGroup>
           <ContextGroup noafter>
-            {/*<TransprantButton left img={moveTo} text={'Добавить в плейлист'} click={() => addToPlaylist()}/>*/}
-            {/*<TransprantButton left img={remover} text={'Удалить'} red click={() => hndleDeletePost(id)}/>*/}
           </ContextGroup>
         </ContextDrop>
       </div> : null}

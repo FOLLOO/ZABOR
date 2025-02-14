@@ -1,7 +1,6 @@
 import React from 'react'
 
 import styles from './post-review.module.css'
-import global from '../../../../../global.module.css'
 
 import Notification from '../../../../../components/notifications/Notification'
 import SettingsBlock from '../../../../../components/toolbar/settings-block/SettingsBlock'
@@ -10,9 +9,7 @@ import InputDporDown from '../../../../../components/ui/input/input-dropdown/Inp
 import { ResponsiveLine } from '@nivo/line'
 import CardLittle from '../../../../../components/post/post-cards/card-little/CardLittle'
 import Tab from '../../../../../components/ui/tab/Tab'
-import { useLocation } from 'react-router-dom'
-function PostReview (props) {
-  const { hash } = useLocation();
+function PostReview () {
 
 
   const data = [

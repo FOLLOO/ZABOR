@@ -6,7 +6,6 @@ import Button from "../../../components/ui/buttons/button/Button";
 import fire from "../../../asserts/emoji/Fire.svg";
 import global from "../../../global.module.css";
 import axios from "../../../r-axios/axios";
-import {SITE_URL} from "../../../utils";
 function TempPay() {
 
     async function Pay(){

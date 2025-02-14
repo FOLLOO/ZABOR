@@ -15,11 +15,6 @@
     gap: 1rem;
 }
 
-.addButton{
-    width: 300px;
-}
-
-
 .grid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);

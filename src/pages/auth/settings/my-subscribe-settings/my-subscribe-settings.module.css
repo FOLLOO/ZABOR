@@ -2,16 +2,6 @@
     padding: 0 35px;
 }
 
-.profileInputs{
-    display: flex;
-    flex-direction: column;
-    gap: 25px
-}
-
-.social{
-    width: 100%;
-    gap: 70px
-}
 
 .profileInputs input, select{
     max-width: 500px;

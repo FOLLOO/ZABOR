@@ -6,7 +6,7 @@ import BackCreate from '../../../../components/toolbar/backCreate-toolbar/BackCr
 import SelectTags from '../../../../components/settings/Tags/SelectTags'
 import { useTags } from '../../../../context/TagsContext'
 import { useDispatch } from 'react-redux'
-import { fetchCreativeTags, fetchTags } from '../../../../redux/slices/tag'
+import { fetchCreativeTags } from '../../../../redux/slices/tag'
 
 function SelectTagsPage (props) {
 

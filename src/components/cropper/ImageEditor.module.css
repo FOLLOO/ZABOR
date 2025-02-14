@@ -19,31 +19,3 @@
 .controlsBlock svg:hover {
     color: #6d28d9;
 }
-
-.controlButton {
-    background: transparent;
-    border: none;
-    display: flex;
-    place-items: center;
-}
-
-.controlButton:focus {
-    outline-color: #6d28d9;
-}
-
-.scaleFieldBlock {
-    display: flex;
-    flex-direction: column;
-}
-
-.imageUploadBlock {
-    margin: 2rem auto;
-    width: 15rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.imageUploadLabel {
-    margin-bottom: 0.75rem;
-}

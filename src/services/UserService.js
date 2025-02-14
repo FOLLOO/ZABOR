@@ -10,8 +10,7 @@ const userService = {
     return response.data;
   },
   logout: async () => {
-    const response = await axios.post("/auth/logout");
-    return response;
+    return await axios.post("/auth/logout");
   },
   updateUser: async (data) => {
     const response = await axios.put("/user/updateUser", data);

@@ -37,7 +37,6 @@ import {postSubscribe} from "../../../redux/slices/sub";
 import {useAuth} from "../../../provider/AuthProvider";
 import {RWebShare} from "react-web-share";
 import NotAvaliblePost from "../../../components/STATUS/205/NotAvaliblePost";
-import {addPostToBasket} from "../../../redux/slices/basketAPI";
 
 function Post() {
     const {id} = useParams()
@@ -159,7 +158,7 @@ function Post() {
         if (status === 'updated' || status === 'loading'){
             pagetGetComments()
         }else {
-            return;
+
         }
     }, [status === 'loading'|| status === 'updated'])
 
@@ -317,7 +316,7 @@ function Post() {
                                             // <div key={index}>Image: {item.file.name}</div>
                                             <div className={styles.imageBlock}>
                                                 <img className={styles.fileUploadImage}
-                                                     src={`${IMAGE_URL}/static/${item.file.name}`} alt="image"/>
+                                                     src={`${IMAGE_URL}/static/${item.file.name}`} alt="file upload image"/>
                                             </div>
                                         )
                                     ) : (

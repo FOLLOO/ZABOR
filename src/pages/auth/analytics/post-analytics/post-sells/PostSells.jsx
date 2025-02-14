@@ -1,7 +1,6 @@
 import React from 'react'
 
 import styles from './post-sells.module.css'
-import global from '../../../../../global.module.css'
 import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
 import SettingsTitle from '../../../../../components/toolbar/settings-title/SettingsTitle'

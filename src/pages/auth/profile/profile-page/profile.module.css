@@ -36,9 +36,7 @@
     box-sizing: border-box;
     padding: 0 120px;
 }
-.contentPad{
-    padding-right: 120px;
-}
+
 .profile{
     position: relative;
     top: -3rem;
@@ -183,9 +181,6 @@
 @media (max-width: 1600px) {
     .content {
         padding: 0 10px;
-    }
-    .contentPad{
-        padding-right: 10px;
     }
 }
 

@@ -30,7 +30,7 @@ export default function Publications() {
     const getPosts = () => {
         let checkboxes = document.getElementsByName("publications_tags");
         let selectedCboxes = Array.prototype.slice.call(checkboxes)
-            .filter(ch => ch.checked == true)
+            .filter(ch => ch.checked === true)
             .map(ch => ch.id);
 
         const params = {

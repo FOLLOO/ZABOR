@@ -68,24 +68,6 @@
     justify-content: space-between;
 }
 
-.alert-enter {
-    opacity: 0;
-    transform: scale(0.9);
-}
-.alert-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-}
-.alert-exit {
-    opacity: 1;
-}
-.alert-exit-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 300ms, transform 300ms;
-}
-
 .button{
     font-size: var(--text-base);
     min-height: 2.5rem; /* h-10 */
@@ -108,10 +90,6 @@
     background: var(--b-ghostHover-color);
 }
 
-.topAction{
-    max-width: 100%;
-    min-width: 30%;
-}
 .he{
     /*text-indent: 1em;*/
 }
@@ -135,10 +113,6 @@
     width: 100%;
 }
 
-.inputDescription{
-    width: 100%;
-    height: fit-content;
-}
 .inputDescription h4{
     margin-bottom: 2vh;
 }
@@ -203,39 +177,10 @@ h5{
     border-radius: 4px 4px 2px 2px;
 }
 
-/*.title:hover {*/
-/*    outline: 1px solid lightgrey;*/
-/*}*/
-
-.save{
-    margin-left: auto;
-    width: 300px;
-    /*position: fixed;*/
-    /*top: 10vh;*/
-    /*left: 50vw;*/
-    /*z-index: 99*/
-}
 .actionButtons{
     width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
-}
-.spanImage{
-    /*height: 520px;*/
-    width: 100%;
-    margin: auto;
-    /*max-height: 520px;*/
-    max-width: 1250px;
-}
-
-.fileUpload{
-    /*position: absolute;*/
-    /*top: 49vh;*/
-    z-index: 10;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .delete{

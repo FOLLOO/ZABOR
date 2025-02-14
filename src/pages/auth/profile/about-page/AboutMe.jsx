@@ -28,7 +28,7 @@ function AboutMe() {
 
     const navigate = useNavigate()
 
-    const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывется
+    const {userData} = useSelector(state => state.userR) //    Не понимаю как можно улучшить потому что в Profile.jsx опять это вызывается
 
 
     function createSocialLink(text, type) {

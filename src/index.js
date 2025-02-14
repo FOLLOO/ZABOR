@@ -31,6 +31,4 @@ root.render(
       </OverlayContextProvider>
   </React.StrictMode>
 );
-// reportWebVitals(console.log)
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

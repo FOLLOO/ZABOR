@@ -7,20 +7,11 @@
 .main hr{
     margin: .5rem;
 }
-.b_content{
-    justify-content: center;
-    display: flex;
-    gap: 7px;
-}
+
 .beMaxSize{
     width: 40vw;
 }
-/*.whiteButton:hover{*/
-/*    box-shadow: 0 0 5px rgb(255, 255, 255),*/
-/*    0 0 5px rgba(255, 255, 255, 0.8),*/
-/*    0 0 25px rgb(255,255,255, 0.6),*/
-/*    0 0 50px rgb(255,255,255, 0.2);*/
-/*}*/
+
 .w100{
     width: 50vw;
     /*max-width: ;*/
@@ -102,42 +93,6 @@
     text-align: center;
     width: 20rem;
     margin: 0 auto;
-}
-
-.basket_footer{
-    margin: 0 auto;
-    width: 380px;
-    gap: 20px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.c_text{
-    color: white;
-}
-.image{
-    /*transform: rotate(45deg);*/
-}
-.deleteButton{
-    background: #9747FF;
-    height: 36px;
-    cursor: pointer;
-}
-
-.close{
-    /*position: relative;*/
-    display: flex;
-    /*justify-content: end;*/
-    bottom: 210px;
-    /*left: 85%;*/left: 44vw;
-    z-index: 1;
-    border-radius: 5px;
-    overflow: hidden;
-    background: #9747FF;
-    width: fit-content;
-    height: 36px;
-    cursor: pointer;
 }
 
 .buttonReplace{

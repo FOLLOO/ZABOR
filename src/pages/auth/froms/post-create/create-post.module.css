@@ -23,11 +23,7 @@
     grid-column: span 2;
 }
 
-.recomends{
-    display: flex;
-    flex-direction: column;
-    gap: 34px
-}
+
 
 .content{
     max-width: 1250px;
@@ -71,14 +67,8 @@
     align-items: center;
     gap: 10px;
 }
-.contextAdd{
-    padding: 10px;
-}
 
-.buttonToAdd:hover{
-    transform: scale(1.02);
-    background: rgba(0, 0, 0, 0.06);
-}
+
 
 .title {
     /*width: 70%;*/
@@ -104,11 +94,7 @@
     border-radius: 4px 4px 2px 2px;
 }
 
-.dateLabel{
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-    overflow-wrap: break-word;
-}
+
 
 .save{
     position: absolute;
@@ -123,14 +109,6 @@
     max-width: 1250px;
 }
 
-.fileUpload{
-    z-index: 10;
-    /*height: 520px;*/
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .fileUpload .input{
     /*font-size: 20px;*/
 }

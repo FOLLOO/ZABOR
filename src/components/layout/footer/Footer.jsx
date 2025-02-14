@@ -8,10 +8,7 @@ import hello_emoji from '../../../asserts/emoji/hello.png'
 import eye_emoji from '../../../asserts/emoji/eye.png'
 import whatsapp from '../../../asserts/icons/update/whatsapp.svg'
 import email from '../../../asserts/icons/update/email.svg'
-import call from '../../../asserts/icons/update/call.svg'
 
-import WhiteButton from '../../ui/buttons/white-button/WhiteButton'
-import whiteButton from '../../ui/buttons/white-button/WhiteButton'
 import {Link} from "react-router-dom";
 
 function Footer ({noStick}) {
@@ -26,7 +23,7 @@ function Footer ({noStick}) {
         <div className={styles.buttons}>
           <button className={styles.whiteButton}>
             <div className={styles.b_content}>
-              <img src={eye_emoji} width={22}/>
+              <img alt={'eye'} src={eye_emoji} width={22}/>
               <div className={`${global.t1} ${global.medium}`}>
                 Документы
               </div>
@@ -34,14 +31,12 @@ function Footer ({noStick}) {
           </button>
           <button className={styles.whiteButton}>
             <div className={styles.b_content}>
-              <img src={hello_emoji} width={22}/>
+              <img alt={'eye'} src={hello_emoji} width={22}/>
               <div className={`${global.t1} ${global.medium}`}>
                 Контакты
               </div>
             </div>
           </button>
-          {/*<WhiteButton img={eye_emoji} img_width={22} text={'Документы'} stylee={{padding: "6px 20px", borderRadius: "20px"}}/>*/}
-          {/*<WhiteButton img={hello_emoji} img_width={22} text={'Контакты'}/>*/}
         </div>
         <hr className={styles.hr}/>
         <div className={styles.coopiryte}>
@@ -56,14 +51,13 @@ function Footer ({noStick}) {
           <div className={`${styles.block} ${global.flex} ${global.f_end} ${global.f_a_center}`}>
             <div className={styles.buttons}>
               <Link to={'tel: +79534911711'} className={styles.button}>
-                <img src={whatsapp} width={24}/>
+                <img alt={'eye'} src={whatsapp} width={24}/>
               </Link>
               <Link to={'tel: +79534911711'} className={styles.button}>
-                <img src={email} width={24}/>
+                <img alt={'eye'} src={email} width={24}/>
               </Link>
             </div>
           </div>
-
         </div>
       </div>
     </footer>

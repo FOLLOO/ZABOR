@@ -41,17 +41,8 @@ import AuthorPlus from "./pages/documentation/price/author/plus/AuthorPlus";
 import SettingsPay from "./pages/auth/settings/author-plus/SettingsPay";
 import TempPay from "./pages/auth/market/TempPay";
 import {start} from "./utils";
-// import axios from "axios";
-
-
-// axios.defaults.baseURL = 'http://localhost:5000'
-// axios.defaults.withCredentials = true
-
-/** манал это Route перделаай плиз */
-/** А может переписать все на Next.js */
 
 function App() {
-    // const { overlay } = useContext(OverlayContext) // overlay находится в layouts
     const routingConfig = [
         {
             status: 'not-auth',
@@ -316,14 +307,11 @@ function App() {
         }
     ]
 
-
-    // Компонент для рендеринга маршрутов на основе конфигурации
     const renderRoutes = (routes, parentPath = '') => {
         return routes.map((route, index) => {
             const {url, component, child} = route;
             const fullPath = `${parentPath}${url.startsWith('/') ? url : `/${url}`}`;
 
-            // Проверяем, есть ли вложенные маршруты
             if (child && child.length > 0) {
                 return (
                     <Route key={index} path={fullPath} element={component}>

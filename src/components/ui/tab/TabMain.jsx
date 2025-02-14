@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import styles from './tab.module.css'
-import global from '../../../global.module.css'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import * as PropTypes from 'prop-types'
 
 const TabContent = (props) => (
   <div className={styles.tabcontent}>
@@ -14,11 +12,9 @@ const TabContent = (props) => (
 function TabMain ({items = []}) {
   const {pathname} = useLocation()
   const { id } = useParams();
-  // const [active, setActive] = useState(0);
   const navigate = useNavigate()
   function openTab(e) {
     const index = e.target.dataset.index
-    // setActive(index)
     navigate(`${pathname.replace(`/${id}`, '')}/${index}`)
   }
 

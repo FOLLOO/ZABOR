@@ -7,9 +7,6 @@
     padding: 0 .75rem;
 }
 
-.paddingNULL{
-    padding: 0;
-}
 
 .button {
     composes: base;
@@ -96,7 +93,7 @@
     outline-offset: 2px;
 }
 
-.outlet:before {
+.outlet:before{
     content: '';
     background: linear-gradient(45deg, #6600ff, #8F38FF, #B780FF, #8780ec,  #6600ff, #8F38FF, #B780FF, #2f4cda, #6600ff);
     position: absolute;
