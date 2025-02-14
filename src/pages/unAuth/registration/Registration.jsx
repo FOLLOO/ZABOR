@@ -10,6 +10,7 @@ import InputDporDown from '../../../components/ui/input/input-dropdown/InputDpor
 import Button from "../../../components/ui/buttons/button/Button";
 
 import {useAuth} from "../../../provider/AuthProvider";
+import {FULL_TITLE, TITLE} from "../../../utils";
 function Registration() {
 
     const navigate = useNavigate()
@@ -74,10 +75,10 @@ function Registration() {
                     <div className={`${styles.flex}`}>
                         <div className={`${styles.logo}`}>
                             <Link to={'/'} className={`${global.xl4} `}>
-                                zabor.inc
+                                {TITLE}
                             </Link>
                             <p className={`${global.d3} ${styles.decriptionText}`}>
-                                zabor — это платформа, на которой люди объединяют свои деньги или другие ресурсы через
+                                {FULL_TITLE} — это платформа, на которой люди объединяют свои деньги или другие ресурсы через
                                 интернет, чтобы поддержать усилия других людей или организаций.
                             </p>
                         </div>

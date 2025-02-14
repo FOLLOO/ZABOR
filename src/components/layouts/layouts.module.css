@@ -22,7 +22,6 @@
     justify-content: start;
     min-height: 2.5rem; /* h-10 */
     padding: 0 .75rem; /* py-2 px-4 */
-    /*padding: 0.75rem 0.75rem; !* py-2 px-4 *!*/
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
@@ -33,10 +32,6 @@
     outline: none;
     cursor: pointer;
 }
-/*.menu:hover{*/
-/*    color: var(--accent);*/
-/*    !*background-color: var(--accent-foreground);*!*/
-/*}*/
 .menu span{
     visibility: hidden;
 }
@@ -56,18 +51,10 @@
     margin: 0.7vh 1vw 0.7vh 0;
     min-width: 80px;
     width: 80px;
-
-    /*transition: width .5s cubic-bezier(0.04, 0.51, 0.97, 0.46); !* Плавный переход *!*/
-
     transition: width 0.2s ease-out;
 }
-
-/*.button span{*/
-/*    display: none;*/
-/*}*/
 .button{
     display: flex;
-    /*justify-content: center;*/
     padding: 0.5rem 2rem;
     height: 100%;
     width: 100%;
@@ -77,18 +64,14 @@
     color: transparent;
 }
 
-/*Checkbox и наш left menu*/
 .sidebar_input:checked + .navbar, #span {
     color: black;
     width: 20vw;
 }
 
-
-
 .row_flex{
     display: flex;
     flex-direction: row;
-    /*overflow: auto;*/
 }
 
 .column_flex{
@@ -96,7 +79,6 @@
     flex-direction: column;
 }
 
-/*OVERLAY*/
 .overlay{
     position: absolute;
     width: 100%;
@@ -116,7 +98,6 @@
 
 .navbar  button:hover {
     color: transparent;
-    /*width: 25vw;*/
 }
 
 
@@ -173,20 +154,16 @@
     gap: 1rem;
     display: flex;
     flex-direction: column;
-    /*width: 400px;*/
-    /*margin: 3rem;*/
 }
 
 
 
 @media (max-width: 1080px) {
-    /*Checkbox и наш left menu*/
     .sidebar_input:checked + .navbar, #span {
         color: black;
         width: 25vw;
     }
 }
-/*Overlay*/
 
 @media (max-width: 800px) {
     .navbar {
@@ -237,11 +214,9 @@
         display: none;
     }
 
-        /*Checkbox и наш left menu*/
     .sidebar_input:checked + .navbar, #span{
         color: black;
         transition: all .2s ease-in-out;
-        /*top: 5rem;*/
         top: 0;
         width: 60vw;
         height: 100vh;

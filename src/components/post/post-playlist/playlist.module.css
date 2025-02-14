@@ -34,7 +34,6 @@
     -webkit-line-clamp: 3;      /* Количество строк, после которых обрезается текст */
     overflow: hidden;           /* Скрывает текст, выходящий за пределы контейнера */
     text-overflow: ellipsis;
-    /*text-align: justify;*/
 }
 
 .title h4{

@@ -1,7 +1,4 @@
 .glass{
-    /*Хз почему на auto поставил*/
-    /*width: auto; */
-    /*width: 100%;*/
     box-sizing: border-box;
     background: rgba(183, 128, 255, 0.1);
     border: 1px solid rgba(143, 56, 255, 0.2) ;

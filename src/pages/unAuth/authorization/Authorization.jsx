@@ -11,6 +11,7 @@ import { useAuth } from '../../../provider/AuthProvider'
 import Button from "../../../components/ui/buttons/button/Button";
 import {useDispatch} from "react-redux";
 import {resetPassword} from "../../../redux/slices/user";
+import {FULL_TITLE, TITLE} from "../../../utils";
 
 
 /*** headers не содержит refreshToken -> он как бы есть, но его с axios не вытащить
@@ -64,10 +65,10 @@ function Authorization () {
           <div className={`${styles.flex}`}>
             <div className={`${styles.logo}`}>
                 <Link to={'/'} className={`${global.xl4} `}>
-                  zabor.inc
+                    {TITLE}
                 </Link>
                 <p className={`${global.d3} ${styles.decriptionText}`}>
-                    zabor — это платформа, на которой люди объединяют свои деньги или другие ресурсы через интернет, чтобы поддержать усилия других людей или организаций.
+                    {FULL_TITLE} — это платформа, на которой люди объединяют свои деньги или другие ресурсы через интернет, чтобы поддержать усилия других людей или организаций.
                 </p>
             </div>
             <div className={`${styles.form}`}>

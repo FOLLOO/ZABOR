@@ -7,7 +7,6 @@ export const TITLE = `Dont Stop Me`
 export const FULL_TITLE = `Don't stop me`
 export const ORG_EMAIL = 'aimany@mail.ru'
 
-export const SITE_URL = 'http://localhost:3000'
 
 export const toggleOverlay = (id) => {
     const dialog = document.getElementById(id)

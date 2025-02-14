@@ -19,10 +19,7 @@
 }
 
 .main:hover{
-    /*box-shadow: 0 10px 36px 0 rgba(0, 0, 0, 0.16);*/
-    /*box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);*/
     opacity: 0.9;
-    /*backdrop-filter: blur(15px);*/
 }
 
 .temp{
@@ -32,15 +29,11 @@
 
 .button:hover{
     opacity: 0.8;
-
-    /*box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.25);*/
-    /*backdrop-filter: blur(15px);*/
 }
 
 .actions{
     padding: 10px;
     gap: 12px;
-
 }
 .button{
     width: 55px;
@@ -68,8 +61,6 @@
 }
 
 .cardImage{
-    /*background: linear-gradient(0deg, rgba(16, 17, 18, 0.92) 25.68%, rgba(27, 28, 32, 0) 72.2%);*/
-    /*background: -moz-linear-gradient();*/
     position: absolute;
     top: 0;
     z-index: -1;
@@ -77,7 +68,6 @@
     object-position: center;
     width: 100%;
     height: 80%;
-    /*filter: blur(20);*/
     transition: all 150ms ease;
 }
 
@@ -86,14 +76,8 @@
     top: -100%;
     z-index: -1;
     object-fit: cover;
-    /*filter: blur(20);*/
     transition: all 150ms ease;
 }
-
-/*.cardImage:hover{*/
-/*    !*transform: scale(1.1);*!*/
-/*}*/
-
 
 .content{
     height: 80px;
@@ -140,7 +124,6 @@
 
 @media (max-width: 430px) {
     .main{
-        /*max-width: 100vw;*/
         width: 95vw;
         min-width: 90vw;
         max-width: none;

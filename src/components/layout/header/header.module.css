@@ -22,7 +22,6 @@
 
 .buttons{
     width: fit-content;
-    /*gap: 0.5rem*/
 }
 .ac{
     align-items: center;
@@ -36,9 +35,6 @@
     position: sticky;
     top: 0;
     z-index: 99;
-
-    /*background-color: rgba(255, 255, 255, 0.1);*/
-    /*backdrop-filter: blur(10px);*/
 
     background: white;
 
@@ -70,9 +66,7 @@
 }
 
 .logo{
-
     min-width: 250px;
-    /*width: max-content;*/
 }
 .profile{
     padding: 0 0.75rem;
@@ -97,12 +91,10 @@
 .notificationsList::-webkit-scrollbar-track {
     border-radius: 8px;
     background-color: #ffffff;
-    /* border: 1px solid #cacaca; */
 }
 
 .notificationsList::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    /* border: 3px solid transparent; */
     background-clip: content-box;
     background-color: rgba(196, 196, 196, 0.35);
 }

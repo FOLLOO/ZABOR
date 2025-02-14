@@ -1,27 +1,16 @@
 .main{
-    /*border: 1px solid var(--accent-foreground);*/
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
-
-
     max-width: 300px;
     max-height: 460px;
     overflow: hidden;
-
     background: white;
     border-radius: 5px;
-
     border: 0 solid var(--accent-foreground);
-
-
     display: flex;
     flex-direction: column;
-
     gap: 7px;
-
     padding-bottom: 10px;
-
     cursor: pointer;
-    /*transition: background-color 2s ease-in-out;*/
     transition: all .5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
@@ -32,7 +21,6 @@
 
 .userDescription{
     min-height: 100px;
-
     display: -webkit-box;       /* Используется для создания блочного контейнера с вебкит-специфичными свойствами */
     -webkit-box-orient: vertical; /* Определяет ориентацию блочного контейнера */
     -webkit-line-clamp: 5;      /* Количество строк, после которых обрезается текст */
@@ -51,10 +39,8 @@
 .userPreview img{
     height: 150px;
     width: 100%;
-    /*overflow: hidden;*/
     object-fit: cover;
     object-position: center;
-
     transition: all 250ms ease;
 }
 

@@ -7,10 +7,6 @@
     margin-top: .5rem;
 }
 
-.h{
-    /*line-height: 2vh;*/
-}
-
 @media (max-width: 430px) {
     .main{
         max-width: 90vw;

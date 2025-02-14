@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './action-card.module.css'
 import global from '../../../global.module.css';
-import TransprantButton from "../../ui/buttons/transprant-button/TransprantButton";
 
 
 function ActionCard({   children,
@@ -15,8 +14,6 @@ function ActionCard({   children,
             <div>
                 {children}
             </div>
-          {b_text ?
-            <TransprantButton unique text={b_text} click={click_nav} /> : null}
         </div>
     );
 }

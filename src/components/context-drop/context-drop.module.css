@@ -1,10 +1,9 @@
-.mainDrop{
+.mainDrop {
     margin-top: 0.5rem;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /*Убрал для уведомлений, нужно что то придумать*/
     gap: 2px;
     background: rgb(255, 255, 255);
 
@@ -14,22 +13,21 @@
     backdrop-filter: blur(100px);
     border-radius: var(--rounded-md);
 }
-.base{
+
+.base {
     padding: 0.5rem;
 }
 
-.sm{
+.sm {
     padding: 0.1rem;
 }
 
-.mainDrop h1{
+.mainDrop h1 {
     padding: 0.5rem;
     width: 100%;
     font-size: var(--text-xl);
     font-family: var(--tf-LATO);
     font-weight: 700;
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
-    /*margin-left: 7px;*/
-    /*margin-bottom: 1vh;*/
 }
 

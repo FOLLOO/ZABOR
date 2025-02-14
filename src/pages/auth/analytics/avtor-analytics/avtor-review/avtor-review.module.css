@@ -6,9 +6,7 @@
 }
 
 .diagram{
-    /*min-height: 400px;*/
     height: 400px;
-    /*max-height: 500px;*/
 }
 
 .flex{
@@ -16,8 +14,3 @@
     flex-direction: column;
     gap: 30px
 }
-
-/*.rightMenu{*/
-/*    position: sticky;*/
-/*    top: 5vh*/
-/*}*/

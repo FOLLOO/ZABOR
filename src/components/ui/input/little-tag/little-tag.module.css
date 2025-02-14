@@ -32,7 +32,6 @@
 }
 
 .checkbox_text{
-    /*line-height: 18px;*/
     width: 100%;
     height: fit-content;
     text-align: center;
@@ -43,7 +42,6 @@
     padding: 0.2rem .5rem;
 
     display: flex;
-    /*flex-direction: column;*/
     align-content: center;
     align-items: center;
     text-align: center;
@@ -51,8 +49,3 @@
     gap: 0.5rem;
     cursor: pointer;
 }
-
-/*.checkbox:checked + .checkbox_label .checkbox_container {*/
-/*    transform: scale(0.98);*/
-/*    background: rgba(105, 52, 173, 0.8);*/
-/*}*/

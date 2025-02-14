@@ -13,9 +13,7 @@
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
-    /*justify-content: center;*/
     border-radius: var(--rounded-md); /* rounded-md */
-    /*font-size: var(--text-sm); !* text-sm *!*/
     font-weight: 500; /* font-medium */
     transition: all 0.2s ease-in-out ;
     outline: none;
@@ -63,9 +61,7 @@
     outline-offset: 2px;
 }
 .default:hover{
-    /*background-color: var(--accent-foreground); !* bg-accent *!*/
     color: var(--accent); /* text-accent-foreground */
-    /*transition: 1s ;*/
 }
 
 .red-text{

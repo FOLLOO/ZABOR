@@ -1,5 +1,3 @@
-/*margin потому что там ток один атрибут*/
-
 .margin{
     margin-top: 2%;
     margin-bottom: 50vh;
@@ -23,7 +21,6 @@
 
 .header{
     font-size: var(--text-3xl);
-    /*padding: 0.5rem;*/
     font-weight: bold;
 }
 .title{
@@ -42,11 +39,11 @@
     max-width: 150px;
 }
 .tags {
-    height: auto; /* конечное состояние */
+    height: auto;
 }
 
 .tags_hidden {
-    height: 35px; /* начальная высота для одной строки */
+    height: 35px;
 }
 @media (max-width: 1440px) {
     .grid{
@@ -69,10 +66,3 @@
         justify-content: start;
     }
 }
-
-
-/*@media (max-width: 1024px) {*/
-/*    .grid{*/
-/*        grid-template-columns: repeat(1, 1fr);*/
-/*    }*/
-/*}*/
