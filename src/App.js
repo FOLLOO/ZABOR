@@ -40,6 +40,7 @@ import BecomeAuthorPlus from "./pages/documentation/price/becomeIP/BecomeAuthorP
 import AuthorPlus from "./pages/documentation/price/author/plus/AuthorPlus";
 import SettingsPay from "./pages/auth/settings/author-plus/SettingsPay";
 import TempPay from "./pages/auth/market/TempPay";
+import {start} from "./utils";
 // import axios from "axios";
 
 
@@ -333,6 +334,9 @@ function App() {
             return <Route key={index} path={fullPath} element={component}/>;
         });
     };
+
+    start()
+
 
     return (
         <div className="App">

@@ -16,7 +16,7 @@ import GlassBox from '../../../components/glasses/glasses-box/GlassBox'
 import Button from "../../../components/ui/buttons/button/Button";
 import Footer from "../../../components/layout/footer/Footer";
 import {Helmet} from "react-helmet";
-import {TITLE} from "../../../utils";
+import {FULL_TITLE, TITLE} from "../../../utils";
 
 //DATA_CONST
 const opportunities = [
@@ -91,7 +91,7 @@ function Main() {
         <div className={styles.back}>
             <Helmet>
                 <meta charSet="utf-8"/>
-                <title>{TITLE}</title>
+                <title>{FULL_TITLE}</title>
                 <meta name="description" content="Раскройте ваш творческий потенциал и поделитесь уникальными историями с миром! На нашем сайте мы, безусловно, помогаем авторам раскрыть свой потенциал"/>
                 <meta name="keywords" content="HTML, CSS, JavaScript"/>
                 <meta name="author" content="Sairommef"/>
@@ -103,10 +103,10 @@ function Main() {
             <div className={styles.content}>
                 <div className={`${styles.logoBlock} `}>
                     <img src={logo} alt="" className={styles.logo}/>
-                    <h3>{TITLE}</h3>
+                    <h3 className={global.xl3}>{TITLE}</h3>
                 </div>
                 <div className={styles.title}>
-                    <h1>Привет, это zabor</h1>
+                    <h1 className={global.xl7}>Привет, это {FULL_TITLE.toUpperCase()}</h1>
                     <p className={global.xl}>
                         Раскройте ваш творческий потенциал и поделитесь <br/> уникальными историями с миром!
                     </p>
@@ -128,7 +128,7 @@ function Main() {
 
                 <div className={`${global.flex}  ${styles.about}`} id={'about'}>
                     <div className={styles.leftTitle}>
-                        <h1>Подробнее о нас</h1>
+                        <h1 className={global.xl7}>Подробнее о нас</h1>
                         <p className={global.base}>На нашем сайте мы, безусловно,<br/> помогаем авторам раскрыть свой
                             потенциал</p>
                     </div>
@@ -154,7 +154,7 @@ function Main() {
 
                 <div className={`${global.flex}  ${styles.about}`}>
                     <div className={styles.leftTitle}>
-                        <h2>Возможности сайта</h2>
+                        <h2 className={global.xl7}>Возможности сайта</h2>
                         <p className={global.base}>На нашем сайте мы, безусловно,<br/> помогаем авторам раскрыть свой
                             потенциал</p>
                     </div>
@@ -177,7 +177,7 @@ function Main() {
                 </div>
 
                 <div className={styles.centerLittle} id={'start'}>
-                    <h2>Как начать?</h2>
+                    <h2 className={global.xl7}>Как начать?</h2>
                     <p className={global.base}>Главное ведь начать, а дальше положитесь на нас!</p>
                 </div>
 

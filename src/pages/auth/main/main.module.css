@@ -37,6 +37,11 @@
 .openMenu{
     display: none;
 }
+@media  (min-width: 1900px){
+    .grid{
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
 
 @media (max-width: 1600px) {
     .grid{
@@ -67,6 +72,7 @@
     .grid{
         grid-template-columns: repeat(2, 1fr);
         column-gap: normal;
+
     }
 }
 @media (max-width: 800px) {

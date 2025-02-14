@@ -22,9 +22,10 @@ import global from '../../../../global.module.css'
  * @param type
  * @param size
  * @param img_size
- * @param variant - ghost, color, base, default
+ * @param variant
  * @returns {Element}
  * @constructor
+ * variant - ghost, color, base, default, outlet
  */
 export default function Button({
                                    children, click, img, id, text_id, name, disabled, componentImage,

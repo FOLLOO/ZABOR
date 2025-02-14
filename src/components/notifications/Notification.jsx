@@ -2,11 +2,12 @@ import React from 'react'
 
 import RenderType from './renderType/RenderType'
 
+
 import temp from '../../asserts/temp/stir-fried-pork-with-korean-sauce-on-dark-background.jpg'
 
 /** Компонент уведомлений В завичимости от типа (type)
  * уведомления меняются выходные данные */
-function Notification ({type, nickname, postName, postImage, views, date}) {
+function Notification ({type, nickname, postName, postImage, views, date, read}) {
 
   const messageType = (params) => {
     switch (params){
@@ -76,7 +77,7 @@ function Notification ({type, nickname, postName, postImage, views, date}) {
   }
 
   return (
-    <div >
+    <div style={read ? null : { background: 'var(--accent-foreground)'}} >
       {messageType(type)}
     </div>
   )

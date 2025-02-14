@@ -3,12 +3,16 @@ import React from 'react'
 import styles from './footer.module.css'
 import global from '../../../global.module.css'
 
-import logo from '../../../asserts/logo.svg'
+import logo from '../../../asserts/logo2.svg'
 import hello_emoji from '../../../asserts/emoji/hello.png'
 import eye_emoji from '../../../asserts/emoji/eye.png'
+import whatsapp from '../../../asserts/icons/update/whatsapp.svg'
+import email from '../../../asserts/icons/update/email.svg'
+import call from '../../../asserts/icons/update/call.svg'
 
 import WhiteButton from '../../ui/buttons/white-button/WhiteButton'
 import whiteButton from '../../ui/buttons/white-button/WhiteButton'
+import {Link} from "react-router-dom";
 
 function Footer ({noStick}) {
   return (
@@ -49,11 +53,14 @@ function Footer ({noStick}) {
               © 2024 АЙМАНИ. Все права защищены.
             </div>
           </div>
-          <div className={`${styles.block} ${global.flex} ${global.f_end}`}>
+          <div className={`${styles.block} ${global.flex} ${global.f_end} ${global.f_a_center}`}>
             <div className={styles.buttons}>
-              <button className={styles.button}><img src={hello_emoji} width={15}/></button>
-              <button className={styles.button}><img src={hello_emoji} width={15}/></button>
-              <button className={styles.button}><img src={hello_emoji} width={15}/></button>
+              <Link to={'tel: +79534911711'} className={styles.button}>
+                <img src={whatsapp} width={24}/>
+              </Link>
+              <Link to={'tel: +79534911711'} className={styles.button}>
+                <img src={email} width={24}/>
+              </Link>
             </div>
           </div>
 

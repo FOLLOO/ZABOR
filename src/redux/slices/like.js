@@ -10,6 +10,15 @@ export const getNotifications = createAsyncThunk('user/getNotifications', async 
     }
 });
 
+export const readAll = createAsyncThunk('notification/setRead', async () => {
+    try {
+        const response = await axios.post('notification/setRead', );
+        return response.data; // Возвращаем данные из ответа
+    } catch (error) {
+        throw error.response.data; // Если есть ошибка, выбрасываем её для обработки в Redux
+    }
+});
+
 export const postLikePublication = createAsyncThunk('publication/likePublication', async (data) => {
     try {
         const response = await axios.post('/publication/likePublication', data);

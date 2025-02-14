@@ -18,7 +18,6 @@ function PlaylistsPost ({ title, description, blur, cost, views, image}) {
                 src={`${IMAGE_URL}${image}`}
                  // src={temp}
                  className={blur ? `${styles.img}` : `${styles.img}` } alt={'playlist-post'}/>
-
             <div className={`${styles.lock} ${global.flex} ${global.f_center}`}>
                 <img src={lock} alt={'lock'} width={80} style={ blur ? null : { opacity: '1%' }}/>
             </div>
@@ -31,15 +30,15 @@ function PlaylistsPost ({ title, description, blur, cost, views, image}) {
       <div className={`${styles.content} ${global.flex} ${global.f_dir_column}`}>
         <div className={`${global.flex} ${global.f_s_between} ${global.f_a_center}`}>
           {title ?
-            <h2 className={`${global.xl} ${global.medium}`}>{title}</h2>
+            <h2 className={`${global.xl} ${global.medium} ${styles.title}`}>{title}</h2>
             :
             // eslint-disable-next-line jsx-a11y/heading-has-content
             <h3 className={global.skeleton}>.</h3>
           }
           {cost === 0 ? <div className={global.t2} style={{ marginLeft: '10px' }}> Бесплатно</div> :
             cost > 0 ?
-              <div className={`${global.t3} `}>
-                {new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB'  }).format(cost)}
+              <div className={`${global.t3} `} style={{ marginLeft: '10px' }}>
+                {new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB'}).format(cost)}
               </div>
               :
               null

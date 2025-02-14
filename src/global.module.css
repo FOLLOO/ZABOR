@@ -17,7 +17,7 @@
 .t3 { font-size: var(--text-base); /* 14px / 1920px * 100 */}
 .t4 { font-size: var(--text-lg); /* 16px / 1920px * 100 */ }
 .t5,.h4 { font-size: var(--text-xl); /* 16px / 1920px * 100 */ }
-.text { font-size: var(--text-xl); /* 20px / 1920px * 100 */ }
+.text { font-size: var(--text-base); /* 20px / 1920px * 100 */ }
 
 .bold { font-weight: var(--tw-700); }
 .medbol { font-weight: 600; }
@@ -40,6 +40,9 @@
 .xl2 { font-size: var(--text-2xl);}
 .xl3 { font-size: var(--text-3xl); }
 .xl4 { font-size: var(--text-4xl); }
+.xl5 { font-size: var(--text-5xl); }
+.xl7 { font-size: var(--text-7xl); }
+.xl8 { font-size: var(--text-8xl); }
 /*.xl4 { font-size: 2rem; padding: 2rem 3.5rem; }*/
 .h-1, .h-1 img{
     height: var(--text-xs);

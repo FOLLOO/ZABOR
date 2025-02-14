@@ -1,5 +1,6 @@
 .card{
     position: relative;
+    max-width: fit-content;
 }
 .main{
     width: 100%;

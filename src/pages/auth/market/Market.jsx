@@ -72,6 +72,9 @@ function Market () {
       }
     }
 
+  // setInterval(Pay, 10000)
+
+
 
   // const count = cartItems.length;
   // подсчет итога
@@ -91,7 +94,7 @@ function Market () {
       </Helmet>
       <div className={`${global.w100}`}>
         <SettingsTitle bigTitle={'Корзина'}
-                       description={`В корзине ${cartItems.length} поста`}/>
+                       description={cartItems.length ? `В корзине ${cartItems.length} поста` : 'В корзине нет постов'}/>
         <div className={`${global.flex} ${styles.check}`}>
           <div className={styles.posts}>
             {cartItems.items.length > 0 ?

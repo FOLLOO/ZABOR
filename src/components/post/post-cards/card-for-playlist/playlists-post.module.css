@@ -20,6 +20,14 @@
     background-color: var(--end-foreground);
 }
 
+.title{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .lock{
     position: relative;
     bottom: 200px;

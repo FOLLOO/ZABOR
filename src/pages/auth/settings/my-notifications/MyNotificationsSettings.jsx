@@ -33,7 +33,7 @@ function MyNotificationsSettings () {
   },[])
 
   const postwToggleNoti = (id) => {
-    console.log(id)
+    // console.log(id)
     const data = {
       subscriptionId: id
     }

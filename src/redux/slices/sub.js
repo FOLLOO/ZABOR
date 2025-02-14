@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../r-axios/axios'
-import { getNotifications } from './notifications'
 
 export const postSubscribe = createAsyncThunk('user/subscribe', async (data) => {
   try {

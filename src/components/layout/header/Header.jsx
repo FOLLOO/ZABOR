@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
 import {useAuth} from "../../../provider/AuthProvider";
-import {IMAGE_URL, TITLE} from "../../../utils";
+import {IMAGE_URL, stop, TITLE} from "../../../utils";
 import {getBasket} from "../../../redux/slices/basketAPI";
 
 //Components
@@ -30,7 +30,7 @@ import creative from '../../../asserts/icons/update/youtube.svg'
 import create from '../../../asserts/icons/update/plus.svg'
 import menu_i from "../../../asserts/icons/update/menu.svg";
 import searching from '../../../asserts/icons/update/search_black.svg'
-import {getNotifications} from "../../../redux/slices/like";
+import {getNotifications, readAll} from "../../../redux/slices/like";
 import NothingYet from "../../../pages/nothing/nothing-yet/NothingYet";
 
 
@@ -45,6 +45,7 @@ export default function Header({type = 'unauthorized'}) {
     const [profile, setProfile] = useState(false)
 
     const profileRef = useRef(null);
+    const notiRef = useRef(null);
 
     // const cartItems = useSelector((state) => state.cart.items)
 
@@ -65,10 +66,20 @@ export default function Header({type = 'unauthorized'}) {
         }
     }
 
+    const readAllnotifications = () => {
+        try{
+            dispatch(readAll())
+        }catch (e) {
+            console.log(e)
+        }
+    }
+
     function handleClickOutside(event) {
         if (profileRef.current && !profileRef.current.contains(event.target)) {
-            setNotification(false);
             setProfile(false);
+        }
+        if (notiRef.current && !notiRef.current.contains(event.target)) {
+            setNotification(false);
         }
     }
 
@@ -81,6 +92,7 @@ export default function Header({type = 'unauthorized'}) {
     function clickLogOut() {
         try {
             logOut()
+            stop()
             navigate('/login')
         } catch (e) {
             console.log(e)
@@ -90,8 +102,7 @@ export default function Header({type = 'unauthorized'}) {
     useEffect(() => {
         if(!isAuth) return;
         else{
-        functionGetBasket();
-        functionGetNotifications();
+            functionGetBasket();
         }
     }, []);
 
@@ -132,6 +143,7 @@ export default function Header({type = 'unauthorized'}) {
                         <div className={styles.button_abs}>
                             <Button img_size={'h-5'} img={bell} name={'noti'} click={() => {
                                 setNotification(true)
+                                functionGetNotifications();
                             }}/>
                             {notificationsItems.items.filter(id => id.read === false).length === 0  ? null :
                                 <span className={styles.basketCount}>{notificationsItems.items.filter(id => id.read === false).length}</span>
@@ -139,15 +151,16 @@ export default function Header({type = 'unauthorized'}) {
                         </div>
                     </div>
 
-                    <div className={notification ?
+                    <div ref={notiRef} className={notification ?
                         `${styles.active} ${styles.dropdown_menu}` :
                         `${styles.dropdown_menu} ${styles.default}`}>
                         <ContextDrop title={'Уведомления'}>
+                            <Button variant={'outlet'} type={'button'} click={() => readAllnotifications()}>Пометить прочитанным</Button>
                             <ContextGroup noafter>
                                 <div className={styles.notificationsList}>
                                 {notificationsItems.items.length > 0 ?
                                     notificationsItems.items.map((noti, i) => (
-                                        <Notification type={'new-post'} postName={noti.notification_text} date={noti.createdAt} key={'Not' + i + Math.floor(Math.random() * 10) +  i}/>
+                                        <Notification type={'new-post'} read={noti.read} postName={noti.notification_text} date={noti.createdAt} key={'Not' + i + Math.floor(Math.random() * 10) +  i}/>
                                     ))
                                 : <NothingYet text={'Уведомлений нет'}/> }
                                 </div>
@@ -201,6 +214,8 @@ export default function Header({type = 'unauthorized'}) {
                                                 click={() => {
                                                     setProfile(false)
                                                     setNotification(true)
+                                                    functionGetNotifications();
+
                                                 }}>
                                             Уведомления
                                         </Button>
@@ -245,7 +260,7 @@ export default function Header({type = 'unauthorized'}) {
                 </label>
                 <Link to={type === 'unauthorized' ? '/' : '/publications'} className={styles.logo}>
                     <img src={logo} alt={''} className={styles.logoImage}/>
-                    <h1 className={`${global.xl} ${global.bold}`}>{TITLE}</h1>
+                    <h1 className={`${global.xl} ${styles.logo_text} ${global.bold}`}>{TITLE}</h1>
                 </Link>
             </div>
             {renderSwitch(type)}
