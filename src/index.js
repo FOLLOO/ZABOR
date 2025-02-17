@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { OverlayContextProvider } from './context/OverlayContext'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import { TagsProvider } from './context/TagsContext'
@@ -22,13 +21,11 @@ root.render(
           <meta name="author" content="Sairommef"/>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Helmet>
-      <OverlayContextProvider>
               <Provider store={store}>
                   <TagsProvider>
                       <App/>
                   </TagsProvider>
               </Provider>
-      </OverlayContextProvider>
   </React.StrictMode>
 );
 reportWebVitals();

@@ -103,10 +103,10 @@ function Main() {
             <div className={styles.content}>
                 <div className={`${styles.logoBlock} `}>
                     <img src={logo} alt="" className={styles.logo}/>
-                    <h3 className={global.xl3}>{TITLE}</h3>
+                    <h3 className={`${global.xl3} ${global.bold}`}>{TITLE}</h3>
                 </div>
                 <div className={styles.title}>
-                    <h1 className={global.xl7}>Привет, это {FULL_TITLE.toUpperCase()}</h1>
+                    <h1 className={`${global.xl7} ${global.bold}`}>Привет, это {FULL_TITLE.toUpperCase()}</h1>
                     <p className={global.xl}>
                         Раскройте ваш творческий потенциал и поделитесь <br/> уникальными историями с миром!
                     </p>
@@ -128,7 +128,7 @@ function Main() {
 
                 <div className={`${global.flex}  ${styles.about}`} id={'about'}>
                     <div className={styles.leftTitle}>
-                        <h1 className={global.xl7}>Подробнее о нас</h1>
+                        <h1 className={`${global.xl7} ${global.bold}`}>Подробнее о нас</h1>
                         <p className={global.base}>На нашем сайте мы, безусловно,<br/> помогаем авторам раскрыть свой
                             потенциал</p>
                     </div>
@@ -177,7 +177,7 @@ function Main() {
                 </div>
 
                 <div className={styles.centerLittle} id={'start'}>
-                    <h2 className={global.xl7}>Как начать?</h2>
+                    <h1 className={`${global.xl7} ${global.bold}`}>Как начать?</h1>
                     <p className={global.base}>Главное ведь начать, а дальше положитесь на нас!</p>
                 </div>
 
