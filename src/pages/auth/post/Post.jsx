@@ -217,7 +217,6 @@ function Post() {
                     </div>
 
                     <div className={`${styles.text} ${styles.actionButtons} ${global.flex}`}>
-                            {/*<TransprantButton img={like} title={'Нравится'} click={() => likePublication()}/>*/}
                             <Button size={'h-3'} img_size={'h-3'} className={global.sm}
                                     img={<Like stroke={liked ? 'transparent' : 'var(--black)'} fill={liked ? 'var(--red)' : 'transparent'}/>}
                                     componentImage variant={'ghost'} click={(e) => likePublication(e)}>
@@ -229,10 +228,8 @@ function Post() {
                                 Сохранить
                             </Button>
 
-                            {/*<TransprantButton img={bookmark} title={'Избранное'} click={() => addToFavorite()}/>*/}
                             <a href={'#comments'} className={`${global.flex} ${global.f_center}`}>
-                                {/*<TransprantButton img={comment} title={'Комментарии'}/>*/}
-                                <Button size={'h-3'} className={global.sm} img={comment} variant={'ghost'}>
+                                <Button size={'h-3'} type={'button'} className={global.sm} img={comment} variant={'ghost'}>
                                     Комментарии
                                 </Button>
                             </a>
@@ -241,13 +238,13 @@ function Post() {
                             </Button>
                             <RWebShare
                                 data={{
-                                    text: "ZABOR",
-                                    url: `http://localhost:3000/publication/${id}`,
-                                    title: "ZABOR",
+                                    text: `${TITLE}`,
+                                    url: `${window.location.origin}/publication/${id}`,
+                                    title: `${TITLE}`,
                                 }}
-                                onClick={() =>
+                                onClick={(e) => {
                                     console.log("shared successfully!")
-                                }
+                                }}
                             >
                             <button className={styles.button} >
                                 <img src={share} alt={'share'} />
@@ -293,28 +290,21 @@ function Post() {
                     </div>
 
                     <div className={styles.text}>
-                        {sharee ?
-                            <div className={styles.sharee}>
-                                <ContextDrop>
-                                jasdlfalsdkjf
-                                </ContextDrop>
-                            </div>
-                            : null}
-
                         {OnePost?.items.publication_blocks?.length > 0 ? (
-                            OnePost.items.publication_blocks.map((item, index) => {
-                                const doc = parser.parseFromString(item.text, 'text/html');
+                            [...OnePost.items.publication_blocks] // Копируем массив
+                                .sort((a, b) => a.id - b.id) // Сортируем копию массива
+                                .map((item, index) => {
+                                const doc = parser.parseFromString(item.text, 'text/html') || null;
                                 const htmlString = doc.body.innerHTML; // Получаем HTML из <body>
                                 return (
                                     item.type === 'file' ? (
                                         item.file.name.split('.').pop().toLowerCase() === 'mp4' || item.file.name.split('.').pop().toLowerCase() === 'h264' ? (
-                                            <video controls className={styles.video}>
+                                            <video controls className={styles.video} key={index}>
                                                 <source src={`${IMAGE_URL}/static/${item.file.name}`} type="video/mp4"/>
                                                 Извините, ваш браузер не поддерживает воспроизведение видео.
                                             </video>
                                         ) : (
-                                            // <div key={index}>Image: {item.file.name}</div>
-                                            <div className={styles.imageBlock}>
+                                            <div className={styles.imageBlock} key={index}>
                                                 <img className={styles.fileUploadImage}
                                                      src={`${IMAGE_URL}/static/${item.file.name}`} alt="file upload image"/>
                                             </div>
@@ -332,7 +322,6 @@ function Post() {
                         <div className={styles.afterpost}>
                             {shuffledPosts && shuffledPosts.length > 0 ? (
                                 shuffledPosts.slice(0, 6).map((post, i) => (
-                                    // <Link to={`/publication/${post.id}`}>
                                         <CardLittle
                                             data={post}
                                             key={i}
@@ -344,7 +333,6 @@ function Post() {
                                             time={post.createdAt}
                                             views={post.views_count + 1}
                                         />
-                                    // </Link>
                                 ))
                             ) : null}
                         </div>

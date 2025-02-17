@@ -69,7 +69,7 @@ function CardLittle({
             try {
                 dispatch(deltePost(id))
                 alert('Публикация удалена')
-                window.location.reload()
+                // window.location.reload()
             } catch (e) {
                 alert('Ошибка исполнения, попробуйте позже');
             }

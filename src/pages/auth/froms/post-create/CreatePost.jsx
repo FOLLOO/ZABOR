@@ -257,7 +257,6 @@ function CreatePost() {
 
         fetchData().then();
     }, [id]);
-
 // Обновление состояний после загрузки `items`
     useEffect(() => {
         if (id && status === 'loaded' && items) {
@@ -277,7 +276,6 @@ function CreatePost() {
     }, [items, status]);
 
     useEffect(() => {
-        // console.log(childBlocks)
     }, [file, childBlocks])
 
     useEffect(() => {
@@ -285,7 +283,6 @@ function CreatePost() {
             return getTags()
     }, []);
 
-// Проверка состояния загрузки
     if (loading && id) {
         return <Loading />;
     }
@@ -317,21 +314,6 @@ function CreatePost() {
                                             Опубликовать
                                         </Button>
                                     </ContextGroup>
-                                    {/*<ContextGroup>*/}
-                                    {/*    <div className={global.flex}>*/}
-                                    {/*        <InputToggle/>*/}
-                                    {/*        <div className={`${global.flex} ${global.f_dir_column} ${styles.dateLabel}`}>*/}
-                                    {/*        <h3 className={`${global.t3} ${global.medium} `}>*/}
-                                    {/*            Отложенная*/}
-                                    {/*            публикация</h3>*/}
-                                    {/*        <h3 className={`${global.d3} ${global.medium}  `}>*/}
-                                    {/*            Выберете дату публикации*/}
-                                    {/*        </h3>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <InputText place={'Отложенная публикация'} type={'date'}*/}
-                                    {/*    />*/}
-                                    {/*</ContextGroup>*/}
                                     <ContextGroup noafter>
                                         <div className={`${global.flex} ${global.f_dir_column}`}>
                                             <Button type={'submit'} img={archive} img_size={'h-5'} disabled={true}>
@@ -398,7 +380,7 @@ function CreatePost() {
                             </SettingsBlock> }
                             <h2 className={`${global.t3} `}>Описание</h2>
                             <div className={global.d3}>
-                                <Textarea place={'Добавьте описание'} rows={10} value={description}
+                                <Textarea place={'Добавьте описание'} rows={10} value={description} req
                                           onChange={(e) => setDescription(e.target.value)}/>
                             </div>
                         </div>
